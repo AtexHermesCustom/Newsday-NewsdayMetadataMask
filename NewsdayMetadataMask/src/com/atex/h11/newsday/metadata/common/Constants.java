@@ -8,7 +8,7 @@ public interface Constants {
 	//
 	// Constants for logger
 	//
-	public static final String LOGFILE_NAME = "CustomMetadata.log";
+	public static final String LOGFILE_NAME = "NewsdayCustomMetadata.log";
 	public static final String LOGGER_NAME = CustomMetadataPanel.class.getName();
 	public static final Logger LOGGER = Logger.getLogger(LOGGER_NAME);
 	public static final boolean STANDALONE_DEBUG = (System.getenv("DEBUG") != null && System.getenv("DEBUG").equals("1"));
