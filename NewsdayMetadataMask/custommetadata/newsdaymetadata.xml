@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+
+	<configuration>
+		<logFile>log/NewsdayCustomMetadata.log</logFile>
+		<!-- logLevel allowed values (in ascending order, in terms of level of detail):
+			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
+		-->
+		<logLevel>OFF</logLevel>
+	</configuration>
+	
+	<!--
+		#####################################
+		SP Metadata 
+		#####################################
+	 -->	
+	<sp>
+		<metadataNames>
+			<sectors>SECTOR</sectors>
+			<industries>INDUSTRY</industries>
+			<keywords>KEYWORDS</keywords>
+			<sentiment>SENTIMENT</sentiment>
+		</metadataNames>	
+		<sector>
+			<item>News</item>
+			<item>Business</item>
+			<item>Property</item>
+			<item>Personal Finance/ Investment</item>
+			<item>Computer/IT</item>
+			<item>Education</item>
+			<item>Motoring</item>
+			<item>Food/Culinary/Wine</item>
+			<item>Fashion &amp; Beauty</item>
+			<item>Health</item>
+			<item>Shopping</item>
+			<item>Entertainment/Music/Movies/Dance</item>
+			<item>Sports</item>
+			<item>Travel</item>
+			<item>Hobbies-Craft/Photography</item>
+			<item>Wedding/Parenting/Homes/Family</item>
+		</sector>
+		<industry>
+			<item>Property</item>
+			<item>Hotel</item>
+			<item>Retail (Shopping Mall, Supermarket, etc)</item>
+			<item>Banking &amp; Finance</item>
+			<item>Insurance</item>
+			<item>Government</item>
+			<item>Motoring</item>
+			<item>Transportation</item>
+			<item>Shipping &amp; Logistics</item>
+			<item>Telecommunications</item>
+			<item>Pharmaceuticals/Medical</item>
+			<item>Petrochemical</item>
+			<item>Industrial Products</item>
+			<item>Consultancy</item>
+			<item>Education</item>
+			<item>Exhibitions/Seminars</item>
+			<item>FMCG</item>
+			<item>FMCG (Consumer Edibles)</item>
+			<item>Food &amp; Beverage</item>
+			<item>Watch &amp; Jewellery</item>
+			<item>Fashion</item>
+			<item>Cosmetics/Beauty Products</item>
+			<item>Beauty Services</item>
+			<item>Furniture &amp; Furnishing</item>
+			<item>IT/Office Equipment</item>
+			<item>Durables</item>
+			<item>Media</item>
+			<item>Entertainment</item>
+			<item>Leisure</item>
+			<item>Sports</item>
+		</industry>
+	</sp>
+	
+</metadata>
