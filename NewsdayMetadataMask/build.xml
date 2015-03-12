@@ -18,9 +18,9 @@
 
 	<!--Creates the deployable jar file  -->
 	<target name="jar" depends="makedir">
-		<jar destfile="${dist.dir}\sphmetadata.jar" basedir="${bin.dir}">
+		<jar destfile="${dist.dir}\newsdaymetadata.jar" basedir="${bin.dir}">
 			<manifest>
-				<attribute name="Main-Class" value="com.atex.h11.custom.metadata.sph.CustomMetadataPanel" />
+				<attribute name="Main-Class" value="com.atex.h11.custom.metadata.sp.CustomMetadataPanel" />
 			</manifest>
 		</jar>
 	</target>
