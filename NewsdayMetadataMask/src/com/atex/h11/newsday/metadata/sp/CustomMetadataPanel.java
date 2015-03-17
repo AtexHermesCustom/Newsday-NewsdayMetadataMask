@@ -57,7 +57,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 	private void initialize() {
 		try {
 		    // Configuration file
-		    config = new ConfigModel("category");	// pass the metadata group
+		    config = new ConfigModel("sp");	// pass the metadata group
 			
 			Level logLevel = Level.parse(config.GetConfigValue("logLevel"));	    
 		    
@@ -139,8 +139,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		try {
 			logger.entering(this.getClass().getSimpleName(), "getMetadataValues");
 			
-			HashMap<String, String> retMetadata = 
-				metadataPanel.GetMetadataValues();
+			HashMap<String, String> retMetadata = metadataPanel.GetMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
