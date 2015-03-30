@@ -113,6 +113,8 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 				this.validator = new HermesValidator(inspector);
 			*/
 			
+			
+			
 			logMetadata(metadata, "Loaded from DB");
 
 			metadataPanel = new MetadataPanel(config, metadata);
