@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -49,6 +50,7 @@ public class TestSPMetadata {
 			// args: inspector=null, metadata hashmap, readonly=false
 			panel.add(customPane.getPanel(null, metadata, false));
 			panel.add(okButton);
+			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			
 			jFrame.add(panel);
 			jFrame.setTitle(customPane.getTitle());
