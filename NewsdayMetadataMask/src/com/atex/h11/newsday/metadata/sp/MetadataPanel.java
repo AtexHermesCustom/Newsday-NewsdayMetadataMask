@@ -1,322 +1,372 @@
 package com.atex.h11.newsday.metadata.sp;
 
 import java.util.HashMap;
-import java.awt.Color;
-import java.awt.Rectangle;
+import java.util.Properties;
 
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JScrollPane;
-
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.xml.xpath.XPathExpressionException;
 
 import com.atex.h11.newsday.metadata.common.ConfigModel;
-import com.atex.h11.newsday.metadata.component.CheckBoxList;
+import com.atex.h11.newsday.metadata.component.DateLabelFormatter;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+import javax.swing.JSpinner;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.xml.xpath.XPathExpressionException;
 
 public class MetadataPanel extends JPanel {
-
-	private static final long serialVersionUID = 1L;
 	private ConfigModel config = null;
 	private HashMap<String, String> metadata = null;
-	private JTextField jTextKeywords = null;
-	private JRadioButton jRadPositiveSentiment = null;
-	private JRadioButton jRadNegativeSentiment = null;
-	private JLabel jLabel = null;
-	private JLabel jLabel1 = null;
-	private JLabel jLabel11 = null;
-	private JLabel jLabel111 = null;
-	private CheckBoxList cbListSectors = null;
-	private CheckBoxList cbListIndustries = null;
-	private JScrollPane jScrollSectors = null;
-	private JScrollPane jScrollIndustries = null;
-	private JLabel jLabel1111 = null;
-	private JRadioButton jRadNeutralSentiment = null;
-	private JLabel jLabelSectorsMandate = null;
-	private JLabel jLabelIndustriesMandate = null;	
-	/**
-	 * This method initializes jScrollSectors	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollSectors() 
-			throws XPathExpressionException {
-		if (jScrollSectors == null) {
-			// initialize
-			DefaultListModel<JCheckBox> listModel = config.InitCheckBoxListModel("sector");	
-			cbListSectors = new CheckBoxList();
-			cbListSectors.setModel(listModel);
-			cbListSectors.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if(cbListSectors.getSelectedListString().trim() == ""){
-						jLabelSectorsMandate.setVisible(true);
-					}
-					else {
-						jLabelSectorsMandate.setVisible(false);
-					}
-				}				
-			});
-			jScrollSectors = new JScrollPane(cbListSectors);
-			jScrollSectors.setBounds(new Rectangle(17, 34, 300, 289));
-			jScrollSectors.setFont(new Font("Dialog", Font.PLAIN, 12));
-		}
-		return jScrollSectors;
-	}
-
-	/**
-	 * This method initializes jScrollIndustries	
-	 * 	
-	 * @return javax.swing.JScrollPane	
-	 */
-	private JScrollPane getJScrollIndustries() 
-			throws XPathExpressionException {
-		if (jScrollIndustries == null) {
-			// initialize
-			DefaultListModel<JCheckBox> listModel = config.InitCheckBoxListModel("industry");
-			cbListIndustries = new CheckBoxList();
-			cbListIndustries.setModel(listModel);
-			cbListIndustries.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					if(cbListIndustries.getSelectedListString().trim() == ""){
-						jLabelIndustriesMandate.setVisible(true);
-					}
-					else {
-						jLabelIndustriesMandate.setVisible(false);
-					}
-				}				
-			});			
-			jScrollIndustries = new JScrollPane(cbListIndustries);
-			jScrollIndustries.setBounds(new Rectangle(332, 33, 300, 291));
-			jScrollIndustries.setFont(new Font("Dialog", Font.PLAIN, 12));
-		}
-		return jScrollIndustries;
-	}		
 	
-	/**
-	 * This method initializes jTextKeywords	
-	 * 	
-	 * @return javax.swing.JTextField	
-	 */
-	private JTextField getJTextKeywords() {
-		if (jTextKeywords == null) {
-			jTextKeywords = new JTextField();
-			jTextKeywords.setBounds(new Rectangle(14, 422, 614, 23));
-			jTextKeywords.setVisible(false);	// invisible -- not used here??
-		}
-		return jTextKeywords;
-	}
+	private JTextField txtEmail1;
+	private JTextField txtEmail2;
+	private JTextField txtEmail3;
+	private JTextField txtAssignLength;
+	private JTextField txtContributor;
+	private JTextField txtStoryGroup;
+	private JTextField txtCustomKeyword;
+	private JComboBox cmbPub;
+	private JComboBox cmbReporter1;
+	private JComboBox cmbDesk;
+	private JComboBox cmbReporter2;
+	private JComboBox cmbReporter3;
+	private JComboBox cmbPriority;
+	private JTextArea txtrDescription;
+	private JComboBox cmbStoryType;
+	private JComboBox cmbLabel;
+	private JTextArea txtrPrintExtra;
+	private JTextArea txtrDigitalExtra1;
+	private JTextArea txtrDigitalExtra2;
+	private JComboBox cmbPrintSection;
+	private JComboBox cmbPrintSequence;
+	private JComboBox cmbHomepage;
+	private JComboBox cmbArrivalStatus;
+	private JCheckBox chckbxEmbargo;
+	private JDatePickerImpl dtpckEmbargo;
+	private JSpinner spnEmbargoTime;
+	private JTree trCategories;
+	private JTree trCommunities;
+	private JTextArea txtrSelCategories;
+	private JTextArea txtrSelCommunities;
 	
-	/**
-	 * This method initializes jRadNeutralSentiment	
-	 * 	
-	 * @return javax.swing.JRadioButton	
-	 */
-	private JRadioButton getJRadNeutralSentiment() {
-		if (jRadNeutralSentiment == null) {
-			jRadNeutralSentiment = new JRadioButton();
-			jRadNeutralSentiment.setBounds(new Rectangle(15, 397, 68, 24));
-			jRadNeutralSentiment.setText("Neutral");
-			jRadNeutralSentiment.setFont(new Font("Dialog", Font.PLAIN, 12));
-		}
-		return jRadNeutralSentiment;
-	}	
-
-	/**
-	 * This method initializes jRadPositiveSentiment	
-	 * 	
-	 * @return javax.swing.JRadioButton	
-	 */
-	private JRadioButton getJRadPositiveSentiment() {
-		if (jRadPositiveSentiment == null) {
-			jRadPositiveSentiment = new JRadioButton();
-			jRadPositiveSentiment.setBounds(new Rectangle(114, 397, 89, 24));
-			jRadPositiveSentiment.setFont(new Font("Dialog", Font.PLAIN, 12));
-			jRadPositiveSentiment.setText("Positive");
-		}
-		return jRadPositiveSentiment;
-	}
-
-	/**
-	 * This method initializes jRadNegativeSentiment	
-	 * 	
-	 * @return javax.swing.JRadioButton	
-	 */
-	private JRadioButton getJRadNegativeSentiment() {
-		if (jRadNegativeSentiment == null) {
-			jRadNegativeSentiment = new JRadioButton();
-			jRadNegativeSentiment.setBounds(new Rectangle(216, 397, 96, 24));
-			jRadNegativeSentiment.setFont(new Font("Dialog", Font.PLAIN, 12));
-			jRadNegativeSentiment.setText("Negative");
-		}
-		return jRadNegativeSentiment;
-	}
-
-	/**
-	 * This is the default constructor
-	 */
+	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata) 
 			throws XPathExpressionException {
-		super();
 		
 		this.config = config;
-		this.metadata = metadata;
+		this.metadata = metadata;		
 		
-		initialize();
+		// initialize panel
+		InitPanel();
 		
 		// set component values, read from the metadata hash
 		SetComponentValues();
 		
 		// check and highlight mandatory fields that are missing 
-		isReady();
-	}	
+		IsReady();		
+	}
 	
-	/**
-	 * This method initializes this
-	 * 
-	 * @return void
-	 */
-	private void initialize() 
-			throws XPathExpressionException {
-		this.setLayout(null);
-		this.setSize(720, 470);
-
-		jLabelSectorsMandate = new JLabel();
-		jLabelSectorsMandate.setBounds(new Rectangle(17, 327, 281, 16));
-		jLabelSectorsMandate.setForeground(Color.red);
-		jLabelSectorsMandate.setFont(new Font("Dialog", Font.PLAIN, 12));
-		jLabelSectorsMandate.setText("<html>Sub-editors or Content producers, please fill this in.</html>");
-		jLabelSectorsMandate.setVerticalAlignment(SwingConstants.TOP);
-		jLabelSectorsMandate.setVerticalTextPosition(SwingConstants.TOP);
-		jLabelSectorsMandate.setVisible(true);		
-		jLabelIndustriesMandate = new JLabel();
-		jLabelIndustriesMandate.setBounds(new Rectangle(332, 327, 281, 16));
-		jLabelIndustriesMandate.setForeground(Color.red);
-		jLabelIndustriesMandate.setFont(new Font("Dialog", Font.PLAIN, 12));
-		jLabelIndustriesMandate.setText("<html>Sub-editors or Content producers, please fill this in.</html>");
-		jLabelIndustriesMandate.setVerticalAlignment(SwingConstants.TOP);
-		jLabelIndustriesMandate.setVerticalTextPosition(SwingConstants.TOP);
-		jLabelIndustriesMandate.setVisible(true);
-		jLabel1111 = new JLabel();
-		jLabel1111.setBounds(new Rectangle(76, 449, 227, 16));
-		jLabel1111.setText("- separate keywords using commas");
-		jLabel1111.setFont(new Font("Dialog", Font.ITALIC, 11));		
-		jLabel1111.setVisible(false);
-		jLabel111 = new JLabel();
-		jLabel111.setBounds(new Rectangle(14, 449, 60, 16));
-		jLabel111.setFont(new Font("Dialog", Font.PLAIN, 12));
-		jLabel111.setText("Keywords");
-		jLabel111.setVisible(false);
-		jLabel11 = new JLabel();
-		jLabel11.setBounds(new Rectangle(14, 376, 99, 16));
-		jLabel11.setFont(new Font("Dialog", Font.PLAIN, 12));
-		jLabel11.setText("Sentiment");
-		jLabel1 = new JLabel();
-		jLabel1.setBounds(new Rectangle(332, 8, 63, 16));
-		jLabel1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		jLabel1.setText("Industry");
-		jLabel = new JLabel();
-		jLabel.setBounds(new Rectangle(17, 10, 48, 15));
-		jLabel.setFont(new Font("Dialog", Font.PLAIN, 12));
-		jLabel.setText("Sector");
-		this.add(jLabel, null);
-		this.add(jLabel1, null);
-		this.add(jLabel11, null);
-		this.add(jLabel111, null);
-		this.add(jLabel1111, null);
-		this.add(jLabelIndustriesMandate, null);
-		this.add(jLabelSectorsMandate, null);
-
-		this.add(getJTextKeywords(), null);
+	void InitPanel() {
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(6dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(41dlu;default):grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(57dlu;default):grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(48dlu;default)"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(53dlu;default):grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("left:max(27dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(9dlu;default)"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(13dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(91dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(51dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
 		
-        //Group the radio buttons.
-        ButtonGroup radioButtonGroup = new ButtonGroup();
-        radioButtonGroup.add(getJRadNeutralSentiment());				
-        radioButtonGroup.add(getJRadPositiveSentiment());
-        radioButtonGroup.add(getJRadNegativeSentiment());				
-		this.add(getJRadPositiveSentiment(), null);
-		this.add(getJRadNegativeSentiment(), null);
-		this.add(getJRadNeutralSentiment(), null);
-		// check "Positive" initially
-		getJRadNeutralSentiment().setSelected(true);
+		JLabel lblTitle = new JLabel("Story Package Metadata for <PACKAGE NAME>");
+		add(lblTitle, "4, 2, 7, 1");
 		
-		// lists
-		this.add(getJScrollSectors(), null);
-		this.add(getJScrollIndustries(), null);
+		JLabel lblPublication = new JLabel("Pub");
+		add(lblPublication, "22, 2, right, default");
+		
+		cmbPub = new JComboBox();
+		add(cmbPub, "24, 2, 9, 1, fill, default");
+		
+		JLabel lblReporter = new JLabel("Reporter");
+		add(lblReporter, "4, 4, right, default");
+		
+		cmbReporter1 = new JComboBox();
+		add(cmbReporter1, "6, 4, 5, 1, fill, default");
+		
+		txtEmail1 = new JTextField();
+		add(txtEmail1, "12, 4, 9, 1, fill, default");
+		txtEmail1.setColumns(10);
+		
+		JLabel lblDesk = new JLabel("Desk");
+		add(lblDesk, "22, 4, right, default");
+		
+		cmbDesk = new JComboBox();
+		add(cmbDesk, "24, 4, 9, 1, fill, default");
+		
+		JLabel lblndReporter = new JLabel("2nd Reporter");
+		add(lblndReporter, "4, 6, right, default");
+		
+		cmbReporter2 = new JComboBox();
+		add(cmbReporter2, "6, 6, 5, 1, fill, default");
+		
+		txtEmail2 = new JTextField();
+		txtEmail2.setColumns(10);
+		add(txtEmail2, "12, 6, 9, 1, fill, default");
+		
+		JLabel lblAssignedLength = new JLabel("Assigned Length");
+		add(lblAssignedLength, "22, 6, 5, 1");
+		
+		JLabel lblPriority = new JLabel("Priority");
+		add(lblPriority, "28, 6, 5, 1");
+		
+		JLabel lblrdReporter = new JLabel("3rd Reporter");
+		add(lblrdReporter, "4, 8, right, default");
+		
+		cmbReporter3 = new JComboBox();
+		add(cmbReporter3, "6, 8, 5, 1, fill, default");
+		
+		txtEmail3 = new JTextField();
+		txtEmail3.setColumns(10);
+		add(txtEmail3, "12, 8, 9, 1, fill, default");
+		
+		txtAssignLength = new JTextField();
+		txtAssignLength.setColumns(10);
+		add(txtAssignLength, "22, 8, 3, 1");
+		
+		cmbPriority = new JComboBox();
+		add(cmbPriority, "28, 8, 5, 1, fill, default");
+		
+		JLabel lblContributor = new JLabel("Contributor");
+		add(lblContributor, "4, 10, right, default");
+		
+		txtContributor = new JTextField();
+		txtContributor.setColumns(10);
+		add(txtContributor, "6, 10, 5, 1, fill, default");
+		
+		JLabel lblDescription = new JLabel("Description");
+		add(lblDescription, "12, 10");
+		
+		JLabel lblStoryGroup = new JLabel("Story Group");
+		add(lblStoryGroup, "4, 12, right, default");
+		
+		txtStoryGroup = new JTextField();
+		txtStoryGroup.setColumns(10);
+		add(txtStoryGroup, "6, 12, 5, 1, fill, default");
+		
+		txtrDescription = new JTextArea();
+		add(txtrDescription, "12, 12, 21, 3, fill, fill");
+		
+		JLabel lblStoryType = new JLabel("Story Type");
+		add(lblStoryType, "4, 14, right, default");
+		
+		cmbStoryType = new JComboBox();
+		add(cmbStoryType, "6, 14, 5, 1, fill, default");
+		
+		JLabel lblLabel = new JLabel("Label");
+		add(lblLabel, "4, 16, right, default");
+		
+		cmbLabel = new JComboBox();
+		add(cmbLabel, "6, 16, 5, 1, fill, default");
+		
+		JLabel lblDigitalExtras = new JLabel("Digital Extras");
+		add(lblDigitalExtras, "12, 16, right, default");
+		
+		txtrDigitalExtra1 = new JTextArea();
+		add(txtrDigitalExtra1, "14, 16, 19, 3, fill, fill");
+		
+		JLabel lblPrintExtra = new JLabel("Print Extra");
+		add(lblPrintExtra, "4, 18, right, default");
+		
+		txtrPrintExtra = new JTextArea();
+		add(txtrPrintExtra, "6, 18, 5, 5, fill, fill");
+		
+		txtrDigitalExtra2 = new JTextArea();
+		add(txtrDigitalExtra2, "14, 20, 19, 3, fill, fill");
+		
+		JLabel lblPrint = new JLabel("PRINT");
+		add(lblPrint, "4, 24");
+		
+		JLabel lblSection = new JLabel("Section");
+		add(lblSection, "6, 24, right, default");
+		
+		cmbPrintSection = new JComboBox();
+		add(cmbPrintSection, "8, 24, 3, 1, fill, default");
+		
+		JLabel lblSequenceOr = new JLabel("Sequence or page");
+		add(lblSequenceOr, "12, 24, right, default");
+		
+		cmbPrintSequence = new JComboBox();
+		add(cmbPrintSequence, "14, 24, 13, 1, fill, default");
+		
+		JLabel lblWeb = new JLabel("WEB");
+		add(lblWeb, "4, 26");
+		
+		JLabel lblHomePage = new JLabel("Home page");
+		add(lblHomePage, "6, 26, right, default");
+		
+		cmbHomepage = new JComboBox();
+		add(cmbHomepage, "8, 26, 3, 1, fill, default");
+		
+		JLabel lblArrivalStatus = new JLabel("Arrival Status");
+		add(lblArrivalStatus, "12, 26, right, default");
+		
+		cmbArrivalStatus = new JComboBox();
+		add(cmbArrivalStatus, "14, 26, 13, 1, fill, default");
+		
+		chckbxEmbargo = new JCheckBox("Embargo");
+		add(chckbxEmbargo, "6, 28");
+		
+		// date picker
+		UtilDateModel dateModel = new UtilDateModel();
+		dateModel.setDate(1990, 8, 24);
+		dateModel.setSelected(true);
+		
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");		
+		
+		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
+		
+		dtpckEmbargo = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		add(dtpckEmbargo, "8, 28, 3, 1");		
+		
+		spnEmbargoTime = new JSpinner();
+		add(spnEmbargoTime, "12, 28");
+		
+		JLabel lblCategories = new JLabel("Categories");
+		add(lblCategories, "4, 30");
+		
+		trCategories = new JTree();
+		add(trCategories, "6, 30, 5, 1, fill, fill");
+		
+		JLabel lblCommunities = new JLabel("Communities");
+		add(lblCommunities, "12, 30");
+		
+		trCommunities = new JTree();
+		add(trCommunities, "14, 30, 19, 1, fill, fill");
+		
+		JLabel lblSelectedCategories = new JLabel("<html><p>Selected</p><p>Categories</p></html>");
+		lblSelectedCategories.setVerticalAlignment(SwingConstants.TOP);
+		add(lblSelectedCategories, "4, 32");
+		
+		txtrSelCategories = new JTextArea();
+		add(txtrSelCategories, "6, 32, 5, 1, fill, fill");
+		
+		JLabel lblselectedcommunities = new JLabel("<html><p>Selected</p><p>Communities</p></html>");
+		lblselectedcommunities.setVerticalAlignment(SwingConstants.TOP);
+		add(lblselectedcommunities, "12, 32");
+		
+		txtrSelCommunities = new JTextArea();
+		add(txtrSelCommunities, "14, 32, 19, 1, fill, fill");
+		
+		JLabel lblcustomkeyword = new JLabel("<html><p>Custom</p><p>Keyword</p></html>");
+		lblcustomkeyword.setVerticalAlignment(SwingConstants.TOP);
+		add(lblcustomkeyword, "4, 34");
+		
+		txtCustomKeyword = new JTextField();
+		txtCustomKeyword.setColumns(10);
+		add(txtCustomKeyword, "6, 34, 3, 1, fill, default");
+		
+		JButton btnAddKeyword = new JButton("Add Keyword");
+		add(btnAddKeyword, "10, 34");		
 	}
 	
 	private void SetComponentValues() 
 			throws XPathExpressionException {
-		cbListSectors.setSelectedFromListString(metadata.get(config.GetMetadataName("sectors")));
-		cbListIndustries.setSelectedFromListString(metadata.get(config.GetMetadataName("industries")));
-		jTextKeywords.setText(metadata.get(config.GetMetadataName("keywords")));
-		jRadNeutralSentiment.setSelected(metadata.get(config.GetMetadataName("sentiment")).equalsIgnoreCase("Neutral"));
-		jRadPositiveSentiment.setSelected(metadata.get(config.GetMetadataName("sentiment")).equalsIgnoreCase("Positive"));
-		jRadNegativeSentiment.setSelected(metadata.get(config.GetMetadataName("sentiment")).equalsIgnoreCase("Negative"));
+		
 	}
 	
-	public boolean isReady() {
+	public boolean IsReady() {
 		/*
 		 * put any required validations here
 		 */
 		boolean isReady = true;
 		
-		// init
-		jLabelSectorsMandate.setVisible(false);
-		jLabelIndustriesMandate.setVisible(false);
-		
-		if (cbListSectors.getSelectedListString().trim() == "") {
-			jLabelSectorsMandate.setVisible(true);
-//			isReady = false;
-		}
-		
-		if (cbListIndustries.getSelectedListString().trim() == "") {
-			jLabelIndustriesMandate.setVisible(true);
-//			isReady = false;
-		}
-
 		return isReady;
-	}	
+	}
 	
 	public HashMap<String,String> GetMetadataValues() 
 			throws XPathExpressionException {
 		HashMap<String,String> retMetadata = new HashMap<String,String>();
 		
-	    retMetadata.put(config.GetMetadataName("sectors"), cbListSectors.getSelectedListString());
-	    retMetadata.put(config.GetMetadataName("industries"), cbListIndustries.getSelectedListString());
-	    
-	    // normalize keywords list
-	    String keywordList = "";
-	    int i = 0;
-	    for (String s : jTextKeywords.getText().split(",")) {
-	    	s = s.trim();			// trim any leading & trailing spaces
-	    	if (! s.isEmpty()) {
-	    		if (i > 0) { keywordList += ","; }
-	    		keywordList += s;
-	    		i++;
-	    	}
-	    }	    
-	    retMetadata.put(config.GetMetadataName("keywords"), keywordList);
-		
-	    retMetadata.put(config.GetMetadataName("sentiment"), 
-		    	getJRadNeutralSentiment().isSelected() ? "Netural" : (getJRadPositiveSentiment().isSelected() ? "Positive" : "Negative"));
-
-	    //	    retMetadata.put(config.GetMetadataName("sentiment"), 
-//	    	getJRadPositiveSentiment().isSelected() ? "Positive" : "Negative");
-	    
-		// combo boxes
 		return retMetadata;
 	}
-
-
-
-	
-}  //  @jve:decl-index=0:visual-constraint="10,10"
+		
+}

@@ -116,7 +116,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 			logMetadata(metadata, "Loaded from DB");
 
 			metadataPanel = new MetadataPanel(config, metadata);
-			metadataPanel.setPreferredSize(new Dimension(720, 470));
+			//metadataPanel.setPreferredSize(new Dimension(720, 470));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");
 			return metadataPanel;			
@@ -203,7 +203,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		
 	private boolean isReady() {
 		logger.entering(this.getClass().getSimpleName(), "isReady");
-		boolean result = metadataPanel.isReady();
+		boolean result = metadataPanel.IsReady();
 		logger.exiting(this.getClass().getSimpleName(), "isReady");
 		return result;
 	}	
