@@ -169,6 +169,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 	@Override
 	public String getTitle() {
 		// Just return the configured string
+		String title = "";
 		String objName = "";
 		
 		if (inspector != null) {
@@ -176,13 +177,13 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		}
 
 		if (objName != null && !objName.equals("")) {
-			objName = "Object name = " + objName;
+			title = "Story Package Metadata for " + objName;
 		} else {
-			objName = "Object not passed";
+			title = "Object not passed";
 		}
 
 		//return bundle.getString("title") + objectName;
-		return objName;
+		return title;
 	}	
 	
 	@Override
