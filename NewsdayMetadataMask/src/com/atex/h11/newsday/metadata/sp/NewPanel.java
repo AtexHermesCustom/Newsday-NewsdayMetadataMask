@@ -21,6 +21,8 @@ import javax.swing.JSpinner;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
 
 public class NewPanel extends JPanel {
 	private JTextField txtEmail1;
@@ -29,6 +31,7 @@ public class NewPanel extends JPanel {
 	private JTextField txtAssignLength;
 	private JTextField txtContributor;
 	private JTextField txtStoryGroup;
+	private JTextField textField;
 	
 	public NewPanel() {
 		setLayout(new FormLayout(new ColumnSpec[] {
@@ -96,9 +99,9 @@ public class NewPanel extends JPanel {
 				FormFactory.UNRELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("max(91dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("max(51dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -259,6 +262,43 @@ public class NewPanel extends JPanel {
 		
 		JSpinner spnEmbargoTime = new JSpinner();
 		add(spnEmbargoTime, "12, 28");
+		
+		JLabel lblCategories = new JLabel("Categories");
+		add(lblCategories, "4, 30");
+		
+		JTree treeCategories = new JTree();
+		add(treeCategories, "6, 30, 5, 1, fill, fill");
+		
+		JLabel lblCommunities = new JLabel("Communities");
+		add(lblCommunities, "12, 30");
+		
+		JTree treeCommunities = new JTree();
+		add(treeCommunities, "14, 30, 19, 1, fill, fill");
+		
+		JLabel lblSelectedCategories = new JLabel("<html><p>Selected</p><p>Categories</p></html>");
+		lblSelectedCategories.setVerticalAlignment(SwingConstants.TOP);
+		add(lblSelectedCategories, "4, 32");
+		
+		JTextArea txtAreaSelectedCategories = new JTextArea();
+		add(txtAreaSelectedCategories, "6, 32, 5, 1, fill, fill");
+		
+		JLabel lblselectedcommunities = new JLabel("<html><p>Selected</p><p>Communities</p></html>");
+		lblselectedcommunities.setVerticalAlignment(SwingConstants.TOP);
+		add(lblselectedcommunities, "12, 32");
+		
+		JTextArea txtAreaSelectedCommunities = new JTextArea();
+		add(txtAreaSelectedCommunities, "14, 32, 19, 1, fill, fill");
+		
+		JLabel lblcustomkeyword = new JLabel("<html><p>Custom</p><p>Keyword</p></html>");
+		lblcustomkeyword.setVerticalAlignment(SwingConstants.TOP);
+		add(lblcustomkeyword, "4, 34");
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		add(textField, "6, 34, 3, 1, fill, default");
+		
+		JButton btnAddKeyword = new JButton("Add Keyword");
+		add(btnAddKeyword, "10, 34");
 
 		
 
