@@ -5,12 +5,13 @@ import java.util.Properties;
 
 import javax.swing.JPanel;
 
-import com.atex.h11.newsday.metadata.common.ConfigModel;
-import com.atex.h11.newsday.metadata.component.DateLabelFormatter;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
+import com.atex.h11.newsday.metadata.common.ConfigModel;
+import com.atex.h11.newsday.metadata.component.DateLabelFormatter;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
