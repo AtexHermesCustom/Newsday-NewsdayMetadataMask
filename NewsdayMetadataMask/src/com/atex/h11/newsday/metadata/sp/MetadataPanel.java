@@ -40,7 +40,6 @@ public class MetadataPanel extends JPanel {
 	private JTextField txtContributor;
 	private JTextField txtStoryGroup;
 	private JTextField txtCustomKeyword;
-	private JComboBox cmbPub;
 	private JComboBox cmbReporter1;
 	private JComboBox cmbDesk;
 	private JComboBox cmbReporter2;
@@ -63,6 +62,8 @@ public class MetadataPanel extends JPanel {
 	private JTree trCommunities;
 	private JTextArea txtrSelCategories;
 	private JTextArea txtrSelCommunities;
+	private JTextField txtPrintPage;
+	private JLabel lblPage;
 	
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata) 
@@ -90,9 +91,9 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(41dlu;default):grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(57dlu;default):grow"),
+				ColumnSpec.decode("max(33dlu;default):grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(48dlu;default)"),
+				ColumnSpec.decode("max(34dlu;default)"),
 				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(53dlu;default):grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -114,7 +115,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
+				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(9dlu;default)"),},
 			new RowSpec[] {
@@ -157,12 +158,6 @@ public class MetadataPanel extends JPanel {
 		
 		JLabel lblTitle = new JLabel("Story Package Metadata for <PACKAGE NAME>");
 		add(lblTitle, "4, 2, 7, 1");
-		
-		JLabel lblPublication = new JLabel("Pub");
-		add(lblPublication, "22, 2, right, default");
-		
-		cmbPub = new JComboBox();
-		add(cmbPub, "24, 2, 9, 1, fill, default");
 		
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "4, 4, right, default");
@@ -274,6 +269,13 @@ public class MetadataPanel extends JPanel {
 		
 		cmbPrintSequence = new JComboBox();
 		add(cmbPrintSequence, "14, 24, 13, 1, fill, default");
+		
+		lblPage = new JLabel("Page");
+		add(lblPage, "30, 24, right, default");
+		
+		txtPrintPage = new JTextField();
+		txtPrintPage.setColumns(10);
+		add(txtPrintPage, "32, 24, fill, default");
 		
 		JLabel lblWeb = new JLabel("WEB");
 		add(lblWeb, "4, 26");

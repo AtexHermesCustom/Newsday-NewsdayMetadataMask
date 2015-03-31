@@ -29,7 +29,4 @@ public interface Constants {
 
 	public static final String FALSE = "false";
 	public static final String TRUE = "true";
-
-	public static final String VERSION = "v1.2.3";
-	
 }

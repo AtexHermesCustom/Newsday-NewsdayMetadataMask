@@ -113,12 +113,24 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 				this.validator = new HermesValidator(inspector);
 			*/
 			
+			String objName;
+			String objLevel;
+			String objLevelId;
+			if (inspector != null) {
+				objName = inspector.getProperty(NodeValueInspector.NAME);
+				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
+				objLevelId = inspector.getProperty(NodeValueInspector.LEVEL_ID);
+				logger.fine("Object name=" + objName + ", level=" + objLevel + ", level id=" + objLevelId);
+			}
+			else {
+				logger.log(Level.SEVERE, "inspector is null");
+			}
 			
 			
 			logMetadata(metadata, "Loaded from DB");
 
 			metadataPanel = new MetadataPanel(config, metadata);
-			metadataPanel.setPreferredSize(new Dimension(750, 670));
+			metadataPanel.setPreferredSize(new Dimension(750, 700));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");
 			return metadataPanel;			
@@ -158,14 +170,17 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 	 * Checks, if values are valid.
 	 */
 	@Override
-	public boolean canActionBePerformed(int button) {		
+	public boolean canActionBePerformed(int button) {
 		// Only OK-Button has to be checked.
+		boolean retVal;
 		switch (button) {
 			case ICustomMetadataPanel.OK_BUTTON:
-				return isReady();
+				retVal = isReady();
 			default:
-				return true;
+				retVal = true;
 		}
+		logger.finer("Return value=" + retVal);
+		return retVal;
 	}	
 	
 	@Override
@@ -185,29 +200,32 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		}
 
 		//return bundle.getString("title") + objectName;
+		logger.finer("Title value=" + title);
 		return title;
 	}	
 	
 	@Override
 	public void setCurrentLocale(Locale locale) {
 		this.locale = locale;
+		logger.finer("Locale Info: name=" + locale.getDisplayName());
 	}
 	
 	@Override
 	public void setLocationValue(LocationInfo locationInfo) {
 		this.locationInfo = locationInfo;
+		logger.finer("Location Info: name=" + locationInfo.getLocationName() + ", user=" + locationInfo.getUsername());
 	}
 	
 	@Override
 	public void setParent(Window parent) {
 		this.parent = parent;
+		logger.finer("Window parent info: name=" + parent.getName());
 	}	
 		
 	private boolean isReady() {
-		logger.entering(this.getClass().getSimpleName(), "isReady");
-		boolean result = metadataPanel.IsReady();
-		logger.exiting(this.getClass().getSimpleName(), "isReady");
-		return result;
+		boolean retVal = metadataPanel.IsReady();
+		logger.finer("Return value=" + retVal);
+		return retVal;
 	}	
 	
 	private void logMetadata(HashMap<String, String> map, String msg) {
