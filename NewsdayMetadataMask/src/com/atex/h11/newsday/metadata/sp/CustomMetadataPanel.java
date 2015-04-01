@@ -113,9 +113,9 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 				this.validator = new HermesValidator(inspector);
 			*/
 			
-			String objName;
-			String objLevel;
-			String objLevelId;
+			String objName = "";
+			String objLevel = "";
+			String objLevelId = "";
 			if (inspector != null) {
 				objName = inspector.getProperty(NodeValueInspector.NAME);
 				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
@@ -129,8 +129,8 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 			
 			logMetadata(metadata, "Loaded from DB");
 
-			metadataPanel = new MetadataPanel(config, metadata);
-			metadataPanel.setPreferredSize(new Dimension(750, 700));
+			metadataPanel = new MetadataPanel(config, metadata, logger, objName, objLevel);
+			metadataPanel.setPreferredSize(new Dimension(640, 580));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");
 			return metadataPanel;			
@@ -176,8 +176,10 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		switch (button) {
 			case ICustomMetadataPanel.OK_BUTTON:
 				retVal = isReady();
+				break;
 			default:
 				retVal = true;
+				break;
 		}
 		logger.finer("Return value=" + retVal);
 		return retVal;

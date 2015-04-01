@@ -96,11 +96,18 @@ public class ConfigModel {
     	return nl;
     }
     
+    public NodeList GetListItems(String metadata, String xpath) 
+			throws XPathExpressionException {
+    	NodeList nl = (NodeList) 
+    	xp.evaluate(metadataGroup + "/" + metadata + "/" + xpath, doc.getDocumentElement(), XPathConstants.NODESET);
+    	return nl;
+    }    
+    
     public String GetAttribValue(String metadata, String attrib)
 			throws XPathExpressionException {
     	return GetXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
     }    
-    
+       
     public void InitComboBox(JComboBox<String> cmbBox, String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = GetListItems(metadata); 
@@ -121,7 +128,6 @@ public class ConfigModel {
 		if (GetAttribValue(metadata, "selectMandatory").trim().equals("1")) {
 			cmbBox.setBackground(Color.red);
 		}
-
 	}    
  
     public DefaultListModel<JCheckBox> InitCheckBoxListModel(String metadata) 

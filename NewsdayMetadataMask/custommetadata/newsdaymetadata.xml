@@ -6,7 +6,7 @@
 		<!-- logLevel allowed values (in ascending order, in terms of level of detail):
 			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
 		-->
-		<logLevel>FINEST</logLevel>
+		<logLevel>FINER</logLevel>
 	</configuration>
 	
 	<!--
@@ -21,7 +21,19 @@
 			<keywords>KEYWORDS</keywords>
 			<sentiment>SENTIMENT</sentiment>
 		</metadataNames>	
-		<sector>
+		<desk>
+			<item></item>
+		</desk>
+		<priority>
+			<item></item>
+		</priority>
+		<storyType>
+			<item></item>
+		</storyType>
+		<label>
+			<item></item>
+		</label>
+		<reporter>
 			<item>News</item>
 			<item>Business</item>
 			<item>Property</item>
@@ -38,7 +50,7 @@
 			<item>Travel</item>
 			<item>Hobbies-Craft/Photography</item>
 			<item>Wedding/Parenting/Homes/Family</item>
-		</sector>
+		</reporter>
 		<industry>
 			<item>Property</item>
 			<item>Hotel</item>
