@@ -94,8 +94,6 @@ public class MetadataPanel extends JPanel {
 		this.metadata = metadata;		
 		logger = l;
 		
-		logger.fine("hello metadata");
-		
 		// initialize panel
 		InitPanel();
 		
@@ -395,6 +393,10 @@ public class MetadataPanel extends JPanel {
 		lblTitle.setText("<html><p><b>Story Package Metadata for " 
 			+ "<font color=\"red\">" + objName + "</font>" 
 			+ "</b></p></html>");
+		
+		config.InitComboBox(cmbPriority, "priority");
+		config.InitComboBox(cmbStoryType, "storyType");
+		config.InitComboBox(cmbLabel, "label");
 	}
 	
 	public boolean IsReady() {

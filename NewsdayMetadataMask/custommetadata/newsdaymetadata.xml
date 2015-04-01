@@ -25,13 +25,27 @@
 			<item></item>
 		</desk>
 		<priority>
-			<item></item>
+			<item>LOW</item>
+			<item>MEDIUM</item>
+			<item>HIGH</item>
 		</priority>
 		<storyType>
-			<item></item>
+			<item>ARTICLE</item>
+			<item>COLUMN</item>
+			<item>EDITORIAL</item>
+			<item>LETTER</item>
+			<item>OPINION</item>
+			<item>REVIEW</item>
+			<item>OBITUARY</item>
+			<item>CUSTOM</item>
 		</storyType>
-		<label>
-			<item></item>
+		<label insertEmptyItem="1">
+			<item>EXCLUSIVE</item>
+			<item>COVER STORY</item>
+			<item>CENTERPIECE</item>
+			<item>DEVELOPING</item>
+			<item>TENTATIVE</item>
+			<item>WATCHING</item>
 		</label>
 		<reporter>
 			<item>News</item>
@@ -51,38 +65,18 @@
 			<item>Hobbies-Craft/Photography</item>
 			<item>Wedding/Parenting/Homes/Family</item>
 		</reporter>
-		<industry>
-			<item>Property</item>
-			<item>Hotel</item>
-			<item>Retail (Shopping Mall, Supermarket, etc)</item>
-			<item>Banking &amp; Finance</item>
-			<item>Insurance</item>
-			<item>Government</item>
-			<item>Motoring</item>
-			<item>Transportation</item>
-			<item>Shipping &amp; Logistics</item>
-			<item>Telecommunications</item>
-			<item>Pharmaceuticals/Medical</item>
-			<item>Petrochemical</item>
-			<item>Industrial Products</item>
-			<item>Consultancy</item>
-			<item>Education</item>
-			<item>Exhibitions/Seminars</item>
-			<item>FMCG</item>
-			<item>FMCG (Consumer Edibles)</item>
-			<item>Food &amp; Beverage</item>
-			<item>Watch &amp; Jewellery</item>
-			<item>Fashion</item>
-			<item>Cosmetics/Beauty Products</item>
-			<item>Beauty Services</item>
-			<item>Furniture &amp; Furnishing</item>
-			<item>IT/Office Equipment</item>
-			<item>Durables</item>
-			<item>Media</item>
-			<item>Entertainment</item>
-			<item>Leisure</item>
-			<item>Sports</item>
-		</industry>
+		<printSection>
+			<item></item>
+		</printSection>
+		<printSequence>
+			<item></item>
+		</printSequence>
+		<homepage>
+			<item></item>
+		</homepage>
+		<arrivalStatus>
+			<item></item>
+		</arrivalStatus>
 	</sp>
 	
 </metadata>
