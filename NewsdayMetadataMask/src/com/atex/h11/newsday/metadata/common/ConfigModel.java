@@ -5,8 +5,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -108,27 +112,51 @@ public class ConfigModel {
     	return GetXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
     }    
        
-    public void InitComboBox(JComboBox<String> cmbBox, String metadata) 
+    public void InitComboBox(JComboBox<String> cmbControl, String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = GetListItems(metadata); 
+		InitComboBox(cmbControl, metadata, nl);
+	}    
+    
+    public void InitComboBox(JComboBox<String> cmbControl, String metadata, String xpath) 
+			throws XPathExpressionException {
+		NodeList nl = GetListItems(metadata, xpath); 
+		InitComboBox(cmbControl, metadata, nl);
+	}      
+    
+    public void InitComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 
+			throws XPathExpressionException {
+    	List<String> items = new ArrayList<String>(nl.getLength());
+    	
+    	// load items
+		for (int i = 0; i < nl.getLength(); i++) {
+			items.add(nl.item(i).getTextContent().trim());
+		}
+		
+		// sort (if configured)
+		if (GetAttribValue(metadata, "sortItems").trim().equals("1")) {
+			Collections.sort(items);
+		}
+		
+		// load to combo box
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(items.toArray(new String[items.size()]));
+		cmbControl.setModel(model);
+
 		// insert empty item
 		if (GetAttribValue(metadata, "insertEmptyItem").trim().equals("1")) {
-			cmbBox.addItem("");
+			cmbControl.insertItemAt("", 0); 	// insert at beginning of the list
 		}
-		// insert items
-		for (int i = 0; i < nl.getLength(); i++) {
-			cmbBox.addItem(nl.item(i).getTextContent().trim());
-		}
+
 		// select default
 		if (GetAttribValue(metadata, "selectFirstItemAsDefault").trim().equals("1")) {
-			cmbBox.setSelectedIndex(0);
+			cmbControl.setSelectedIndex(0);
 		}
 		
 		// select mandatory
-		if (GetAttribValue(metadata, "selectMandatory").trim().equals("1")) {
-			cmbBox.setBackground(Color.red);
+		if (GetAttribValue(metadata, "setMandatory").trim().equals("1")) {
+			cmbControl.setBackground(Color.red);
 		}
-	}    
+	}        
  
     public DefaultListModel<JCheckBox> InitCheckBoxListModel(String metadata) 
 			throws XPathExpressionException {
