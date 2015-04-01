@@ -20,9 +20,23 @@
 			<industries>INDUSTRY</industries>
 			<keywords>KEYWORDS</keywords>
 			<sentiment>SENTIMENT</sentiment>
-		</metadataNames>	
+		</metadataNames>
+		
+		<pubConfiguration>
+			<item levelMatch="^ND*">ND</item>
+			<item levelMatch="^AM*">AM</item>
+		</pubConfiguration>
+			
 		<desk>
-			<item></item>
+			<item>ALL</item>
+			<item pub="ND">LONG ISLAND</item>
+			<item pub="ND">BUSINESS</item>
+			<item pub="ND">ENTERTAINMENT</item>
+			<item pub="ND">LIFESTYLE</item>
+			<item pub="ND">OP-ED</item>
+			<item pub="ND">SPORTS</item>
+			<item pub="ND">TRAVEL</item>
+			<item pub="AM">AMNY</item>
 		</desk>
 		<priority>
 			<item>LOW</item>

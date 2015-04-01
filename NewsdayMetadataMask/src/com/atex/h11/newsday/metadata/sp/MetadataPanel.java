@@ -1,5 +1,6 @@
 package com.atex.h11.newsday.metadata.sp;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import javax.swing.JTree;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -332,7 +334,11 @@ public class MetadataPanel extends JPanel {
 		dtpckEmbargo = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		add(dtpckEmbargo, "6, 26, 3, 1");		
 		
+		SpinnerDateModel timeModel = new SpinnerDateModel();
+		timeModel.setCalendarField(Calendar.MINUTE);
 		spnEmbargoTime = new JSpinner();
+		spnEmbargoTime.setModel(timeModel);
+		spnEmbargoTime.setEditor(new JSpinner.DateEditor(spnEmbargoTime, "h:mm a"));		
 		add(spnEmbargoTime, "10, 26, fill, default");
 		
 		JLabel lblCategories = new JLabel("Categories");
@@ -394,6 +400,7 @@ public class MetadataPanel extends JPanel {
 			+ "<font color=\"red\">" + objName + "</font>" 
 			+ "</b></p></html>");
 		
+		config.InitComboBox(cmbDesk, "desk", "item[@pub='ND']");
 		config.InitComboBox(cmbPriority, "priority");
 		config.InitComboBox(cmbStoryType, "storyType");
 		config.InitComboBox(cmbLabel, "label");
