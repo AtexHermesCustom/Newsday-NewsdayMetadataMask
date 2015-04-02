@@ -303,10 +303,10 @@ public class MetadataPanel extends JPanel {
 		add(lblPage, "16, 22, right, default");
 		
 		ftxtPrintPage = new JFormattedTextField();
-		//((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
-		//		new NumericDocumentFilter(ftxtPrintPage.getDocument(), false, false));		
 		((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
-				new AlphaNumericDocumentFilter());		
+				new NumericDocumentFilter(ftxtPrintPage.getDocument(), false, false));		
+		//((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
+		//		new AlphaNumericDocumentFilter());		
 		add(ftxtPrintPage, "18, 22, fill, default");
 		
 		JLabel lblWeb = new JLabel("WEB");
