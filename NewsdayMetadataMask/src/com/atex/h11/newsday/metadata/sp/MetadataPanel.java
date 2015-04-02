@@ -11,7 +11,6 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
-import com.atex.h11.newsday.metadata.common.AlphaNumericDocumentFilter;
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
 import com.atex.h11.newsday.metadata.common.DateLabelFormatter;
@@ -110,7 +109,8 @@ public class MetadataPanel extends JPanel {
 		isReady();		
 	}
 
-	protected void initPanel() {
+	protected void initPanel() 
+			throws XPathExpressionException {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:default"),
@@ -164,7 +164,9 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		lblTitle = new JLabel("Story Package Metadata for <PACKAGE NAME>");
+		lblTitle = new JLabel("<html><p><b>Story Package Metadata for " 
+				+ "<font color=\"red\">" + objName + "</font>" 
+				+ "</b></p></html>");
 		add(lblTitle, "2, 2, 7, 1");
 		
 		JLabel lblReporter = new JLabel("Reporter");
@@ -355,7 +357,7 @@ public class MetadataPanel extends JPanel {
 		scrlCategories = new JScrollPane();
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
-		trCategories = new JTree();
+		trCategories = config.initTree("category");
 		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
@@ -365,7 +367,7 @@ public class MetadataPanel extends JPanel {
 		scrlCommunities = new JScrollPane();
 		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
 		
-		trCommunities = new JTree();
+		trCommunities = config.initTree("community");
 		trCommunities.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCommunities.setViewportView(trCommunities);
 		
@@ -404,18 +406,17 @@ public class MetadataPanel extends JPanel {
 		
 		chckbxExclusive = new JCheckBox("Exclusive");
 		add(chckbxExclusive, "12, 32, 2, 1");
+		
+
+		config.initComboBox(cmbDesk, "desk", "item[@pub='ND']");
+		config.initComboBox(cmbPriority, "priority");
+		config.initComboBox(cmbStoryType, "storyType");
+		config.initComboBox(cmbLabel, "label");
 	}
 	
 	protected void setComponentValues() 
 			throws XPathExpressionException {
-		lblTitle.setText("<html><p><b>Story Package Metadata for " 
-			+ "<font color=\"red\">" + objName + "</font>" 
-			+ "</b></p></html>");
-		
-		config.InitComboBox(cmbDesk, "desk", "item[@pub='ND']");
-		config.InitComboBox(cmbPriority, "priority");
-		config.InitComboBox(cmbStoryType, "storyType");
-		config.InitComboBox(cmbLabel, "label");
+
 	}
 	
 	public boolean isReady() {

@@ -14,6 +14,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -73,7 +75,7 @@ public class ConfigModel {
 		return p;
 	}    
   
-    public String GetXpathValue(String xpath)
+    public String getXpathValue(String xpath)
     		throws XPathExpressionException {
     	String val = "";	// default value
     	Node n = (Node) xp.evaluate(xpath, doc.getDocumentElement(), XPathConstants.NODE);
@@ -83,48 +85,48 @@ public class ConfigModel {
     	return val;
     }
 
-    public String GetConfigValue(String key)
+    public String getConfigValue(String key)
     		throws XPathExpressionException {
-    	return GetXpathValue("configuration/" + key);
+    	return getXpathValue("configuration/" + key);
     }
 
-    public String GetMetadataName(String key)
+    public String getMetadataName(String key)
 			throws XPathExpressionException {
-    	return GetXpathValue(metadataGroup + "/metadataNames/" + key);
+    	return getXpathValue(metadataGroup + "/metadataNames/" + key);
     }
         
-    public NodeList GetListItems(String metadata) 
+    public NodeList getListItems(String metadata) 
 			throws XPathExpressionException {
     	NodeList nl = (NodeList) 
     	xp.evaluate(metadataGroup + "/" + metadata + "/item", doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }
     
-    public NodeList GetListItems(String metadata, String xpath) 
+    public NodeList getListItems(String metadata, String xpath) 
 			throws XPathExpressionException {
     	NodeList nl = (NodeList) 
     	xp.evaluate(metadataGroup + "/" + metadata + "/" + xpath, doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }    
     
-    public String GetAttribValue(String metadata, String attrib)
+    public String getAttribValue(String metadata, String attrib)
 			throws XPathExpressionException {
-    	return GetXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
+    	return getXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
     }    
        
-    public void InitComboBox(JComboBox<String> cmbControl, String metadata) 
+    public void initComboBox(JComboBox<String> cmbControl, String metadata) 
 			throws XPathExpressionException {
-		NodeList nl = GetListItems(metadata); 
-		InitComboBox(cmbControl, metadata, nl);
+		NodeList nl = getListItems(metadata); 
+		initComboBox(cmbControl, metadata, nl);
 	}    
     
-    public void InitComboBox(JComboBox<String> cmbControl, String metadata, String xpath) 
+    public void initComboBox(JComboBox<String> cmbControl, String metadata, String xpath) 
 			throws XPathExpressionException {
-		NodeList nl = GetListItems(metadata, xpath); 
-		InitComboBox(cmbControl, metadata, nl);
+		NodeList nl = getListItems(metadata, xpath); 
+		initComboBox(cmbControl, metadata, nl);
 	}      
     
-    public void InitComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 
+    public void initComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 
 			throws XPathExpressionException {
     	List<String> items = new ArrayList<String>(nl.getLength());
     	
@@ -134,7 +136,7 @@ public class ConfigModel {
 		}
 		
 		// sort (if configured)
-		if (GetAttribValue(metadata, "sortItems").trim().equals("1")) {
+		if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
 			Collections.sort(items);
 		}
 		
@@ -143,24 +145,73 @@ public class ConfigModel {
 		cmbControl.setModel(model);
 
 		// insert empty item
-		if (GetAttribValue(metadata, "insertEmptyItem").trim().equals("1")) {
+		if (getAttribValue(metadata, "insertEmptyItem").trim().equals("1")) {
 			cmbControl.insertItemAt("", 0); 	// insert at beginning of the list
 		}
 
 		// select default
-		if (GetAttribValue(metadata, "selectFirstItemAsDefault").trim().equals("1")) {
+		if (getAttribValue(metadata, "selectFirstItemAsDefault").trim().equals("1")) {
 			cmbControl.setSelectedIndex(0);
 		}
 		
 		// select mandatory
-		if (GetAttribValue(metadata, "setMandatory").trim().equals("1")) {
+		if (getAttribValue(metadata, "setMandatory").trim().equals("1")) {
 			cmbControl.setBackground(Color.red);
 		}
 	}        
+    
+    public JTree initTree(String metadata) 
+			throws XPathExpressionException {    
+    	NodeList nlGroups = getListItems(metadata, "group/@name");
+    	List<String> groups = new ArrayList<String>(nlGroups.getLength());
+    	
+    	// load groups
+		for (int i = 0; i < nlGroups.getLength(); i++) {
+			groups.add(nlGroups.item(i).getTextContent().trim());
+		}    	
+    	
+		// sort (if configured)
+		if (getAttribValue(metadata, "sortGroups").trim().equals("1")) {
+			Collections.sort(groups);
+		}    	
+		
+        //create the root node
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");		
+		
+		for (String group : groups) {
+			DefaultMutableTreeNode nodeGroup = new DefaultMutableTreeNode(group);
+			
+			NodeList nl = getListItems(metadata, "group[@name='" + group + "']/item");
+			List<String> items = new ArrayList<String>(nl.getLength());
+
+	    	// load items
+			for (int i = 0; i < nl.getLength(); i++) {
+				items.add(nl.item(i).getTextContent().trim());
+			}    
+			
+			// sort (if configured)
+			if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
+				Collections.sort(items);
+			}    			
+			
+			// add item nodes to the group node
+			for (String item : items) {
+				nodeGroup.add(new DefaultMutableTreeNode(item));
+			}
+			
+			root.add(nodeGroup);
+		}
+		
+		JTree trControl = new JTree(root);
+		trControl.setShowsRootHandles(true);
+		trControl.setRootVisible(false);		// root not shown
+		
+		return trControl;
+    }
  
-    public DefaultListModel<JCheckBox> InitCheckBoxListModel(String metadata) 
+    public DefaultListModel<JCheckBox> initCheckBoxListModel(String metadata) 
 			throws XPathExpressionException {
-		NodeList nl = GetListItems(metadata);
+		NodeList nl = getListItems(metadata);
 		DefaultListModel<JCheckBox> listModel = new DefaultListModel<JCheckBox>();
 		// insert items
 		for (int i = 0; i < nl.getLength(); i++) {

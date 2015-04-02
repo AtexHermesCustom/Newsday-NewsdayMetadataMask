@@ -59,10 +59,10 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		    // Configuration file
 		    config = new ConfigModel("sp");	// pass the metadata group
 			
-			Level logLevel = Level.parse(config.GetConfigValue("logLevel"));	    
+			Level logLevel = Level.parse(config.getConfigValue("logLevel"));	    
 		    
 			// log file
-			String logFile = config.GetConfigValue("logFile");			
+			String logFile = config.getConfigValue("logFile");			
 			if (logFile == null || logFile.isEmpty()) {
 				logFile = Constants.LOGFILE_NAME;	// default log file
 			}
@@ -77,7 +77,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 			}
 		    
 		    // log level
-			logger.setLevel(Level.parse(config.GetConfigValue("logLevel")));	
+			logger.setLevel(Level.parse(config.getConfigValue("logLevel")));	
 		}
 		catch (Exception e) {
 			logger.log(Level.SEVERE, "Error encountered", e);

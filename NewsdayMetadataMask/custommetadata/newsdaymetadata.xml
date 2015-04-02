@@ -91,6 +91,52 @@
 		<arrivalStatus>
 			<item></item>
 		</arrivalStatus>
+		<category>
+			<group pub="ND" name="LONG ISLAND-NEWS">
+				<item>Nassau</item>
+				<item>Suffolk</item>
+				<item>LI Crime</item>
+				<item>LI Colleges</item>
+				<item>LI Schools</item>
+			</group>
+			<group pub="ND" name="BUSINESS">
+				<item>Auto</item>
+				<item>Employment</item>
+				<item>Healthcare</item>
+				<item>Local industry</item>
+				<item>Money</item>
+			</group>
+			<group pub="ND" name="ENTERTAINMENT">
+				<item>Arts</item>
+				<item>Celebrities</item>
+				<item>Movies</item>
+			</group>
+			<group pub="AM" name="NEWS">
+				<item>Colleges</item>
+				<item>Crime</item>
+				<item>Health-Fitness</item>
+				<item>Lottery</item>
+				<item>Nation</item>
+			</group>
+			<group pub="AM" name="BUSINESS">
+				<item>Auto</item>
+				<item>Employment</item>
+				<item>Healthcare</item>
+				<item>Local industry</item>
+				<item>Money</item>				
+			</group>
+		</category>
+		<community>
+			<item pub="ND">ALBERTSON</item>
+			<item pub="ND">AMAGANSETT</item>
+			<item pub="ND">AMITYVILLE</item>
+			<item pub="ND">AQUEBOGUE</item>
+			<item pub="AM">MANHATTAN</item>
+			<item pub="AM">BROOKLYN</item>
+			<item pub="AM">QUEENS</item>
+			<item pub="AM">BRONX</item>
+			<item pub="AM">STATEN ISLAND</item>
+		</community>
 	</sp>
 	
 </metadata>
