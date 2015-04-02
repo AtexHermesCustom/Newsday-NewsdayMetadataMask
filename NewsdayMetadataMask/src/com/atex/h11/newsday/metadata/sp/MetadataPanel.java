@@ -34,6 +34,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JFormattedTextField;
 
 public class MetadataPanel extends JPanel {
 	private static Logger logger;
@@ -47,7 +48,6 @@ public class MetadataPanel extends JPanel {
 	private JTextField txtEmail1;
 	private JTextField txtEmail2;
 	private JTextField txtEmail3;
-	private JTextField txtAssignLength;
 	private JTextField txtContributor;
 	private JTextField txtStoryGroup;
 	private JTextField txtCustomKeyword;
@@ -65,7 +65,6 @@ public class MetadataPanel extends JPanel {
 	private JCheckBox chckbxEmbargo;
 	private JDatePickerImpl dtpckEmbargo;
 	private JSpinner spnEmbargoTime;
-	private JTextField txtPrintPage;
 	private JLabel lblPage;
 	private JCheckBox chckbxExclusive;
 	private JScrollPane scrlCommunities;
@@ -85,6 +84,8 @@ public class MetadataPanel extends JPanel {
 	private JTextArea txtrDigitalExtra1;
 	private JTextArea txtrDigitalExtra2;
 	private JLabel label;
+	private JFormattedTextField ftxtAssignLength;
+	private JFormattedTextField ftxtPrintPage;
 	
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel) 
@@ -205,9 +206,8 @@ public class MetadataPanel extends JPanel {
 		txtEmail3.setColumns(10);
 		add(txtEmail3, "10, 8, 3, 1, fill, default");
 		
-		txtAssignLength = new JTextField();
-		txtAssignLength.setColumns(10);
-		add(txtAssignLength, "14, 8");
+		ftxtAssignLength = new JFormattedTextField();
+		add(ftxtAssignLength, "14, 8, fill, default");
 		
 		cmbPriority = new JComboBox();
 		add(cmbPriority, "16, 8, 3, 1, fill, default");
@@ -297,9 +297,8 @@ public class MetadataPanel extends JPanel {
 		lblPage = new JLabel("Page");
 		add(lblPage, "16, 22, right, default");
 		
-		txtPrintPage = new JTextField();
-		txtPrintPage.setColumns(10);
-		add(txtPrintPage, "18, 22, fill, default");
+		ftxtPrintPage = new JFormattedTextField();
+		add(ftxtPrintPage, "18, 22, fill, default");
 		
 		JLabel lblWeb = new JLabel("WEB");
 		add(lblWeb, "2, 24, right, default");
