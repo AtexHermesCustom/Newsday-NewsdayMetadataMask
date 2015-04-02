@@ -1,6 +1,5 @@
 package com.atex.h11.newsday.metadata.sp;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
@@ -12,9 +11,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import com.atex.h11.newsday.metadata.common.AlphaNumericDocumentFilter;
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
-import com.atex.h11.newsday.metadata.component.DateLabelFormatter;
+import com.atex.h11.newsday.metadata.common.DateLabelFormatter;
+import com.atex.h11.newsday.metadata.common.NumericDocumentFilter;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -36,7 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JFormattedTextField;
-import javax.swing.text.MaskFormatter;
+import javax.swing.text.AbstractDocument;
 
 public class MetadataPanel extends JPanel {
 	private static Logger logger;
@@ -209,6 +210,8 @@ public class MetadataPanel extends JPanel {
 		add(txtEmail3, "10, 8, 3, 1, fill, default");
 		
 		ftxtAssignLength = new JFormattedTextField();
+		((AbstractDocument) ftxtAssignLength.getDocument()).setDocumentFilter(
+				new NumericDocumentFilter(ftxtAssignLength.getDocument(), false, false));
 		add(ftxtAssignLength, "14, 8, fill, default");
 		
 		cmbPriority = new JComboBox();
@@ -300,6 +303,10 @@ public class MetadataPanel extends JPanel {
 		add(lblPage, "16, 22, right, default");
 		
 		ftxtPrintPage = new JFormattedTextField();
+		//((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
+		//		new NumericDocumentFilter(ftxtPrintPage.getDocument(), false, false));		
+		((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
+				new AlphaNumericDocumentFilter());		
 		add(ftxtPrintPage, "18, 22, fill, default");
 		
 		JLabel lblWeb = new JLabel("WEB");
@@ -429,16 +436,5 @@ public class MetadataPanel extends JPanel {
 		retMetadata.put("REPORTER1", "Report1");
 		
 		return retMetadata;
-	}
-	
-    protected MaskFormatter createFormatter(String s) {
-        MaskFormatter formatter = null;
-        try {
-            formatter = new MaskFormatter(s);
-        } catch (ParseException exc) {
-            System.err.println("formatter is bad: " + exc.getMessage());
-            System.exit(-1);
-        }
-        return formatter;
-    }    	
+	}  	
 }

@@ -1,4 +1,4 @@
-package com.atex.h11.newsday.metadata.component;
+package com.atex.h11.newsday.metadata.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
