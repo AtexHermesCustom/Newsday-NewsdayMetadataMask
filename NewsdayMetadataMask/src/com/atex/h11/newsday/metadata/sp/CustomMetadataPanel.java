@@ -153,7 +153,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		try {
 			logger.entering(this.getClass().getSimpleName(), "getMetadataValues");
 			
-			HashMap<String, String> retMetadata = metadataPanel.GetMetadataValues();
+			HashMap<String, String> retMetadata = metadataPanel.getMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
@@ -225,7 +225,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 	}	
 		
 	private boolean isReady() {
-		boolean retVal = metadataPanel.IsReady();
+		boolean retVal = metadataPanel.isReady();
 		logger.finer("Return value=" + retVal);
 		return retVal;
 	}	

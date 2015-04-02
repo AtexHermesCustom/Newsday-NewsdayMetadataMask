@@ -1,5 +1,6 @@
 package com.atex.h11.newsday.metadata.sp;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
@@ -35,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
 
 public class MetadataPanel extends JPanel {
 	private static Logger logger;
@@ -98,16 +100,16 @@ public class MetadataPanel extends JPanel {
 		logger = l;
 		
 		// initialize panel
-		InitPanel();
+		initPanel();
 		
 		// set component values, read from the metadata hash
-		SetComponentValues();
+		setComponentValues();
 		
 		// check and highlight mandatory fields that are missing 
-		IsReady();		
+		isReady();		
 	}
 
-	void InitPanel() {
+	protected void initPanel() {
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:default"),
@@ -347,6 +349,7 @@ public class MetadataPanel extends JPanel {
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
 		trCategories = new JTree();
+		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
 		JLabel lblCommunities = new JLabel("Communities");
@@ -356,6 +359,7 @@ public class MetadataPanel extends JPanel {
 		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
 		
 		trCommunities = new JTree();
+		trCommunities.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCommunities.setViewportView(trCommunities);
 		
 		JLabel lblSelectedCategories = new JLabel("<html><p>Selected</p><p>Categories</p></html>");
@@ -366,6 +370,7 @@ public class MetadataPanel extends JPanel {
 		add(scrlSelCategories, "4, 30, 5, 1, fill, fill");
 		
 		lstSelCategories = new JList();
+		lstSelCategories.setToolTipText("Double click an item to remove it from the list");
 		scrlSelCategories.setViewportView(lstSelCategories);
 		
 		JLabel lblselectedcommunities = new JLabel("<html><p>Selected</p><p>Communities</p></html>");
@@ -376,6 +381,7 @@ public class MetadataPanel extends JPanel {
 		add(scrlSelCommunities, "12, 30, 7, 1, fill, fill");
 		
 		lstSelCommunities = new JList();
+		lstSelCommunities.setToolTipText("Double click an item to remove it from the list");
 		scrlSelCommunities.setViewportView(lstSelCommunities);
 		
 		JLabel lblcustomkeyword = new JLabel("<html><p>Custom</p><p>Keyword</p></html>");
@@ -393,7 +399,7 @@ public class MetadataPanel extends JPanel {
 		add(chckbxExclusive, "12, 32, 2, 1");
 	}
 	
-	private void SetComponentValues() 
+	protected void setComponentValues() 
 			throws XPathExpressionException {
 		lblTitle.setText("<html><p><b>Story Package Metadata for " 
 			+ "<font color=\"red\">" + objName + "</font>" 
@@ -405,7 +411,7 @@ public class MetadataPanel extends JPanel {
 		config.InitComboBox(cmbLabel, "label");
 	}
 	
-	public boolean IsReady() {
+	public boolean isReady() {
 		/*
 		 * put any required validations here
 		 */
@@ -414,7 +420,7 @@ public class MetadataPanel extends JPanel {
 		return isReady;
 	}
 	
-	public HashMap<String,String> GetMetadataValues() 
+	public HashMap<String,String> getMetadataValues() 
 			throws XPathExpressionException {
 		HashMap<String,String> retMetadata = new HashMap<String,String>();
 		
@@ -424,4 +430,15 @@ public class MetadataPanel extends JPanel {
 		
 		return retMetadata;
 	}
+	
+    protected MaskFormatter createFormatter(String s) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(s);
+        } catch (ParseException exc) {
+            System.err.println("formatter is bad: " + exc.getMessage());
+            System.exit(-1);
+        }
+        return formatter;
+    }    	
 }
