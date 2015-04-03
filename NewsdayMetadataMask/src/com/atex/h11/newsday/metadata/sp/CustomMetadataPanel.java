@@ -113,17 +113,19 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 				this.validator = new HermesValidator(inspector);
 			*/
 			
+			String objId = "";
 			String objName = "";
 			String objLevel = "";
 			String objLevelId = "";
 			if (inspector != null) {
+				objId = inspector.getID();
 				objName = inspector.getProperty(NodeValueInspector.NAME);
 				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
 				objLevelId = inspector.getProperty(NodeValueInspector.LEVEL_ID);
-				logger.fine("Object name=" + objName + ", level=" + objLevel + ", level id=" + objLevelId);
+				logger.fine("Object: name=" + objName + ", id=" + objId + ", level=" + objLevel + ", level id=" + objLevelId);
 			}
 			else {
-				logger.log(Level.SEVERE, "inspector is null");
+				logger.log(Level.WARNING, "inspector is null");
 			}
 			
 			
