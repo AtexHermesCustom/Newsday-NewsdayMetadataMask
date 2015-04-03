@@ -123,7 +123,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(53dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(73dlu;default)"),
+				ColumnSpec.decode("left:max(68dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:30dlu"),
 				FormFactory.RELATED_GAP_COLSPEC,
