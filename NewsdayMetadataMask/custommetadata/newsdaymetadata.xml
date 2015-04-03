@@ -62,36 +62,50 @@
 			<item>WATCHING</item>
 		</label>
 		<reporter>
-			<item>News</item>
-			<item>Business</item>
-			<item>Property</item>
-			<item>Personal Finance/ Investment</item>
-			<item>Computer/IT</item>
-			<item>Education</item>
-			<item>Motoring</item>
-			<item>Food/Culinary/Wine</item>
-			<item>Fashion &amp; Beauty</item>
-			<item>Health</item>
-			<item>Shopping</item>
-			<item>Entertainment/Music/Movies/Dance</item>
-			<item>Sports</item>
-			<item>Travel</item>
-			<item>Hobbies-Craft/Photography</item>
-			<item>Wedding/Parenting/Homes/Family</item>
+			<item email="laura.albanese@newsday.com">Laura  Albanese</item>
+			<item email="aisha.al-muslim@newsday.com">Aisha  Al-Muslim</item>
+			<item email="stacey.altherr@newsday.com">Stacey  Altherr</item>
+			<item email="sarah.armaghan@newsday.com">Sarah  Armaghan</item>
+			<item email="john.asbury@newsday.com">John  Asbury</item>
+			<item email="barbara.barker@newsday.com">Barbara  Barker</item>
+			<item email="jennifer.barrios@newsday.com">Jennifer  Barrios</item>
+			<item email="valerie.bauman@newsday.com">Valerie  Bauman</item>
+			<item email="jim.baumbach@newsday.com">Jim  Baumbach</item>
+			<item email="tom.beer@newsday.com">Tom Beer</item>
+			<item email="nbest1@gmail.com">Neil  Best</item>
+			<item email="john.boell@newsday.com">John  Boell</item>
+			<item email="eboland11@aol.com">Erik  Boland</item>
 		</reporter>
 		<printSection>
-			<item></item>
+			<item>NEWS</item>
+			<item>LI LIFE</item>
+			<item>EXPLORE LI</item>
 		</printSection>
 		<printSequence>
-			<item></item>
+			<item>PAGE ONE</item>
+			<item>UPFRONT</item>
+			<item>LONG ISLAND</item>
+			<item>CRIME &amp; COURTS</item>
+			<item>HEALTH-SCIENCE</item>
+			<item>OBITUARIES</item>
+			<item>CORRECTIONS</item>
+			<item>COVER STORY</item>
+			<item>FEATURES</item>
+			<item>ACT2</item>
 		</printSequence>
 		<homepage>
-			<item></item>
+			<item>LONG ISLAND-NEWS</item>
+			<item>Nassau</item>
+			<item>Suffolk</item>
+			<item>LI Crime</item>
+			<item>LI Colleges</item>
+			<item>LI Schools</item>
 		</homepage>
 		<arrivalStatus>
-			<item></item>
+			<item>LIVE</item>
+			<item>OFF</item>
 		</arrivalStatus>
-		<category>
+		<category sortGroups="0" sortItems="0">
 			<group pub="ND" name="LONG ISLAND-NEWS">
 				<item>Nassau</item>
 				<item>Suffolk</item>
@@ -126,7 +140,7 @@
 				<item>Money</item>				
 			</group>
 		</category>
-		<community>
+		<community sortItems="0">
 			<item pub="ND">ALBERTSON</item>
 			<item pub="ND">AMAGANSETT</item>
 			<item pub="ND">AMITYVILLE</item>

@@ -114,19 +114,19 @@ public class ConfigModel {
     	return getXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
     }    
        
-    public void initComboBox(JComboBox<String> cmbControl, String metadata) 
+    public JComboBox<String> initComboBox(String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(metadata); 
-		initComboBox(cmbControl, metadata, nl);
+		return initComboBox(metadata, nl);
 	}    
     
-    public void initComboBox(JComboBox<String> cmbControl, String metadata, String xpath) 
+    public JComboBox<String> initComboBox(String metadata, String xpath) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(metadata, xpath); 
-		initComboBox(cmbControl, metadata, nl);
+		return initComboBox(metadata, nl);
 	}      
     
-    public void initComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 
+    public JComboBox<String> initComboBox(String metadata, NodeList nl) 
 			throws XPathExpressionException {
     	List<String> items = new ArrayList<String>(nl.getLength());
     	
@@ -139,6 +139,8 @@ public class ConfigModel {
 		if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
 			Collections.sort(items);
 		}
+		
+		JComboBox<String> cmbControl = new JComboBox<String>();
 		
 		// load to combo box
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(items.toArray(new String[items.size()]));
@@ -158,9 +160,41 @@ public class ConfigModel {
 		if (getAttribValue(metadata, "setMandatory").trim().equals("1")) {
 			cmbControl.setBackground(Color.red);
 		}
+		
+		return cmbControl;
 	}        
     
-    public JTree initTree(String metadata) 
+    public JTree initTree(String metadata)
+			throws XPathExpressionException {
+		NodeList nl = getListItems(metadata);
+		List<String> items = new ArrayList<String>(nl.getLength());
+		
+    	// load items
+		for (int i = 0; i < nl.getLength(); i++) {
+			items.add(nl.item(i).getTextContent().trim());
+		}    
+		
+		// sort (if configured)
+		if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
+			Collections.sort(items);
+		}    			
+		
+        //create the root node
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");	
+        
+		// add item nodes
+		for (String item : items) {
+			root.add(new DefaultMutableTreeNode(item));
+		}        
+		
+		JTree trControl = new JTree(root);
+		trControl.setShowsRootHandles(true);
+		trControl.setRootVisible(false);		// root not shown
+		
+		return trControl;		
+    }
+    
+    public JTree initTreeWithGroups(String metadata) 
 			throws XPathExpressionException {    
     	NodeList nlGroups = getListItems(metadata, "group/@name");
     	List<String> groups = new ArrayList<String>(nlGroups.getLength());

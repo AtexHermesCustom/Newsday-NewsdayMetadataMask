@@ -117,19 +117,19 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(41dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(29dlu;default)"),
+				ColumnSpec.decode("left:max(50dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(61dlu;default)"),
+				ColumnSpec.decode("left:max(60dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(53dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(63dlu;default)"),
+				ColumnSpec.decode("left:max(73dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:30dlu"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:24dlu"),
+				ColumnSpec.decode("left:36dlu"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:31dlu"),},
+				ColumnSpec.decode("left:30dlu"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -146,7 +146,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),
+				RowSpec.decode("max(12dlu;default):grow"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(12dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -164,15 +164,19 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		lblTitle = new JLabel("<html><p><b>Story Package Metadata for " 
-				+ "<font color=\"red\">" + objName + "</font>" 
-				+ "</b></p></html>");
+		lblTitle = new JLabel("Story Package Metadata");
+		String title = "<html><p><b>Story Package Metadata</b>";
+		if (objName != null && !objName.isEmpty()) {
+			title += "<b> for <font color=\"red\">" + objName + "</font></b>";
+		}
+		title += "</p></html>";
+		lblTitle.setText(title);
 		add(lblTitle, "2, 2, 7, 1");
 		
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "2, 4, right, default");
 		
-		cmbReporter1 = new JComboBox();
+		cmbReporter1 = config.initComboBox("reporter");
 		add(cmbReporter1, "4, 4, 5, 1, fill, default");
 		
 		txtEmail1 = new JTextField();
@@ -182,13 +186,13 @@ public class MetadataPanel extends JPanel {
 		label = new JLabel("Desk");
 		add(label, "14, 4, right, default");
 		
-		cmbDesk = new JComboBox();
+		cmbDesk = config.initComboBox("desk", "item[@pub='ND']");
 		add(cmbDesk, "16, 4, 3, 1, fill, default");
 		
 		JLabel lblndReporter = new JLabel("2nd Reporter");
 		add(lblndReporter, "2, 6, right, default");
 		
-		cmbReporter2 = new JComboBox();
+		cmbReporter2 = config.initComboBox("reporter", "item[@pub='ND']");
 		add(cmbReporter2, "4, 6, 5, 1, fill, default");
 		
 		txtEmail2 = new JTextField();
@@ -204,7 +208,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblrdReporter = new JLabel("3rd Reporter");
 		add(lblrdReporter, "2, 8, right, default");
 		
-		cmbReporter3 = new JComboBox();
+		cmbReporter3 = config.initComboBox("reporter", "item[@pub='ND']");
 		add(cmbReporter3, "4, 8, 5, 1, fill, default");
 		
 		txtEmail3 = new JTextField();
@@ -216,7 +220,7 @@ public class MetadataPanel extends JPanel {
 				new NumericDocumentFilter(ftxtAssignLength.getDocument(), false, false));
 		add(ftxtAssignLength, "14, 8, fill, default");
 		
-		cmbPriority = new JComboBox();
+		cmbPriority = config.initComboBox("priority");
 		add(cmbPriority, "16, 8, 3, 1, fill, default");
 		
 		JLabel lblContributor = new JLabel("Contributor");
@@ -247,7 +251,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblStoryType = new JLabel("Story Type");
 		add(lblStoryType, "2, 14, right, default");
 		
-		cmbStoryType = new JComboBox();
+		cmbStoryType = config.initComboBox("storyType");
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
 		
 		JLabel lblDigitalExtras = new JLabel("Digital Extras");
@@ -256,7 +260,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblLabel = new JLabel("Label");
 		add(lblLabel, "2, 16, right, default");
 		
-		cmbLabel = new JComboBox();
+		cmbLabel = config.initComboBox("label");
 		add(cmbLabel, "4, 16, 3, 1, fill, default");
 		
 		scrlDigitalExtra1 = new JScrollPane();
@@ -292,13 +296,13 @@ public class MetadataPanel extends JPanel {
 		JLabel lblSection = new JLabel("Section");
 		add(lblSection, "4, 22, right, default");
 		
-		cmbPrintSection = new JComboBox();
+		cmbPrintSection = config.initComboBox("printSection");
 		add(cmbPrintSection, "6, 22, 3, 1, fill, default");
 		
 		JLabel lblSequenceOr = new JLabel("Sequence");
 		add(lblSequenceOr, "10, 22, right, default");
 		
-		cmbPrintSequence = new JComboBox();
+		cmbPrintSequence = config.initComboBox("printSequence");
 		add(cmbPrintSequence, "12, 22, 3, 1, fill, default");
 		
 		lblPage = new JLabel("Page");
@@ -317,13 +321,13 @@ public class MetadataPanel extends JPanel {
 		JLabel lblHomePage = new JLabel("Home page");
 		add(lblHomePage, "4, 24, right, default");
 		
-		cmbHomepage = new JComboBox();
+		cmbHomepage = config.initComboBox("homepage");
 		add(cmbHomepage, "6, 24, 3, 1, fill, default");
 		
 		JLabel lblArrivalStatus = new JLabel("Arrival Status");
 		add(lblArrivalStatus, "10, 24, right, default");
 		
-		cmbArrivalStatus = new JComboBox();
+		cmbArrivalStatus = config.initComboBox("arrivalStatus");
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
 		
 		chckbxEmbargo = new JCheckBox("Embargo");
@@ -357,7 +361,7 @@ public class MetadataPanel extends JPanel {
 		scrlCategories = new JScrollPane();
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
-		trCategories = config.initTree("category");
+		trCategories = config.initTreeWithGroups("category");
 		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
@@ -378,7 +382,7 @@ public class MetadataPanel extends JPanel {
 		scrlSelCategories = new JScrollPane();
 		add(scrlSelCategories, "4, 30, 5, 1, fill, fill");
 		
-		lstSelCategories = new JList();
+		lstSelCategories = new JList<String>();
 		lstSelCategories.setToolTipText("Double click an item to remove it from the list");
 		scrlSelCategories.setViewportView(lstSelCategories);
 		
@@ -389,7 +393,7 @@ public class MetadataPanel extends JPanel {
 		scrlSelCommunities = new JScrollPane();
 		add(scrlSelCommunities, "12, 30, 7, 1, fill, fill");
 		
-		lstSelCommunities = new JList();
+		lstSelCommunities = new JList<String>();
 		lstSelCommunities.setToolTipText("Double click an item to remove it from the list");
 		scrlSelCommunities.setViewportView(lstSelCommunities);
 		
@@ -406,12 +410,6 @@ public class MetadataPanel extends JPanel {
 		
 		chckbxExclusive = new JCheckBox("Exclusive");
 		add(chckbxExclusive, "12, 32, 2, 1");
-		
-
-		config.initComboBox(cmbDesk, "desk", "item[@pub='ND']");
-		config.initComboBox(cmbPriority, "priority");
-		config.initComboBox(cmbStoryType, "storyType");
-		config.initComboBox(cmbLabel, "label");
 	}
 	
 	protected void setComponentValues() 
