@@ -80,12 +80,12 @@
 			<item email="john.boell@newsday.com">John  Boell</item>
 			<item email="eboland11@aol.com">Erik  Boland</item>
 		</reporter>
-		<printSection>
+		<printSection insertEmptyItem="1">
 			<item>NEWS</item>
 			<item>LI LIFE</item>
 			<item>EXPLORE LI</item>
 		</printSection>
-		<printSequence>
+		<printSequence insertEmptyItem="1">
 			<item>PAGE ONE</item>
 			<item>UPFRONT</item>
 			<item>LONG ISLAND</item>
@@ -97,7 +97,7 @@
 			<item>FEATURES</item>
 			<item>ACT2</item>
 		</printSequence>
-		<homepage>
+		<homepage insertEmptyItem="1">
 			<item>LONG ISLAND-NEWS</item>
 			<item>Nassau</item>
 			<item>Suffolk</item>

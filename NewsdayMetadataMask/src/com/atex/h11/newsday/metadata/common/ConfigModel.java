@@ -16,6 +16,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -114,19 +115,19 @@ public class ConfigModel {
     	return getXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
     }    
        
-    public JComboBox<String> initComboBox(String metadata) 
+    public void initComboBox(JComboBox<String> cmbControl, String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(metadata); 
-		return initComboBox(metadata, nl);
+		initComboBox(cmbControl, metadata, nl);
 	}    
     
-    public JComboBox<String> initComboBox(String metadata, String xpath) 
+    public void initComboBox(JComboBox<String> cmbControl, String metadata, String xpath) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(metadata, xpath); 
-		return initComboBox(metadata, nl);
+		initComboBox(cmbControl, metadata, nl);
 	}      
     
-    public JComboBox<String> initComboBox(String metadata, NodeList nl) 
+    public void initComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 
 			throws XPathExpressionException {
     	List<String> items = new ArrayList<String>(nl.getLength());
     	
@@ -139,8 +140,6 @@ public class ConfigModel {
 		if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
 			Collections.sort(items);
 		}
-		
-		JComboBox<String> cmbControl = new JComboBox<String>();
 		
 		// load to combo box
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(items.toArray(new String[items.size()]));
@@ -160,11 +159,9 @@ public class ConfigModel {
 		if (getAttribValue(metadata, "setMandatory").trim().equals("1")) {
 			cmbControl.setBackground(Color.red);
 		}
-		
-		return cmbControl;
 	}        
     
-    public JTree initTree(String metadata)
+    public void initTree(JTree trControl, String metadata)
 			throws XPathExpressionException {
 		NodeList nl = getListItems(metadata);
 		List<String> items = new ArrayList<String>(nl.getLength());
@@ -179,22 +176,21 @@ public class ConfigModel {
 			Collections.sort(items);
 		}    			
 		
-        //create the root node
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");	
+        //create the root node and model
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");		
+        DefaultTreeModel model = new DefaultTreeModel(root);
         
 		// add item nodes
 		for (String item : items) {
 			root.add(new DefaultMutableTreeNode(item));
 		}        
 		
-		JTree trControl = new JTree(root);
+		trControl.setModel(model);
 		trControl.setShowsRootHandles(true);
 		trControl.setRootVisible(false);		// root not shown
-		
-		return trControl;		
     }
     
-    public JTree initTreeWithGroups(String metadata) 
+    public void initTreeWithGroups(JTree trControl, String metadata) 
 			throws XPathExpressionException {    
     	NodeList nlGroups = getListItems(metadata, "group/@name");
     	List<String> groups = new ArrayList<String>(nlGroups.getLength());
@@ -209,8 +205,9 @@ public class ConfigModel {
 			Collections.sort(groups);
 		}    	
 		
-        //create the root node
+        //create the root node and model
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");		
+        DefaultTreeModel model = new DefaultTreeModel(root);
 		
 		for (String group : groups) {
 			DefaultMutableTreeNode nodeGroup = new DefaultMutableTreeNode(group);
@@ -236,11 +233,9 @@ public class ConfigModel {
 			root.add(nodeGroup);
 		}
 		
-		JTree trControl = new JTree(root);
+		trControl.setModel(model);
 		trControl.setShowsRootHandles(true);
 		trControl.setRootVisible(false);		// root not shown
-		
-		return trControl;
     }
  
     public DefaultListModel<JCheckBox> initCheckBoxListModel(String metadata) 

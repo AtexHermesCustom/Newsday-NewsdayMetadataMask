@@ -53,17 +53,17 @@ public class MetadataPanel extends JPanel {
 	private JTextField txtContributor;
 	private JTextField txtStoryGroup;
 	private JTextField txtCustomKeyword;
-	private JComboBox cmbReporter1;
-	private JComboBox cmbDesk;
-	private JComboBox cmbReporter2;
-	private JComboBox cmbReporter3;
-	private JComboBox cmbPriority;
-	private JComboBox cmbStoryType;
-	private JComboBox cmbLabel;
-	private JComboBox cmbPrintSection;
-	private JComboBox cmbPrintSequence;
-	private JComboBox cmbHomepage;
-	private JComboBox cmbArrivalStatus;
+	private JComboBox<String> cmbReporter1;
+	private JComboBox<String> cmbDesk;
+	private JComboBox<String> cmbReporter2;
+	private JComboBox<String> cmbReporter3;
+	private JComboBox<String> cmbPriority;
+	private JComboBox<String> cmbStoryType;
+	private JComboBox<String> cmbLabel;
+	private JComboBox<String> cmbPrintSection;
+	private JComboBox<String> cmbPrintSequence;
+	private JComboBox<String> cmbHomepage;
+	private JComboBox<String> cmbArrivalStatus;
 	private JCheckBox chckbxEmbargo;
 	private JDatePickerImpl dtpckEmbargo;
 	private JSpinner spnEmbargoTime;
@@ -75,8 +75,8 @@ public class MetadataPanel extends JPanel {
 	private JTree trCommunities;
 	private JScrollPane scrlSelCategories;
 	private JScrollPane scrlSelCommunities;
-	private JList lstSelCategories;
-	private JList lstSelCommunities;
+	private JList<String> lstSelCategories;
+	private JList<String> lstSelCommunities;
 	private JScrollPane scrlPrintExtra;
 	private JScrollPane scrlDigitalExtra1;
 	private JScrollPane scrlDigitalExtra2;
@@ -176,7 +176,9 @@ public class MetadataPanel extends JPanel {
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "2, 4, right, default");
 		
-		cmbReporter1 = config.initComboBox("reporter");
+		cmbReporter1 = new JComboBox<String>();
+		config.initComboBox(cmbReporter1, "reporter");
+		cmbReporter1.setEditable(true);
 		add(cmbReporter1, "4, 4, 5, 1, fill, default");
 		
 		txtEmail1 = new JTextField();
@@ -186,13 +188,15 @@ public class MetadataPanel extends JPanel {
 		label = new JLabel("Desk");
 		add(label, "14, 4, right, default");
 		
-		cmbDesk = config.initComboBox("desk", "item[@pub='ND']");
+		cmbDesk = new JComboBox<String>();
+		config.initComboBox(cmbDesk, "desk", "item[@pub='ND']");
 		add(cmbDesk, "16, 4, 3, 1, fill, default");
 		
 		JLabel lblndReporter = new JLabel("2nd Reporter");
 		add(lblndReporter, "2, 6, right, default");
 		
-		cmbReporter2 = config.initComboBox("reporter", "item[@pub='ND']");
+		cmbReporter2 = new JComboBox<String>();
+		config.initComboBox(cmbDesk, "reporter", "item[@pub='ND']");
 		add(cmbReporter2, "4, 6, 5, 1, fill, default");
 		
 		txtEmail2 = new JTextField();
@@ -208,7 +212,8 @@ public class MetadataPanel extends JPanel {
 		JLabel lblrdReporter = new JLabel("3rd Reporter");
 		add(lblrdReporter, "2, 8, right, default");
 		
-		cmbReporter3 = config.initComboBox("reporter", "item[@pub='ND']");
+		cmbReporter3 = new JComboBox<String>();
+		config.initComboBox(cmbReporter3, "reporter", "item[@pub='ND']");
 		add(cmbReporter3, "4, 8, 5, 1, fill, default");
 		
 		txtEmail3 = new JTextField();
@@ -220,7 +225,8 @@ public class MetadataPanel extends JPanel {
 				new NumericDocumentFilter(ftxtAssignLength.getDocument(), false, false));
 		add(ftxtAssignLength, "14, 8, fill, default");
 		
-		cmbPriority = config.initComboBox("priority");
+		cmbPriority = new JComboBox<String>();
+		config.initComboBox(cmbPriority, "priority");
 		add(cmbPriority, "16, 8, 3, 1, fill, default");
 		
 		JLabel lblContributor = new JLabel("Contributor");
@@ -251,7 +257,8 @@ public class MetadataPanel extends JPanel {
 		JLabel lblStoryType = new JLabel("Story Type");
 		add(lblStoryType, "2, 14, right, default");
 		
-		cmbStoryType = config.initComboBox("storyType");
+		cmbStoryType = new JComboBox<String>();
+		config.initComboBox(cmbStoryType, "storyType");
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
 		
 		JLabel lblDigitalExtras = new JLabel("Digital Extras");
@@ -260,7 +267,8 @@ public class MetadataPanel extends JPanel {
 		JLabel lblLabel = new JLabel("Label");
 		add(lblLabel, "2, 16, right, default");
 		
-		cmbLabel = config.initComboBox("label");
+		cmbLabel = new JComboBox<String>();
+		config.initComboBox(cmbLabel, "label");
 		add(cmbLabel, "4, 16, 3, 1, fill, default");
 		
 		scrlDigitalExtra1 = new JScrollPane();
@@ -296,13 +304,15 @@ public class MetadataPanel extends JPanel {
 		JLabel lblSection = new JLabel("Section");
 		add(lblSection, "4, 22, right, default");
 		
-		cmbPrintSection = config.initComboBox("printSection");
+		cmbPrintSection = new JComboBox<String>();
+		config.initComboBox(cmbPrintSection, "printSection");
 		add(cmbPrintSection, "6, 22, 3, 1, fill, default");
 		
 		JLabel lblSequenceOr = new JLabel("Sequence");
 		add(lblSequenceOr, "10, 22, right, default");
 		
-		cmbPrintSequence = config.initComboBox("printSequence");
+		cmbPrintSequence = new JComboBox<String>();
+		config.initComboBox(cmbPrintSequence, "printSequence");
 		add(cmbPrintSequence, "12, 22, 3, 1, fill, default");
 		
 		lblPage = new JLabel("Page");
@@ -321,13 +331,15 @@ public class MetadataPanel extends JPanel {
 		JLabel lblHomePage = new JLabel("Home page");
 		add(lblHomePage, "4, 24, right, default");
 		
-		cmbHomepage = config.initComboBox("homepage");
+		cmbHomepage = new JComboBox<String>();
+		config.initComboBox(cmbHomepage, "homepage");
 		add(cmbHomepage, "6, 24, 3, 1, fill, default");
 		
 		JLabel lblArrivalStatus = new JLabel("Arrival Status");
 		add(lblArrivalStatus, "10, 24, right, default");
 		
-		cmbArrivalStatus = config.initComboBox("arrivalStatus");
+		cmbArrivalStatus = new JComboBox<String>();
+		config.initComboBox(cmbArrivalStatus, "arrivalStatus");
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
 		
 		chckbxEmbargo = new JCheckBox("Embargo");
@@ -361,7 +373,8 @@ public class MetadataPanel extends JPanel {
 		scrlCategories = new JScrollPane();
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
-		trCategories = config.initTreeWithGroups("category");
+		trCategories = new JTree();
+		config.initTreeWithGroups(trCategories, "category");
 		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
@@ -371,7 +384,8 @@ public class MetadataPanel extends JPanel {
 		scrlCommunities = new JScrollPane();
 		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
 		
-		trCommunities = config.initTree("community");
+		trCommunities = new JTree();
+		config.initTree(trCommunities, "community");
 		trCommunities.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCommunities.setViewportView(trCommunities);
 		
