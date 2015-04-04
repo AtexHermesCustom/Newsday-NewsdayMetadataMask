@@ -145,19 +145,19 @@
 			</group>
 		</category>
 		<community sortItems="0">
-			<pub code="ND">
+			<!-- <pub code="ND"> -->
 				<item>ALBERTSON</item>
 				<item>AMAGANSETT</item>
 				<item>AMITYVILLE</item>
 				<item>AQUEBOGUE</item>
-			</pub>
-			<pub code="AM">
+			<!-- </pub> -->
+			<!-- <pub code="AM"> -->
 				<item>MANHATTAN</item>
 				<item>BROOKLYN</item>
 				<item>QUEENS</item>
 				<item>BRONX</item>
 				<item>STATEN ISLAND</item>
-			</pub>
+			<!-- </pub> -->
 		</community>
 	</sp>
 	

@@ -16,6 +16,7 @@ import com.atex.h11.newsday.metadata.common.Constants;
 import com.atex.h11.newsday.metadata.common.DateLabelFormatter;
 import com.atex.h11.newsday.metadata.common.NumericDocumentFilter;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -37,6 +38,12 @@ import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.AbstractDocument;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MetadataPanel extends JPanel {
 	private static Logger logger;
@@ -64,11 +71,11 @@ public class MetadataPanel extends JPanel {
 	private JComboBox<String> cmbPrintSequence;
 	private JComboBox<String> cmbHomepage;
 	private JComboBox<String> cmbArrivalStatus;
-	private JCheckBox chckbxEmbargo;
-	private JDatePickerImpl dtpckEmbargo;
+	private JCheckBox chkEmbargo;
+	private JDatePickerImpl dtpckEmbargoDate;
 	private JSpinner spnEmbargoTime;
 	private JLabel lblPage;
-	private JCheckBox chckbxExclusive;
+	private JCheckBox chkExclusive;
 	private JScrollPane scrlCommunities;
 	private JScrollPane scrlCategories;
 	private JTree trCategories;
@@ -88,6 +95,8 @@ public class MetadataPanel extends JPanel {
 	private JLabel label;
 	private JFormattedTextField ftxtAssignLength;
 	private JFormattedTextField ftxtPrintPage;
+	private DefaultListModel<String> selCategoriesModel = new DefaultListModel<String>();
+	private DefaultListModel<String> selCommunitiesModel = new DefaultListModel<String>();
 	
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel) 
@@ -165,19 +174,12 @@ public class MetadataPanel extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		lblTitle = new JLabel("Story Package Metadata");
-		String title = "<html><p><b>Story Package Metadata</b>";
-		if (objName != null && !objName.isEmpty()) {
-			title += "<b> for <font color=\"red\">" + objName + "</font></b>";
-		}
-		title += "</p></html>";
-		lblTitle.setText(title);
 		add(lblTitle, "2, 2, 7, 1");
 		
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "2, 4, right, default");
 		
 		cmbReporter1 = new JComboBox<String>();
-		config.initComboBox(cmbReporter1, "reporter");
 		cmbReporter1.setEditable(true);
 		add(cmbReporter1, "4, 4, 5, 1, fill, default");
 		
@@ -189,14 +191,13 @@ public class MetadataPanel extends JPanel {
 		add(label, "14, 4, right, default");
 		
 		cmbDesk = new JComboBox<String>();
-		config.initComboBox(cmbDesk, "desk", "item[@pub='ND']");
 		add(cmbDesk, "16, 4, 3, 1, fill, default");
 		
 		JLabel lblndReporter = new JLabel("2nd Reporter");
 		add(lblndReporter, "2, 6, right, default");
 		
 		cmbReporter2 = new JComboBox<String>();
-		config.initComboBox(cmbDesk, "reporter", "item[@pub='ND']");
+		cmbReporter2.setEditable(true);
 		add(cmbReporter2, "4, 6, 5, 1, fill, default");
 		
 		txtEmail2 = new JTextField();
@@ -213,7 +214,7 @@ public class MetadataPanel extends JPanel {
 		add(lblrdReporter, "2, 8, right, default");
 		
 		cmbReporter3 = new JComboBox<String>();
-		config.initComboBox(cmbReporter3, "reporter", "item[@pub='ND']");
+		cmbReporter3.setEditable(true);
 		add(cmbReporter3, "4, 8, 5, 1, fill, default");
 		
 		txtEmail3 = new JTextField();
@@ -226,7 +227,6 @@ public class MetadataPanel extends JPanel {
 		add(ftxtAssignLength, "14, 8, fill, default");
 		
 		cmbPriority = new JComboBox<String>();
-		config.initComboBox(cmbPriority, "priority");
 		add(cmbPriority, "16, 8, 3, 1, fill, default");
 		
 		JLabel lblContributor = new JLabel("Contributor");
@@ -258,7 +258,6 @@ public class MetadataPanel extends JPanel {
 		add(lblStoryType, "2, 14, right, default");
 		
 		cmbStoryType = new JComboBox<String>();
-		config.initComboBox(cmbStoryType, "storyType");
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
 		
 		JLabel lblDigitalExtras = new JLabel("Digital Extras");
@@ -268,7 +267,6 @@ public class MetadataPanel extends JPanel {
 		add(lblLabel, "2, 16, right, default");
 		
 		cmbLabel = new JComboBox<String>();
-		config.initComboBox(cmbLabel, "label");
 		add(cmbLabel, "4, 16, 3, 1, fill, default");
 		
 		scrlDigitalExtra1 = new JScrollPane();
@@ -305,14 +303,12 @@ public class MetadataPanel extends JPanel {
 		add(lblSection, "4, 22, right, default");
 		
 		cmbPrintSection = new JComboBox<String>();
-		config.initComboBox(cmbPrintSection, "printSection");
 		add(cmbPrintSection, "6, 22, 3, 1, fill, default");
 		
 		JLabel lblSequenceOr = new JLabel("Sequence");
 		add(lblSequenceOr, "10, 22, right, default");
 		
 		cmbPrintSequence = new JComboBox<String>();
-		config.initComboBox(cmbPrintSequence, "printSequence");
 		add(cmbPrintSequence, "12, 22, 3, 1, fill, default");
 		
 		lblPage = new JLabel("Page");
@@ -332,18 +328,16 @@ public class MetadataPanel extends JPanel {
 		add(lblHomePage, "4, 24, right, default");
 		
 		cmbHomepage = new JComboBox<String>();
-		config.initComboBox(cmbHomepage, "homepage");
 		add(cmbHomepage, "6, 24, 3, 1, fill, default");
 		
 		JLabel lblArrivalStatus = new JLabel("Arrival Status");
 		add(lblArrivalStatus, "10, 24, right, default");
 		
 		cmbArrivalStatus = new JComboBox<String>();
-		config.initComboBox(cmbArrivalStatus, "arrivalStatus");
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
 		
-		chckbxEmbargo = new JCheckBox("Embargo");
-		add(chckbxEmbargo, "4, 26");
+		chkEmbargo = new JCheckBox("Embargo");
+		add(chkEmbargo, "4, 26");
 		
 		// date picker
 		UtilDateModel dateModel = new UtilDateModel();
@@ -357,8 +351,8 @@ public class MetadataPanel extends JPanel {
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
 		
-		dtpckEmbargo = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		add(dtpckEmbargo, "6, 26, 3, 1");		
+		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		add(dtpckEmbargoDate, "6, 26, 3, 1");		
 		
 		SpinnerDateModel timeModel = new SpinnerDateModel();
 		timeModel.setCalendarField(Calendar.MINUTE);
@@ -374,7 +368,6 @@ public class MetadataPanel extends JPanel {
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
 		trCategories = new JTree();
-		config.initTreeWithGroups(trCategories, "category");
 		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
@@ -385,7 +378,6 @@ public class MetadataPanel extends JPanel {
 		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
 		
 		trCommunities = new JTree();
-		config.initTree(trCommunities, "community");
 		trCommunities.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCommunities.setViewportView(trCommunities);
 		
@@ -422,13 +414,118 @@ public class MetadataPanel extends JPanel {
 		JButton btnAddKeyword = new JButton("Add Keyword");
 		add(btnAddKeyword, "8, 32");		
 		
-		chckbxExclusive = new JCheckBox("Exclusive");
-		add(chckbxExclusive, "12, 32, 2, 1");
+		chkExclusive = new JCheckBox("Exclusive");
+		add(chkExclusive, "12, 32, 2, 1");
+		
+		// -----------------------------------------------------------------
+		// Init lists
+		config.initComboBox(cmbReporter1, "reporter");
+		config.initComboBox(cmbReporter2, "reporter");
+		config.initComboBox(cmbReporter3, "reporter");
+		config.initComboBox(cmbDesk, "desk");
+		config.initComboBox(cmbPriority, "priority");
+		config.initComboBox(cmbStoryType, "storyType");
+		config.initComboBox(cmbLabel, "label");
+		config.initComboBox(cmbPrintSection, "printSection");
+		config.initComboBox(cmbPrintSequence, "printSequence");
+		config.initComboBox(cmbHomepage, "homepage");
+		config.initComboBox(cmbArrivalStatus, "arrivalStatus");
+		config.initTreeWithGroups(trCategories, "category");
+		config.initTree(trCommunities, "community");		
+		
+		// -----------------------------------------------------------------
+		// Init models
+		lstSelCategories.setModel(selCategoriesModel);
+		lstSelCommunities.setModel(selCommunitiesModel);
+		
+		// -----------------------------------------------------------------		
+		// Init listeners
+		chkEmbargo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chkEmbargo.isSelected()) {
+					dtpckEmbargoDate.setEnabled(false);
+					spnEmbargoTime.setEnabled(false);
+				} else {
+					dtpckEmbargoDate.setEnabled(true);
+					spnEmbargoTime.setEnabled(true);
+				}
+			}
+		});			
+		
+		trCategories.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				DefaultMutableTreeNode selNode = (DefaultMutableTreeNode) trCategories.getLastSelectedPathComponent();
+				if (selNode != null && selNode.isLeaf()) {
+					String selItem = selNode.getUserObject().toString();
+					addItemToListModel(selCategoriesModel, selItem);
+				}
+			}
+		});		
+		
+		trCommunities.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				DefaultMutableTreeNode selNode = (DefaultMutableTreeNode) trCommunities.getLastSelectedPathComponent();
+				if (selNode != null && selNode.isLeaf()) {
+					if (e.getClickCount() == 2) {	// double-click
+						String selItem = selNode.getUserObject().toString();
+						addItemToListModel(selCommunitiesModel, selItem);
+					}
+				}
+			}
+		});			
+		
+		lstSelCategories.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				int selIndex = lstSelCategories.getSelectedIndex();
+				if (selIndex > -1) {
+					if (e.getClickCount() == 2) { 	// double-click
+						removeItemFromListModel(selCategoriesModel, selIndex);
+					}					
+				}
+			}
+		});
+		
+		lstSelCommunities.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				int selIndex = lstSelCommunities.getSelectedIndex();
+				if (selIndex > -1) {
+					if (e.getClickCount() == 2) { 	// double-click
+						removeItemFromListModel(selCommunitiesModel, selIndex);
+					}					
+				}
+			}
+		});		
+		
+		btnAddKeyword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});		
+	}
+	
+	protected void addItemToListModel(DefaultListModel<String> model, String item) {
+		if (!model.contains(item)) {
+			model.addElement(item);
+		}
+	}
+	
+	protected void removeItemFromListModel(DefaultListModel<String> model, int index) {
+		model.remove(index);
 	}
 	
 	protected void setComponentValues() 
 			throws XPathExpressionException {
-
+		String title = "<html><p><b>Story Package Metadata</b>";
+		if (objName != null && !objName.isEmpty()) {
+			title += "<b> for <font color=\"red\">" + objName + "</font></b>";
+		}
+		title += "</p></html>";
+		lblTitle.setText(title);
+		
 	}
 	
 	public boolean isReady() {
