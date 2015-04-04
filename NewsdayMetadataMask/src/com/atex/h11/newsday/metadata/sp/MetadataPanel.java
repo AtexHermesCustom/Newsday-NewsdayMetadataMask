@@ -1,7 +1,9 @@
 package com.atex.h11.newsday.metadata.sp;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -14,11 +16,13 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
 import com.atex.h11.newsday.metadata.common.DateLabelFormatter;
+import com.atex.h11.newsday.metadata.common.InfoBox;
 import com.atex.h11.newsday.metadata.common.NumericDocumentFilter;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.JTextArea;
@@ -457,8 +461,10 @@ public class MetadataPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				DefaultMutableTreeNode selNode = (DefaultMutableTreeNode) trCategories.getLastSelectedPathComponent();
 				if (selNode != null && selNode.isLeaf()) {
-					String selItem = selNode.getUserObject().toString();
-					addItemToListModel(selCategoriesModel, selItem);
+					if (e.getClickCount() == 2) {	// double-click
+						String selItem = selNode.getUserObject().toString();
+						addItemToListModel(selCategoriesModel, selItem);
+					}
 				}
 			}
 		});		
@@ -502,14 +508,27 @@ public class MetadataPanel extends JPanel {
 		
 		btnAddKeyword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				addItemToListModel(selCategoriesModel, txtCustomKeyword.getText().trim());
 			}
 		});		
 	}
 	
 	protected void addItemToListModel(DefaultListModel<String> model, String item) {
-		if (!model.contains(item)) {
+		// check if item is already in the list - custom check to be case-insensitive
+		boolean duplicate = false;
+		Object[] selList = model.toArray();
+		
+		for (int i = 0; i < selList.length; i++) {
+			if (((String) selList[i]).trim().equalsIgnoreCase(item.trim())) {
+				duplicate = true;
+				break;
+			}
+		}
+		
+		if (!duplicate) {
 			model.addElement(item);
+		} else {
+			InfoBox.ShowMessage("\"" + item + "\" is already in the list.", "Duplicate item", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
