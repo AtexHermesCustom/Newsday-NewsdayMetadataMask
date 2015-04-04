@@ -48,6 +48,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class MetadataPanel extends JPanel {
 	private static Logger logger;
@@ -345,17 +347,18 @@ public class MetadataPanel extends JPanel {
 		
 		// date picker
 		UtilDateModel dateModel = new UtilDateModel();
-		dateModel.setDate(1990, 8, 24);
+		dateModel.setDate(2015, 0, 1);
 		dateModel.setSelected(true);
 		
-		Properties p = new Properties();
-		p.put("text.today", "Today");
-		p.put("text.month", "Month");
-		p.put("text.year", "Year");		
+		Properties datePanelProps = new Properties();
+		datePanelProps.put("text.today", "Today");
+		datePanelProps.put("text.month", "Month");
+		datePanelProps.put("text.year", "Year");		
 		
-		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, p);
+		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
 		
 		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		dtpckEmbargoDate.getJFormattedTextField().setEditable(true);
 		add(dtpckEmbargoDate, "6, 26, 3, 1");		
 		
 		SpinnerDateModel timeModel = new SpinnerDateModel();
@@ -444,14 +447,49 @@ public class MetadataPanel extends JPanel {
 		
 		// -----------------------------------------------------------------		
 		// Init listeners
+		cmbReporter1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object item = e.getItem();
+					if (item != null) {
+						
+					}
+				}
+			}
+		});
+		
+		cmbReporter2.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object item = e.getItem();
+					if (item != null) {
+						
+					}
+				}
+			}
+		});		
+		
+		cmbReporter3.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object item = e.getItem();
+					if (item != null) {
+						
+					}
+				}
+			}
+		});		
+		
 		chkEmbargo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (chkEmbargo.isSelected()) {
-					dtpckEmbargoDate.setEnabled(false);
-					spnEmbargoTime.setEnabled(false);
-				} else {
-					dtpckEmbargoDate.setEnabled(true);
+					//dtpckEmbargoDate.setEnabled(true);
+					dtpckEmbargoDate.getJFormattedTextField().setEnabled(true);
 					spnEmbargoTime.setEnabled(true);
+				} else {
+					//dtpckEmbargoDate.setEnabled(false);
+					dtpckEmbargoDate.getJFormattedTextField().setEnabled(false);
+					spnEmbargoTime.setEnabled(false);
 				}
 			}
 		});			
@@ -534,6 +572,10 @@ public class MetadataPanel extends JPanel {
 	
 	protected void removeItemFromListModel(DefaultListModel<String> model, int index) {
 		model.remove(index);
+	}
+	
+	protected void updateEmail() {
+		
 	}
 	
 	protected void setComponentValues() 
