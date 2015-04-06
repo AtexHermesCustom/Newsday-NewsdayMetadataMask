@@ -27,6 +27,11 @@
 			<item levelMatch="^AM*">AM</item>
 		</pubConfiguration>
 			
+		<pub>
+			<item>NEWSDAY</item>
+			<item>AMNY</item>
+		</pub>
+			
 		<desk>
 			<pub code="ND">
 				<item>ALL</item>

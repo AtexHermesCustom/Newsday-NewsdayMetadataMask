@@ -66,6 +66,7 @@ public class MetadataPanel extends JPanel {
 	private JTextField txtContributor;
 	private JTextField txtStoryGroup;
 	private JTextField txtCustomKeyword;
+	private JComboBox<String> cmbPub;
 	private JComboBox<String> cmbReporter1;
 	private JComboBox<String> cmbDesk;
 	private JComboBox<String> cmbReporter2;
@@ -103,6 +104,7 @@ public class MetadataPanel extends JPanel {
 	private JFormattedTextField ftxtPrintPage;
 	private DefaultListModel<String> selCategoriesModel = new DefaultListModel<String>();
 	private DefaultListModel<String> selCommunitiesModel = new DefaultListModel<String>();
+	private JLabel lblPub;
 	
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel) 
@@ -181,6 +183,12 @@ public class MetadataPanel extends JPanel {
 		
 		lblTitle = new JLabel("Story Package Metadata");
 		add(lblTitle, "2, 2, 7, 1");
+		
+		lblPub = new JLabel("Pub");
+		add(lblPub, "14, 2, right, default");
+		
+		cmbPub = new JComboBox<String>();
+		add(cmbPub, "16, 2, 3, 1, fill, default");
 		
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "2, 4, right, default");
@@ -426,6 +434,7 @@ public class MetadataPanel extends JPanel {
 		
 		// -----------------------------------------------------------------
 		// Init lists
+		config.initComboBox(cmbPub, "pub");
 		config.initComboBox(cmbReporter1, "reporter");
 		config.initComboBox(cmbReporter2, "reporter");
 		config.initComboBox(cmbReporter3, "reporter");
