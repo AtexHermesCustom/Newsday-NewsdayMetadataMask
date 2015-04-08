@@ -242,11 +242,11 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		
 		// log
 		logger.finer("logMetadata - " + msg + ":");
-		logger.finer("<key> = <value>");
+		logger.finer("<key>=<value>");
 		logger.finer("----------");
 		String info = "";
 		for (String s : treeMap.keySet()) {
-			String keyValuePair = (s + " = " + treeMap.get(s));
+			String keyValuePair = (s + "=" + treeMap.get(s));
 			logger.finer(keyValuePair);
 			info += (keyValuePair + "\n");
 		}

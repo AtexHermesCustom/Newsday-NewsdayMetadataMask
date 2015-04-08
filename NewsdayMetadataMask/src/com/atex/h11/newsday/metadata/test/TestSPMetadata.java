@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TreeMap;
 
 import javax.swing.BoxLayout;
@@ -13,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.unisys.media.commonservices.dialogs.metadata.custom.NodeValueInspector;
 import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPanel;
 import com.atex.h11.newsday.metadata.sp.CustomMetadataPanel;
 
@@ -71,8 +73,12 @@ public class TestSPMetadata {
 		
 		try {
 			JPanel panel = new JPanel();
-			// args: inspector=null, metadata hashmap, readonly=false
-			panel.add(customPane.getPanel(null, metadata, false));
+			
+			// dummy inspector
+			NodeValueInspector inspector = null;
+						
+			// args: inspector, metadata hashmap, readonly=false
+			panel.add(customPane.getPanel(inspector, metadata, false));
 			panel.add(okButton);
 			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			
@@ -120,9 +126,9 @@ public class TestSPMetadata {
 		Map<String, String> treeMap = new TreeMap<String, String>(map);
 		
 		System.out.println("printHashMap:");
-		System.out.println("'<key>' = '<value>'");
+		System.out.println("<key>=<value>");
 		for (String s : treeMap.keySet()) {
-			System.out.println("'" + s + "' = '" + treeMap.get(s) + "'");
+			System.out.println(s + "=" + treeMap.get(s));
 		};
 		System.out.println("--end--");
 	}	
