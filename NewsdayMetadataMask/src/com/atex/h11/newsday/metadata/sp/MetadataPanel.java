@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SwingUtilities;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -39,6 +40,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JFormattedTextField;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -569,6 +572,40 @@ public class MetadataPanel extends JPanel {
 			}
 		});			
 		
+		selCategoriesModel.addListDataListener(new ListDataListener() {
+			@Override
+			public void intervalAdded(ListDataEvent e) {
+			    SwingUtilities.invokeLater(new Runnable() {
+			    	public void run() {
+			    		lstSelCategories.ensureIndexIsVisible(selCategoriesModel.size() - 1);
+			    	}
+			    });				
+			}
+
+			@Override
+			public void intervalRemoved(ListDataEvent e) { }
+
+			@Override
+			public void contentsChanged(ListDataEvent e) { }
+		});
+		
+		selCommunitiesModel.addListDataListener(new ListDataListener() {
+			@Override
+			public void intervalAdded(ListDataEvent e) {
+			    SwingUtilities.invokeLater(new Runnable() {
+			    	public void run() {
+			    		lstSelCommunities.ensureIndexIsVisible(selCommunitiesModel.size() - 1);
+			    	}
+			    });								
+			}
+
+			@Override
+			public void intervalRemoved(ListDataEvent e) { }
+
+			@Override
+			public void contentsChanged(ListDataEvent e) { }
+		});		
+		
 		lstSelCategories.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -596,6 +633,7 @@ public class MetadataPanel extends JPanel {
 		btnAddKeyword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addItemToListModel(selCategoriesModel, txtCustomKeyword.getText().trim());
+				txtCustomKeyword.setText("");	// clear
 			}
 		});		
 	}
@@ -653,7 +691,11 @@ public class MetadataPanel extends JPanel {
 	}
 	
 	protected void updateEmail(String reporter, JTextField txtEmail) {
-		
+		try {
+			txtEmail.setText(config.getXpathValue("sp/reporter/item[.='" + reporter.trim() + "']/@email"));		
+		} catch (Exception e) {
+			// ignore
+		}
 	}
 	
 	protected void setComponentValues() 
