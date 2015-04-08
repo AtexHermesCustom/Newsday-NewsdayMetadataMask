@@ -32,7 +32,7 @@
 			<item>AMNY</item>
 		</pub>
 			
-		<desk>
+		<desk insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<!-- <pub code="ND"> -->
 				<item>ALL</item>
 				<item>LONG ISLAND</item>
@@ -47,12 +47,12 @@
 				<item>AMNY</item>
 			<!-- </pub> -->
 		</desk>
-		<priority>
+		<priority insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<item>LOW</item>
 			<item>MEDIUM</item>
 			<item>HIGH</item>
 		</priority>
-		<storyType>
+		<storyType insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<item>ARTICLE</item>
 			<item>COLUMN</item>
 			<item>EDITORIAL</item>
@@ -62,7 +62,7 @@
 			<item>OBITUARY</item>
 			<item>CUSTOM</item>
 		</storyType>
-		<label insertEmptyItem="1">
+		<label insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<item>EXCLUSIVE</item>
 			<item>COVER STORY</item>
 			<item>CENTERPIECE</item>
@@ -70,7 +70,7 @@
 			<item>TENTATIVE</item>
 			<item>WATCHING</item>
 		</label>
-		<reporter>
+		<reporter insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<item email="laura.albanese@newsday.com">Laura  Albanese</item>
 			<item email="aisha.al-muslim@newsday.com">Aisha  Al-Muslim</item>
 			<item email="stacey.altherr@newsday.com">Stacey  Altherr</item>
@@ -85,12 +85,12 @@
 			<item email="john.boell@newsday.com">John  Boell</item>
 			<item email="eboland11@aol.com">Erik  Boland</item>
 		</reporter>
-		<printSection insertEmptyItem="1">
+		<printSection insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<item>NEWS</item>
 			<item>LI LIFE</item>
 			<item>EXPLORE LI</item>
 		</printSection>
-		<printSequence insertEmptyItem="1">
+		<printSequence insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<item>PAGE ONE</item>
 			<item>UPFRONT</item>
 			<item>LONG ISLAND</item>
@@ -102,7 +102,7 @@
 			<item>FEATURES</item>
 			<item>ACT2</item>
 		</printSequence>
-		<homepage insertEmptyItem="1">
+		<homepage insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<item>LONG ISLAND-NEWS</item>
 			<item>Nassau</item>
 			<item>Suffolk</item>
@@ -110,7 +110,7 @@
 			<item>LI Colleges</item>
 			<item>LI Schools</item>
 		</homepage>
-		<arrivalStatus>
+		<arrivalStatus insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<item>LIVE</item>
 			<item>OFF</item>
 		</arrivalStatus>
