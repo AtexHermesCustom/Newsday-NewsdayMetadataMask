@@ -4,6 +4,7 @@ import com.unisys.media.commonservices.common.location.LocationInfo;
 import com.unisys.media.commonservices.dialogs.metadata.custom.NodeValueInspector;
 import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPanel;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.util.ResourceBundle;
@@ -22,7 +23,7 @@ import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
 import com.atex.h11.newsday.metadata.common.InfoBox;
 
-public class CustomMetadataPanel implements ICustomMetadataPanel {
+public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel {
 	private ResourceBundle bundle;
 	private static final long serialVersionUID = 1L;
 	
@@ -250,7 +251,7 @@ public class CustomMetadataPanel implements ICustomMetadataPanel {
 		
 		// for easy debugging
 		if (logger.getLevel() == Level.FINEST) {
-			InfoBox.ShowMessage(info, "debug");
+			InfoBox.showMessage(this, info, "debug", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}		
 	

@@ -1,9 +1,7 @@
 package com.atex.h11.newsday.metadata.sp;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -119,6 +117,8 @@ public class MetadataPanel extends JPanel {
 		this.config = config;
 		this.metadata = metadata;		
 		logger = l;
+		
+		InfoBox.setParentComponent(this);
 		
 		// initialize panel
 		initPanel();
@@ -472,11 +472,11 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(1, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.ShowMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
+							InfoBox.showMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
 							cmbReporter1.setSelectedItem(prevReporter1);
 						} else {
 							// update email field
-							
+							updateEmail(selReporter, txtEmail1);
 						}
 					}
 				}
@@ -495,10 +495,11 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(2, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.ShowMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
+							InfoBox.showMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
 							cmbReporter2.setSelectedItem(prevReporter2);
 						} else {
-							
+							// update email field
+							updateEmail(selReporter, txtEmail2);						
 						}
 					}
 				}
@@ -517,10 +518,11 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(3, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.ShowMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
+							InfoBox.showMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
 							cmbReporter3.setSelectedItem(prevReporter3);
 						} else {
-							
+							// update email field
+							updateEmail(selReporter, txtEmail3);							
 						}
 					}
 				}
@@ -613,7 +615,7 @@ public class MetadataPanel extends JPanel {
 		if (!duplicate) {
 			model.addElement(item);
 		} else {
-			InfoBox.ShowMessage("\"" + item + "\" is already in the list.", "Duplicate item", JOptionPane.INFORMATION_MESSAGE);
+			InfoBox.showMessage("\"" + item + "\" is already in the list.", "Duplicate item", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -629,20 +631,20 @@ public class MetadataPanel extends JPanel {
 				case 1:
 					if (reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim()) ||
 						reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
-						retValue = true;
+							retValue = true;
 					}
 					break;
 				case 2:
 					if (reporter.equalsIgnoreCase(cmbReporter1.getSelectedItem().toString().trim()) ||
-							reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
+						reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
 							retValue = true;
-						}
+					}
 					break;
 				case 3:
 					if (reporter.equalsIgnoreCase(cmbReporter1.getSelectedItem().toString().trim()) ||
-							reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim())) {
+						reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim())) {
 							retValue = true;
-						}
+					}
 					break;
 			}
 		}		
@@ -662,6 +664,7 @@ public class MetadataPanel extends JPanel {
 		}
 		title += "</p></html>";
 		lblTitle.setText(title);
+		
 		
 	}
 	
