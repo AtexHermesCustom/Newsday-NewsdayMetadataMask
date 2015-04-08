@@ -706,7 +706,7 @@ public class MetadataPanel extends JPanel {
 	
 	protected void updateEmail(String reporter, JTextField txtEmail) {
 		try {
-			txtEmail.setText(config.getXpathValue("sp/reporter/item[.='" + reporter.trim() + "']/@email"));		
+			txtEmail.setText(config.getMetadataXpathValue("reporter/item[.='" + reporter.trim() + "']/@email"));		
 		} catch (Exception e) {
 			// ignore
 		}

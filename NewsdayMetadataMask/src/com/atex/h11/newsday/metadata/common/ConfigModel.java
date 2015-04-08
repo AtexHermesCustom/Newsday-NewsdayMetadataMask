@@ -85,6 +85,11 @@ public class ConfigModel {
     	}
     	return val;
     }
+    
+    public String getMetadataXpathValue(String xpath)
+    		throws XPathExpressionException {
+    	return getXpathValue(metadataGroup + "/" + xpath);
+    }
 
     public String getConfigValue(String key)
     		throws XPathExpressionException {
