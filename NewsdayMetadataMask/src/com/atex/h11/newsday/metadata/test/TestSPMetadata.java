@@ -58,7 +58,7 @@ public class TestSPMetadata {
 		metadata.put("DIGITAL_EXTRA2", "digital extra2");
 		metadata.put("PRINT_PAGE", "99");
 		metadata.put("EXCLUSIVE_FLAG", "FALSE");		
-		
+			
 		jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JButton okButton = new JButton("OK");
@@ -76,7 +76,7 @@ public class TestSPMetadata {
 			
 			// dummy inspector
 			NodeValueInspector inspector = null;
-						
+									
 			// args: inspector, metadata hashmap, readonly=false
 			panel.add(customPane.getPanel(inspector, metadata, false));
 			panel.add(okButton);

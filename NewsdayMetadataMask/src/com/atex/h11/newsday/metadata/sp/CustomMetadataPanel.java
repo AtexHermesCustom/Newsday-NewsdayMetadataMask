@@ -7,6 +7,7 @@ import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPane
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	private static final Logger logger = Constants.LOGGER;
 	private static FileHandler fileLog;
     private static SimpleFormatter simpleFormatter;
-	
 	
 	/**
 	 * This is the default constructor
@@ -115,8 +115,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			*/
 			
 			String objId = "";
-			String objName = "";
-			String objLevel = "";
+			String objName = ""; 			// defaults for testing
+			String objLevel = "ND-WRITERS/NEWS";	// defaults for testing
 			String objLevelId = "";
 			if (inspector != null) {
 				objId = inspector.getID();
@@ -128,7 +128,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			else {
 				logger.log(Level.WARNING, "inspector is null");
 			}
-			
 			
 			logMetadata(metadata, "Loaded from DB");
 
@@ -256,6 +255,5 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		if (logger.getLevel() == Level.FINEST) {
 			InfoBox.showMessage(this, info, "debug", JOptionPane.INFORMATION_MESSAGE);
 		}
-	}		
-	
+	}			
 }

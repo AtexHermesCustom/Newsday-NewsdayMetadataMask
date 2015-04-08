@@ -1,5 +1,7 @@
 package com.atex.h11.newsday.metadata.sp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
@@ -45,6 +47,8 @@ import javax.swing.event.ListDataListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -129,18 +133,27 @@ public class MetadataPanel extends JPanel {
 		// initialize panel
 		initPanel();
 		
-		// set component values, read from the metadata hash
-		setComponentValues();
-		
-		// initialize listeners
-		setComponentListeners();
-		
-		// check and highlight mandatory fields that are missing 
-		isReady();		
+		if (objName == null || objLevel == null || objName.isEmpty() || objLevel.isEmpty()) {
+			// disable - do not allow entry of metadata
+			disableControls();
+		} else {
+			// init controls
+			initControlItems();
+			
+			// set component values, read from the metadata hash
+			setComponentValues();
+			
+			// initialize listeners 
+			// - must be done after setting component values
+			setComponentListeners();
+			
+			// not needed
+			//// check and highlight mandatory fields that are missing 
+			//isReady();		
+		}		
 	}
 
-	protected void initPanel() 
-			throws XPathExpressionException {
+	protected void initPanel() { 
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:default"),
@@ -450,8 +463,10 @@ public class MetadataPanel extends JPanel {
 		
 		lblVersion = new JLabel("Version:");
 		add(lblVersion, "14, 32, 5, 1, right, default");		
-		
-		// -----------------------------------------------------------------
+	}
+	
+	protected void initControlItems() 
+			throws XPathExpressionException {	
 		// Init lists
 		config.initComboBox(cmbPub, "pub");
 		config.initComboBox(cmbReporter1, "reporter");
@@ -465,13 +480,13 @@ public class MetadataPanel extends JPanel {
 		config.initComboBox(cmbPrintSequence, "printSequence");
 		config.initComboBox(cmbHomepage, "homepage");
 		config.initComboBox(cmbArrivalStatus, "arrivalStatus");
+
 		config.initTreeWithGroups(trCategories, "category");
 		config.initTree(trCommunities, "community");		
 		
-		// -----------------------------------------------------------------
 		// Init models
 		lstSelCategories.setModel(selCategoriesModel);
-		lstSelCommunities.setModel(selCommunitiesModel);		
+		lstSelCommunities.setModel(selCommunitiesModel);				
 	}
 	
 	protected void setComponentListeners() {
@@ -760,6 +775,33 @@ public class MetadataPanel extends JPanel {
 		ftxtPrintPage.setText(metadata.get("PRINT_PAGE"));
 		chkExclusive.setSelected(metadata.get("EXCLUSIVE_FLAG").equalsIgnoreCase(Constants.TRUE));
 	}
+	
+	protected void disableControls() {		
+		for(Component component : getComponents(this)) {
+		    component.setEnabled(false);
+		}
+		
+		String title = "<html><p><b><font color=\"red\">This tab will be enabled once the package is created</font></b></html>";
+		lblTitle.setText(title);
+		lblTitle.setEnabled(true);
+	}
+	
+	 private Component[] getComponents(Component container) {
+		 ArrayList<Component> list = null;
+
+	     try {
+	    	 list = new ArrayList<Component>(Arrays.asList(((Container) container).getComponents()));
+	         for (int index = 0; index < list.size(); index++) {
+	        	 for (Component currentComponent : getComponents(list.get(index))) {
+	        		 list.add(currentComponent);
+	        	 }
+	         }
+	     } catch (ClassCastException e) {
+	    	 list = new ArrayList<Component>();
+	     }
+
+	     return list.toArray(new Component[list.size()]);
+    }
 	
 	public boolean isReady() {
 		/*
