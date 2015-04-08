@@ -156,7 +156,9 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		try {
 			logger.entering(this.getClass().getSimpleName(), "getMetadataValues");
 			
-			HashMap<String, String> retMetadata = metadataPanel.getMetadataValues();
+			HashMap<String, String> retMetadata = null;
+			
+			retMetadata = metadataPanel.getMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
@@ -176,6 +178,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	public boolean canActionBePerformed(int button) {
 		// Only OK-Button has to be checked.
 		boolean retVal;
+		
 		switch (button) {
 			case ICustomMetadataPanel.OK_BUTTON:
 				retVal = isReady();

@@ -709,31 +709,31 @@ public class MetadataPanel extends JPanel {
 			throws XPathExpressionException {
 		HashMap<String,String> retMetadata = new HashMap<String,String>();
 		
-		retMetadata.put("PUB", cmbPub.getSelectedItem().toString().trim());
-		retMetadata.put("DESK", cmbDesk.getSelectedItem().toString().trim());
-		retMetadata.put("REPORTER1", cmbReporter1.getSelectedItem().toString().trim());
-		retMetadata.put("REPORTER2", cmbReporter2.getSelectedItem().toString().trim());
-		retMetadata.put("REPORTER3", cmbReporter3.getSelectedItem().toString().trim());
+		retMetadata.put("PUB", getComboBoxSelectedItem(cmbPub));
+		retMetadata.put("DESK", getComboBoxSelectedItem(cmbDesk));
+		retMetadata.put("REPORTER1", getComboBoxSelectedItem(cmbReporter1));
+		retMetadata.put("REPORTER2", getComboBoxSelectedItem(cmbReporter2));
+		retMetadata.put("REPORTER3", getComboBoxSelectedItem(cmbReporter3));
 		retMetadata.put("REPORTER1_EMAIL", txtEmail1.getText().trim());
 		retMetadata.put("REPORTER2_EMAIL", txtEmail2.getText().trim());
 		retMetadata.put("REPORTER3_EMAIL", txtEmail3.getText().trim());
 		retMetadata.put("ASSIGN_LEN", ftxtAssignLength.getText().trim());
 		retMetadata.put("CONTRIBUTOR", txtContributor.getText().trim());
 		retMetadata.put("STORY_GROUP", txtStoryGroup.getText().trim());
-		retMetadata.put("STORY_TYPE", cmbStoryType.getSelectedItem().toString().trim());
-		retMetadata.put("LABEL", cmbLabel.getSelectedItem().toString().trim());
+		retMetadata.put("STORY_TYPE", getComboBoxSelectedItem(cmbStoryType));
+		retMetadata.put("LABEL", getComboBoxSelectedItem(cmbLabel));
 		retMetadata.put("DESCRIPTION", txtrDescription.getText().trim());
 		retMetadata.put("PRINT_EXTRA", txtrPrintExtra.getText().trim());
-		retMetadata.put("PRINT_SECTION", cmbPrintSection.getSelectedItem().toString().trim());
-		retMetadata.put("SEQUENCE", cmbPrintSequence.getSelectedItem().toString().trim());
-		retMetadata.put("HOMEPAGE", cmbHomepage.getSelectedItem().toString().trim());
-		retMetadata.put("ARRIVAL_STATUS", cmbArrivalStatus.getSelectedItem().toString().trim());
+		retMetadata.put("PRINT_SECTION", getComboBoxSelectedItem(cmbPrintSection));
+		retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
+		retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
+		retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
 		retMetadata.put("EMBARGO_FLAG", chkEmbargo.isSelected() ? Constants.TRUE : Constants.FALSE);
 		retMetadata.put("EMBARGO_DATE", "");
 		retMetadata.put("EMBARGO_TIME", "");
 		retMetadata.put("CATEGORIES", getStringList(selCategoriesModel));
 		retMetadata.put("COMMUNITIES", getStringList(selCommunitiesModel));
-		retMetadata.put("PRIORITY", cmbPriority.getSelectedItem().toString().trim());
+		retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
 		retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
 		retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
 		retMetadata.put("PRINT_PAGE", ftxtPrintPage.getText().trim());
@@ -742,11 +742,19 @@ public class MetadataPanel extends JPanel {
 		return retMetadata;
 	}  	
 	
+	protected String getComboBoxSelectedItem(JComboBox<String> cmbControl) {
+		if (cmbControl.getSelectedIndex() > -1) {
+			return cmbControl.getSelectedItem().toString().trim();
+		} else {
+			return "";
+		}
+	}
+	
 	protected void setListModel(DefaultListModel<String> model, String stringList) {
 		if (stringList.contains(",")) {
 			String[] itemList = stringList.split(",");
 			for (int i = 0; i < itemList.length; i++) {
-				model.addElement(itemList[i]);
+				model.addElement(itemList[i].trim());
 			}
 		} else if (!stringList.isEmpty()) {
 			model.addElement(stringList);

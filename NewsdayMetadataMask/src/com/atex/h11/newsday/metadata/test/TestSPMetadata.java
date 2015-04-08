@@ -27,11 +27,35 @@ public class TestSPMetadata {
 		final HashMap<String, String> metadata = new HashMap<String, String>();
 		
 		// sample metadata
-		metadata.put("SECTOR", "sector 2,sector 3,sector 7,xyz,sector 10,Health");
-		metadata.put("INDUSTRY", "industry 1,industry 5,abc,hello,industry 8");
-		metadata.put("SENTIMENT", "neutral");
-		//metadata.put("KEYWORDS", "keyword1,keyword2,keyword3");
-		//metadata.put("WEBCATEGORY", "webcat");
+		metadata.put("PUB", "NEWSDAY");
+		metadata.put("DESK", "DESK");
+		metadata.put("REPORTER1", "Reporter 3 name");
+		metadata.put("REPORTER2", "Reporter 2 name");
+		metadata.put("REPORTER3", "Reporter 1 name");
+		metadata.put("REPORTER1_EMAIL", "email1@email.com");
+		metadata.put("REPORTER2_EMAIL", "email2@email.com");
+		metadata.put("REPORTER3_EMAIL", "email3@email.com");
+		metadata.put("ASSIGN_LEN", "123");
+		metadata.put("CONTRIBUTOR", "contributor value");
+		metadata.put("STORY_GROUP", "story group");
+		metadata.put("STORY_TYPE", "story type value");
+		metadata.put("LABEL", "label value");
+		metadata.put("DESCRIPTION", "this is the description\nthis is the 2nd line");
+		metadata.put("PRINT_EXTRA", "print extra here");
+		metadata.put("PRINT_SECTION", "print section value");
+		metadata.put("SEQUENCE", "sequence value");
+		metadata.put("HOMEPAGE", "www.google.com/help");
+		metadata.put("ARRIVAL_STATUS", "LIVE");
+		metadata.put("EMBARGO_FLAG", "TRUE");
+		metadata.put("EMBARGO_DATE", "");
+		metadata.put("EMBARGO_TIME", "");
+		metadata.put("CATEGORIES", "cat1,cat2,cat3");
+		metadata.put("COMMUNITIES", "com1,com2,com3");
+		metadata.put("PRIORITY", "MEDIUM");
+		metadata.put("DIGITAL_EXTRA1", "digital extra1");
+		metadata.put("DIGITAL_EXTRA2", "digital extra2");
+		metadata.put("PRINT_PAGE", "99");
+		metadata.put("EXCLUSIVE_FLAG", "FALSE");		
 		
 		jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
