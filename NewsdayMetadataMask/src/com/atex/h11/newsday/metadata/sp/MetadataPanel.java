@@ -60,7 +60,9 @@ public class MetadataPanel extends JPanel {
 	private ConfigModel config = null;
 	private HashMap<String, String> metadata = null;
 	
+	private JLabel lblPub;	
 	private JLabel lblTitle;
+	private JLabel lblLevel;
 	private JTextField txtEmail1;
 	private JTextField txtEmail2;
 	private JTextField txtEmail3;
@@ -105,11 +107,12 @@ public class MetadataPanel extends JPanel {
 	private JFormattedTextField ftxtPrintPage;
 	private DefaultListModel<String> selCategoriesModel = new DefaultListModel<String>();
 	private DefaultListModel<String> selCommunitiesModel = new DefaultListModel<String>();
-	private JLabel lblPub;
+	JButton btnAddKeyword;
 	
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
+	private JLabel lblVersion;
 	
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel) 
@@ -128,6 +131,9 @@ public class MetadataPanel extends JPanel {
 		
 		// set component values, read from the metadata hash
 		setComponentValues();
+		
+		// initialize listeners
+		setComponentListeners();
 		
 		// check and highlight mandatory fields that are missing 
 		isReady();		
@@ -190,6 +196,9 @@ public class MetadataPanel extends JPanel {
 		
 		lblTitle = new JLabel("Story Package Metadata");
 		add(lblTitle, "2, 2, 7, 1");
+		
+		lblLevel = new JLabel("Level:");
+		add(lblLevel, "10, 2, 3, 1");
 		
 		lblPub = new JLabel("Pub");
 		add(lblPub, "14, 2, right, default");
@@ -433,11 +442,14 @@ public class MetadataPanel extends JPanel {
 		txtCustomKeyword.setColumns(10);
 		add(txtCustomKeyword, "4, 32, 3, 1, fill, default");
 		
-		JButton btnAddKeyword = new JButton("Add Keyword");
+		btnAddKeyword = new JButton("Add Keyword");
 		add(btnAddKeyword, "8, 32");		
 		
 		chkExclusive = new JCheckBox("Exclusive");
 		add(chkExclusive, "12, 32, 2, 1");
+		
+		lblVersion = new JLabel("Version:");
+		add(lblVersion, "14, 32, 5, 1, right, default");		
 		
 		// -----------------------------------------------------------------
 		// Init lists
@@ -459,8 +471,10 @@ public class MetadataPanel extends JPanel {
 		// -----------------------------------------------------------------
 		// Init models
 		lstSelCategories.setModel(selCategoriesModel);
-		lstSelCommunities.setModel(selCommunitiesModel);
-		
+		lstSelCommunities.setModel(selCommunitiesModel);		
+	}
+	
+	protected void setComponentListeners() {
 		// -----------------------------------------------------------------		
 		// Init listeners
 		cmbReporter1.addItemListener(new ItemListener() {
@@ -635,7 +649,7 @@ public class MetadataPanel extends JPanel {
 				addItemToListModel(selCategoriesModel, txtCustomKeyword.getText().trim());
 				txtCustomKeyword.setText("");	// clear
 			}
-		});		
+		});				
 	}
 	
 	protected void addItemToListModel(DefaultListModel<String> model, String item) {
@@ -702,10 +716,19 @@ public class MetadataPanel extends JPanel {
 			throws XPathExpressionException {
 		String title = "<html><p><b>Story Package Metadata</b>";
 		if (objName != null && !objName.isEmpty()) {
-			title += "<b> for <font color=\"red\">" + objName + "</font></b>";
+			title += "<b> for <font color=\"blue\">" + objName + "</font>";
 		}
 		title += "</p></html>";
 		lblTitle.setText(title);
+
+		String level = "";
+		if (objLevel != null && !objLevel.isEmpty()) {
+			level = "<html><b>Level: " + objLevel + "</b></html>";
+		}
+		lblLevel.setText(level);		
+		
+		lblVersion.setText("<html><p><font color=\"gray\">Version: " + 
+				MetadataPanel.class.getPackage().getImplementationVersion() + "</font></p></html>");
 		
 		cmbPub.setSelectedItem(metadata.get("PUB"));
 		cmbDesk.setSelectedItem(metadata.get("DESK"));
