@@ -15,12 +15,7 @@
 		#####################################
 	 -->	
 	<sp>
-		<metadataNames>
-			<sectors>SECTOR</sectors>
-			<industries>INDUSTRY</industries>
-			<keywords>KEYWORDS</keywords>
-			<sentiment>SENTIMENT</sentiment>
-		</metadataNames>
+		<metadataNames></metadataNames>
 		
 		<pubConfiguration>
 			<item levelMatch="^ND*">ND</item>

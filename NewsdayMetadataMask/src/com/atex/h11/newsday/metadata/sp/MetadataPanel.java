@@ -665,6 +665,27 @@ public class MetadataPanel extends JPanel {
 		title += "</p></html>";
 		lblTitle.setText(title);
 		
+		cmbPub.setSelectedItem(metadata.get("PUB"));
+		cmbDesk.setSelectedItem(metadata.get("DESK"));
+		cmbReporter1.setSelectedItem(metadata.get("REPORTER1"));
+		cmbReporter2.setSelectedItem(metadata.get("REPORTER2"));
+		cmbReporter3.setSelectedItem(metadata.get("REPORTER3"));
+		txtEmail1.setText(metadata.get("REPORTER1_EMAIL"));
+		txtEmail2.setText(metadata.get("REPORTER2_EMAIL"));
+		txtEmail3.setText(metadata.get("REPORTER3_EMAIL"));
+		ftxtAssignLength.setText(metadata.get("ASSIGN_LEN"));
+		txtContributor.setText(metadata.get("CONTRIBUTOR"));
+		txtStoryGroup.setText(metadata.get("STORY_GROUP"));
+		cmbStoryType.setSelectedItem(metadata.get("STORY_TYPE"));
+		cmbLabel.setSelectedItem(metadata.get("LABEL"));
+		txtrDescription.setText(metadata.get("DESCRIPTION"));
+		txtrPrintExtra.setText(metadata.get("PRINT_EXTRA"));
+		cmbPrintSection.setSelectedItem(metadata.get("PRINT_SECTION"));
+		cmbPrintSequence.setSelectedItem(metadata.get("SEQUENCE"));
+		cmbHomepage.setSelectedItem(metadata.get("HOMEPAGE"));
+		cmbArrivalStatus.setSelectedItem(metadata.get("ARRIVAL_STATUS"));
+		chkEmbargo.setSelected(metadata.get("EMBARGO_FLAG").equalsIgnoreCase(Constants.TRUE));
+		
 		
 	}
 	
@@ -681,10 +702,61 @@ public class MetadataPanel extends JPanel {
 			throws XPathExpressionException {
 		HashMap<String,String> retMetadata = new HashMap<String,String>();
 		
-		retMetadata.put("EXCLUSIVE_FLAG", Constants.TRUE);
-		retMetadata.put("EMBARGO_FLAG", Constants.TRUE);
-		retMetadata.put("REPORTER1", "Report1");
+		retMetadata.put("PUB", cmbPub.getSelectedItem().toString().trim());
+		retMetadata.put("DESK", cmbDesk.getSelectedItem().toString().trim());
+		retMetadata.put("REPORTER1", cmbReporter1.getSelectedItem().toString().trim());
+		retMetadata.put("REPORTER2", cmbReporter2.getSelectedItem().toString().trim());
+		retMetadata.put("REPORTER3", cmbReporter3.getSelectedItem().toString().trim());
+		retMetadata.put("REPORTER1_EMAIL", txtEmail1.getText().trim());
+		retMetadata.put("REPORTER2_EMAIL", txtEmail2.getText().trim());
+		retMetadata.put("REPORTER3_EMAIL", txtEmail3.getText().trim());
+		retMetadata.put("ASSIGN_LEN", ftxtAssignLength.getText().trim());
+		retMetadata.put("CONTRIBUTOR", txtContributor.getText().trim());
+		retMetadata.put("STORY_GROUP", txtStoryGroup.getText().trim());
+		retMetadata.put("STORY_TYPE", cmbStoryType.getSelectedItem().toString().trim());
+		retMetadata.put("LABEL", cmbLabel.getSelectedItem().toString().trim());
+		retMetadata.put("DESCRIPTION", txtrDescription.getText().trim());
+		retMetadata.put("PRINT_EXTRA", txtrPrintExtra.getText().trim());
+		retMetadata.put("PRINT_SECTION", cmbPrintSection.getSelectedItem().toString().trim());
+		retMetadata.put("SEQUENCE", cmbPrintSequence.getSelectedItem().toString().trim());
+		retMetadata.put("HOMEPAGE", cmbHomepage.getSelectedItem().toString().trim());
+		retMetadata.put("ARRIVAL_STATUS", cmbArrivalStatus.getSelectedItem().toString().trim());
+		retMetadata.put("EMBARGO_FLAG", chkEmbargo.isSelected() ? Constants.TRUE : Constants.FALSE);
+		retMetadata.put("EMBARGO_DATE", "");
+		retMetadata.put("EMBARGO_TIME", "");
+		retMetadata.put("CATEGORIES", getStringList(selCategoriesModel));
+		retMetadata.put("COMMUNITIES", getStringList(selCommunitiesModel));
+		retMetadata.put("PRIORITY", cmbPriority.getSelectedItem().toString().trim());
+		retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
+		retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
+		retMetadata.put("PRINT_PAGE", ftxtPrintPage.getText().trim());
+		retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
 		
 		return retMetadata;
 	}  	
+	
+	protected void setListModel(DefaultListModel<String> model, String stringList) {
+		if (stringList.contains(",")) {
+			String[] itemList = stringList.split(",");
+			for (int i = 0; i < itemList.length; i++) {
+				model.addElement(itemList[i]);
+			}
+		} else if (!stringList.isEmpty()) {
+			model.addElement(stringList);
+		}
+	}
+	
+	protected String getStringList(DefaultListModel<String> model) {
+		String retStringList = "";
+		Object[] list = model.toArray();
+		
+		for (int i = 0; i < list.length; i++) {
+			if (!retStringList.isEmpty()) {
+				retStringList += ",";
+			}
+			retStringList += ((String) list[i]).trim(); 
+		}		
+	
+		return retStringList;
+	}
 }
