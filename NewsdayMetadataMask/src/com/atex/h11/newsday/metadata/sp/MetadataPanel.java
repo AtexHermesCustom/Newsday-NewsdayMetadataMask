@@ -685,8 +685,15 @@ public class MetadataPanel extends JPanel {
 		cmbHomepage.setSelectedItem(metadata.get("HOMEPAGE"));
 		cmbArrivalStatus.setSelectedItem(metadata.get("ARRIVAL_STATUS"));
 		chkEmbargo.setSelected(metadata.get("EMBARGO_FLAG").equalsIgnoreCase(Constants.TRUE));
-		
-		
+		//dtpckEmbargoDate
+		//spnEmbargoTime
+		setListModel(selCategoriesModel, metadata.get("CATEGORIES"));
+		setListModel(selCommunitiesModel, metadata.get("COMMUNITIES"));
+		cmbPriority.setSelectedItem(metadata.get("PRIORITY"));
+		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
+		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
+		ftxtPrintPage.setText(metadata.get("PRINT_PAGE"));
+		chkExclusive.setSelected(metadata.get("EXCLUSIVE_FLAG").equalsIgnoreCase(Constants.TRUE));
 	}
 	
 	public boolean isReady() {
