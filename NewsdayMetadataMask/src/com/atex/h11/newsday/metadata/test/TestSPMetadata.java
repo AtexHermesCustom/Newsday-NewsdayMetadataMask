@@ -28,7 +28,7 @@ public class TestSPMetadata {
 		
 		// sample metadata
 		metadata.put("PUB", "NEWSDAY");
-		metadata.put("DESK", "DESK");
+		metadata.put("DESK", "ALL");
 		metadata.put("REPORTER1", "Reporter 3 name");
 		metadata.put("REPORTER2", "Reporter 2 name");
 		metadata.put("REPORTER3", "Reporter 1 name");
