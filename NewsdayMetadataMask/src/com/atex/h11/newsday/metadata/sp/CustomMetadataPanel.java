@@ -115,7 +115,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			*/
 			
 			String objId = "";
-			String objName = ""; 			// defaults for testing
+			String objName = "PACKAGE"; 			// defaults for testing
 			String objLevel = "ND-WRITERS/NEWS";	// defaults for testing
 			String objLevelId = "";
 			if (inspector != null) {
