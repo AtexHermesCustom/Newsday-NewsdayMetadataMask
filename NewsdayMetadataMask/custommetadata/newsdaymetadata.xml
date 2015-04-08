@@ -33,7 +33,7 @@
 		</pub>
 			
 		<desk>
-			<pub code="ND">
+			<!-- <pub code="ND"> -->
 				<item>ALL</item>
 				<item>LONG ISLAND</item>
 				<item>BUSINESS</item>
@@ -42,10 +42,10 @@
 				<item>OP-ED</item>
 				<item>SPORTS</item>
 				<item>TRAVEL</item>
-			</pub>
-			<pub code="AM">
+			<!-- </pub> -->
+			<!-- <pub code="AM"> -->
 				<item>AMNY</item>
-			</pub>
+			<!-- </pub> -->
 		</desk>
 		<priority>
 			<item>LOW</item>

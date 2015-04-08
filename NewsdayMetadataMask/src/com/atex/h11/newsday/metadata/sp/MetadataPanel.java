@@ -106,6 +106,10 @@ public class MetadataPanel extends JPanel {
 	private DefaultListModel<String> selCommunitiesModel = new DefaultListModel<String>();
 	private JLabel lblPub;
 	
+	private String prevReporter1 = "";
+	private String prevReporter2 = "";
+	private String prevReporter3 = "";
+	
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel) 
 			throws XPathExpressionException {
@@ -458,10 +462,22 @@ public class MetadataPanel extends JPanel {
 		// Init listeners
 		cmbReporter1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.DESELECTED) {
+					prevReporter1 = e.getItem().toString();
+				}
+				
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					Object item = e.getItem();
 					if (item != null) {
-						
+						String selReporter = item.toString();
+						if (isDuplicateReporter(1, selReporter)) {	
+							// check duplicate reporter
+							InfoBox.ShowMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
+							cmbReporter1.setSelectedItem(prevReporter1);
+						} else {
+							// update email field
+							
+						}
 					}
 				}
 			}
@@ -469,10 +485,21 @@ public class MetadataPanel extends JPanel {
 		
 		cmbReporter2.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.DESELECTED) {
+					prevReporter2 = e.getItem().toString();
+				}
+				
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					Object item = e.getItem();
 					if (item != null) {
-						
+						String selReporter = item.toString();
+						if (isDuplicateReporter(2, selReporter)) {	
+							// check duplicate reporter
+							InfoBox.ShowMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
+							cmbReporter2.setSelectedItem(prevReporter2);
+						} else {
+							
+						}
 					}
 				}
 			}
@@ -480,10 +507,21 @@ public class MetadataPanel extends JPanel {
 		
 		cmbReporter3.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.DESELECTED) {
+					prevReporter3 = e.getItem().toString();
+				}
+				
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					Object item = e.getItem();
 					if (item != null) {
-						
+						String selReporter = item.toString();
+						if (isDuplicateReporter(3, selReporter)) {	
+							// check duplicate reporter
+							InfoBox.ShowMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
+							cmbReporter3.setSelectedItem(prevReporter3);
+						} else {
+							
+						}
 					}
 				}
 			}
@@ -583,7 +621,36 @@ public class MetadataPanel extends JPanel {
 		model.remove(index);
 	}
 	
-	protected void updateEmail() {
+	protected boolean isDuplicateReporter(int reporterNum, String reporter) {
+		boolean retValue = false;
+		
+		if (reporter != null && !reporter.trim().isEmpty()) {
+			switch (reporterNum) {
+				case 1:
+					if (reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim()) ||
+						reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
+						retValue = true;
+					}
+					break;
+				case 2:
+					if (reporter.equalsIgnoreCase(cmbReporter1.getSelectedItem().toString().trim()) ||
+							reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
+							retValue = true;
+						}
+					break;
+				case 3:
+					if (reporter.equalsIgnoreCase(cmbReporter1.getSelectedItem().toString().trim()) ||
+							reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim())) {
+							retValue = true;
+						}
+					break;
+			}
+		}		
+		
+		return retValue;
+	}
+	
+	protected void updateEmail(String reporter, JTextField txtEmail) {
 		
 	}
 	
