@@ -208,18 +208,30 @@
 		
 		<printSequence insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ND">
-				<printSection id="">
-					<item>PAGE ONE</item>
-					<item>UPFRONT</item>
-					<item>LONG ISLAND</item>
-					<item>CRIME &amp; COURTS</item>
-					<item>HEALTH-SCIENCE</item>
-					<item>OBITUARIES</item>
-					<item>CORRECTIONS</item>
-					<item>COVER STORY</item>
-					<item>FEATURES</item>
-					<item>ACT2</item>
-				</printSection>
+				<desk id="LONG ISLAND">
+					<printSection id="NEWS">
+						<item>PAGE ONE</item>
+						<item>UPFRONT</item>
+						<item>LONG ISLAND</item>
+						<item>CRIME &amp; COURTS</item>
+						<item>HEALTH-SCIENCE</item>
+						<item>OBITUARIES</item>
+						<item>CORRECTIONS</item>
+					<printSection id="LI LIFE">
+						<item>COVER STORY</item>
+						<item>FEATURES</item>
+						<item>ACT 2</item>
+					</printSection>
+				</desk>
+				<desk id="BUSINESS">
+					<printSection id="NEWS">
+						<item>PAGE ONE</item>
+						<item>UPFRONT</item>
+						<item>LI BUSINESS</item>
+						<item>OBITUARIES</item>
+						<item>CORRECTIONS</item>
+					</printSection>
+				</desk>
 			</pub>
 			<pub id="AM">
 				<printSection id="">
