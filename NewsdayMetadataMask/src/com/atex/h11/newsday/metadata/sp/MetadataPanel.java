@@ -548,14 +548,18 @@ public class MetadataPanel extends JPanel {
 					Object item = e.getItem();
 					if (item != null) {
 						String desk = item.toString();
+						String deskXpath;
+						if (desk.equalsIgnoreCase(Constants.ALL)) {
+							deskXpath = "desk";		// no condition
+						} else {
+							deskXpath = "desk[@id='" + desk + "']";		// should match desk id
+						}						
 						try {							
 							// update related components
-							config.initComboBox(cmbHomepage, pub, "homepage", 
-									"desk[@id='" + desk + "']/item");
-							config.initComboBox(cmbPrintSection, pub, "printSection", 
-									"desk[@id='" + desk + "']/item");
+							config.initComboBox(cmbHomepage, pub, "homepage", deskXpath + "/item");
+							config.initComboBox(cmbPrintSection, pub, "printSection", deskXpath + "/item");
 							config.initComboBox(cmbPrintSequence, pub, "printSequence", 
-									"desk[@id='" + desk + "']/printSection[@id='" + cmbPrintSection.getSelectedItem().toString().trim() + "']/item");							
+									deskXpath + "/printSection[@id='" + cmbPrintSection.getSelectedItem().toString().trim() + "']/item");							
 						} catch (Exception ex) {
 							InfoBox.ShowException(ex);
 						}
@@ -570,10 +574,17 @@ public class MetadataPanel extends JPanel {
 					Object item = e.getItem();
 					if (item != null) {
 						String printSection = item.toString();
+						String desk = cmbDesk.getSelectedItem().toString().trim();
+						String deskXpath;
+						if (desk.equalsIgnoreCase(Constants.ALL)) {
+							deskXpath = "desk";		// no condition
+						} else {
+							deskXpath = "desk[@id='" + desk + "']";		// should match desk id
+						}							
 						try {							
 							// update related components
 							config.initComboBox(cmbPrintSequence, pub, "printSequence", 
-									"desk[@id='" + cmbDesk.getSelectedItem().toString().trim() + "']/printSection[@id='" + printSection + "']/item");							
+									deskXpath + "/printSection[@id='" + printSection + "']/item");							
 						} catch (Exception ex) {
 							InfoBox.ShowException(ex);
 						}
@@ -805,20 +816,26 @@ public class MetadataPanel extends JPanel {
 		// desk
 		config.initComboBox(cmbDesk, pub, "desk");
 		String desk = metadata.get("DESK");
+		String deskXpath;
+		if (desk.equalsIgnoreCase(Constants.ALL)) {
+			deskXpath = "desk";		// no condition
+		} else {
+			deskXpath = "desk[@id='" + desk + "']";		// should match desk id
+		}
 		setComboBoxSelectedItem(cmbDesk, desk);
 
 		// web homepage - list depends on current desk
-		config.initComboBox(cmbHomepage, pub, "homepage", "desk[@id='" + desk + "']/item");
+		config.initComboBox(cmbHomepage, pub, "homepage", deskXpath + "/item");
 		String homepage = metadata.get("HOMEPAGE");
 		setComboBoxSelectedItem(cmbHomepage, homepage);
 
 		// print section - list depends on current desk
-		config.initComboBox(cmbPrintSection, pub, "printSection", "desk[@id='" + desk + "']/item");
+		config.initComboBox(cmbPrintSection, pub, "printSection", deskXpath + "/item");
 		String printSection = metadata.get("PRINT_SECTION");
 		setComboBoxSelectedItem(cmbPrintSection, printSection);
 		
 		// print sequence - list depends on current desk and print section
-		config.initComboBox(cmbPrintSequence, pub, "printSequence", "desk[@id='" + desk + "']/printSection[@id='" + printSection + "']/item");
+		config.initComboBox(cmbPrintSequence, pub, "printSequence", deskXpath + "/printSection[@id='" + printSection + "']/item");
 		String printSequence = metadata.get("SEQUENCE");
 		setComboBoxSelectedItem(cmbPrintSequence, printSequence);
 
