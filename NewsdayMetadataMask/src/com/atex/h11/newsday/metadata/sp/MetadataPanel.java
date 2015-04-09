@@ -485,10 +485,12 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(1, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.WARNING_MESSAGE);
-							// cmbReporter1.setSelectedItem(prevReporter1); - just warn
-						}
-						updateEmail(selReporter, txtEmail1);						
+							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", 
+									"Duplicate reporter", JOptionPane.WARNING_MESSAGE);
+							cmbReporter1.setSelectedItem(prevReporter1);
+						} else {
+							updateEmail(selReporter, txtEmail1);
+						}						
 					}
 				}
 			}
@@ -506,10 +508,12 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(2, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.WARNING_MESSAGE);
-							// cmbReporter2.setSelectedItem(prevReporter2); - just warn
-						}
-						updateEmail(selReporter, txtEmail2);						
+							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", 
+									"Duplicate reporter", JOptionPane.WARNING_MESSAGE);
+							cmbReporter2.setSelectedItem(prevReporter2);
+						} else {
+							updateEmail(selReporter, txtEmail2);
+						}		
 					}
 				}
 			}
@@ -527,10 +531,12 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(3, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.WARNING_MESSAGE);
-							// cmbReporter3.setSelectedItem(prevReporter3); - just warn
-						}
-						updateEmail(selReporter, txtEmail3);							
+							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", 
+									"Duplicate reporter", JOptionPane.WARNING_MESSAGE);
+							cmbReporter3.setSelectedItem(prevReporter3);
+						} else {
+							updateEmail(selReporter, txtEmail3);
+						}							
 					}
 				}
 			}
