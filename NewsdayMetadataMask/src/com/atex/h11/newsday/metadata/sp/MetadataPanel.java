@@ -47,7 +47,6 @@ import javax.swing.event.ListDataListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -58,6 +57,11 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 public class MetadataPanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static Logger logger;
 	
 	private String objName;
@@ -146,6 +150,11 @@ public class MetadataPanel extends JPanel {
 			// initialize listeners 
 			// - must be done after setting component values
 			setComponentListeners();
+			
+			String desk = metadata.get("DESK");
+			if (desk == null || desk.isEmpty()) {	// set defaults based on level
+				setDefaults(objLevel);
+			}
 			
 			// not needed
 			//// check and highlight mandatory fields that are missing 
@@ -871,6 +880,14 @@ public class MetadataPanel extends JPanel {
 		selCommunitiesModel = new DefaultListModel<String>();
 		lstSelCommunities.setModel(selCommunitiesModel);				
 		setModelListItems(selCommunitiesModel, metadata.get("COMMUNITIES"));
+	}
+	
+	protected void setDefaults(String objLevel) 
+			throws XPathExpressionException {
+		// set default desk
+		String defaultDesk = config.getMetadataXpathValue(pub, "defaultValue",
+				"level[@id='" + objLevel + "']/desk");
+		setComboBoxSelectedItem(cmbDesk, defaultDesk); 
 	}
 	
 	protected void disableControls() {		
