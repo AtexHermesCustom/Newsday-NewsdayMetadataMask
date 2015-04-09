@@ -104,14 +104,14 @@ public class ConfigModel {
     public NodeList getListItems(String metadata) 
 			throws XPathExpressionException {
     	NodeList nl = (NodeList) 
-    	xp.evaluate(metadataGroup + "/" + metadata + "/item", doc.getDocumentElement(), XPathConstants.NODESET);
+    			xp.evaluate(metadataGroup + "/" + metadata + "/item", doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }
     
     public NodeList getListItems(String metadata, String xpath) 
 			throws XPathExpressionException {
     	NodeList nl = (NodeList) 
-    	xp.evaluate(metadataGroup + "/" + metadata + "/" + xpath, doc.getDocumentElement(), XPathConstants.NODESET);
+    			xp.evaluate(metadataGroup + "/" + metadata + "/" + xpath, doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }    
     

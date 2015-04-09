@@ -18,8 +18,8 @@
 		<metadataNames></metadataNames>
 		
 		<pubConfiguration>
-			<item levelMatch="^ND*">ND</item>
-			<item levelMatch="^AM*">AM</item>
+			<item levelMatchPattern="^ND.*">ND</item>
+			<item levelMatchPattern="^AM.*">AM</item>
 		</pubConfiguration>
 			
 		<pub>

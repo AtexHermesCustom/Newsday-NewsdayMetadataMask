@@ -6,8 +6,11 @@ import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPane
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.xml.xpath.XPathExpressionException;
 
-import java.util.Properties;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
@@ -113,17 +116,29 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			else
 				this.validator = new HermesValidator(inspector);
 			*/
-			
+						
 			String objId = "";
-			String objName = "PACKAGE"; 			// defaults for testing
-			String objLevel = "ND-WRITERS/NEWS";	// defaults for testing
+			String objName = ""; 		
+			String objLevel = "";
 			String objLevelId = "";
+			String pub = "";
+			
+			// for testing only
+			String testMode = System.getProperty("test.mode");
+			if (testMode != null && testMode.equals("1")) {
+				System.out.println("test mode");
+				objName = "TESTPACKAGE";
+				objLevel = "ND-WRITERS/NEWS";
+				pub = getPubFromLevel(objLevel);
+			}
+
 			if (inspector != null) {
 				objId = inspector.getID();
 				objName = inspector.getProperty(NodeValueInspector.NAME);
 				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
 				objLevelId = inspector.getProperty(NodeValueInspector.LEVEL_ID);
-				logger.fine("Object: name=" + objName + ", id=" + objId + ", level=" + objLevel + ", level id=" + objLevelId);
+				pub = getPubFromLevel(objLevel);
+				logger.fine("Object: name=" + objName + ", id=" + objId + ", level=" + objLevel + ", level id=" + objLevelId + ", pub=" + pub);
 			}
 			else {
 				logger.log(Level.WARNING, "inspector is null");
@@ -131,7 +146,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			
 			logMetadata(metadata, "Loaded from DB");
 
-			metadataPanel = new MetadataPanel(config, metadata, logger, objName, objLevel);
+			metadataPanel = new MetadataPanel(config, metadata, logger, objName, objLevel, pub);
 			metadataPanel.setPreferredSize(new Dimension(690, 580));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");
@@ -234,6 +249,25 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		logger.finer("Return value=" + retVal);
 		return retVal;
 	}	
+	
+	private String getPubFromLevel(String objLevel) 
+			throws XPathExpressionException {
+		String pub = null;
+		
+		NodeList nl = config.getListItems("pubConfiguration");
+		for (int i = 0; i < nl.getLength(); i++) {
+			Node n = nl.item(i);
+			String pattern = n.getAttributes().getNamedItem("levelMatchPattern").getNodeValue();
+			if (objLevel.matches(pattern)) {
+				logger.finer("Level: " + objLevel + " matches pattern: " + pattern);
+				pub = n.getTextContent().trim();
+				break;
+			}
+		}
+		
+		logger.finer("Return value=" + pub);
+		return pub;
+	}
 	
 	private void logMetadata(HashMap<String, String> map, String msg) {
 		// sort map by key

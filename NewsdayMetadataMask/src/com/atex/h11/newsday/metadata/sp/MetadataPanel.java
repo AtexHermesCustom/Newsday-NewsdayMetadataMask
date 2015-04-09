@@ -61,6 +61,7 @@ public class MetadataPanel extends JPanel {
 	
 	private String objName;
 	private String objLevel;
+	private String pub;
 	private ConfigModel config = null;
 	private HashMap<String, String> metadata = null;
 	
@@ -119,11 +120,12 @@ public class MetadataPanel extends JPanel {
 	private JLabel lblVersion;
 	
 	// constructor
-	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel) 
+	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel, String pub) 
 			throws XPathExpressionException {
 		
 		this.objName = objName;
 		this.objLevel = objLevel;
+		this.pub = pub;
 		this.config = config;
 		this.metadata = metadata;		
 		logger = l;
@@ -767,8 +769,8 @@ public class MetadataPanel extends JPanel {
 		chkEmbargo.setSelected(metadata.get("EMBARGO_FLAG").equalsIgnoreCase(Constants.TRUE));
 		//dtpckEmbargoDate
 		//spnEmbargoTime
-		setListModel(selCategoriesModel, metadata.get("CATEGORIES"));
-		setListModel(selCommunitiesModel, metadata.get("COMMUNITIES"));
+		setModelListItems(selCategoriesModel, metadata.get("CATEGORIES"));
+		setModelListItems(selCommunitiesModel, metadata.get("COMMUNITIES"));
 		cmbPriority.setSelectedItem(metadata.get("PRIORITY"));
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
@@ -777,7 +779,7 @@ public class MetadataPanel extends JPanel {
 	}
 	
 	protected void disableControls() {		
-		for(Component component : getComponents(this)) {
+		for (Component component : getAllComponents(this)) {
 		    component.setEnabled(false);
 		}
 		
@@ -786,21 +788,21 @@ public class MetadataPanel extends JPanel {
 		lblTitle.setEnabled(true);
 	}
 	
-	 private Component[] getComponents(Component container) {
-		 ArrayList<Component> list = null;
+	protected Component[] getAllComponents(Component container) {
+		ArrayList<Component> list = null;
 
-	     try {
-	    	 list = new ArrayList<Component>(Arrays.asList(((Container) container).getComponents()));
-	         for (int index = 0; index < list.size(); index++) {
-	        	 for (Component currentComponent : getComponents(list.get(index))) {
-	        		 list.add(currentComponent);
-	        	 }
-	         }
-	     } catch (ClassCastException e) {
-	    	 list = new ArrayList<Component>();
-	     }
+	    try {
+	    	list = new ArrayList<Component>(Arrays.asList(((Container) container).getComponents()));
+	        for (int index = 0; index < list.size(); index++) {
+	        	for (Component currentComponent : getAllComponents(list.get(index))) {
+	        		list.add(currentComponent);
+	        	}
+	        }
+	    } catch (ClassCastException e) {
+	    	list = new ArrayList<Component>();
+	    }
 
-	     return list.toArray(new Component[list.size()]);
+	    return list.toArray(new Component[list.size()]);
     }
 	
 	public boolean isReady() {
@@ -838,8 +840,8 @@ public class MetadataPanel extends JPanel {
 		retMetadata.put("EMBARGO_FLAG", chkEmbargo.isSelected() ? Constants.TRUE : Constants.FALSE);
 		retMetadata.put("EMBARGO_DATE", "");
 		retMetadata.put("EMBARGO_TIME", "");
-		retMetadata.put("CATEGORIES", getStringList(selCategoriesModel));
-		retMetadata.put("COMMUNITIES", getStringList(selCommunitiesModel));
+		retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
+		retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
 		retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
 		retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
 		retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
@@ -857,7 +859,7 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
-	protected void setListModel(DefaultListModel<String> model, String stringList) {
+	protected void setModelListItems(DefaultListModel<String> model, String stringList) {
 		if (stringList.contains(",")) {
 			String[] itemList = stringList.split(",");
 			for (int i = 0; i < itemList.length; i++) {
@@ -868,7 +870,7 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
-	protected String getStringList(DefaultListModel<String> model) {
+	protected String getStringFromListModel(DefaultListModel<String> model) {
 		String retStringList = "";
 		Object[] list = model.toArray();
 		
