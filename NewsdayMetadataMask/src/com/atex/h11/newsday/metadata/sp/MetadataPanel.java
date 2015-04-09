@@ -887,7 +887,9 @@ public class MetadataPanel extends JPanel {
 		// set default desk
 		String defaultDesk = config.getMetadataXpathValue(pub, "defaultValue",
 				"level[@id='" + objLevel + "']/desk");
-		setComboBoxSelectedItem(cmbDesk, defaultDesk); 
+		if (defaultDesk != null && !defaultDesk.isEmpty()) {
+			setComboBoxSelectedItem(cmbDesk, defaultDesk);
+		}
 	}
 	
 	protected void disableControls() {		
