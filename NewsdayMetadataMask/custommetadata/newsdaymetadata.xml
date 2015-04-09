@@ -24,7 +24,7 @@
 			</pub>
 		</publicationConfiguration>
 			
-		<publication>
+		<publication insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>NEWSDAY</item>
 				<item>AMNY</item>
@@ -52,7 +52,7 @@
 			</pub>
 		</storyType>
 		
-		<label insertEmptyItem="1" selectFirstItemAsDefault="1">
+		<label insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>EXCLUSIVE</item>
 				<item>COVER STORY</item>
@@ -106,7 +106,7 @@
 			</pub>
 		</desk>		
 		
-		<homepage insertEmptyItem="1" selectFirstItemAsDefault="1">
+		<homepage insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
 					<item>LONG ISLAND-NEWS</item>
@@ -172,7 +172,7 @@
 			</pub>						
 		</homepage>		
 		
-		<printSection insertEmptyItem="1" selectFirstItemAsDefault="1">
+		<printSection insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
 					<item>NEWS</item>
@@ -206,7 +206,7 @@
 			</pub>						
 		</printSection>
 		
-		<printSequence insertEmptyItem="1" selectFirstItemAsDefault="1">
+		<printSequence insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
 					<printSection id="NEWS">
@@ -298,7 +298,31 @@
 		</community>
 		
 		<defaultValue>
-		
+			<pub id="ND">
+				<level id="ND-WRITERS/NEWS/LONG-ISLAND">
+					<desk>LONG ISLAND</desk>
+				</level>
+				<level id="ND-WRITERS/NEWS/BUSINESS">
+					<desk>BUSINESS</desk>
+				</level>
+				<level id="ND-WRITERS/FEATURES/ENTERTAINMENT">
+					<desk>ENTERTAINMENT</desk>
+				</level>
+				<level id="ND-WRITERS/FEATURES/LIFESTYLE">
+					<desk>LIFESTYLE</desk>
+				</level>		
+				<level id="ND-WRITERS/OP-ED/OPINION">
+					<desk>OP-ED</desk>
+				</level>
+				<level id="ND-WRITERS/SPORTS/MAIN">
+					<desk>SPORTS</desk>
+				</level>
+			</pub>
+			<pub id="AM">
+				<level id="AM-WRITERS/AMNY">
+					<desk>NEWS</desk>
+				</level>
+			</pub>
 		</defaultValue>
 	</sp>
 	
