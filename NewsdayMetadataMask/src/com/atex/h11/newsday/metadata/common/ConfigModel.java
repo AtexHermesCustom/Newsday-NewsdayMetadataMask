@@ -219,7 +219,7 @@ public class ConfigModel {
 		for (String group : groups) {
 			DefaultMutableTreeNode nodeGroup = new DefaultMutableTreeNode(group);
 			
-			NodeList nl = getListItems(pub, metadata, "group[@name='" + group + "']/item");
+			NodeList nl = getListItems(pub, metadata, "group[@id='" + group + "']/item");
 			List<String> items = new ArrayList<String>(nl.getLength());
 
 	    	// load items

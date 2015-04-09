@@ -30,7 +30,7 @@ public class TestSPMetadata {
 		
 		// sample metadata
 		metadata.put("PUB", "NEWSDAY");
-		metadata.put("DESK", "ALL");
+		metadata.put("DESK", "LONG ISLAND");
 		metadata.put("REPORTER1", "Reporter 3 name");
 		metadata.put("REPORTER2", "Reporter 2 name");
 		metadata.put("REPORTER3", "Reporter 1 name");
@@ -44,9 +44,9 @@ public class TestSPMetadata {
 		metadata.put("LABEL", "label value");
 		metadata.put("DESCRIPTION", "this is the description\nthis is the 2nd line");
 		metadata.put("PRINT_EXTRA", "print extra here");
-		metadata.put("PRINT_SECTION", "print section value");
+		metadata.put("PRINT_SECTION", "LI LIFE");
 		metadata.put("SEQUENCE", "sequence value");
-		metadata.put("HOMEPAGE", "www.google.com/help");
+		metadata.put("HOMEPAGE", "LI Crime");
 		metadata.put("ARRIVAL_STATUS", "LIVE");
 		metadata.put("EMBARGO_FLAG", "TRUE");
 		metadata.put("EMBARGO_DATE", "");
