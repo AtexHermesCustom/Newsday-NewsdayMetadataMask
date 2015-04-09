@@ -103,19 +103,19 @@ public class ConfigModel {
     
     public String getMetadataXpathValue(String pub, String metadata, String xpath)
     		throws XPathExpressionException {
-    	return getXpathValue(metadataGroup + "/" + metadata + "/pub[@code='" + pub + "']/" + xpath);
+    	return getXpathValue(metadataGroup + "/" + metadata + "/pub[@id='" + pub + "']/" + xpath);
     }    
     
     public NodeList getListItems(String pub, String metadata) 
 			throws XPathExpressionException {
-    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@code='" + pub + "']/item", 
+    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@id='" + pub + "']/item", 
     			doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }
     
     public NodeList getListItems(String pub, String metadata, String xpath) 
 			throws XPathExpressionException {
-    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@code='" + pub + "']/" + xpath, 
+    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@id='" + pub + "']/" + xpath, 
     			doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }    
@@ -199,7 +199,7 @@ public class ConfigModel {
     
     public void initTreeWithGroups(JTree trControl, String pub, String metadata) 
 			throws XPathExpressionException {    
-    	NodeList nlGroups = getListItems(pub, metadata, "group/@name");
+    	NodeList nlGroups = getListItems(pub, metadata, "group/@id");
     	List<String> groups = new ArrayList<String>(nlGroups.getLength());
     	
     	// load groups

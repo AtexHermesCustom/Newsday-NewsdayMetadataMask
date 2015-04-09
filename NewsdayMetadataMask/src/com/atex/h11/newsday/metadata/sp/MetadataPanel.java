@@ -465,6 +465,11 @@ public class MetadataPanel extends JPanel {
 		
 		lblVersion = new JLabel("Version:");
 		add(lblVersion, "14, 32, 5, 1, right, default");		
+		
+		// hide the Pub combobox - not needed
+		// the pub is determined from the level
+		lblPub.setVisible(false);
+		cmbPub.setVisible(false);
 	}
 	
 	protected void initControlItems() 
