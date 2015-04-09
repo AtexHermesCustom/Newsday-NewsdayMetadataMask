@@ -254,7 +254,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			throws XPathExpressionException {
 		String pub = null;
 		
-		NodeList nl = config.getListItems("pubConfiguration");
+		NodeList nl = config.getListItems(Constants.ALL, "publicationConfiguration");
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node n = nl.item(i);
 			String pattern = n.getAttributes().getNamedItem("levelMatchPattern").getNodeValue();

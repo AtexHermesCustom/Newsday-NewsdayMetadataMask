@@ -86,11 +86,6 @@ public class ConfigModel {
     	return val;
     }
     
-    public String getMetadataXpathValue(String xpath)
-    		throws XPathExpressionException {
-    	return getXpathValue(metadataGroup + "/" + xpath);
-    }
-
     public String getConfigValue(String key)
     		throws XPathExpressionException {
     	return getXpathValue("configuration/" + key);
@@ -100,35 +95,40 @@ public class ConfigModel {
 			throws XPathExpressionException {
     	return getXpathValue(metadataGroup + "/metadataNames/" + key);
     }
-        
-    public NodeList getListItems(String metadata) 
+    
+    public String getMetadataAttribValue(String metadata, String attrib)
 			throws XPathExpressionException {
-    	NodeList nl = (NodeList) 
-    			xp.evaluate(metadataGroup + "/" + metadata + "/item", doc.getDocumentElement(), XPathConstants.NODESET);
+    	return getXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
+    }       
+    
+    public String getMetadataXpathValue(String pub, String metadata, String xpath)
+    		throws XPathExpressionException {
+    	return getXpathValue(metadataGroup + "/" + metadata + "/pub[@code='" + pub + "']/" + xpath);
+    }    
+    
+    public NodeList getListItems(String pub, String metadata) 
+			throws XPathExpressionException {
+    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@code='" + pub + "']/item", 
+    			doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }
     
-    public NodeList getListItems(String metadata, String xpath) 
+    public NodeList getListItems(String pub, String metadata, String xpath) 
 			throws XPathExpressionException {
-    	NodeList nl = (NodeList) 
-    			xp.evaluate(metadataGroup + "/" + metadata + "/" + xpath, doc.getDocumentElement(), XPathConstants.NODESET);
+    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@code='" + pub + "']/" + xpath, 
+    			doc.getDocumentElement(), XPathConstants.NODESET);
     	return nl;
     }    
-    
-    public String getAttribValue(String metadata, String attrib)
+           
+    public void initComboBox(JComboBox<String> cmbControl, String pub, String metadata) 
 			throws XPathExpressionException {
-    	return getXpathValue(metadataGroup + "/" + metadata + "/@" + attrib);
-    }    
-       
-    public void initComboBox(JComboBox<String> cmbControl, String metadata) 
-			throws XPathExpressionException {
-		NodeList nl = getListItems(metadata); 
+		NodeList nl = getListItems(pub, metadata); 
 		initComboBox(cmbControl, metadata, nl);
 	}    
     
-    public void initComboBox(JComboBox<String> cmbControl, String metadata, String xpath) 
+    public void initComboBox(JComboBox<String> cmbControl, String pub, String metadata, String xpath) 
 			throws XPathExpressionException {
-		NodeList nl = getListItems(metadata, xpath); 
+		NodeList nl = getListItems(pub, metadata, xpath); 
 		initComboBox(cmbControl, metadata, nl);
 	}      
     
@@ -142,7 +142,7 @@ public class ConfigModel {
 		}
 		
 		// sort (if configured)
-		if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
+		if (getMetadataAttribValue(metadata, "sortItems").trim().equals("1")) {
 			Collections.sort(items);
 		}
 		
@@ -151,24 +151,26 @@ public class ConfigModel {
 		cmbControl.setModel(model);
 
 		// insert empty item
-		if (getAttribValue(metadata, "insertEmptyItem").trim().equals("1")) {
+		if (getMetadataAttribValue(metadata, "insertEmptyItem").trim().equals("1")) {
 			cmbControl.insertItemAt("", 0); 	// insert at beginning of the list
 		}
 
 		// select default
-		if (getAttribValue(metadata, "selectFirstItemAsDefault").trim().equals("1")) {
-			cmbControl.setSelectedIndex(0);
+		if (getMetadataAttribValue(metadata, "selectFirstItemAsDefault").trim().equals("1")) {
+			if (model.getSize() > 0) {
+				cmbControl.setSelectedIndex(0);
+			}
 		}
 		
 		// select mandatory
-		if (getAttribValue(metadata, "setMandatory").trim().equals("1")) {
+		if (getMetadataAttribValue(metadata, "setMandatory").trim().equals("1")) {
 			cmbControl.setBackground(Color.red);
 		}
 	}        
     
-    public void initTree(JTree trControl, String metadata)
+    public void initTree(JTree trControl, String pub, String metadata)
 			throws XPathExpressionException {
-		NodeList nl = getListItems(metadata);
+		NodeList nl = getListItems(pub, metadata);
 		List<String> items = new ArrayList<String>(nl.getLength());
 		
     	// load items
@@ -177,7 +179,7 @@ public class ConfigModel {
 		}    
 		
 		// sort (if configured)
-		if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
+		if (getMetadataAttribValue(metadata, "sortItems").trim().equals("1")) {
 			Collections.sort(items);
 		}    			
 		
@@ -195,9 +197,9 @@ public class ConfigModel {
 		trControl.setRootVisible(false);		// root not shown
     }
     
-    public void initTreeWithGroups(JTree trControl, String metadata) 
+    public void initTreeWithGroups(JTree trControl, String pub, String metadata) 
 			throws XPathExpressionException {    
-    	NodeList nlGroups = getListItems(metadata, "group/@name");
+    	NodeList nlGroups = getListItems(pub, metadata, "group/@name");
     	List<String> groups = new ArrayList<String>(nlGroups.getLength());
     	
     	// load groups
@@ -206,7 +208,7 @@ public class ConfigModel {
 		}    	
     	
 		// sort (if configured)
-		if (getAttribValue(metadata, "sortGroups").trim().equals("1")) {
+		if (getMetadataAttribValue(metadata, "sortGroups").trim().equals("1")) {
 			Collections.sort(groups);
 		}    	
 		
@@ -217,7 +219,7 @@ public class ConfigModel {
 		for (String group : groups) {
 			DefaultMutableTreeNode nodeGroup = new DefaultMutableTreeNode(group);
 			
-			NodeList nl = getListItems(metadata, "group[@name='" + group + "']/item");
+			NodeList nl = getListItems(pub, metadata, "group[@name='" + group + "']/item");
 			List<String> items = new ArrayList<String>(nl.getLength());
 
 	    	// load items
@@ -226,7 +228,7 @@ public class ConfigModel {
 			}    
 			
 			// sort (if configured)
-			if (getAttribValue(metadata, "sortItems").trim().equals("1")) {
+			if (getMetadataAttribValue(metadata, "sortItems").trim().equals("1")) {
 				Collections.sort(items);
 			}    			
 			
@@ -243,9 +245,9 @@ public class ConfigModel {
 		trControl.setRootVisible(false);		// root not shown
     }
  
-    public DefaultListModel<JCheckBox> initCheckBoxListModel(String metadata) 
+    public DefaultListModel<JCheckBox> initCheckBoxListModel(String pub, String metadata) 
 			throws XPathExpressionException {
-		NodeList nl = getListItems(metadata);
+		NodeList nl = getListItems(pub, metadata);
 		DefaultListModel<JCheckBox> listModel = new DefaultListModel<JCheckBox>();
 		// insert items
 		for (int i = 0; i < nl.getLength(); i++) {

@@ -470,21 +470,22 @@ public class MetadataPanel extends JPanel {
 	protected void initControlItems() 
 			throws XPathExpressionException {	
 		// Init lists
-		config.initComboBox(cmbPub, "pub");
-		config.initComboBox(cmbReporter1, "reporter");
-		config.initComboBox(cmbReporter2, "reporter");
-		config.initComboBox(cmbReporter3, "reporter");
-		config.initComboBox(cmbDesk, "desk");
-		config.initComboBox(cmbPriority, "priority");
-		config.initComboBox(cmbStoryType, "storyType");
-		config.initComboBox(cmbLabel, "label");
-		config.initComboBox(cmbPrintSection, "printSection");
-		config.initComboBox(cmbPrintSequence, "printSequence");
-		config.initComboBox(cmbHomepage, "homepage");
-		config.initComboBox(cmbArrivalStatus, "arrivalStatus");
+		config.initComboBox(cmbPub, Constants.ALL, "publication");
+		config.initComboBox(cmbPriority, Constants.ALL, "priority");		
+		config.initComboBox(cmbStoryType, Constants.ALL, "storyType");
+		config.initComboBox(cmbLabel, Constants.ALL, "label");
+		config.initComboBox(cmbArrivalStatus, Constants.ALL, "arrivalStatus");		
 
-		config.initTreeWithGroups(trCategories, "category");
-		config.initTree(trCommunities, "community");		
+		config.initComboBox(cmbDesk, pub, "desk");
+		config.initComboBox(cmbReporter1, pub, "reporter");
+		config.initComboBox(cmbReporter2, pub, "reporter");
+		config.initComboBox(cmbReporter3, pub, "reporter");
+		config.initComboBox(cmbPrintSection, pub, "printSection");
+		config.initComboBox(cmbPrintSequence, pub, "printSequence");
+		config.initComboBox(cmbHomepage, pub, "homepage");
+
+		config.initTreeWithGroups(trCategories, pub, "category");
+		config.initTree(trCommunities, pub, "community");		
 		
 		// Init models
 		lstSelCategories.setModel(selCategoriesModel);
@@ -723,7 +724,7 @@ public class MetadataPanel extends JPanel {
 	
 	protected void updateEmail(String reporter, JTextField txtEmail) {
 		try {
-			txtEmail.setText(config.getMetadataXpathValue("reporter/item[.='" + reporter.trim() + "']/@email"));		
+			txtEmail.setText(config.getMetadataXpathValue(pub, "reporter", "item[.='" + reporter.trim() + "']/@email"));		
 		} catch (Exception e) {
 			// ignore
 		}
@@ -747,31 +748,31 @@ public class MetadataPanel extends JPanel {
 		lblVersion.setText("<html><p><font color=\"gray\">Version: " + 
 				MetadataPanel.class.getPackage().getImplementationVersion() + "</font></p></html>");
 		
-		cmbPub.setSelectedItem(metadata.get("PUB"));
-		cmbDesk.setSelectedItem(metadata.get("DESK"));
-		cmbReporter1.setSelectedItem(metadata.get("REPORTER1"));
-		cmbReporter2.setSelectedItem(metadata.get("REPORTER2"));
-		cmbReporter3.setSelectedItem(metadata.get("REPORTER3"));
+		setComboBoxSelectedItem(cmbPub, metadata.get("PUB"));
+		setComboBoxSelectedItem(cmbDesk, metadata.get("DESK"));
+		setComboBoxSelectedItem(cmbReporter1, metadata.get("REPORTER1"));
+		setComboBoxSelectedItem(cmbReporter2, metadata.get("REPORTER2"));
+		setComboBoxSelectedItem(cmbReporter3, metadata.get("REPORTER3"));
 		txtEmail1.setText(metadata.get("REPORTER1_EMAIL"));
 		txtEmail2.setText(metadata.get("REPORTER2_EMAIL"));
 		txtEmail3.setText(metadata.get("REPORTER3_EMAIL"));
 		ftxtAssignLength.setText(metadata.get("ASSIGN_LEN"));
 		txtContributor.setText(metadata.get("CONTRIBUTOR"));
 		txtStoryGroup.setText(metadata.get("STORY_GROUP"));
-		cmbStoryType.setSelectedItem(metadata.get("STORY_TYPE"));
-		cmbLabel.setSelectedItem(metadata.get("LABEL"));
+		setComboBoxSelectedItem(cmbStoryType, metadata.get("STORY_TYPE"));
+		setComboBoxSelectedItem(cmbLabel, metadata.get("LABEL"));
 		txtrDescription.setText(metadata.get("DESCRIPTION"));
 		txtrPrintExtra.setText(metadata.get("PRINT_EXTRA"));
-		cmbPrintSection.setSelectedItem(metadata.get("PRINT_SECTION"));
-		cmbPrintSequence.setSelectedItem(metadata.get("SEQUENCE"));
-		cmbHomepage.setSelectedItem(metadata.get("HOMEPAGE"));
-		cmbArrivalStatus.setSelectedItem(metadata.get("ARRIVAL_STATUS"));
+		setComboBoxSelectedItem(cmbPrintSection, metadata.get("PRINT_SECTION"));
+		setComboBoxSelectedItem(cmbPrintSequence, metadata.get("SEQUENCE"));
+		setComboBoxSelectedItem(cmbHomepage, metadata.get("HOMEPAGE"));
+		setComboBoxSelectedItem(cmbArrivalStatus, metadata.get("ARRIVAL_STATUS"));
 		chkEmbargo.setSelected(metadata.get("EMBARGO_FLAG").equalsIgnoreCase(Constants.TRUE));
 		//dtpckEmbargoDate
 		//spnEmbargoTime
 		setModelListItems(selCategoriesModel, metadata.get("CATEGORIES"));
 		setModelListItems(selCommunitiesModel, metadata.get("COMMUNITIES"));
-		cmbPriority.setSelectedItem(metadata.get("PRIORITY"));
+		setComboBoxSelectedItem(cmbPriority, metadata.get("PRIORITY"));
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
 		ftxtPrintPage.setText(metadata.get("PRINT_PAGE"));
@@ -850,6 +851,12 @@ public class MetadataPanel extends JPanel {
 		
 		return retMetadata;
 	}  	
+	
+	protected void setComboBoxSelectedItem(JComboBox<String> cmbControl, String item) {
+		if (cmbControl.getModel().getSize() > 0) {
+			cmbControl.setSelectedItem(item);
+		}
+	}
 	
 	protected String getComboBoxSelectedItem(JComboBox<String> cmbControl) {
 		if (cmbControl.getSelectedIndex() > -1) {

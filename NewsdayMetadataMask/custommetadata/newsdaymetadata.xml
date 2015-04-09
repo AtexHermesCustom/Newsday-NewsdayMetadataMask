@@ -17,18 +17,22 @@
 	<sp>
 		<metadataNames></metadataNames>
 		
-		<pubConfiguration>
-			<item levelMatchPattern="^ND.*">ND</item>
-			<item levelMatchPattern="^AM.*">AM</item>
-		</pubConfiguration>
+		<publicationConfiguration>
+			<pub code="ALL">
+				<item levelMatchPattern="^ND.*">ND</item>
+				<item levelMatchPattern="^AM.*">AM</item>
+			</pub>
+		</publicationConfiguration>
 			
-		<pub>
-			<item>NEWSDAY</item>
-			<item>AMNY</item>
-		</pub>
+		<publication>
+			<pub code="ALL">
+				<item>NEWSDAY</item>
+				<item>AMNY</item>
+			</pub>
+		</publication>
 			
 		<desk insertEmptyItem="0" selectFirstItemAsDefault="1">
-			<!-- <pub code="ND"> -->
+			<pub code="ND">
 				<item>ALL</item>
 				<item>LONG ISLAND</item>
 				<item>BUSINESS</item>
@@ -37,127 +41,157 @@
 				<item>OP-ED</item>
 				<item>SPORTS</item>
 				<item>TRAVEL</item>
-			<!-- </pub> -->
-			<!-- <pub code="AM"> -->
+			</pub>
+			<pub code="AM">
 				<item>AMNY</item>
-			<!-- </pub> -->
+			</pub>
 		</desk>
+		
 		<priority insertEmptyItem="0" selectFirstItemAsDefault="1">
-			<item>LOW</item>
-			<item>MEDIUM</item>
-			<item>HIGH</item>
+			<pub code="ALL">
+				<item>LOW</item>
+				<item>MEDIUM</item>
+				<item>HIGH</item>
+			</pub>
 		</priority>
+		
 		<storyType insertEmptyItem="0" selectFirstItemAsDefault="1">
-			<item>ARTICLE</item>
-			<item>COLUMN</item>
-			<item>EDITORIAL</item>
-			<item>LETTER</item>
-			<item>OPINION</item>
-			<item>REVIEW</item>
-			<item>OBITUARY</item>
-			<item>CUSTOM</item>
+			<pub code="ALL">
+				<item>ARTICLE</item>
+				<item>COLUMN</item>
+				<item>EDITORIAL</item>
+				<item>LETTER</item>
+				<item>OPINION</item>
+				<item>REVIEW</item>
+				<item>OBITUARY</item>
+				<item>CUSTOM</item>
+			</pub>
 		</storyType>
+		
 		<label insertEmptyItem="1" selectFirstItemAsDefault="1">
-			<item>EXCLUSIVE</item>
-			<item>COVER STORY</item>
-			<item>CENTERPIECE</item>
-			<item>DEVELOPING</item>
-			<item>TENTATIVE</item>
-			<item>WATCHING</item>
+			<pub code="ALL">
+				<item>EXCLUSIVE</item>
+				<item>COVER STORY</item>
+				<item>CENTERPIECE</item>
+				<item>DEVELOPING</item>
+				<item>TENTATIVE</item>
+				<item>WATCHING</item>
+			</pub>
 		</label>
+		
 		<reporter insertEmptyItem="1" selectFirstItemAsDefault="1">
-			<item email="laura.albanese@newsday.com">Laura  Albanese</item>
-			<item email="aisha.al-muslim@newsday.com">Aisha  Al-Muslim</item>
-			<item email="stacey.altherr@newsday.com">Stacey  Altherr</item>
-			<item email="sarah.armaghan@newsday.com">Sarah  Armaghan</item>
-			<item email="john.asbury@newsday.com">John  Asbury</item>
-			<item email="barbara.barker@newsday.com">Barbara  Barker</item>
-			<item email="jennifer.barrios@newsday.com">Jennifer  Barrios</item>
-			<item email="valerie.bauman@newsday.com">Valerie  Bauman</item>
-			<item email="jim.baumbach@newsday.com">Jim  Baumbach</item>
-			<item email="tom.beer@newsday.com">Tom Beer</item>
-			<item email="nbest1@gmail.com">Neil  Best</item>
-			<item email="john.boell@newsday.com">John  Boell</item>
-			<item email="eboland11@aol.com">Erik  Boland</item>
+			<pub code="ND">
+				<item email="laura.albanese@newsday.com">Laura  Albanese</item>
+				<item email="aisha.al-muslim@newsday.com">Aisha  Al-Muslim</item>
+				<item email="stacey.altherr@newsday.com">Stacey  Altherr</item>
+				<item email="sarah.armaghan@newsday.com">Sarah  Armaghan</item>
+				<item email="john.asbury@newsday.com">John  Asbury</item>
+				<item email="barbara.barker@newsday.com">Barbara  Barker</item>
+				<item email="jennifer.barrios@newsday.com">Jennifer  Barrios</item>
+				<item email="valerie.bauman@newsday.com">Valerie  Bauman</item>
+				<item email="jim.baumbach@newsday.com">Jim  Baumbach</item>
+				<item email="tom.beer@newsday.com">Tom Beer</item>
+				<item email="nbest1@gmail.com">Neil  Best</item>
+				<item email="john.boell@newsday.com">John  Boell</item>
+				<item email="eboland11@aol.com">Erik  Boland</item>
+			</pub>
 		</reporter>
+		
 		<printSection insertEmptyItem="1" selectFirstItemAsDefault="1">
-			<item>NEWS</item>
-			<item>LI LIFE</item>
-			<item>EXPLORE LI</item>
+			<pub code="ND">
+				<item>NEWS</item>
+				<item>LI LIFE</item>
+				<item>EXPLORE LI</item>
+			</pub>
 		</printSection>
+		
 		<printSequence insertEmptyItem="1" selectFirstItemAsDefault="1">
-			<item>PAGE ONE</item>
-			<item>UPFRONT</item>
-			<item>LONG ISLAND</item>
-			<item>CRIME &amp; COURTS</item>
-			<item>HEALTH-SCIENCE</item>
-			<item>OBITUARIES</item>
-			<item>CORRECTIONS</item>
-			<item>COVER STORY</item>
-			<item>FEATURES</item>
-			<item>ACT2</item>
+			<pub code="ND">
+				<item>PAGE ONE</item>
+				<item>UPFRONT</item>
+				<item>LONG ISLAND</item>
+				<item>CRIME &amp; COURTS</item>
+				<item>HEALTH-SCIENCE</item>
+				<item>OBITUARIES</item>
+				<item>CORRECTIONS</item>
+				<item>COVER STORY</item>
+				<item>FEATURES</item>
+				<item>ACT2</item>
+			</pub>
 		</printSequence>
+		
 		<homepage insertEmptyItem="1" selectFirstItemAsDefault="1">
-			<item>LONG ISLAND-NEWS</item>
-			<item>Nassau</item>
-			<item>Suffolk</item>
-			<item>LI Crime</item>
-			<item>LI Colleges</item>
-			<item>LI Schools</item>
-		</homepage>
-		<arrivalStatus insertEmptyItem="0" selectFirstItemAsDefault="1">
-			<item>LIVE</item>
-			<item>OFF</item>
-		</arrivalStatus>
-		<category sortGroups="0" sortItems="0">
-			<group name="LONG ISLAND-NEWS">
+			<pub code="ND">			
+				<item>LONG ISLAND-NEWS</item>
 				<item>Nassau</item>
 				<item>Suffolk</item>
 				<item>LI Crime</item>
 				<item>LI Colleges</item>
 				<item>LI Schools</item>
-			</group>
-			<group name="BUSINESS">
-				<item>Auto</item>
-				<item>Employment</item>
-				<item>Healthcare</item>
-				<item>Local industry</item>
-				<item>Money</item>
-			</group>
-			<group name="ENTERTAINMENT">
-				<item>Arts</item>
-				<item>Celebrities</item>
-				<item>Movies</item>
-			</group>
-			<group name="NEWS">
-				<item>Colleges</item>
-				<item>Crime</item>
-				<item>Health-Fitness</item>
-				<item>Lottery</item>
-				<item>Nation</item>
-			</group>
-			<group name="BUSINESS">
-				<item>Auto</item>
-				<item>Employment</item>
-				<item>Healthcare</item>
-				<item>Local industry</item>
-				<item>Money</item>				
-			</group>
+			</pub>
+		</homepage>
+		
+		<arrivalStatus insertEmptyItem="0" selectFirstItemAsDefault="1">
+			<pub code="ALL">
+				<item>LIVE</item>
+				<item>OFF</item>
+			</pub>				
+		</arrivalStatus>
+		
+		<category sortGroups="0" sortItems="0">
+			<pub code="ND">
+				<group name="LONG ISLAND-NEWS">
+					<item>Nassau</item>
+					<item>Suffolk</item>
+					<item>LI Crime</item>
+					<item>LI Colleges</item>
+					<item>LI Schools</item>
+				</group>
+				<group name="BUSINESS">
+					<item>Auto</item>
+					<item>Employment</item>
+					<item>Healthcare</item>
+					<item>Local industry</item>
+					<item>Money</item>
+				</group>
+				<group name="ENTERTAINMENT">
+					<item>Arts</item>
+					<item>Celebrities</item>
+					<item>Movies</item>
+				</group>
+				<group name="NEWS">
+					<item>Colleges</item>
+					<item>Crime</item>
+					<item>Health-Fitness</item>
+					<item>Lottery</item>
+					<item>Nation</item>
+				</group>
+				<group name="BUSINESS">
+					<item>Auto</item>
+					<item>Employment</item>
+					<item>Healthcare</item>
+					<item>Local industry</item>
+					<item>Money</item>				
+				</group>
+			</pub>
+			<pub code="AM">
+			</pub>
 		</category>
+		
 		<community sortItems="0">
-			<!-- <pub code="ND"> -->
+			<pub code="ND">
 				<item>ALBERTSON</item>
 				<item>AMAGANSETT</item>
 				<item>AMITYVILLE</item>
 				<item>AQUEBOGUE</item>
-			<!-- </pub> -->
-			<!-- <pub code="AM"> -->
+			</pub>
+			<pub code="AM">
 				<item>MANHATTAN</item>
 				<item>BROOKLYN</item>
 				<item>QUEENS</item>
 				<item>BRONX</item>
 				<item>STATEN ISLAND</item>
-			<!-- </pub> -->
+			</pub>
 		</community>
 	</sp>
 	
