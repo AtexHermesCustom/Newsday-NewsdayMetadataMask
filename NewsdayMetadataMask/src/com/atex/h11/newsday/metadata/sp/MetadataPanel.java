@@ -47,6 +47,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionListener;
@@ -484,12 +485,10 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(1, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.showMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
-							cmbReporter1.setSelectedItem(prevReporter1);
-						} else {
-							// update email field
-							updateEmail(selReporter, txtEmail1);
+							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.WARNING_MESSAGE);
+							// cmbReporter1.setSelectedItem(prevReporter1); - just warn
 						}
+						updateEmail(selReporter, txtEmail1);						
 					}
 				}
 			}
@@ -507,12 +506,10 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(2, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.showMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
-							cmbReporter2.setSelectedItem(prevReporter2);
-						} else {
-							// update email field
-							updateEmail(selReporter, txtEmail2);						
+							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.WARNING_MESSAGE);
+							// cmbReporter2.setSelectedItem(prevReporter2); - just warn
 						}
+						updateEmail(selReporter, txtEmail2);						
 					}
 				}
 			}
@@ -530,26 +527,68 @@ public class MetadataPanel extends JPanel {
 						String selReporter = item.toString();
 						if (isDuplicateReporter(3, selReporter)) {	
 							// check duplicate reporter
-							InfoBox.showMessage("\"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.INFORMATION_MESSAGE);
-							cmbReporter3.setSelectedItem(prevReporter3);
-						} else {
-							// update email field
-							updateEmail(selReporter, txtEmail3);							
+							InfoBox.showMessage("WARNING: \"" + selReporter + "\" has already been selected.", "Duplicate reporter", JOptionPane.WARNING_MESSAGE);
+							// cmbReporter3.setSelectedItem(prevReporter3); - just warn
+						}
+						updateEmail(selReporter, txtEmail3);							
+					}
+				}
+			}
+		});
+		
+		cmbDesk.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object item = e.getItem();
+					if (item != null) {
+						String desk = item.toString();
+						try {							
+							// update related components
+							config.initComboBox(cmbHomepage, pub, "homepage", 
+									"desk[@id='" + desk + "']/item");
+							config.initComboBox(cmbPrintSection, pub, "printSection", 
+									"desk[@id='" + desk + "']/item");
+							config.initComboBox(cmbPrintSequence, pub, "printSequence", 
+									"desk[@id='" + desk + "']/printSection[@id='" + cmbPrintSection.getSelectedItem().toString().trim() + "']/item");							
+						} catch (Exception ex) {
+							InfoBox.ShowException(ex);
 						}
 					}
 				}
 			}
-		});		
+		});
+		
+		cmbPrintSection.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object item = e.getItem();
+					if (item != null) {
+						String printSection = item.toString();
+						try {							
+							// update related components
+							config.initComboBox(cmbPrintSequence, pub, "printSequence", 
+									"desk[@id='" + cmbDesk.getSelectedItem().toString().trim() + "']/printSection[@id='" + printSection + "']/item");							
+						} catch (Exception ex) {
+							InfoBox.ShowException(ex);
+						}
+					}
+				}
+			}			
+		});
 		
 		chkEmbargo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (chkEmbargo.isSelected()) {
-					//dtpckEmbargoDate.setEnabled(true);
-					dtpckEmbargoDate.getJFormattedTextField().setEnabled(true);
+				if (chkEmbargo.isSelected()) {	
+					// enable components
+					for (Component component : getAllComponents(dtpckEmbargoDate)) {
+					    component.setEnabled(true);
+					}					
 					spnEmbargoTime.setEnabled(true);
-				} else {
-					//dtpckEmbargoDate.setEnabled(false);
-					dtpckEmbargoDate.getJFormattedTextField().setEnabled(false);
+				} else {	
+					// disable components
+					for (Component component : getAllComponents(dtpckEmbargoDate)) {
+					    component.setEnabled(false);
+					}	
 					spnEmbargoTime.setEnabled(false);
 				}
 			}
