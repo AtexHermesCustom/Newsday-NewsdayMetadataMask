@@ -69,23 +69,7 @@
 				<item>OFF</item>
 			</pub>				
 		</arrivalStatus>		
-			
-		<desk insertEmptyItem="0" selectFirstItemAsDefault="1">
-			<pub id="ND">
-				<item>ALL</item>
-				<item>LONG ISLAND</item>
-				<item>BUSINESS</item>
-				<item>ENTERTAINMENT</item>
-				<item>LIFESTYLE</item>
-				<item>OP-ED</item>
-				<item>SPORTS</item>
-				<item>TRAVEL</item>
-			</pub>
-			<pub id="AM">
-				<item>AMNY</item>
-			</pub>
-		</desk>
-			
+					
 		<reporter insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<item email="laura.albanese@newsday.com">Laura  Albanese</item>
@@ -107,48 +91,141 @@
 			</pub>			
 		</reporter>
 		
-		<printSection insertEmptyItem="1" selectFirstItemAsDefault="1">
+		<desk insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
-				<item>NEWS</item>
-				<item>LI LIFE</item>
-				<item>EXPLORE LI</item>
+				<item>ALL</item>
+				<item>LONG ISLAND</item>
+				<item>BUSINESS</item>
+				<item>ENTERTAINMENT</item>
+				<item>LIFESTYLE</item>
+				<item>OP-ED</item>
+				<item>SPORTS</item>
 			</pub>
 			<pub id="AM">
-				
+				<item>AMNY</item>
+			</pub>
+		</desk>		
+		
+		<homepage insertEmptyItem="1" selectFirstItemAsDefault="1">
+			<pub id="ND">
+				<desk id="LONG ISLAND">
+					<item>LONG ISLAND-NEWS</item>
+					<item>Nassau</item>
+					<item>Suffolk</item>
+					<item>LI Crime</item>
+					<item>LI Colleges</item>
+					<item>LI Schools</item>
+				</desk>
+				<desk id="BUSINESS">
+					<item>BUSINESS</item>
+					<item>Auto</item>
+					<item>Employment</item>
+					<item>Life After 50</item>
+					<item>Real Estate</item>
+					<item>Technology</item>
+				</desk>
+				<desk id="ENTERTAINMENT">
+					<item>ENTERTAINMENT</item>
+					<item>Celebrities</item>
+					<item>Events</item>
+					<item>Museums</item>
+					<item>Movies</item>
+					<item>Music</item>
+					<item>Theater</item>
+					<item>TV</item>
+					<item>Reality TV</item>
+				</desk>
+				<desk id="LIFESTYLE">
+					<item>LIFESTYLE</item>
+					<item>Explore Long Island</item>
+					<item>Advice</item>
+					<item>Books</item>
+					<item>Family</item>
+					<item>Kidsday</item>
+					<item>Fashion</item>
+					<item>Food</item>
+					<item>Getaways</item>
+					<item>Home-Garden</item>
+					<item>Kidsday</item>
+					<item>Pets</item>
+					<item>Recreation</item>
+					<item>Restaurants</item>
+					<item>Travel</item>
+					<item>Weddings</item>
+				</desk>
+				<desk id="OP-ED">
+					<item>OP-ED</item>
+					<item>Letters</item>
+					<item>Opinion</item>
+					<item>Editorials</item>
+				</desk>
+				<desk id="SPORTS">
+					<item>SPORTS</item>
+					<item>Baseball</item>
+					<item>Baseball All Stars</item>
+					<item>Baseball Mets</item>
+				</desk>
+			</pub>
+			<pub id="AM">
+				<desk id="">
+				</desk>
+			</pub>						
+		</homepage>		
+		
+		<printSection insertEmptyItem="1" selectFirstItemAsDefault="1">
+			<pub id="ND">
+				<desk id="LONG ISLAND">
+					<item>NEWS</item>
+					<item>LI LIFE</item>
+				</desk>
+				<desk id="BUSINESS">
+					<item>NEWS</item>
+				</desk>
+				<desk id="ENTERTAINMENT">
+					<item>NEWS</item>
+					<item>EXPLORE LI</item>
+					<item>FANFARE</item>
+				</desk>
+				<desk id="LIFESTYLE">
+					<item>NEWS</item>
+					<item>EXPORE LI</item>
+					<item>LI HOME</item>
+					<item>FANFARE</item>
+				</desk>
+				<desk id="OP-ED">
+					<item>NEWS</item>
+				</desk>
+				<desk id="SPORTS">
+					<item>NEWS</item>
+					<item>SPORTS</item>
+				</desk>
+			</pub>
+			<pub id="AM">
+				<desk id="">
+				</desk>
 			</pub>						
 		</printSection>
 		
 		<printSequence insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ND">
-				<item>PAGE ONE</item>
-				<item>UPFRONT</item>
-				<item>LONG ISLAND</item>
-				<item>CRIME &amp; COURTS</item>
-				<item>HEALTH-SCIENCE</item>
-				<item>OBITUARIES</item>
-				<item>CORRECTIONS</item>
-				<item>COVER STORY</item>
-				<item>FEATURES</item>
-				<item>ACT2</item>
+				<printSection id="">
+					<item>PAGE ONE</item>
+					<item>UPFRONT</item>
+					<item>LONG ISLAND</item>
+					<item>CRIME &amp; COURTS</item>
+					<item>HEALTH-SCIENCE</item>
+					<item>OBITUARIES</item>
+					<item>CORRECTIONS</item>
+					<item>COVER STORY</item>
+					<item>FEATURES</item>
+					<item>ACT2</item>
+				</printSection>
 			</pub>
 			<pub id="AM">
-				
+				<printSection id="">
+				</printSection>
 			</pub>						
 		</printSequence>
-		
-		<homepage insertEmptyItem="1" selectFirstItemAsDefault="1">
-			<pub id="ND">			
-				<item>LONG ISLAND-NEWS</item>
-				<item>Nassau</item>
-				<item>Suffolk</item>
-				<item>LI Crime</item>
-				<item>LI Colleges</item>
-				<item>LI Schools</item>
-			</pub>
-			<pub id="AM">
-				
-			</pub>						
-		</homepage>
 			
 		<category sortGroups="0" sortItems="0">
 			<pub id="ND">
@@ -206,6 +283,10 @@
 				<item>STATEN ISLAND</item>
 			</pub>
 		</community>
+		
+		<defaultValue>
+		
+		</defaultValue>
 	</sp>
 	
 </metadata>
