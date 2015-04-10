@@ -972,12 +972,12 @@ public class MetadataPanel extends JPanel {
 		retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
 		
 		Date d1 = (Date) dtpckEmbargoDate.getModel().getValue();
-		SimpleDateFormat formatDate = new SimpleDateFormat(Constants.DATE_FORMAT);
-		retMetadata.put("EMBARGO_DATE", formatDate.format(d1));
+		SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
+		retMetadata.put("EMBARGO_DATE", dateFormat.format(d1));
 		
 		Date d2 = (Date) spnrEmbargoTime.getValue();
-		SimpleDateFormat formatTime = new SimpleDateFormat(Constants.TIME_FORMAT);
-		retMetadata.put("EMBARGO_TIME", formatTime.format(d2));
+		SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
+		retMetadata.put("EMBARGO_TIME", timeFormat.format(d2));
 		
 		retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
 		retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
