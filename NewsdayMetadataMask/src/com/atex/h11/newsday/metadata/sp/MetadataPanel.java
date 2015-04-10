@@ -1,6 +1,5 @@
 package com.atex.h11.newsday.metadata.sp;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +57,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.tree.DefaultTreeModel;
 
 public class MetadataPanel extends JPanel {
 	/**
@@ -117,8 +117,8 @@ public class MetadataPanel extends JPanel {
 	private JTextArea txtrDigitalExtra1;
 	private JTextArea txtrDigitalExtra2;
 	private JLabel label;
-	private JFormattedTextField ftxtAssignLength;
-	private JFormattedTextField ftxtPrintPage;
+	private JFormattedTextField ftfAssignLength;
+	private JFormattedTextField ftfPrintPage;
 	private DefaultListModel<String> selCategoriesModel = null;
 	private DefaultListModel<String> selCommunitiesModel = null;
 	JButton btnAddKeyword;
@@ -283,10 +283,10 @@ public class MetadataPanel extends JPanel {
 		txtEmail3.setColumns(10);
 		add(txtEmail3, "10, 8, 3, 1, fill, default");
 		
-		ftxtAssignLength = new JFormattedTextField();
-		((AbstractDocument) ftxtAssignLength.getDocument()).setDocumentFilter(
-				new NumericDocumentFilter(ftxtAssignLength.getDocument(), false, false));
-		add(ftxtAssignLength, "14, 8, fill, default");
+		ftfAssignLength = new JFormattedTextField();
+		((AbstractDocument) ftfAssignLength.getDocument()).setDocumentFilter(
+				new NumericDocumentFilter(ftfAssignLength.getDocument(), false, false));
+		add(ftfAssignLength, "14, 8, fill, default");
 		
 		cmbPriority = new JComboBox<String>();
 		add(cmbPriority, "16, 8, 3, 1, fill, default");
@@ -376,12 +376,12 @@ public class MetadataPanel extends JPanel {
 		lblPage = new JLabel("Page");
 		add(lblPage, "16, 22, right, default");
 		
-		ftxtPrintPage = new JFormattedTextField();
-		((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
-				new NumericDocumentFilter(ftxtPrintPage.getDocument(), false, false));		
-		//((AbstractDocument) ftxtPrintPage.getDocument()).setDocumentFilter(
+		ftfPrintPage = new JFormattedTextField();
+		((AbstractDocument) ftfPrintPage.getDocument()).setDocumentFilter(
+				new NumericDocumentFilter(ftfPrintPage.getDocument(), false, false));		
+		//((AbstractDocument) ftfPrintPage.getDocument()).setDocumentFilter(
 		//		new AlphaNumericDocumentFilter());		
-		add(ftxtPrintPage, "18, 22, fill, default");
+		add(ftfPrintPage, "18, 22, fill, default");
 		
 		JLabel lblWeb = new JLabel("WEB");
 		add(lblWeb, "2, 24, right, default");
@@ -435,6 +435,12 @@ public class MetadataPanel extends JPanel {
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
 		trCategories = new JTree();
+		trCategories.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("JTree") {
+				{
+				}
+			}
+		));
 		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
@@ -445,6 +451,12 @@ public class MetadataPanel extends JPanel {
 		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
 		
 		trCommunities = new JTree();
+		trCommunities.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("JTree") {
+				{
+				}
+			}
+		));
 		trCommunities.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCommunities.setViewportView(trCommunities);
 		
@@ -874,8 +886,8 @@ public class MetadataPanel extends JPanel {
 		txtEmail1.setText(metadata.get("REPORTER1_EMAIL"));
 		txtEmail2.setText(metadata.get("REPORTER2_EMAIL"));
 		txtEmail3.setText(metadata.get("REPORTER3_EMAIL"));
-		ftxtAssignLength.setText(metadata.get("ASSIGN_LEN"));
-		ftxtPrintPage.setText(metadata.get("PRINT_PAGE"));
+		ftfAssignLength.setText(metadata.get("ASSIGN_LEN"));
+		ftfPrintPage.setText(metadata.get("PRINT_PAGE"));
 		txtContributor.setText(metadata.get("CONTRIBUTOR"));
 		txtStoryGroup.setText(metadata.get("STORY_GROUP"));
 		txtrDescription.setText(metadata.get("DESCRIPTION"));
@@ -987,7 +999,7 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("REPORTER1_EMAIL", txtEmail1.getText().trim());
 			retMetadata.put("REPORTER2_EMAIL", txtEmail2.getText().trim());
 			retMetadata.put("REPORTER3_EMAIL", txtEmail3.getText().trim());
-			retMetadata.put("ASSIGN_LEN", ftxtAssignLength.getText().trim());
+			retMetadata.put("ASSIGN_LEN", ftfAssignLength.getText().trim());
 			retMetadata.put("CONTRIBUTOR", txtContributor.getText().trim());
 			retMetadata.put("STORY_GROUP", txtStoryGroup.getText().trim());
 			retMetadata.put("STORY_TYPE", getComboBoxSelectedItem(cmbStoryType));
@@ -999,7 +1011,7 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
 			retMetadata.put("PRINT_SECTION", getComboBoxSelectedItem(cmbPrintSection));
 			retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
-			retMetadata.put("PRINT_PAGE", ftxtPrintPage.getText().trim());
+			retMetadata.put("PRINT_PAGE", ftfPrintPage.getText().trim());
 			retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
 			retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
 			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
