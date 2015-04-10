@@ -91,7 +91,6 @@ public class MetadataPanel extends JPanel {
 	private JComboBox<String> cmbPrintSequence;
 	private JComboBox<String> cmbHomepage;
 	private JComboBox<String> cmbArrivalStatus;
-	private JCheckBox chkEmbargo;
 	private JDatePickerImpl dtpckEmbargoDate;
 	private JSpinner spnrEmbargoTime;
 	private JLabel lblPage;
@@ -119,11 +118,14 @@ public class MetadataPanel extends JPanel {
 	private DefaultListModel<String> selCommunitiesModel = null;
 	JButton btnAddKeyword;
 	
+	private JLabel lblEmbargoDate;
+	private JLabel lblEmbargoTime;
+	private JLabel lblVersion;
+	
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
-	private JLabel lblVersion;
-	
+
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel, String pub) 
 			throws XPathExpressionException {
@@ -388,9 +390,6 @@ public class MetadataPanel extends JPanel {
 		cmbArrivalStatus = new JComboBox<String>();
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
 		
-		chkEmbargo = new JCheckBox("Embargo");
-		add(chkEmbargo, "4, 26");
-		
 		// date picker
 		UtilDateModel dateModel = new UtilDateModel();
 		dateModel.setDate(2015, 0, 1);
@@ -403,16 +402,22 @@ public class MetadataPanel extends JPanel {
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
 		
+		lblEmbargoDate = new JLabel("Embargo Date");
+		add(lblEmbargoDate, "4, 26, right, default");
+		
 		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dtpckEmbargoDate.getJFormattedTextField().setEditable(true);
 		add(dtpckEmbargoDate, "6, 26, 3, 1");		
 		
 		SpinnerDateModel timeModel = new SpinnerDateModel();
 		timeModel.setCalendarField(Calendar.MINUTE);
+		
+		lblEmbargoTime = new JLabel("Embargo Time");
+		add(lblEmbargoTime, "10, 26, right, default");
 		spnrEmbargoTime = new JSpinner();
 		spnrEmbargoTime.setModel(timeModel);
 		spnrEmbargoTime.setEditor(new JSpinner.DateEditor(spnrEmbargoTime, "h:mm a"));		
-		add(spnrEmbargoTime, "10, 26, fill, default");
+		add(spnrEmbargoTime, "12, 26, fill, default");
 		
 		JLabel lblCategories = new JLabel("Categories");
 		add(lblCategories, "2, 28, right, top");
@@ -602,23 +607,29 @@ public class MetadataPanel extends JPanel {
 			}			
 		});
 		
-		chkEmbargo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (chkEmbargo.isSelected()) {	
-					// enable components
-					for (Component component : getAllComponents(dtpckEmbargoDate)) {
-					    component.setEnabled(true);
-					}					
-					spnrEmbargoTime.setEnabled(true);
-				} else {	
-					// disable components
-					for (Component component : getAllComponents(dtpckEmbargoDate)) {
-					    component.setEnabled(false);
-					}	
-					spnrEmbargoTime.setEnabled(false);
+		cmbArrivalStatus.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object item = e.getItem();
+					if (item != null) {
+						String arrivalStatus = item.toString().trim();
+						if (arrivalStatus.equalsIgnoreCase(Constants.LIVE)) {
+							// enable components
+							for (Component component : getAllComponents(dtpckEmbargoDate)) {
+							    component.setEnabled(true);
+							}					
+							spnrEmbargoTime.setEnabled(true);							
+						} else {
+							// disable components
+							for (Component component : getAllComponents(dtpckEmbargoDate)) {
+							    component.setEnabled(false);
+							}	
+							spnrEmbargoTime.setEnabled(false);							
+						}
+					}
 				}
 			}
-		});			
+		});
 		
 		trCategories.addMouseListener(new MouseAdapter() {
 			@Override
@@ -862,7 +873,6 @@ public class MetadataPanel extends JPanel {
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
 
 		// embargo components
-		chkEmbargo.setSelected(metadata.get("EMBARGO_FLAG").equalsIgnoreCase(Constants.TRUE));
 		//dtpckEmbargoDate
 		//spnrEmbargoTime
 
@@ -951,7 +961,6 @@ public class MetadataPanel extends JPanel {
 		retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
 		retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
 		retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
-		retMetadata.put("EMBARGO_FLAG", chkEmbargo.isSelected() ? Constants.TRUE : Constants.FALSE);
 		retMetadata.put("EMBARGO_DATE", "");
 		retMetadata.put("EMBARGO_TIME", "");
 		retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));

@@ -30,5 +30,6 @@ public interface Constants {
 	public static final String FALSE = "false";
 	public static final String TRUE = "true";
 	
-	public static final String ALL = "ALL";
+	public static final String ALL = "ALL";	
+	public static final String LIVE = "LIVE";
 }
