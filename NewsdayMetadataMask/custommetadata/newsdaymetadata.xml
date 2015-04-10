@@ -87,7 +87,8 @@
 				<item email="eboland11@aol.com">Erik  Boland</item>
 			</pub>
 			<pub id="AM">
-				
+				<item email="matthew.chayes@newsday.com">Matthew Chayes</item>
+				<item email="peter.catapano@am-ny.com">Peter Catapano</item>
 			</pub>			
 		</reporter>
 		
@@ -167,7 +168,28 @@
 				</desk>
 			</pub>
 			<pub id="AM">
-				<desk id="">
+				<desk id="AMNY">
+					<item>NEWS</item>
+					<item>TRANSIT</item>
+					<item>BUSINESS</item>
+					<item>ENTERTAINMENT</item>
+					<item>LIFESTYLE</item>
+					<item>EAT AND DRINK</item>
+					<item>FASHION</item>
+					<item>CITY LIVING</item>
+					<item>REAL ESTATE</item>
+					<item>HEALTH</item>
+					<item>SPORTS</item>
+					<item>JETS</item>
+					<item>GIANTS</item>
+					<item>METS</item>
+					<item>YANKEES</item>
+					<item>RANGERS</item>
+					<item>ISLANDERS</item>
+					<item>KNICKS</item>
+					<item>NETS</item>
+					<item>OPINION</item>
+					<item>EDITORIALS</item>
 				</desk>
 			</pub>						
 		</homepage>		
@@ -201,7 +223,8 @@
 				</desk>
 			</pub>
 			<pub id="AM">
-				<desk id="">
+				<desk id="AMNY">
+					<item>NEWS</item>
 				</desk>
 			</pub>						
 		</printSection>
@@ -235,8 +258,28 @@
 				</desk>
 			</pub>
 			<pub id="AM">
-				<printSection id="">
-				</printSection>
+				<desk id="AMNY">
+					<printSection id="NEWS">
+						<item>CITY</item>
+						<item>NATION-WORLD</item>
+						<item>BIZ</item>
+						<item>BUZZ</item>
+						<item>CITY LIVING</item>
+						<item>WEEKEND</item>
+						<item>MOVIES</item>
+						<item>REAL ESTATE</item>
+						<item>AM/PMC</item>
+						<item>PMNY</item>
+						<item>HEALTH</item>
+						<item>JOBS</item>
+						<item>EDUCATION</item>
+						<item>SPORTS</item>
+						<item>BROOKLYN</item>
+						<item>FASHION WEEK</item>
+						<item>SPECIAL</item>
+						<item>CORRECTIONS</item>
+					</printSection>
+				</desk>
 			</pub>						
 		</printSequence>
 			
@@ -277,7 +320,7 @@
 				</group>
 			</pub>
 			<pub id="AM">
-			
+				
 			</pub>
 		</category>
 		
@@ -287,6 +330,281 @@
 				<item>AMAGANSETT</item>
 				<item>AMITYVILLE</item>
 				<item>AQUEBOGUE</item>
+				<item>ASHAROKEN</item>
+				<item>ATLANTIC BEACH</item>
+				<item>ATLANTIQUE</item>
+				<item>BABYLON</item>
+				<item>BAITING HOLLOW</item>
+				<item>BALDWIN</item>
+				<item>BAXTER ESTATES</item>
+				<item>BAY PARK</item>
+				<item>BAY SHORE</item>
+				<item>BAYPORT</item>
+				<item>BAYVILLE</item>
+				<item>BAYWOOD</item>
+				<item>BELLE TERRE</item>
+				<item>BELLEROSE TERRACE</item>
+				<item>BELLMORE</item>
+				<item>BELLPORT</item>
+				<item>BETHPAGE</item>
+				<item>BLUE POINT</item>
+				<item>BOHEMIA</item>
+				<item>BRENTWOOD</item>
+				<item>BRIDGEHAMPTON</item>
+				<item>BRIGHTWATERS</item>
+				<item>BROOKHAVEN</item>
+				<item>BROOKVILLE</item>
+				<item>CALVERTON</item>
+				<item>CARLE PLACE</item>
+				<item>CEDARHURST</item>
+				<item>CENTER MORICHES</item>
+				<item>CENTEREACH</item>
+				<item>CENTERPORT</item>
+				<item>CENTRAL ISLIP</item>
+				<item>CENTRE ISLAND</item>
+				<item>CHERRY GROVE</item>
+				<item>COLD SPRING HARBOR</item>
+				<item>COMMACK</item>
+				<item>COPIAGUE</item>
+				<item>CORAM</item>
+				<item>COVE NECK</item>
+				<item>CUTCHOGUE</item>
+				<item>DAVIS PARK</item>
+				<item>DEER PARK</item>
+				<item>DERING HARBOR</item>
+				<item>DIX HILLS</item>
+				<item>EAST FARMINGDALE</item>
+				<item>EAST GARDEN CITY</item>
+				<item>EAST HAMPTON</item>
+				<item>EAST HILLS</item>
+				<item>EAST ISLIP</item>
+				<item>EAST MARION</item>
+				<item>EAST MASSAPEQUA</item>
+				<item>EAST MEADOW</item>
+				<item>EAST MORICHES</item>
+				<item>EAST NORTHPORT</item>
+				<item>EAST NORWICH</item>
+				<item>EAST PATCHOGUE</item>
+				<item>EAST QUOGUE</item>
+				<item>EAST ROCKAWAY</item>
+				<item>EAST SETAUKET</item>
+				<item>EAST WILLISTON</item>
+				<item>EASTPORT</item>
+				<item>EATONS NECK</item>
+				<item>ELMONT</item>
+				<item>ELWOOD</item>
+				<item>FAIR HARBOR</item>
+				<item>FARMINGDALE</item>
+				<item>FARMINGVILLE</item>
+				<item>FIRE ISLAND PINES</item>
+				<item>FISHERS ISLAND</item>
+				<item>FLANDERS</item>
+				<item>FLORAL PARK</item>
+				<item>FLOWER HILL</item>
+				<item>FORT SALONGA</item>
+				<item>FRANKLIN SQUARE</item>
+				<item>FREEPORT</item>
+				<item>GARDEN CITY</item>
+				<item>GARDEN CITY PARK</item>
+				<item>GARDEN CITY SOUTH</item>
+				<item>GILGO BEACH</item>
+				<item>GLEN COVE</item>
+				<item>GLEN HEAD</item>
+				<item>GLENWOOD LANDING</item>
+				<item>GORDON HEIGHTS</item>
+				<item>GREAT NECK</item>
+				<item>GREAT NECK ESTATES</item>
+				<item>GREAT NECK PLAZA</item>
+				<item>GREAT RIVER</item>
+				<item>GREENLAWN</item>
+				<item>GREENPORT</item>
+				<item>GREENVALE</item>
+				<item>HALESITE</item>
+				<item>HAMPTON BAYS</item>
+				<item>HARBOR ISLE</item>
+				<item>HAUPPAUGE</item>
+				<item>HEAD OF THE HARBOR</item>
+				<item>HEMPSTEAD</item>
+				<item>HERRICKS</item>
+				<item>HEWLETT</item>
+				<item>HEWLETT BAY PARK</item>
+				<item>HEWLETT HARBOR</item>
+				<item>HEWLETT NECK</item>
+				<item>HICKSVILLE</item>
+				<item>HOLBROOK</item>
+				<item>HOLTSVILLE</item>
+				<item>HUNTINGTON</item>
+				<item>HUNTINGTON BAY</item>
+				<item>HUNTINGTON STATION</item>
+				<item>INWOOD</item>
+				<item>ISLAND PARK</item>
+				<item>ISLANDIA</item>
+				<item>ISLIP</item>
+				<item>ISLIP TERRACE</item>
+				<item>JAMESPORT</item>
+				<item>JERICHO</item>
+				<item>KENSINGTON</item>
+				<item>KINGS PARK</item>
+				<item>KINGS POINT</item>
+				<item>KISMET</item>
+				<item>KISMET</item>
+				<item>LAKE GROVE</item>
+				<item>LAKE RONKONKOMA</item>
+				<item>LAKE SUCCESS</item>
+				<item>LAKEVIEW</item>
+				<item>LATTINGTOWN</item>
+				<item>LAUREL</item>
+				<item>LAUREL HOLLOW</item>
+				<item>LAWRENCE</item>
+				<item>LEVITTOWN</item>
+				<item>LIDO BEACH</item>
+				<item>LINDENHURST</item>
+				<item>LLOYD HARBOR</item>
+				<item>LOCUST VALLEY</item>
+				<item>LONG BEACH</item>
+				<item>LYNBROOK</item>
+				<item>MALVERNE</item>
+				<item>MANHASSET</item>
+				<item>MANHASSET HILLS</item>
+				<item>MANORHAVEN</item>
+				<item>MANORVILLE</item>
+				<item>MASSAPEQUA</item>
+				<item>MASSAPEQUA PARK</item>
+				<item>MASTIC</item>
+				<item>MASTIC BEACH</item>
+				<item>MATINECOCK</item>
+				<item>MATTITUCK</item>
+				<item>MEDFORD</item>
+				<item>MELVILLE</item>
+				<item>MERRICK</item>
+				<item>MIDDLE ISLAND</item>
+				<item>MILL NECK</item>
+				<item>MILLER PLACE</item>
+				<item>MINEOLA</item>
+				<item>MONTAUK</item>
+				<item>MORICHES</item>
+				<item>MOUNT SINAI</item>
+				<item>MUNSEY PARK</item>
+				<item>MUTTONTOWN</item>
+				<item>NAPEAGUE</item>
+				<item>NESCONSET</item>
+				<item>NEW CASSEL</item>
+				<item>NEW HYDE PARK</item>
+				<item>NEW SUFFOLK</item>
+				<item>NISSEQUOGUE</item>
+				<item>NORTH AMITYVILLE</item>
+				<item>NORTH BABYLON</item>
+				<item>NORTH BAY SHORE</item>
+				<item>NORTH BELLMORE</item>
+				<item>NORTH GREAT RIVER</item>
+				<item>NORTH HAVEN</item>
+				<item>NORTH HILLS</item>
+				<item>NORTH MASSAPEQUA</item>
+				<item>NORTH MERRICK</item>
+				<item>NORTH NEW HYDE PARK</item>
+				<item>NORTH PATCHOGUE</item>
+				<item>NORTH SEA</item>
+				<item>NORTH VALLEY STREAM</item>
+				<item>NORTH WANTAGH</item>
+				<item>NORTHAMPTON</item>
+				<item>NORTHPORT</item>
+				<item>NORTHWEST HARBOR</item>
+				<item>NOYACK</item>
+				<item>OAKDALE</item>
+				<item>OCEAN BAY PARK</item>
+				<item>OCEAN BEACH</item>
+				<item>OCEANSIDE</item>
+				<item>OLD BETHPAGE</item>
+				<item>OLD BROOKVILLE</item>
+				<item>OLD FIELD</item>
+				<item>OLD WESTBURY</item>
+				<item>ORIENT</item>
+				<item>OYSTER BAY</item>
+				<item>OYSTER BAY COVE</item>
+				<item>PATCHOGUE</item>
+				<item>PECONIC</item>
+				<item>PLAINEDGE</item>
+				<item>PLAINVIEW</item>
+				<item>PLANDOME</item>
+				<item>PLANDOME HEIGHTS</item>
+				<item>PLANDOME MANOR</item>
+				<item>POINT LOOKOUT</item>
+				<item>POINT O'WOODS</item>
+				<item>POQUOTT</item>
+				<item>PORT JEFFERSON</item>
+				<item>PORT JEFFERSON STATION</item>
+				<item>PORT WASHINGTON</item>
+				<item>PORT WASHINGTON NORTH</item>
+				<item>QUOGUE</item>
+				<item>REMSENBURG</item>
+				<item>RIDGE</item>
+				<item>RIVERHEAD</item>
+				<item>RIVERSIDE</item>
+				<item>ROCKVILLE CENTRE</item>
+				<item>ROCKY POINT</item>
+				<item>RONKONKOMA</item>
+				<item>ROOSEVELT</item>
+				<item>ROSLYN</item>
+				<item>ROSLYN ESTATES</item>
+				<item>ROSLYN HARBOR</item>
+				<item>ROSLYN HEIGHTS</item>
+				<item>RUSSELL GARDENS</item>
+				<item>SADDLE ROCK</item>
+				<item>SAG HARBOR</item>
+				<item>SAGAPONACK</item>
+				<item>SALTAIR</item>
+				<item>SANDS POINT</item>
+				<item>SAYVILLE</item>
+				<item>SEA CLIFF</item>
+				<item>SEAFORD</item>
+				<item>SEARINGTOWN</item>
+				<item>SELDEN</item>
+				<item>SETAUKET</item>
+				<item>SHELTER ISLAND</item>
+				<item>SHELTER ISLAND HEIGHTS</item>
+				<item>SHINNECOCK HILLS</item>
+				<item>SHIRLEY</item>
+				<item>SHOREHAM</item>
+				<item>SMITHTOWN</item>
+				<item>SOUND BEACH</item>
+				<item>SOUTH FARMINGDALE</item>
+				<item>SOUTH FLORAL PARK</item>
+				<item>SOUTH HEMPSTEAD</item>
+				<item>SOUTH HUNTINGTON</item>
+				<item>SOUTH JAMESPORT</item>
+				<item>SOUTHAMPTON</item>
+				<item>SOUTHOLD</item>
+				<item>SPEONK</item>
+				<item>SPRINGS</item>
+				<item>ST. JAMES</item>
+				<item>STEWART MANOR</item>
+				<item>STONY BROOK</item>
+				<item>SYOSSET</item>
+				<item>UNIONDALE</item>
+				<item>UPPER BROOKVILLE</item>
+				<item>UPTON</item>
+				<item>VALLEY STREAM</item>
+				<item>VILLAGE OF THE BRANCH</item>
+				<item>WADING RIVER</item>
+				<item>WAINSCOTT</item>
+				<item>WANTAGH</item>
+				<item>WATCH HILL</item>
+				<item>WATER ISLAND</item>
+				<item>WATER MILL</item>
+				<item>WEST BABYLON</item>
+				<item>WEST HEMPSTEAD</item>
+				<item>WEST HILLS</item>
+				<item>WEST ISLIP</item>
+				<item>WEST SAYVILLE</item>
+				<item>WESTBURY</item>
+				<item>WESTHAMPTON BEACH</item>
+				<item>WHEATLEY HEIGHTS</item>
+				<item>WILLISTON PARK</item>
+				<item>WOODBURY</item>
+				<item>WOODMERE</item>
+				<item>WOODSBURGH</item>
+				<item>WYANDANCH</item>
+				<item>YAPHANK</item>
 			</pub>
 			<pub id="AM">
 				<item>MANHATTAN</item>
