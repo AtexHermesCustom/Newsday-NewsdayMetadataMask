@@ -1,11 +1,13 @@
 package com.atex.h11.newsday.metadata.sp;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -70,6 +72,7 @@ public class MetadataPanel extends JPanel {
 	private String objLevel;
 	private String pub;
 	private ConfigModel config = null;
+	private Locale locale = null;
 	private HashMap<String, String> metadata = null;
 	private boolean panelDisabled = false;
 	
@@ -130,13 +133,14 @@ public class MetadataPanel extends JPanel {
 	private String prevReporter3 = "";
 
 	// constructor
-	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, String objName, String objLevel, String pub) 
+	public MetadataPanel(ConfigModel config, Locale locale, HashMap<String, String> metadata, Logger l, String objName, String objLevel, String pub) 
 			throws XPathExpressionException {
 		
 		this.objName = objName;
 		this.objLevel = objLevel;
 		this.pub = pub;
 		this.config = config;
+		this.locale = locale;
 		this.metadata = metadata;		
 		logger = l;
 		
@@ -827,8 +831,7 @@ public class MetadataPanel extends JPanel {
 		
 		// arrival status
 		config.initComboBox(cmbArrivalStatus, Constants.ALL, "arrivalStatus");
-		String arrivalStatus = metadata.get("ARRIVAL_STATUS");
-		setComboBoxSelectedItem(cmbArrivalStatus, arrivalStatus);
+		setComboBoxSelectedItem(cmbArrivalStatus, metadata.get("ARRIVAL_STATUS"));
 				
 		// reporter fields
 		config.initComboBox(cmbReporter1, pub, "reporter");
@@ -879,12 +882,17 @@ public class MetadataPanel extends JPanel {
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
 
-		if (arrivalStatus.equalsIgnoreCase(Constants.LIVE)) {
+		if (cmbArrivalStatus.getSelectedItem().toString().equalsIgnoreCase(Constants.LIVE)) {
 			try {
 				// embargo date
 				String embargoDate = metadata.get("EMBARGO_DATE");
+				InfoBox.showMessage(embargoDate, "embargo date");
 				if (embargoDate != null && !embargoDate.isEmpty()) {
-					SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
+					//SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
+					DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+					String pattern       = ((SimpleDateFormat) dateFormat).toPattern();
+					String localPattern  = ((SimpleDateFormat) dateFormat).toLocalizedPattern();	
+					logger.finer("pat=" + pattern + ", localPat=" + localPattern);
 					Date d = (Date) dateFormat.parse(embargoDate);
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(d);

@@ -146,7 +146,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			
 			logMetadata(metadata, "Loaded from DB");
 
-			metadataPanel = new MetadataPanel(config, metadata, logger, objName, objLevel, pub);
+			metadataPanel = new MetadataPanel(config, locale, metadata, logger, objName, objLevel, pub);
 			metadataPanel.setPreferredSize(new Dimension(690, 580));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");
