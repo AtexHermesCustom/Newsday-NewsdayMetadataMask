@@ -320,7 +320,36 @@
 				</group>
 			</pub>
 			<pub id="AM">
-				
+				<group id="NEWS">
+					<item>Colleges</item>
+					<item>Crime</item>
+					<item>Health-Fitness</item>
+					<item>Lottery</item>
+				</group>
+				<group id="BUSINESS">
+					<item>Auto</item>
+					<item>Employment</item>
+				</group>
+				<group id="ENTERTAINMENT">
+					<item>Arts</item>
+					<item>Celebrities</item>
+					<item>Movies</item>
+				</group>
+				<group id="LIFESTYLE">
+					<item>Advice</item>
+					<item>Books</item>
+					<item>Events</item>
+				</group>
+				<group id="TRAVEL">
+					<item>Asia</item>
+					<item>Canada</item>
+					<item>Europe</item>
+				</group>
+				<group id="SPORTS">
+					<item>Baseball</item>
+					<item>Baseball Other</item>
+					<item>Baseball All-Stars</item>
+				</group>				
 			</pub>
 		</category>
 		
