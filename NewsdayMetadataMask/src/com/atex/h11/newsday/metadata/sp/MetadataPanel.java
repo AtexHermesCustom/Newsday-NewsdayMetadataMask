@@ -93,7 +93,7 @@ public class MetadataPanel extends JPanel {
 	private JComboBox<String> cmbArrivalStatus;
 	private JCheckBox chkEmbargo;
 	private JDatePickerImpl dtpckEmbargoDate;
-	private JSpinner spnEmbargoTime;
+	private JSpinner spnrEmbargoTime;
 	private JLabel lblPage;
 	private JCheckBox chkExclusive;
 	private JScrollPane scrlCommunities;
@@ -409,10 +409,10 @@ public class MetadataPanel extends JPanel {
 		
 		SpinnerDateModel timeModel = new SpinnerDateModel();
 		timeModel.setCalendarField(Calendar.MINUTE);
-		spnEmbargoTime = new JSpinner();
-		spnEmbargoTime.setModel(timeModel);
-		spnEmbargoTime.setEditor(new JSpinner.DateEditor(spnEmbargoTime, "h:mm a"));		
-		add(spnEmbargoTime, "10, 26, fill, default");
+		spnrEmbargoTime = new JSpinner();
+		spnrEmbargoTime.setModel(timeModel);
+		spnrEmbargoTime.setEditor(new JSpinner.DateEditor(spnrEmbargoTime, "h:mm a"));		
+		add(spnrEmbargoTime, "10, 26, fill, default");
 		
 		JLabel lblCategories = new JLabel("Categories");
 		add(lblCategories, "2, 28, right, top");
@@ -609,13 +609,13 @@ public class MetadataPanel extends JPanel {
 					for (Component component : getAllComponents(dtpckEmbargoDate)) {
 					    component.setEnabled(true);
 					}					
-					spnEmbargoTime.setEnabled(true);
+					spnrEmbargoTime.setEnabled(true);
 				} else {	
 					// disable components
 					for (Component component : getAllComponents(dtpckEmbargoDate)) {
 					    component.setEnabled(false);
 					}	
-					spnEmbargoTime.setEnabled(false);
+					spnrEmbargoTime.setEnabled(false);
 				}
 			}
 		});			
@@ -864,7 +864,7 @@ public class MetadataPanel extends JPanel {
 		// embargo components
 		chkEmbargo.setSelected(metadata.get("EMBARGO_FLAG").equalsIgnoreCase(Constants.TRUE));
 		//dtpckEmbargoDate
-		//spnEmbargoTime
+		//spnrEmbargoTime
 
 		// exclusive checkbox
 		chkExclusive.setSelected(metadata.get("EXCLUSIVE_FLAG").equalsIgnoreCase(Constants.TRUE));
