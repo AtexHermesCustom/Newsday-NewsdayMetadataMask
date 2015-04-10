@@ -27,9 +27,15 @@ public interface Constants {
 	public static final String METADATA_PROPERTIES_FILE = METADATA_GUI_PATH + "NewsdayMetadata.properties";
 	public static final String METADATA_CONFIG_FILE_PROPERTY = "MetadataConfigFile";
 
+	// boolean constants
 	public static final String FALSE = "false";
 	public static final String TRUE = "true";
 	
+	// String constants
 	public static final String ALL = "ALL";	
 	public static final String LIVE = "LIVE";
+	
+	// formats
+	public static final String DATE_FORMAT = "MM/dd/yyyy";
+	public static final String TIME_FORMAT = "hh:mm a";	
 }

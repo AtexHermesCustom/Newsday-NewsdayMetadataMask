@@ -1,8 +1,10 @@
 package com.atex.h11.newsday.metadata.sp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.logging.Logger;
@@ -390,33 +392,34 @@ public class MetadataPanel extends JPanel {
 		cmbArrivalStatus = new JComboBox<String>();
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
 		
+		lblEmbargoDate = new JLabel("Embargo Date");
+		add(lblEmbargoDate, "4, 26, right, default");
+
+		Date currentDate = new Date();
+
 		// date picker
-		UtilDateModel dateModel = new UtilDateModel();
-		dateModel.setDate(2015, 0, 1);
+		UtilDateModel dateModel = new UtilDateModel();	// current date by default
 		dateModel.setSelected(true);
 		
 		Properties datePanelProps = new Properties();
 		datePanelProps.put("text.today", "Today");
 		datePanelProps.put("text.month", "Month");
-		datePanelProps.put("text.year", "Year");		
+		datePanelProps.put("text.year", "Year");								
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
-		
-		lblEmbargoDate = new JLabel("Embargo Date");
-		add(lblEmbargoDate, "4, 26, right, default");
 		
 		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dtpckEmbargoDate.getJFormattedTextField().setEditable(true);
 		add(dtpckEmbargoDate, "6, 26, 3, 1");		
-		
-		SpinnerDateModel timeModel = new SpinnerDateModel();
-		timeModel.setCalendarField(Calendar.MINUTE);
-		
+				
 		lblEmbargoTime = new JLabel("Embargo Time");
 		add(lblEmbargoTime, "10, 26, right, default");
+
+		SpinnerDateModel timeModel = new SpinnerDateModel(currentDate, null, null, Calendar.MINUTE);
 		spnrEmbargoTime = new JSpinner();
 		spnrEmbargoTime.setModel(timeModel);
-		spnrEmbargoTime.setEditor(new JSpinner.DateEditor(spnrEmbargoTime, "h:mm a"));		
+		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spnrEmbargoTime, Constants.TIME_FORMAT);
+		spnrEmbargoTime.setEditor(dateEditor);
 		add(spnrEmbargoTime, "12, 26, fill, default");
 		
 		JLabel lblCategories = new JLabel("Categories");
@@ -614,13 +617,13 @@ public class MetadataPanel extends JPanel {
 					if (item != null) {
 						String arrivalStatus = item.toString().trim();
 						if (arrivalStatus.equalsIgnoreCase(Constants.LIVE)) {
-							// enable components
+							// enable Embargo-related components
 							for (Component component : getAllComponents(dtpckEmbargoDate)) {
 							    component.setEnabled(true);
 							}					
 							spnrEmbargoTime.setEnabled(true);							
 						} else {
-							// disable components
+							// disable Embargo-related components
 							for (Component component : getAllComponents(dtpckEmbargoDate)) {
 							    component.setEnabled(false);
 							}	
@@ -872,9 +875,10 @@ public class MetadataPanel extends JPanel {
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
 
-		// embargo components
+		// embargo date
 		//dtpckEmbargoDate
-		//spnrEmbargoTime
+		
+		// embargo time
 
 		// exclusive checkbox
 		chkExclusive.setSelected(metadata.get("EXCLUSIVE_FLAG").equalsIgnoreCase(Constants.TRUE));
@@ -955,21 +959,29 @@ public class MetadataPanel extends JPanel {
 		retMetadata.put("STORY_GROUP", txtStoryGroup.getText().trim());
 		retMetadata.put("STORY_TYPE", getComboBoxSelectedItem(cmbStoryType));
 		retMetadata.put("LABEL", getComboBoxSelectedItem(cmbLabel));
+		retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
 		retMetadata.put("DESCRIPTION", txtrDescription.getText().trim());
 		retMetadata.put("PRINT_EXTRA", txtrPrintExtra.getText().trim());
-		retMetadata.put("PRINT_SECTION", getComboBoxSelectedItem(cmbPrintSection));
-		retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
-		retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
-		retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
-		retMetadata.put("EMBARGO_DATE", "");
-		retMetadata.put("EMBARGO_TIME", "");
-		retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
-		retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
-		retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
 		retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
 		retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
+		retMetadata.put("PRINT_SECTION", getComboBoxSelectedItem(cmbPrintSection));
+		retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
 		retMetadata.put("PRINT_PAGE", ftxtPrintPage.getText().trim());
+		retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
+		retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
 		retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
+		
+		Date d1 = (Date) dtpckEmbargoDate.getModel().getValue();
+		SimpleDateFormat formatDate = new SimpleDateFormat(Constants.DATE_FORMAT);
+		retMetadata.put("EMBARGO_DATE", formatDate.format(d1));
+		
+		Date d2 = (Date) spnrEmbargoTime.getValue();
+		SimpleDateFormat formatTime = new SimpleDateFormat(Constants.TIME_FORMAT);
+		retMetadata.put("EMBARGO_TIME", formatTime.format(d2));
+		
+		retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
+		retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
+
 		
 		return retMetadata;
 	}  	
