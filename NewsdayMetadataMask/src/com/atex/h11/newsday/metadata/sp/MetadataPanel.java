@@ -435,12 +435,7 @@ public class MetadataPanel extends JPanel {
 		add(scrlCategories, "4, 28, 5, 1, fill, fill");
 		
 		trCategories = new JTree();
-		trCategories.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
-				{
-				}
-			}
-		));
+		trCategories.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("JTree")));
 		trCategories.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCategories.setViewportView(trCategories);
 		
@@ -451,12 +446,7 @@ public class MetadataPanel extends JPanel {
 		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
 		
 		trCommunities = new JTree();
-		trCommunities.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
-				{
-				}
-			}
-		));
+		trCommunities.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("JTree")));
 		trCommunities.setToolTipText("Double click an item to add it to the Selected list");
 		scrlCommunities.setViewportView(trCommunities);
 		
