@@ -123,13 +123,17 @@ public class ConfigModel {
     public void initComboBox(JComboBox<String> cmbControl, String pub, String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(pub, metadata); 
-		initComboBox(cmbControl, metadata, nl);
+		if (nl.getLength() > 0) {
+			initComboBox(cmbControl, metadata, nl);
+		}
 	}    
     
     public void initComboBox(JComboBox<String> cmbControl, String pub, String metadata, String xpath) 
 			throws XPathExpressionException {
-		NodeList nl = getListItems(pub, metadata, xpath); 
-		initComboBox(cmbControl, metadata, nl);
+		NodeList nl = getListItems(pub, metadata, xpath);
+		if (nl.getLength() > 0) {
+			initComboBox(cmbControl, metadata, nl);
+		}
 	}      
     
     public void initComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 

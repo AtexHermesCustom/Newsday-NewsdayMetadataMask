@@ -847,14 +847,14 @@ public class MetadataPanel extends JPanel {
 
 		// desk
 		config.initComboBox(cmbDesk, pub, "desk");
-		String desk = metadata.get("DESK");
-		setComboBoxSelectedItem(cmbDesk, desk);
+		setComboBoxSelectedItem(cmbDesk, metadata.get("DESK"));
 		
 		String deskXpath;
-		if (cmbDesk.getSelectedItem().toString().equalsIgnoreCase(Constants.ALL)) {
+		String currentDesk = cmbDesk.getSelectedItem().toString().trim();
+		if (currentDesk.equalsIgnoreCase(Constants.ALL)) {
 			deskXpath = "desk";		// no condition
 		} else {
-			deskXpath = "desk[@id='" + desk + "']";		// should match desk id
+			deskXpath = "desk[@id='" + currentDesk + "']";		// should match desk id
 		}		
 
 		// web homepage - list depends on current desk
