@@ -37,5 +37,6 @@ public interface Constants {
 	
 	// formats
 	public static final String DATE_FORMAT = "MM/dd/yyyy";
+	public static final String DATE_FORMAT_DB = "yyyy-MM-dd hh:mm:ss";	// format in DB
 	public static final String TIME_FORMAT = "hh:mm a";	
 }

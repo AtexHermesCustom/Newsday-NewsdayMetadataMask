@@ -71,6 +71,7 @@ public class MetadataPanel extends JPanel {
 	private String pub;
 	private ConfigModel config = null;
 	private HashMap<String, String> metadata = null;
+	private boolean panelDisabled = false;
 	
 	private JLabel lblPub;	
 	private JLabel lblTitle;
@@ -147,6 +148,7 @@ public class MetadataPanel extends JPanel {
 		if (objName == null || objLevel == null || objName.isEmpty() || objLevel.isEmpty()) {
 			// disable - do not allow entry of metadata
 			disableControls();
+			panelDisabled = true;
 		} else {
 			// init components and set values based from metadata hash
 			setComponentValues();
@@ -618,16 +620,10 @@ public class MetadataPanel extends JPanel {
 						String arrivalStatus = item.toString().trim();
 						if (arrivalStatus.equalsIgnoreCase(Constants.LIVE)) {
 							// enable Embargo-related components
-							for (Component component : getAllComponents(dtpckEmbargoDate)) {
-							    component.setEnabled(true);
-							}					
-							spnrEmbargoTime.setEnabled(true);							
+							setEmbargoComponentsEnabled(true);
 						} else {
 							// disable Embargo-related components
-							for (Component component : getAllComponents(dtpckEmbargoDate)) {
-							    component.setEnabled(false);
-							}	
-							spnrEmbargoTime.setEnabled(false);							
+							setEmbargoComponentsEnabled(false);
 						}
 					}
 				}
@@ -786,6 +782,13 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
+	protected void setEmbargoComponentsEnabled(boolean enabled) {
+		for (Component component : getAllComponents(dtpckEmbargoDate)) {
+		    component.setEnabled(enabled);
+		}	
+		spnrEmbargoTime.setEnabled(enabled);				
+	}
+	
 	protected void setComponentValues() 
 			throws XPathExpressionException {
 		// title label
@@ -823,8 +826,9 @@ public class MetadataPanel extends JPanel {
 		setComboBoxSelectedItem(cmbLabel, metadata.get("LABEL"));
 		
 		// arrival status
-		config.initComboBox(cmbArrivalStatus, Constants.ALL, "arrivalStatus");		
-		setComboBoxSelectedItem(cmbArrivalStatus, metadata.get("ARRIVAL_STATUS"));
+		config.initComboBox(cmbArrivalStatus, Constants.ALL, "arrivalStatus");
+		String arrivalStatus = metadata.get("ARRIVAL_STATUS");
+		setComboBoxSelectedItem(cmbArrivalStatus, arrivalStatus);
 				
 		// reporter fields
 		config.initComboBox(cmbReporter1, pub, "reporter");
@@ -875,10 +879,34 @@ public class MetadataPanel extends JPanel {
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
 
-		// embargo date
-		//dtpckEmbargoDate
-		
-		// embargo time
+		if (arrivalStatus.equalsIgnoreCase(Constants.LIVE)) {
+			try {
+				// embargo date
+				String embargoDate = metadata.get("EMBARGO_DATE");
+				if (embargoDate != null && !embargoDate.isEmpty()) {
+					SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
+					Date d = (Date) dateFormat.parse(embargoDate);
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(d);
+					dtpckEmbargoDate.getModel().setYear(cal.get(Calendar.YEAR));
+					dtpckEmbargoDate.getModel().setMonth(cal.get(Calendar.MONTH));
+					dtpckEmbargoDate.getModel().setDay(cal.get(Calendar.DAY_OF_MONTH));
+				}				
+				
+				// embargo time			
+				String embargoTime = metadata.get("EMBARGO_TIME");
+				if (embargoTime != null && !embargoTime.isEmpty()) {
+					SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
+					Date d = (Date) timeFormat.parse(embargoTime);
+					spnrEmbargoTime.setValue(d);
+				}
+			} catch (Exception e) {
+				InfoBox.ShowException(e);
+			}
+		} else {
+			// disable
+			setEmbargoComponentsEnabled(false);
+		}		
 
 		// exclusive checkbox
 		chkExclusive.setSelected(metadata.get("EXCLUSIVE_FLAG").equalsIgnoreCase(Constants.TRUE));
@@ -946,43 +974,52 @@ public class MetadataPanel extends JPanel {
 			throws XPathExpressionException {
 		HashMap<String,String> retMetadata = new HashMap<String,String>();
 		
-		//retMetadata.put("PUB", getComboBoxSelectedItem(cmbPub)); - unused
-		retMetadata.put("DESK", getComboBoxSelectedItem(cmbDesk));
-		retMetadata.put("REPORTER1", getComboBoxSelectedItem(cmbReporter1));
-		retMetadata.put("REPORTER2", getComboBoxSelectedItem(cmbReporter2));
-		retMetadata.put("REPORTER3", getComboBoxSelectedItem(cmbReporter3));
-		retMetadata.put("REPORTER1_EMAIL", txtEmail1.getText().trim());
-		retMetadata.put("REPORTER2_EMAIL", txtEmail2.getText().trim());
-		retMetadata.put("REPORTER3_EMAIL", txtEmail3.getText().trim());
-		retMetadata.put("ASSIGN_LEN", ftxtAssignLength.getText().trim());
-		retMetadata.put("CONTRIBUTOR", txtContributor.getText().trim());
-		retMetadata.put("STORY_GROUP", txtStoryGroup.getText().trim());
-		retMetadata.put("STORY_TYPE", getComboBoxSelectedItem(cmbStoryType));
-		retMetadata.put("LABEL", getComboBoxSelectedItem(cmbLabel));
-		retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
-		retMetadata.put("DESCRIPTION", txtrDescription.getText().trim());
-		retMetadata.put("PRINT_EXTRA", txtrPrintExtra.getText().trim());
-		retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
-		retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
-		retMetadata.put("PRINT_SECTION", getComboBoxSelectedItem(cmbPrintSection));
-		retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
-		retMetadata.put("PRINT_PAGE", ftxtPrintPage.getText().trim());
-		retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
-		retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
-		retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
-		
-		Date d1 = (Date) dtpckEmbargoDate.getModel().getValue();
-		SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
-		retMetadata.put("EMBARGO_DATE", dateFormat.format(d1));
-		
-		Date d2 = (Date) spnrEmbargoTime.getValue();
-		SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
-		retMetadata.put("EMBARGO_TIME", timeFormat.format(d2));
-		
-		retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
-		retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
-
-		
+		if (!panelDisabled) {
+			//retMetadata.put("PUB", getComboBoxSelectedItem(cmbPub)); - unused
+			retMetadata.put("DESK", getComboBoxSelectedItem(cmbDesk));
+			retMetadata.put("REPORTER1", getComboBoxSelectedItem(cmbReporter1));
+			retMetadata.put("REPORTER2", getComboBoxSelectedItem(cmbReporter2));
+			retMetadata.put("REPORTER3", getComboBoxSelectedItem(cmbReporter3));
+			retMetadata.put("REPORTER1_EMAIL", txtEmail1.getText().trim());
+			retMetadata.put("REPORTER2_EMAIL", txtEmail2.getText().trim());
+			retMetadata.put("REPORTER3_EMAIL", txtEmail3.getText().trim());
+			retMetadata.put("ASSIGN_LEN", ftxtAssignLength.getText().trim());
+			retMetadata.put("CONTRIBUTOR", txtContributor.getText().trim());
+			retMetadata.put("STORY_GROUP", txtStoryGroup.getText().trim());
+			retMetadata.put("STORY_TYPE", getComboBoxSelectedItem(cmbStoryType));
+			retMetadata.put("LABEL", getComboBoxSelectedItem(cmbLabel));
+			retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
+			retMetadata.put("DESCRIPTION", txtrDescription.getText().trim());
+			retMetadata.put("PRINT_EXTRA", txtrPrintExtra.getText().trim());
+			retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
+			retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
+			retMetadata.put("PRINT_SECTION", getComboBoxSelectedItem(cmbPrintSection));
+			retMetadata.put("SEQUENCE", getComboBoxSelectedItem(cmbPrintSequence));
+			retMetadata.put("PRINT_PAGE", ftxtPrintPage.getText().trim());
+			retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
+			retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
+			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
+			
+			String embargoDate = "";
+			if (dtpckEmbargoDate.getComponent(0).isEnabled()) {
+				Date d1 = (Date) dtpckEmbargoDate.getModel().getValue();
+				SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
+				embargoDate = dateFormat.format(d1);
+			}
+			retMetadata.put("EMBARGO_DATE", embargoDate);
+			
+			String embargoTime = "";
+			if (spnrEmbargoTime.isEnabled()) {
+				Date d2 = (Date) spnrEmbargoTime.getValue();
+				SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
+				embargoTime = timeFormat.format(d2);
+			}
+			retMetadata.put("EMBARGO_TIME", embargoTime);
+			
+			retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
+			retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
+		}
+			
 		return retMetadata;
 	}  	
 	
