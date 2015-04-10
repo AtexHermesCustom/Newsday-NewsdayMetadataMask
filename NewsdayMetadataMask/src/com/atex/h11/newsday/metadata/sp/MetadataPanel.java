@@ -979,6 +979,7 @@ public class MetadataPanel extends JPanel {
 	public HashMap<String,String> getMetadataValues() 
 			throws XPathExpressionException {
 		HashMap<String,String> retMetadata = new HashMap<String,String>();
+		retMetadata.clear();
 		
 		if (!panelDisabled) {
 			//retMetadata.put("PUB", getComboBoxSelectedItem(cmbPub)); - unused
