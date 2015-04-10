@@ -127,6 +127,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			String testMode = System.getProperty("metadata.test");
 			if (testMode != null && testMode.equals("1")) {
 				System.out.println("metadata test mode");
+				objId = "99999:00";
+				objId = objId.replaceAll(":.*$", "");
 				objName = "TESTPACKAGE";
 				objLevel = "ND-WRITERS/NEWS";
 				pub = getPubFromLevel(objLevel);
@@ -134,6 +136,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 
 			if (inspector != null) {
 				objId = inspector.getID();
+				objId = objId.replaceAll(":.*$", "");
 				objName = inspector.getProperty(NodeValueInspector.NAME);
 				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
 				objLevelId = inspector.getProperty(NodeValueInspector.LEVEL_ID);
@@ -146,7 +149,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			
 			logMetadata(metadata, "Loaded from DB");
 
-			metadataPanel = new MetadataPanel(config, locale, metadata, logger, objName, objLevel, pub);
+			metadataPanel = new MetadataPanel(config, metadata, logger, objId, objName, objLevel, pub);
 			metadataPanel.setPreferredSize(new Dimension(690, 580));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");

@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -68,11 +67,11 @@ public class MetadataPanel extends JPanel {
 
 	private static Logger logger;
 	
+	private String objId;
 	private String objName;
 	private String objLevel;
 	private String pub;
 	private ConfigModel config = null;
-	private Locale locale = null;
 	private HashMap<String, String> metadata = null;
 	private boolean panelDisabled = false;
 	
@@ -133,14 +132,15 @@ public class MetadataPanel extends JPanel {
 	private String prevReporter3 = "";
 
 	// constructor
-	public MetadataPanel(ConfigModel config, Locale locale, HashMap<String, String> metadata, Logger l, String objName, String objLevel, String pub) 
+	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
+		String objId, String objName, String objLevel, String pub) 
 			throws XPathExpressionException {
 		
+		this.objId = objId;
 		this.objName = objName;
 		this.objLevel = objLevel;
 		this.pub = pub;
 		this.config = config;
-		this.locale = locale;
 		this.metadata = metadata;		
 		logger = l;
 		
@@ -426,7 +426,7 @@ public class MetadataPanel extends JPanel {
 		spnrEmbargoTime.setModel(timeModel);
 		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spnrEmbargoTime, Constants.TIME_FORMAT);
 		spnrEmbargoTime.setEditor(dateEditor);
-		add(spnrEmbargoTime, "12, 26, fill, default");
+		add(spnrEmbargoTime, "12, 26, fill, fill");
 		
 		JLabel lblCategories = new JLabel("Categories");
 		add(lblCategories, "2, 28, right, top");
@@ -798,7 +798,7 @@ public class MetadataPanel extends JPanel {
 		// title label
 		String title = "<html><p><b>Story Package Metadata</b>";
 		if (objName != null && !objName.isEmpty()) {
-			title += "<b> for <font color=\"blue\">" + objName + "</font>";
+			title += "<b> for <font color=\"blue\">" + objName + "</font> (id: " + objId + ")</b>";
 		}
 		title += "</p></html>";
 		lblTitle.setText(title);
@@ -846,13 +846,14 @@ public class MetadataPanel extends JPanel {
 		// desk
 		config.initComboBox(cmbDesk, pub, "desk");
 		String desk = metadata.get("DESK");
+		setComboBoxSelectedItem(cmbDesk, desk);
+		
 		String deskXpath;
-		if (desk.equalsIgnoreCase(Constants.ALL)) {
+		if (cmbDesk.getSelectedItem().toString().equalsIgnoreCase(Constants.ALL)) {
 			deskXpath = "desk";		// no condition
 		} else {
 			deskXpath = "desk[@id='" + desk + "']";		// should match desk id
-		}
-		setComboBoxSelectedItem(cmbDesk, desk);
+		}		
 
 		// web homepage - list depends on current desk
 		config.initComboBox(cmbHomepage, pub, "homepage", deskXpath + "/item");
@@ -886,13 +887,8 @@ public class MetadataPanel extends JPanel {
 			try {
 				// embargo date
 				String embargoDate = metadata.get("EMBARGO_DATE");
-				InfoBox.showMessage(embargoDate, "embargo date");
 				if (embargoDate != null && !embargoDate.isEmpty()) {
-					//SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
-					DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
-					String pattern       = ((SimpleDateFormat) dateFormat).toPattern();
-					String localPattern  = ((SimpleDateFormat) dateFormat).toLocalizedPattern();	
-					logger.finer("pat=" + pattern + ", localPat=" + localPattern);
+					SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
 					Date d = (Date) dateFormat.parse(embargoDate);
 					Calendar cal = Calendar.getInstance();
 					cal.setTime(d);
