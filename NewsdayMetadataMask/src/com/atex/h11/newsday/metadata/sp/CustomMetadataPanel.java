@@ -136,7 +136,9 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 
 			if (inspector != null) {
 				objId = inspector.getID();
-				objId = objId.replaceAll(":.*$", "");
+				if (objId != null && !objId.isEmpty()) {
+					objId = objId.replaceAll(":.*$", "");
+				}
 				objName = inspector.getProperty(NodeValueInspector.NAME);
 				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
 				objLevelId = inspector.getProperty(NodeValueInspector.LEVEL_ID);
