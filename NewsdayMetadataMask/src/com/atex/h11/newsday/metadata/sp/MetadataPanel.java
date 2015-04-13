@@ -122,14 +122,13 @@ public class MetadataPanel extends JPanel {
 	private DefaultListModel<String> selCategoriesModel = null;
 	private DefaultListModel<String> selCommunitiesModel = null;
 	JButton btnAddKeyword;
-	
-	private JLabel lblEmbargoDate;
 	private JLabel lblEmbargoTime;
 	private JLabel lblVersion;
 	
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
+	private JCheckBox chckbxEmbargoDate;
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
@@ -397,9 +396,6 @@ public class MetadataPanel extends JPanel {
 		
 		cmbArrivalStatus = new JComboBox<String>();
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
-		
-		lblEmbargoDate = new JLabel("Embargo Date");
-		add(lblEmbargoDate, "4, 26, right, default");
 
 		Date currentDate = new Date();
 
@@ -413,6 +409,9 @@ public class MetadataPanel extends JPanel {
 		datePanelProps.put("text.year", "Year");								
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
+		
+		chckbxEmbargoDate = new JCheckBox("Embargo");
+		add(chckbxEmbargoDate, "4, 26");
 		
 		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dtpckEmbargoDate.getJFormattedTextField().setEditable(true);
