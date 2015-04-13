@@ -48,7 +48,7 @@ public class TestSPMetadata {
 		metadata.put("SEQUENCE", "sequence value");
 		metadata.put("HOMEPAGE", "LI Crime");
 		metadata.put("ARRIVAL_STATUS", "LIVE");
-		metadata.put("EMBARGO_FLAG", "TRUE");
+		// metadata.put("EMBARGO_FLAG", "TRUE"); - not needed
 		metadata.put("EMBARGO_DATE", "2012-09-04 21:45:35");
 		metadata.put("EMBARGO_TIME", "3:55 am");
 		metadata.put("CATEGORIES", "cat1,cat2,cat3");
