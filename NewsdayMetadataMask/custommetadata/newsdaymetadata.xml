@@ -15,8 +15,12 @@
 		#####################################
 	 -->	
 	<sp>
+		<!--  metadataNames - not used -->
 		<metadataNames></metadataNames>
 		
+		<!-- publicationConfiguration:
+			- regex to determine the publication code from the level
+		 -->
 		<publicationConfiguration>
 			<pub id="ALL">
 				<item levelMatchPattern="^ND.*">ND</item>
@@ -24,6 +28,9 @@
 			</pub>
 		</publicationConfiguration>
 			
+		<!-- publication:
+			- items in the Publication dropdown
+		 -->
 		<publication insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>NEWSDAY</item>
@@ -31,6 +38,9 @@
 			</pub>
 		</publication>
 		
+		<!-- priority:
+			- items in the Priority dropdown
+		 -->
 		<priority insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>LOW</item>
@@ -39,6 +49,9 @@
 			</pub>
 		</priority>		
 		
+		<!-- storyType:
+			- items in the Story Type dropdown
+		 -->
 		<storyType insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>ARTICLE</item>
@@ -52,6 +65,9 @@
 			</pub>
 		</storyType>
 		
+		<!-- label:
+			- items in the Label dropdown
+		 -->
 		<label insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>EXCLUSIVE</item>
@@ -63,6 +79,9 @@
 			</pub>
 		</label>		
 
+		<!-- arrivalStatus
+			- items in the Arrival Status dropdown
+		 -->
 		<arrivalStatus insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>LIVE</item>
@@ -70,6 +89,9 @@
 			</pub>				
 		</arrivalStatus>		
 					
+		<!-- reporter
+			- items in the Reporter dropdown and Email fields
+		 -->
 		<reporter insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<item email="laura.albanese@newsday.com">Laura  Albanese</item>
@@ -442,6 +464,9 @@
 			</pub>			
 		</reporter>
 		
+		<!-- desk:
+			- items in the Desk dropdown
+		 -->
 		<desk insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<item>ALL</item>
@@ -457,6 +482,9 @@
 			</pub>
 		</desk>		
 		
+		<!-- homepage:
+			- items in the Homepage dropdown
+		 -->
 		<homepage insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
@@ -626,6 +654,9 @@
 			</pub>						
 		</homepage>		
 		
+		<!-- printSection:
+			- items in the Print Section dropdown
+		 -->
 		<printSection insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
@@ -661,6 +692,9 @@
 			</pub>						
 		</printSection>
 		
+		<!-- printSequence:
+			- items in the Print Sequence dropdown
+		 -->
 		<printSequence insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
@@ -791,6 +825,9 @@
 			</pub>						
 		</printSequence>
 			
+		<!-- category:
+			- items in the Categories list
+		 -->
 		<category sortGroups="0" sortItems="0">
 			<pub id="ND">
 				<group id="LONG ISLAND-NEWS">
@@ -1184,6 +1221,9 @@
 			</pub>
 		</category>
 		
+		<!-- community:
+			- items in the Communities list
+		 -->
 		<community sortItems="0">
 			<pub id="ND">
 				<item>ALBERTSON</item>
