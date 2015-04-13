@@ -99,6 +99,7 @@ public class MetadataPanel extends JPanel {
 	private JDatePickerImpl dtpckEmbargoDate;
 	private JSpinner spnrEmbargoTime;
 	private JLabel lblPage;
+	private JCheckBox chkEmbargo;	
 	private JCheckBox chkExclusive;
 	private JScrollPane scrlCommunities;
 	private JScrollPane scrlCategories;
@@ -128,7 +129,7 @@ public class MetadataPanel extends JPanel {
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
-	private JCheckBox chckbxEmbargoDate;
+
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
@@ -410,8 +411,8 @@ public class MetadataPanel extends JPanel {
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
 		
-		chckbxEmbargoDate = new JCheckBox("Embargo");
-		add(chckbxEmbargoDate, "4, 26");
+		chkEmbargo = new JCheckBox("Embargo");
+		add(chkEmbargo, "4, 26");
 		
 		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dtpckEmbargoDate.getJFormattedTextField().setEditable(true);
@@ -624,16 +625,37 @@ public class MetadataPanel extends JPanel {
 					if (item != null) {
 						String arrivalStatus = item.toString().trim();
 						if (arrivalStatus.equalsIgnoreCase(Constants.LIVE)) {
-							// enable Embargo-related components
-							setEmbargoComponentsEnabled(true);
+							// enable Embargo checkbox
+							chkEmbargo.setEnabled(true);
+							// enable Embargo-related components if checkbox is ticked
+							if (chkEmbargo.isSelected()) {
+								setEmbargoComponentsEnabled(true);
+							} else {
+								setEmbargoComponentsEnabled(false);
+							}
 						} else {
+							// disable and deselect Embargo checkbox
+							chkEmbargo.setEnabled(false);
+							chkEmbargo.setSelected(false);
 							// disable Embargo-related components
-							setEmbargoComponentsEnabled(false);
+							setEmbargoComponentsEnabled(false);							
 						}
 					}
 				}
 			}
 		});
+		
+		chkEmbargo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chkEmbargo.isSelected()) {	
+					// enable Embargo-related components
+					setEmbargoComponentsEnabled(true);
+				} else {	
+					// disable Embargo-related components
+					setEmbargoComponentsEnabled(false);
+				}
+			}
+		});			
 		
 		trCategories.addMouseListener(new MouseAdapter() {
 			@Override
@@ -791,7 +813,7 @@ public class MetadataPanel extends JPanel {
 		for (Component component : getAllComponents(dtpckEmbargoDate)) {
 		    component.setEnabled(enabled);
 		}	
-		spnrEmbargoTime.setEnabled(enabled);				
+		spnrEmbargoTime.setEnabled(enabled);
 	}
 	
 	protected void setComponentValues() 
@@ -886,6 +908,9 @@ public class MetadataPanel extends JPanel {
 
 		if (cmbArrivalStatus.getSelectedItem().toString().equalsIgnoreCase(Constants.LIVE)) {
 			try {
+				boolean hasEmbargoDate = false;
+				boolean hasEmbargoTime = false;
+				
 				// embargo date
 				String embargoDate = metadata.get("EMBARGO_DATE");
 				if (embargoDate != null && !embargoDate.isEmpty()) {
@@ -896,6 +921,7 @@ public class MetadataPanel extends JPanel {
 					dtpckEmbargoDate.getModel().setYear(cal.get(Calendar.YEAR));
 					dtpckEmbargoDate.getModel().setMonth(cal.get(Calendar.MONTH));
 					dtpckEmbargoDate.getModel().setDay(cal.get(Calendar.DAY_OF_MONTH));
+					hasEmbargoDate = true;
 				}				
 				
 				// embargo time			
@@ -904,12 +930,24 @@ public class MetadataPanel extends JPanel {
 					SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
 					Date d = (Date) timeFormat.parse(embargoTime);
 					spnrEmbargoTime.setValue(d);
+					hasEmbargoTime = true;
+				}
+				
+				if (hasEmbargoDate && hasEmbargoTime) {
+					chkEmbargo.setSelected(true);
+				} else {
+					chkEmbargo.setSelected(false);
+					// disable embargo related components
+					setEmbargoComponentsEnabled(false);					
 				}
 			} catch (Exception e) {
 				InfoBox.ShowException(e);
 			}
 		} else {
-			// disable
+			// disable and deselect embargo checkbox
+			chkEmbargo.setEnabled(false);
+			chkEmbargo.setSelected(false);
+			// disable embargo related components
 			setEmbargoComponentsEnabled(false);
 		}		
 
