@@ -6,7 +6,7 @@
 		<!-- logLevel allowed values (in ascending order, in terms of level of detail):
 			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
 		-->
-		<logLevel>FINER</logLevel>
+		<logLevel>OFF</logLevel>
 	</configuration>
 	
 	<!--
