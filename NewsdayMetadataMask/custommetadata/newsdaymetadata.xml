@@ -1515,6 +1515,9 @@
 			</pub>
 		</community>
 		
+		<!-- defaultValue:
+			- default values based on the level
+		 -->
 		<defaultValue>
 			<pub id="ND">
 				<level id="ND-WRITERS/NEWS/LONG-ISLAND">
