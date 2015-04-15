@@ -156,7 +156,7 @@ public class ConfigModel {
 
 		// insert empty item
 		if (getMetadataAttribValue(metadata, "insertEmptyItem").trim().equals("1")) {
-			cmbControl.insertItemAt("", 0); 	// insert at beginning of the list
+			model.insertElementAt("", 0);	// insert at beginning of the list
 		}
 
 		// select default
