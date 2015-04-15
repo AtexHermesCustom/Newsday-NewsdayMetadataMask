@@ -33,7 +33,7 @@ public class TestSPMetadata {
 		metadata.put("DESK", "NEWS");
 		metadata.put("REPORTER1", "Reporter 3 name");
 		metadata.put("REPORTER2", "Reporter 2 name");
-		metadata.put("REPORTER3", "Reporter 1 name");
+		//metadata.put("REPORTER3", "Reporter 1 name");		// simulate non entry
 		metadata.put("REPORTER1_EMAIL", "email1@email.com");
 		metadata.put("REPORTER2_EMAIL", "email2@email.com");
 		metadata.put("REPORTER3_EMAIL", "email3@email.com");
