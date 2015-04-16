@@ -3,7 +3,10 @@ package com.atex.h11.newsday.metadata.sp;
 import com.unisys.media.commonservices.common.location.LocationInfo;
 import com.unisys.media.commonservices.dialogs.metadata.custom.NodeValueInspector;
 import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPanel;
+import com.unisys.media.cr.adapter.ncm.common.data.pk.NCMObjectPK;
+import com.unisys.media.cr.adapter.ncm.common.data.values.NCMObjectBuildProperties;
 import com.unisys.media.cr.adapter.ncm.model.data.datasource.NCMDataSource;
+import com.unisys.media.cr.adapter.ncm.model.data.values.NCMObjectValueClient;
 import com.unisys.media.cr.model.data.datasource.DataSourceManager;
 import com.unisys.media.extension.common.constants.ApplicationConstants;
 import com.unisys.media.extension.common.security.UPSUser;
@@ -53,6 +56,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	private ConfigModel config = null;
 	
 	private NCMDataSource ds = null;
+	private NCMObjectValueClient sp = null;
 	
 	private static final Logger logger = Constants.LOGGER;
 	private static FileHandler fileLog;
@@ -143,7 +147,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			String testMode = System.getProperty("metadata.test");
 			if (testMode != null && testMode.equals("1")) {
 				System.out.println("metadata test mode");
-				objId = "99999:00";
+				objId = "5465:00";
 				objId = objId.replaceAll(":.*$", "");
 				objName = "TESTPACKAGE";
 				objLevel = "ND-WRITERS/NEWS";
@@ -159,12 +163,15 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				objLevel = inspector.getProperty(NodeValueInspector.LEVEL_PATH);
 				objLevelId = inspector.getProperty(NodeValueInspector.LEVEL_ID);
 				pub = getPubFromLevel(objLevel);
-				logger.fine("Object: name=" + objName + ", id=" + objId + ", level=" + objLevel + ", level id=" + objLevelId + ", pub=" + pub);
+				logger.fine("Object: name=" + objName + ", id=" + objId + ", level=" + objLevel + ", level id=" + objLevelId + ", pub=" + pub);				
 			}
 			else {
 				logger.log(Level.WARNING, "inspector is null");
 			}
 			
+			// retrieve package
+			NCMObjectValueClient sp = getPackage(Integer.parseInt(objId));
+
 			logMetadata(metadata, "Loaded from DB");
 
 			metadataPanel = new MetadataPanel(config, metadata, logger, objId, objName, objLevel, pub);
@@ -264,6 +271,18 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		this.parent = parent;
 		logger.finer("Window parent info: name=" + parent.getName());
 	}	
+	
+	protected NCMObjectValueClient getPackage(int objId) {
+		NCMObjectBuildProperties objProps = new NCMObjectBuildProperties();
+		objProps.setGetByObjId(true);
+		objProps.setIncludeSpChild(true);
+		objProps.setDoNotChekPermissions(true);
+		//objProps.setIncludeMetadataGroups(new Vector<String>());
+		NCMObjectPK pk = new NCMObjectPK(objId);
+		NCMObjectValueClient sp = (NCMObjectValueClient) ((NCMDataSource)ds).getNode(pk, objProps);
+		logger.finer("Package retrieved: name=" + sp.getNCMName() + ", type=" + sp.getType() + ", pk=" + sp.getPK().toString());
+		return sp;
+	}
 		
 	protected boolean isReady() {
 		boolean retVal = metadataPanel.isReady();
