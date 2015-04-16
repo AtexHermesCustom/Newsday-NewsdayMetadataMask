@@ -18,8 +18,10 @@ import com.unisys.media.extension.common.exception.NodeAlreadyLockedException;
 import com.unisys.media.ncm.cfg.common.data.values.MetadataSchemaValue;
 import com.unisys.media.ncm.cfg.model.values.UserHermesCfgValueClient;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Node;
@@ -32,6 +34,8 @@ import java.util.TreeMap;
 import java.util.Vector;
 import java.awt.Dimension;
 import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -205,8 +209,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			retMetadata = metadataPanel.getMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
-			//updateChildMetadata(NCMObjectNodeType.OBJ_TEXT, "WEB", "BYLINE", retMetadata.get("REPORTER1"));
-			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
 			return retMetadata;
 		}
@@ -233,6 +235,12 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				retVal = true;
 				break;
 		}
+		
+		if (retVal) {
+			//updateChildMetadata(NCMObjectNodeType.OBJ_TEXT, "WEB", "BYLINE", retMetadata.get("REPORTER1"));
+			updateChildMetadata(NCMObjectNodeType.OBJ_TEXT, "WEB", "BYLINE", "test byline");
+		}
+		
 		logger.finer("Return value=" + retVal);
 		return retVal;
 	}	
