@@ -34,6 +34,7 @@ import java.util.logging.SimpleFormatter;
 
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
+import com.atex.h11.newsday.metadata.common.DataSource;
 import com.atex.h11.newsday.util.CustomException;
 import com.atex.h11.newsday.util.InfoBox;
 
@@ -96,7 +97,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			logger.setLevel(Level.parse(config.getConfigValue("logLevel")));	
 			
 			// get H11 data source
-			ds = getDataSource();
+			ds = DataSource.getDataSource(config);
 		}
 		catch (Exception e) {
 			logger.log(Level.SEVERE, "Error encountered", e);
@@ -269,54 +270,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		logger.finer("Return value=" + retVal);
 		return retVal;
 	}	
-	
-	protected NCMDataSource getDataSource() 
-			throws FileNotFoundException, IOException, CustomException {
-		logger.entering(this.getClass().getSimpleName(), "getDataSource");
-		DataSourceManager dsmgr = null;
-		
-		Properties connectProps = new Properties();
-		connectProps.load(new FileInputStream(config.getConnectionPropertiesFile()));
-
-        Enumeration<?> connectEnum = connectProps.propertyNames();
-        while (connectEnum.hasMoreElements()) {
-        	String key = (String) connectEnum.nextElement();
-        	String value = connectProps.getProperty(key);
-        	System.setProperty(key, value);
-        	logger.finer("connect: " + key + "=" + value);
-        }    		
-				
-		Properties jndiProps = new Properties();
-        jndiProps.load(new FileInputStream(System.getProperty(Constants.JNDI_PROPERTIES)));
-        
-        // Get a DataSourceManager instance.
-        dsmgr = DataSourceManager.getInstance(jndiProps);
-        
-        Enumeration<?> jndiEnum = jndiProps.propertyNames();
-        while (jndiEnum.hasMoreElements()) {
-        	String key = (String) jndiEnum.nextElement();
-        	logger.finer("jndi: " + key + "=" + jndiProps.getProperty(key));
-        }                    	  
-        
-		String user = config.getAPIUser();
-		String password = config.getAPIPassword();
-		logger.finer("API user=" + user + ", password=" + password);
-		
-		// Login
-		UPSUser upsUser = 
-			UPSUser.instanceUPSUserForNamedUser(user, password, ApplicationConstants.APP_MEDIA_API_ID);
-		NCMDataSource ds = 
-			(NCMDataSource) dsmgr.getDataSource(NCMDataSource.DS_PK, upsUser, ApplicationConstants.APP_MEDIA_API_ID);		
-	
-		if (ds == null) {
-			throw new CustomException("Datasource is null");
-		} else {
-			logger.finer("Datasource initialized");
-		}
-		
-		logger.exiting(this.getClass().getSimpleName(), "getDataSource");
-		return ds;
-	}
 	
 	protected String getPubFromLevel(String objLevel) 
 			throws XPathExpressionException {
