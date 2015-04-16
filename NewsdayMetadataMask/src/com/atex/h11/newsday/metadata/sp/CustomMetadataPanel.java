@@ -34,8 +34,8 @@ import java.util.logging.SimpleFormatter;
 
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
-import com.atex.h11.newsday.metadata.common.CustomException;
-import com.atex.h11.newsday.metadata.common.InfoBox;
+import com.atex.h11.newsday.util.CustomException;
+import com.atex.h11.newsday.util.InfoBox;
 
 public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel {
 	private ResourceBundle bundle;

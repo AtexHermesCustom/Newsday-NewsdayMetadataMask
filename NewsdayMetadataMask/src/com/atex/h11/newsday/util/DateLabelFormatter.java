@@ -1,9 +1,12 @@
-package com.atex.h11.newsday.metadata.common;
+package com.atex.h11.newsday.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import javax.swing.JFormattedTextField.AbstractFormatter;
+
+import com.atex.h11.newsday.metadata.common.Constants;
 
 public class DateLabelFormatter extends AbstractFormatter {
 

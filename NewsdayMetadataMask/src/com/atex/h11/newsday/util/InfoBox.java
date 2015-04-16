@@ -1,4 +1,4 @@
-package com.atex.h11.newsday.metadata.common;
+package com.atex.h11.newsday.util;
 
 import java.awt.Component;
 import java.io.PrintWriter;

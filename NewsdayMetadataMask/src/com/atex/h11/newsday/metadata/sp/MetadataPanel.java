@@ -17,9 +17,9 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
-import com.atex.h11.newsday.metadata.common.DateLabelFormatter;
-import com.atex.h11.newsday.metadata.common.InfoBox;
-import com.atex.h11.newsday.metadata.common.NumericDocumentFilter;
+import com.atex.h11.newsday.metadata.filter.NumericDocumentFilter;
+import com.atex.h11.newsday.util.DateLabelFormatter;
+import com.atex.h11.newsday.util.InfoBox;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -57,6 +57,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+
 import javax.swing.tree.DefaultTreeModel;
 
 public class MetadataPanel extends JPanel {
