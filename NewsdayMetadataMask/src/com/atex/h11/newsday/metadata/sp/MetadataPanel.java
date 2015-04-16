@@ -1046,17 +1046,17 @@ public class MetadataPanel extends JPanel {
 			
 			String embargoDate = "";
 			if (dtpckEmbargoDate.getComponent(0).isEnabled()) {
-				Date d1 = (Date) dtpckEmbargoDate.getModel().getValue();
+				Date d = (Date) dtpckEmbargoDate.getModel().getValue();
 				SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
-				embargoDate = dateFormat.format(d1);
+				embargoDate = dateFormat.format(d);
 			}
 			retMetadata.put("EMBARGO_DATE", embargoDate);
 			
 			String embargoTime = "";
 			if (spnrEmbargoTime.isEnabled()) {
-				Date d2 = (Date) spnrEmbargoTime.getValue();
+				Date d = (Date) spnrEmbargoTime.getValue();
 				SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
-				embargoTime = timeFormat.format(d2);
+				embargoTime = timeFormat.format(d);
 			}
 			retMetadata.put("EMBARGO_TIME", embargoTime);
 			
