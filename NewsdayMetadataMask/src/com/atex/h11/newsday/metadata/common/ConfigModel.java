@@ -75,8 +75,21 @@ public class ConfigModel {
 		in.close();
 		return p;
 	}    
-  
-    public String getXpathValue(String xpath)
+	
+	public String getConnectionPropertiesFile() {
+		return props.getProperty(Constants.CONNECTION_PROPERTIES);
+	}
+
+	public String getAPIUser() {
+		return props.getProperty(Constants.API_USER);
+	}
+	
+	public String getAPIPassword() {
+		String password = props.getProperty(Constants.API_PASSWORD);
+		return Base64Coder.decodeString(password);
+	}
+
+	public String getXpathValue(String xpath)
     		throws XPathExpressionException {
     	String val = "";	// default value
     	Node n = (Node) xp.evaluate(xpath, doc.getDocumentElement(), XPathConstants.NODE);

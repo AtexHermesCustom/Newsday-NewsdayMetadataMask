@@ -3,6 +3,10 @@ package com.atex.h11.newsday.metadata.sp;
 import com.unisys.media.commonservices.common.location.LocationInfo;
 import com.unisys.media.commonservices.dialogs.metadata.custom.NodeValueInspector;
 import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPanel;
+import com.unisys.media.cr.adapter.ncm.model.data.datasource.NCMDataSource;
+import com.unisys.media.cr.model.data.datasource.DataSourceManager;
+import com.unisys.media.extension.common.constants.ApplicationConstants;
+import com.unisys.media.extension.common.security.UPSUser;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -11,12 +15,17 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.Enumeration;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.awt.Dimension;
 import java.awt.Window;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +34,7 @@ import java.util.logging.SimpleFormatter;
 
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
+import com.atex.h11.newsday.metadata.common.CustomException;
 import com.atex.h11.newsday.metadata.common.InfoBox;
 
 public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel {
@@ -40,6 +50,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	private MetadataPanel metadataPanel = null;
 	
 	private ConfigModel config = null;
+	
+	private NCMDataSource ds = null;
 	
 	private static final Logger logger = Constants.LOGGER;
 	private static FileHandler fileLog;
@@ -82,6 +94,9 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		    
 		    // log level
 			logger.setLevel(Level.parse(config.getConfigValue("logLevel")));	
+			
+			// get H11 data source
+			ds = getDataSource();
 		}
 		catch (Exception e) {
 			logger.log(Level.SEVERE, "Error encountered", e);
@@ -249,13 +264,61 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		logger.finer("Window parent info: name=" + parent.getName());
 	}	
 		
-	private boolean isReady() {
+	protected boolean isReady() {
 		boolean retVal = metadataPanel.isReady();
 		logger.finer("Return value=" + retVal);
 		return retVal;
 	}	
 	
-	private String getPubFromLevel(String objLevel) 
+	protected NCMDataSource getDataSource() 
+			throws FileNotFoundException, IOException, CustomException {
+		logger.entering(this.getClass().getSimpleName(), "getDataSource");
+		DataSourceManager dsmgr = null;
+		
+		Properties connectProps = new Properties();
+		connectProps.load(new FileInputStream(config.getConnectionPropertiesFile()));
+
+        Enumeration<?> connectEnum = connectProps.propertyNames();
+        while (connectEnum.hasMoreElements()) {
+        	String key = (String) connectEnum.nextElement();
+        	String value = connectProps.getProperty(key);
+        	System.setProperty(key, value);
+        	logger.finer("connect: " + key + "=" + value);
+        }    		
+				
+		Properties jndiProps = new Properties();
+        jndiProps.load(new FileInputStream(System.getProperty(Constants.JNDI_PROPERTIES)));
+        
+        // Get a DataSourceManager instance.
+        dsmgr = DataSourceManager.getInstance(jndiProps);
+        
+        Enumeration<?> jndiEnum = jndiProps.propertyNames();
+        while (jndiEnum.hasMoreElements()) {
+        	String key = (String) jndiEnum.nextElement();
+        	logger.finer("jndi: " + key + "=" + jndiProps.getProperty(key));
+        }                    	  
+        
+		String user = config.getAPIUser();
+		String password = config.getAPIPassword();
+		logger.finer("API user=" + user + ", password=" + password);
+		
+		// Login
+		UPSUser upsUser = 
+			UPSUser.instanceUPSUserForNamedUser(user, password, ApplicationConstants.APP_MEDIA_API_ID);
+		NCMDataSource ds = 
+			(NCMDataSource) dsmgr.getDataSource(NCMDataSource.DS_PK, upsUser, ApplicationConstants.APP_MEDIA_API_ID);		
+	
+		if (ds == null) {
+			throw new CustomException("Datasource is null");
+		} else {
+			logger.finer("Datasource initialized");
+		}
+		
+		logger.exiting(this.getClass().getSimpleName(), "getDataSource");
+		return ds;
+	}
+	
+	protected String getPubFromLevel(String objLevel) 
 			throws XPathExpressionException {
 		String pub = null;
 		
@@ -274,7 +337,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		return pub;
 	}
 	
-	private void logMetadata(HashMap<String, String> map, String msg) {
+	protected void logMetadata(HashMap<String, String> map, String msg) {
 		// sort map by key
 		Map<String, String> treeMap = new TreeMap<String, String>(map);
 		
