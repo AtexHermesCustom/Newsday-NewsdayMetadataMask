@@ -778,25 +778,25 @@ public class MetadataPanel extends JPanel {
 		if (reporter != null && !reporter.trim().isEmpty()) {
 			switch (reporterNum) {
 				case 1:
-					if (reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim()) ||
-						reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
+					if (reporter.equalsIgnoreCase(getComboBoxSelectedItem(cmbReporter2)) ||
+						reporter.equalsIgnoreCase(getComboBoxSelectedItem(cmbReporter3))) {
 							retValue = true;
 					}
 					break;
 				case 2:
-					if (reporter.equalsIgnoreCase(cmbReporter1.getSelectedItem().toString().trim()) ||
-						reporter.equalsIgnoreCase(cmbReporter3.getSelectedItem().toString().trim())) {
+					if (reporter.equalsIgnoreCase(getComboBoxSelectedItem(cmbReporter1)) ||
+						reporter.equalsIgnoreCase(getComboBoxSelectedItem(cmbReporter3))) {
 							retValue = true;
 					}
 					break;
 				case 3:
-					if (reporter.equalsIgnoreCase(cmbReporter1.getSelectedItem().toString().trim()) ||
-						reporter.equalsIgnoreCase(cmbReporter2.getSelectedItem().toString().trim())) {
+					if (reporter.equalsIgnoreCase(getComboBoxSelectedItem(cmbReporter1)) ||
+						reporter.equalsIgnoreCase(getComboBoxSelectedItem(cmbReporter2))) {
 							retValue = true;
 					}
 					break;
 			}
-		}		
+		}	
 		
 		return retValue;
 	}
