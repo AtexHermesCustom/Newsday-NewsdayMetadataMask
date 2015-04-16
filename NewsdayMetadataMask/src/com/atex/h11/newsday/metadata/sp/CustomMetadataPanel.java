@@ -205,7 +205,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			retMetadata = metadataPanel.getMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
-			updateTextMetadata("WEB", "BYLINE", retMetadata.get("REPORTER1"));
+			//updateChildMetadata(NCMObjectNodeType.OBJ_TEXT, "WEB", "BYLINE", retMetadata.get("REPORTER1"));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
 			return retMetadata;
@@ -288,7 +288,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		return sp;
 	}
 	
-	protected void updateTextMetadata(String metaSchema, String metaField, String metaValue) {
+	protected void updateChildMetadata(int objType, String metaSchema, String metaField, String metaValue) {
 		// get child objects
 		INodePK[] childPKs = sp.getChildPKs();
 		if (childPKs != null) {
@@ -302,14 +302,14 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				NCMObjectValueClient child = (NCMObjectValueClient) ds.getNode(childPK, objProps);
 				
 				// text objects
-				if (child.getType() == NCMObjectNodeType.OBJ_TEXT) {
+				if (child.getType() == objType) {
 					setMetadata(child, metaSchema, metaField, metaValue);
 				}				
 			}
 		}
 	}
 	
-	private void setMetadata(NCMObjectValueClient objVC, String metaSchema, String metaField, String metaValue) {
+	protected void setMetadata(NCMObjectValueClient objVC, String metaSchema, String metaField, String metaValue) {
 		String objName = objVC.getNCMName();
 		Integer objId = getObjIdFromPK(objVC.getPK());
 		logger.finer("setMetadata: Object [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]" +
@@ -354,7 +354,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		}			
 	}	
 	
-	private int getObjIdFromPK(INodePK pk) {
+	protected int getObjIdFromPK(INodePK pk) {
 		String s = pk.toString();
 		int delimIdx = s.indexOf(":");
 		if (delimIdx >= 0)
