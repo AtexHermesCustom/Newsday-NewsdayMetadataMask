@@ -3,10 +3,20 @@ package com.atex.h11.newsday.metadata.sp;
 import com.unisys.media.commonservices.common.location.LocationInfo;
 import com.unisys.media.commonservices.dialogs.metadata.custom.NodeValueInspector;
 import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPanel;
+import com.unisys.media.cr.adapter.ncm.common.business.interfaces.INCMMetadataNodeManager;
+import com.unisys.media.cr.adapter.ncm.common.data.pk.NCMCustomMetadataPK;
 import com.unisys.media.cr.adapter.ncm.common.data.pk.NCMObjectPK;
+import com.unisys.media.cr.adapter.ncm.common.data.types.NCMObjectNodeType;
+import com.unisys.media.cr.adapter.ncm.common.data.values.NCMCustomMetadataJournal;
+import com.unisys.media.cr.adapter.ncm.common.data.values.NCMMetadataPropertyValue;
 import com.unisys.media.cr.adapter.ncm.common.data.values.NCMObjectBuildProperties;
 import com.unisys.media.cr.adapter.ncm.model.data.datasource.NCMDataSource;
 import com.unisys.media.cr.adapter.ncm.model.data.values.NCMObjectValueClient;
+import com.unisys.media.cr.common.data.interfaces.INodePK;
+import com.unisys.media.cr.common.data.types.IPropertyDefType;
+import com.unisys.media.extension.common.exception.NodeAlreadyLockedException;
+import com.unisys.media.ncm.cfg.common.data.values.MetadataSchemaValue;
+import com.unisys.media.ncm.cfg.model.values.UserHermesCfgValueClient;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +29,7 @@ import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Vector;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.util.Locale;
@@ -194,6 +205,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			retMetadata = metadataPanel.getMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
+			updateTextMetadata();
+			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
 			return retMetadata;
 		}
@@ -275,7 +288,79 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		return sp;
 	}
 	
+	protected void updateTextMetadata() {
+		// get child objects
+		INodePK[] childPKs = sp.getChildPKs();
+		if (childPKs != null) {
+			NCMObjectBuildProperties objProps = new NCMObjectBuildProperties();
+			objProps.setGetByObjId(true);
+			objProps.setDoNotChekPermissions(true);
+			objProps.setIncludeMetadataGroups(new Vector<String>());		
 	
+			for (int i = 0; i < childPKs.length; i++ ) {
+				NCMObjectPK childPK = new NCMObjectPK(getObjIdFromPK(childPKs[i]));
+				NCMObjectValueClient child = (NCMObjectValueClient) ds.getNode(childPK, objProps);
+				
+				// text objects
+				if (child.getType() == NCMObjectNodeType.OBJ_TEXT) {
+					setMetadata(child, "WEB", "BYLINE", "Test byline");
+				}				
+			}
+		}
+	}
+	
+	private void setMetadata(NCMObjectValueClient objVC, String metaGroup, String metaField, String metaValue) {
+		String objName = objVC.getNCMName();
+		Integer objId = getObjIdFromPK(objVC.getPK());
+		logger.finer("setMetadata: Object [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]" +
+			", Meta=" + metaGroup + "." + metaField + ", Value=" + metaValue);
+		
+		UserHermesCfgValueClient cfg = ds.getUserHermesCfg();
+		
+		// Get from configuration the schemaId using schemaName for metadata
+		MetadataSchemaValue schema = cfg.getMetadataSchemaByName(metaGroup);
+		int schemaId = schema.getId();
+		
+		// Get metadata property
+		IPropertyDefType metaGroupDefType = ds.getPropertyDefType(metaGroup);
+		//IPropertyValueClient metaGroupPK = objVC.getProperty(metaGroupDefType.getPK());		
+		
+		INCMMetadataNodeManager metaMgr = DataSource.getMetadataManager();
+		NCMMetadataPropertyValue pValue = new NCMMetadataPropertyValue(
+				metaGroupDefType.getPK(), null, schema);
+		pValue.setMetadataValue(metaField, metaValue);
+		NCMCustomMetadataPK cmPk = new NCMCustomMetadataPK(
+				objId, (short) objVC.getType(), schemaId);
+		schemaId = schema.getId();
+		NCMCustomMetadataPK[] nodePKs = new NCMCustomMetadataPK[] { cmPk };
+		
+		try {
+			try {
+				metaMgr.lockMetadataGroup(schemaId, nodePKs);
+			} catch (NodeAlreadyLockedException e) {
+			}
+			NCMCustomMetadataJournal j = new NCMCustomMetadataJournal();
+			j.setCreateDuringUpdate(true);
+			metaMgr.updateMetadataGroup(schemaId, nodePKs, pValue, j);
+			logger.finer("setMetadata: Update metadata successful for [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]");
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "setMetadata: Update metadata failed for [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]: ", 
+				e);
+		} finally {
+			try {
+				metaMgr.unlockMetadataGroup(schemaId, nodePKs);
+			} catch (Exception e) {
+			}
+		}			
+	}	
+	
+	private int getObjIdFromPK(INodePK pk) {
+		String s = pk.toString();
+		int delimIdx = s.indexOf(":");
+		if (delimIdx >= 0)
+			s = s.substring(0, delimIdx);
+		return Integer.parseInt(s);
+	}	
 		
 	protected boolean isReady() {
 		boolean retVal = metadataPanel.isReady();

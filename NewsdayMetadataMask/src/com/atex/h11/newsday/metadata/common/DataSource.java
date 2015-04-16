@@ -8,13 +8,18 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 import com.atex.h11.newsday.util.CustomException;
+import com.unisys.media.cr.adapter.ncm.common.business.interfaces.INCMMetadataNodeManager;
+import com.unisys.media.cr.adapter.ncm.common.data.datasource.NCMDataSourceDescriptor;
 import com.unisys.media.cr.adapter.ncm.model.data.datasource.NCMDataSource;
+import com.unisys.media.cr.common.data.values.NodeTypePK;
 import com.unisys.media.cr.model.data.datasource.DataSourceManager;
 import com.unisys.media.extension.common.constants.ApplicationConstants;
 import com.unisys.media.extension.common.security.UPSUser;
 
 public class DataSource {
 	private static final Logger logger = Constants.LOGGER;
+	private static NCMDataSource ds = null;
+	private static INCMMetadataNodeManager metaMgr = null;
 	
 	public DataSource() { }
 	
@@ -53,8 +58,7 @@ public class DataSource {
 		// Login
 		UPSUser upsUser = 
 			UPSUser.instanceUPSUserForNamedUser(user, password, ApplicationConstants.APP_MEDIA_API_ID);
-		NCMDataSource ds = 
-			(NCMDataSource) dsmgr.getDataSource(NCMDataSource.DS_PK, upsUser, ApplicationConstants.APP_MEDIA_API_ID);		
+		ds = (NCMDataSource) dsmgr.getDataSource(NCMDataSource.DS_PK, upsUser, ApplicationConstants.APP_MEDIA_API_ID);		
 	
 		if (ds == null) {
 			throw new CustomException("Datasource is null");
@@ -64,5 +68,17 @@ public class DataSource {
 		
 		logger.exiting(NCMDataSource.class.getSimpleName(), "getDataSource");
 		return ds;
+	}	
+	
+	public static INCMMetadataNodeManager getMetadataManager() {
+		logger.entering(NCMDataSource.class.getSimpleName(), "getMetadataManager");
+		
+		if (metaMgr == null) {
+			NodeTypePK PK = new NodeTypePK(NCMDataSourceDescriptor.NODETYPE_NCMMETADATA);
+			metaMgr = (INCMMetadataNodeManager) ds.getNodeManager(PK);
+		}
+		
+		logger.exiting(NCMDataSource.class.getSimpleName(), "getMetadataManager");
+		return metaMgr;
 	}	
 }
