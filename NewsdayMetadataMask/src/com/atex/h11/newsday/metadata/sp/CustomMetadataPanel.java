@@ -274,6 +274,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		logger.finer("Package retrieved: name=" + sp.getNCMName() + ", type=" + sp.getType() + ", pk=" + sp.getPK().toString());
 		return sp;
 	}
+	
+	
 		
 	protected boolean isReady() {
 		boolean retVal = metadataPanel.isReady();
