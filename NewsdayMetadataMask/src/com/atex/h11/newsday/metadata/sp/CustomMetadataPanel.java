@@ -7,9 +7,6 @@ import com.unisys.media.cr.adapter.ncm.common.data.pk.NCMObjectPK;
 import com.unisys.media.cr.adapter.ncm.common.data.values.NCMObjectBuildProperties;
 import com.unisys.media.cr.adapter.ncm.model.data.datasource.NCMDataSource;
 import com.unisys.media.cr.adapter.ncm.model.data.values.NCMObjectValueClient;
-import com.unisys.media.cr.model.data.datasource.DataSourceManager;
-import com.unisys.media.extension.common.constants.ApplicationConstants;
-import com.unisys.media.extension.common.security.UPSUser;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,17 +15,12 @@ import javax.xml.xpath.XPathExpressionException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.util.Enumeration;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.awt.Dimension;
 import java.awt.Window;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +30,6 @@ import java.util.logging.SimpleFormatter;
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
 import com.atex.h11.newsday.metadata.common.DataSource;
-import com.atex.h11.newsday.util.CustomException;
 import com.atex.h11.newsday.util.InfoBox;
 
 public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel {
