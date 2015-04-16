@@ -172,7 +172,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			}
 			
 			// retrieve package
-			NCMObjectValueClient sp = getPackage(Integer.parseInt(objId));
+			sp = getPackage(Integer.parseInt(objId));
 
 			logMetadata(metadata, "Loaded from DB");
 
@@ -205,7 +205,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			retMetadata = metadataPanel.getMetadataValues();
 			logMetadata(retMetadata, "Save to DB");
 			
-			updateTextMetadata();
+			updateTextMetadata("WEB", "BYLINE", retMetadata.get("REPORTER1"));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
 			return retMetadata;
@@ -288,7 +288,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		return sp;
 	}
 	
-	protected void updateTextMetadata() {
+	protected void updateTextMetadata(String metaSchema, String metaField, String metaValue) {
 		// get child objects
 		INodePK[] childPKs = sp.getChildPKs();
 		if (childPKs != null) {
@@ -303,26 +303,26 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				
 				// text objects
 				if (child.getType() == NCMObjectNodeType.OBJ_TEXT) {
-					setMetadata(child, "WEB", "BYLINE", "Test byline");
+					setMetadata(child, metaSchema, metaField, metaValue);
 				}				
 			}
 		}
 	}
 	
-	private void setMetadata(NCMObjectValueClient objVC, String metaGroup, String metaField, String metaValue) {
+	private void setMetadata(NCMObjectValueClient objVC, String metaSchema, String metaField, String metaValue) {
 		String objName = objVC.getNCMName();
 		Integer objId = getObjIdFromPK(objVC.getPK());
 		logger.finer("setMetadata: Object [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]" +
-			", Meta=" + metaGroup + "." + metaField + ", Value=" + metaValue);
+			", Meta=" + metaSchema + "." + metaField + ", Value=" + metaValue);
 		
 		UserHermesCfgValueClient cfg = ds.getUserHermesCfg();
 		
 		// Get from configuration the schemaId using schemaName for metadata
-		MetadataSchemaValue schema = cfg.getMetadataSchemaByName(metaGroup);
+		MetadataSchemaValue schema = cfg.getMetadataSchemaByName(metaSchema);
 		int schemaId = schema.getId();
 		
 		// Get metadata property
-		IPropertyDefType metaGroupDefType = ds.getPropertyDefType(metaGroup);
+		IPropertyDefType metaGroupDefType = ds.getPropertyDefType(metaSchema);
 		//IPropertyValueClient metaGroupPK = objVC.getProperty(metaGroupDefType.getPK());		
 		
 		INCMMetadataNodeManager metaMgr = DataSource.getMetadataManager();

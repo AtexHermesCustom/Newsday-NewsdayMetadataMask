@@ -30,19 +30,19 @@ public class DataSource {
 		if (ds == null) {
 			DataSourceManager dsmgr = null;
 			
-			Properties connectProps = new Properties();
-			connectProps.load(new FileInputStream(config.getConnectionPropertiesFile()));
+			Properties secProps = new Properties();
+			secProps.load(new FileInputStream(config.getSecurityPropertiesFile()));
 	
-	        Enumeration<?> connectEnum = connectProps.propertyNames();
-	        while (connectEnum.hasMoreElements()) {
-	        	String key = (String) connectEnum.nextElement();
-	        	String value = connectProps.getProperty(key);
+	        Enumeration<?> secEnum = secProps.propertyNames();
+	        while (secEnum.hasMoreElements()) {
+	        	String key = (String) secEnum.nextElement();
+	        	String value = secProps.getProperty(key);
 	        	System.setProperty(key, value);
-	        	logger.finer("connect: " + key + "=" + value);
+	        	logger.finer("security: " + key + "=" + value);
 	        }    		
 					
 			Properties jndiProps = new Properties();
-	        jndiProps.load(new FileInputStream(System.getProperty(Constants.JNDI_PROPERTIES)));
+	        jndiProps.load(new FileInputStream(config.getJNDIPropertiesFile()));
 	        
 	        // Get a DataSourceManager instance.
 	        dsmgr = DataSourceManager.getInstance(jndiProps);

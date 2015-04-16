@@ -79,9 +79,13 @@ public class ConfigModel {
 		return p;
 	}    
 	
-	public String getConnectionPropertiesFile() {
-		return props.getProperty(Constants.CONNECTION_PROPERTIES);
+	public String getSecurityPropertiesFile() {
+		return props.getProperty(Constants.SECURITY_PROPERTIES);
 	}
+	
+	public String getJNDIPropertiesFile() {
+		return props.getProperty(Constants.JNDI_PROPERTIES);
+	}	
 
 	public String getAPIUser() {
 		return props.getProperty(Constants.API_USER);

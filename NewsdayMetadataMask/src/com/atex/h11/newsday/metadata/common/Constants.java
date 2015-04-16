@@ -27,10 +27,10 @@ public interface Constants {
 	public static final String METADATA_PROPERTIES_FILE = METADATA_GUI_PATH + "NewsdayMetadata.properties";
 	public static final String METADATA_CONFIG_FILE_PROPERTY = "MetadataConfigFile";
 	
-	public static final String CONNECTION_PROPERTIES = "ConnectionProperties";
+	public static final String SECURITY_PROPERTIES = "SecurityProperties";
+	public static final String JNDI_PROPERTIES = "JNDIProperties";
 	public static final String API_USER = "APIUser";
 	public static final String API_PASSWORD = "APIPassword";
-	public static final String JNDI_PROPERTIES = "jndi.properties";
 
 	// boolean constants
 	public static final String FALSE = "false";
