@@ -22,9 +22,9 @@ public interface Constants {
 
 	// 
 	// File Path constants
-	public static final String METADATA_PROPERTIES_DIR_DEFAULT = "c:\\Hermes11\\custommetadata\\"; 
+	public static final String METADATA_PROPERTIES_DIR_DEFAULT = "C:/Hermes11/custommetadata"; 
 	public static final String METADATA_PROPERTIES_DIR = System.getProperty("MetadataPropertiesDir", METADATA_PROPERTIES_DIR_DEFAULT);
-	public static final String METADATA_PROPERTIES_FILE = METADATA_PROPERTIES_DIR + "NewsdayMetadata.properties";
+	public static final String METADATA_PROPERTIES_FILE = METADATA_PROPERTIES_DIR + "/" + "NewsdayMetadata.properties";
 	public static final String METADATA_CONFIG_FILE_PROPERTY = "MetadataConfigFile";
 	
 	// boolean constants

@@ -146,7 +146,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			String pub = "";
 			
 			// for testing only
-			String testMode = System.getProperty("metadata.test");
+			String testMode = System.getProperty("Metadata.Test");
 			if (testMode != null && testMode.equals("1")) {
 				System.out.println("metadata test mode");
 				objId = "5465:00";
