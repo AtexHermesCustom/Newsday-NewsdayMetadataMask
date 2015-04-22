@@ -797,7 +797,7 @@ public class MetadataPanel extends JPanel {
 					}
 					break;
 			}
-		}		
+		}	
 		
 		return retValue;
 	}
