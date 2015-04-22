@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class CheckBoxList extends JList<JCheckBox> {
+public class CheckBoxList extends JList {
 	private static final long serialVersionUID = 1L;
 	private boolean enabled;
 	protected static Border noFocusBorder = new EmptyBorder(1, 1, 1, 1);

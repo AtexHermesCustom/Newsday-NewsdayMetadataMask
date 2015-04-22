@@ -85,18 +85,18 @@ public class MetadataPanel extends JPanel {
 	private JTextField txtContributor;
 	private JTextField txtStoryGroup;
 	private JTextField txtCustomKeyword;
-	private JComboBox<String> cmbPub;
-	private JComboBox<String> cmbReporter1;
-	private JComboBox<String> cmbDesk;
-	private JComboBox<String> cmbReporter2;
-	private JComboBox<String> cmbReporter3;
-	private JComboBox<String> cmbPriority;
-	private JComboBox<String> cmbStoryType;
-	private JComboBox<String> cmbLabel;
-	private JComboBox<String> cmbPrintSection;
-	private JComboBox<String> cmbPrintSequence;
-	private JComboBox<String> cmbHomepage;
-	private JComboBox<String> cmbArrivalStatus;
+	private JComboBox cmbPub;
+	private JComboBox cmbReporter1;
+	private JComboBox cmbDesk;
+	private JComboBox cmbReporter2;
+	private JComboBox cmbReporter3;
+	private JComboBox cmbPriority;
+	private JComboBox cmbStoryType;
+	private JComboBox cmbLabel;
+	private JComboBox cmbPrintSection;
+	private JComboBox cmbPrintSequence;
+	private JComboBox cmbHomepage;
+	private JComboBox cmbArrivalStatus;
 	private JDatePickerImpl dtpckEmbargoDate;
 	private JSpinner spnrEmbargoTime;
 	private JLabel lblPage;
@@ -108,8 +108,8 @@ public class MetadataPanel extends JPanel {
 	private JTree trCommunities;
 	private JScrollPane scrlSelCategories;
 	private JScrollPane scrlSelCommunities;
-	private JList<String> lstSelCategories;
-	private JList<String> lstSelCommunities;
+	private JList lstSelCategories;
+	private JList lstSelCommunities;
 	private JScrollPane scrlPrintExtra;
 	private JScrollPane scrlDigitalExtra1;
 	private JScrollPane scrlDigitalExtra2;
@@ -121,8 +121,8 @@ public class MetadataPanel extends JPanel {
 	private JLabel label;
 	private JFormattedTextField ftfAssignLength;
 	private JFormattedTextField ftfPrintPage;
-	private DefaultListModel<String> selCategoriesModel = null;
-	private DefaultListModel<String> selCommunitiesModel = null;
+	private DefaultListModel selCategoriesModel = null;
+	private DefaultListModel selCommunitiesModel = null;
 	JButton btnAddKeyword;
 	private JLabel lblEmbargoTime;
 	private JLabel lblVersion;
@@ -236,13 +236,13 @@ public class MetadataPanel extends JPanel {
 		lblPub = new JLabel("Pub");
 		add(lblPub, "14, 2, right, default");
 		
-		cmbPub = new JComboBox<String>();
+		cmbPub = new JComboBox();
 		add(cmbPub, "16, 2, 3, 1, fill, default");
 		
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "2, 4, right, default");
 		
-		cmbReporter1 = new JComboBox<String>();
+		cmbReporter1 = new JComboBox();
 		cmbReporter1.setEditable(true);
 		add(cmbReporter1, "4, 4, 5, 1, fill, default");
 		
@@ -253,13 +253,13 @@ public class MetadataPanel extends JPanel {
 		label = new JLabel("Desk");
 		add(label, "14, 4, right, default");
 		
-		cmbDesk = new JComboBox<String>();
+		cmbDesk = new JComboBox();
 		add(cmbDesk, "16, 4, 3, 1, fill, default");
 		
 		JLabel lblndReporter = new JLabel("2nd Reporter");
 		add(lblndReporter, "2, 6, right, default");
 		
-		cmbReporter2 = new JComboBox<String>();
+		cmbReporter2 = new JComboBox();
 		cmbReporter2.setEditable(true);
 		add(cmbReporter2, "4, 6, 5, 1, fill, default");
 		
@@ -276,7 +276,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblrdReporter = new JLabel("3rd Reporter");
 		add(lblrdReporter, "2, 8, right, default");
 		
-		cmbReporter3 = new JComboBox<String>();
+		cmbReporter3 = new JComboBox();
 		cmbReporter3.setEditable(true);
 		add(cmbReporter3, "4, 8, 5, 1, fill, default");
 		
@@ -289,7 +289,7 @@ public class MetadataPanel extends JPanel {
 				new NumericDocumentFilter(ftfAssignLength.getDocument(), false, false));
 		add(ftfAssignLength, "14, 8, fill, default");
 		
-		cmbPriority = new JComboBox<String>();
+		cmbPriority = new JComboBox();
 		add(cmbPriority, "16, 8, 3, 1, fill, default");
 		
 		JLabel lblContributor = new JLabel("Contributor");
@@ -320,7 +320,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblStoryType = new JLabel("Story Type");
 		add(lblStoryType, "2, 14, right, default");
 		
-		cmbStoryType = new JComboBox<String>();
+		cmbStoryType = new JComboBox();
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
 		
 		JLabel lblDigitalExtras = new JLabel("Digital Extras");
@@ -329,7 +329,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblLabel = new JLabel("Label");
 		add(lblLabel, "2, 16, right, default");
 		
-		cmbLabel = new JComboBox<String>();
+		cmbLabel = new JComboBox();
 		add(cmbLabel, "4, 16, 3, 1, fill, default");
 		
 		scrlDigitalExtra1 = new JScrollPane();
@@ -365,13 +365,13 @@ public class MetadataPanel extends JPanel {
 		JLabel lblSection = new JLabel("Section");
 		add(lblSection, "4, 22, right, default");
 		
-		cmbPrintSection = new JComboBox<String>();
+		cmbPrintSection = new JComboBox();
 		add(cmbPrintSection, "6, 22, 3, 1, fill, default");
 		
 		JLabel lblSequenceOr = new JLabel("Sequence");
 		add(lblSequenceOr, "10, 22, right, default");
 		
-		cmbPrintSequence = new JComboBox<String>();
+		cmbPrintSequence = new JComboBox();
 		add(cmbPrintSequence, "12, 22, 3, 1, fill, default");
 		
 		lblPage = new JLabel("Page");
@@ -390,13 +390,13 @@ public class MetadataPanel extends JPanel {
 		JLabel lblHomePage = new JLabel("Home page");
 		add(lblHomePage, "4, 24, right, default");
 		
-		cmbHomepage = new JComboBox<String>();
+		cmbHomepage = new JComboBox();
 		add(cmbHomepage, "6, 24, 3, 1, fill, default");
 		
 		JLabel lblArrivalStatus = new JLabel("Arrival Status");
 		add(lblArrivalStatus, "10, 24, right, default");
 		
-		cmbArrivalStatus = new JComboBox<String>();
+		cmbArrivalStatus = new JComboBox();
 		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
 
 		Date currentDate = new Date();
@@ -458,7 +458,7 @@ public class MetadataPanel extends JPanel {
 		scrlSelCategories = new JScrollPane();
 		add(scrlSelCategories, "4, 30, 5, 1, fill, fill");
 		
-		lstSelCategories = new JList<String>();
+		lstSelCategories = new JList();
 		lstSelCategories.setToolTipText("Double click an item to remove it from the list");
 		scrlSelCategories.setViewportView(lstSelCategories);
 		
@@ -469,7 +469,7 @@ public class MetadataPanel extends JPanel {
 		scrlSelCommunities = new JScrollPane();
 		add(scrlSelCommunities, "12, 30, 7, 1, fill, fill");
 		
-		lstSelCommunities = new JList<String>();
+		lstSelCommunities = new JList();
 		lstSelCommunities.setToolTipText("Double click an item to remove it from the list");
 		scrlSelCommunities.setViewportView(lstSelCommunities);
 		
@@ -750,7 +750,7 @@ public class MetadataPanel extends JPanel {
 		});				
 	}
 	
-	protected void addItemToListModel(DefaultListModel<String> model, String item) {
+	protected void addItemToListModel(DefaultListModel model, String item) {
 		// check if item is already in the list - custom check to be case-insensitive
 		boolean duplicate = false;
 		Object[] selList = model.toArray();
@@ -769,7 +769,7 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
-	protected void removeItemFromListModel(DefaultListModel<String> model, int index) {
+	protected void removeItemFromListModel(DefaultListModel model, int index) {
 		model.remove(index);
 	}
 	
@@ -957,13 +957,13 @@ public class MetadataPanel extends JPanel {
 
 		// categories list
 		config.initTreeWithGroups(trCategories, pub, "category");
-		selCategoriesModel = new DefaultListModel<String>();
+		selCategoriesModel = new DefaultListModel();
 		lstSelCategories.setModel(selCategoriesModel);
 		setModelListItems(selCategoriesModel, metadata.get("CATEGORIES"));		
 		
 		// communities list
 		config.initTree(trCommunities, pub, "community");	
-		selCommunitiesModel = new DefaultListModel<String>();
+		selCommunitiesModel = new DefaultListModel();
 		lstSelCommunities.setModel(selCommunitiesModel);				
 		setModelListItems(selCommunitiesModel, metadata.get("COMMUNITIES"));
 	}
@@ -1068,13 +1068,13 @@ public class MetadataPanel extends JPanel {
 		return retMetadata;
 	}  	
 	
-	protected void setComboBoxSelectedItem(JComboBox<String> cmbControl, String item) {
+	protected void setComboBoxSelectedItem(JComboBox cmbControl, String item) {
 		if (cmbControl.getModel().getSize() > 0) {
 			cmbControl.setSelectedItem(item);
 		}
 	}
 	
-	protected String getComboBoxSelectedItem(JComboBox<String> cmbControl) {
+	protected String getComboBoxSelectedItem(JComboBox cmbControl) {
 		if (cmbControl.getSelectedIndex() > -1) {
 			return cmbControl.getSelectedItem().toString().trim();
 		} else {
@@ -1082,7 +1082,7 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
-	protected void setModelListItems(DefaultListModel<String> model, String stringList) {
+	protected void setModelListItems(DefaultListModel model, String stringList) {
 		if (stringList.contains(",")) {
 			String[] itemList = stringList.split(",");
 			for (int i = 0; i < itemList.length; i++) {
@@ -1093,7 +1093,7 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
-	protected String getStringFromListModel(DefaultListModel<String> model) {
+	protected String getStringFromListModel(DefaultListModel model) {
 		String retStringList = "";
 		Object[] list = model.toArray();
 		
