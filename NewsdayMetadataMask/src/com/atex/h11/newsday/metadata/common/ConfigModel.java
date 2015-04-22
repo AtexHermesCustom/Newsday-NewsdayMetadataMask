@@ -140,7 +140,7 @@ public class ConfigModel {
     	return nl;
     }    
            
-    public void initComboBox(JComboBox<String> cmbControl, String pub, String metadata) 
+    public void initComboBox(JComboBox cmbControl, String pub, String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(pub, metadata); 
 		if (nl.getLength() > 0) {
@@ -148,7 +148,7 @@ public class ConfigModel {
 		}
 	}    
     
-    public void initComboBox(JComboBox<String> cmbControl, String pub, String metadata, String xpath) 
+    public void initComboBox(JComboBox cmbControl, String pub, String metadata, String xpath) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(pub, metadata, xpath);
 		if (nl.getLength() > 0) {
@@ -156,7 +156,7 @@ public class ConfigModel {
 		}
 	}      
     
-    public void initComboBox(JComboBox<String> cmbControl, String metadata, NodeList nl) 
+    public void initComboBox(JComboBox cmbControl, String metadata, NodeList nl) 
 			throws XPathExpressionException {
     	List<String> items = new ArrayList<String>(nl.getLength());
     	
@@ -171,7 +171,7 @@ public class ConfigModel {
 		}
 		
 		// load to combo box
-		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(items.toArray(new String[items.size()]));
+		DefaultComboBoxModel model = new DefaultComboBoxModel(items.toArray(new String[items.size()]));
 		cmbControl.setModel(model);
 
 		// insert empty item
@@ -269,10 +269,10 @@ public class ConfigModel {
 		trControl.setRootVisible(false);		// root not shown
     }
  
-    public DefaultListModel<JCheckBox> initCheckBoxListModel(String pub, String metadata) 
+    public DefaultListModel initCheckBoxListModel(String pub, String metadata) 
 			throws XPathExpressionException {
 		NodeList nl = getListItems(pub, metadata);
-		DefaultListModel<JCheckBox> listModel = new DefaultListModel<JCheckBox>();
+		DefaultListModel listModel = new DefaultListModel();
 		// insert items
 		for (int i = 0; i < nl.getLength(); i++) {
 			String checkBoxText = nl.item(i).getTextContent().trim();
