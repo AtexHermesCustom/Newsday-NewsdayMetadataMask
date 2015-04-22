@@ -30,7 +30,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import com.atex.h11.newsday.util.Base64Coder;
 import com.atex.h11.newsday.util.CustomException;
 
 
@@ -79,23 +78,6 @@ public class ConfigModel {
 		return p;
 	}    
 	
-	public String getSecurityPropertiesFile() {
-		return props.getProperty(Constants.SECURITY_PROPERTIES);
-	}
-	
-	public String getJNDIPropertiesFile() {
-		return props.getProperty(Constants.JNDI_PROPERTIES);
-	}	
-
-	public String getAPIUser() {
-		return props.getProperty(Constants.API_USER);
-	}
-	
-	public String getAPIPassword() {
-		String password = props.getProperty(Constants.API_PASSWORD);
-		return Base64Coder.decodeString(password);
-	}
-
 	public String getXpathValue(String xpath)
     		throws XPathExpressionException {
     	String val = "";	// default value

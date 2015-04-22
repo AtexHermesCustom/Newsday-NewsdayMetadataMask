@@ -44,7 +44,6 @@ import java.util.logging.SimpleFormatter;
 
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
-import com.atex.h11.newsday.metadata.common.DataSource;
 import com.atex.h11.newsday.util.InfoBox;
 
 public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel {
@@ -105,9 +104,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		    
 		    // log level
 			logger.setLevel(Level.parse(config.getConfigValue("logLevel")));	
-			
-			// get H11 data source
-			ds = DataSource.getDataSource(config);
 		}
 		catch (Exception e) {
 			logger.log(Level.SEVERE, "Error encountered", e);
@@ -175,9 +171,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				logger.log(Level.WARNING, "inspector is null");
 			}
 			
-			// retrieve package
-			sp = getPackage(Integer.parseInt(objId));
-
 			logMetadata(metadata, "Loaded from DB");
 
 			metadataPanel = new MetadataPanel(config, metadata, logger, objId, objName, objLevel, pub);
@@ -235,12 +228,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				retVal = true;
 				break;
 		}
-		
-		if (retVal) {
-			//updateChildMetadata(NCMObjectNodeType.OBJ_TEXT, "WEB", "BYLINE", retMetadata.get("REPORTER1"));
-			updateChildMetadata(NCMObjectNodeType.OBJ_TEXT, "WEB", "BYLINE", "test byline");
-		}
-		
+				
 		logger.finer("Return value=" + retVal);
 		return retVal;
 	}	
@@ -282,92 +270,6 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	public void setParent(Window parent) {
 		this.parent = parent;
 		logger.finer("Window parent info: name=" + parent.getName());
-	}	
-	
-	protected NCMObjectValueClient getPackage(int objId) {
-		NCMObjectBuildProperties objProps = new NCMObjectBuildProperties();
-		objProps.setGetByObjId(true);
-		objProps.setIncludeSpChild(true);
-		objProps.setDoNotChekPermissions(true);
-		//objProps.setIncludeMetadataGroups(new Vector<String>());
-		NCMObjectPK pk = new NCMObjectPK(objId);
-		NCMObjectValueClient sp = (NCMObjectValueClient) ((NCMDataSource)ds).getNode(pk, objProps);
-		logger.finer("Package retrieved: name=" + sp.getNCMName() + ", type=" + sp.getType() + ", pk=" + sp.getPK().toString());
-		return sp;
-	}
-	
-	protected void updateChildMetadata(int objType, String metaSchema, String metaField, String metaValue) {
-		// get child objects
-		INodePK[] childPKs = sp.getChildPKs();
-		if (childPKs != null) {
-			NCMObjectBuildProperties objProps = new NCMObjectBuildProperties();
-			objProps.setGetByObjId(true);
-			objProps.setDoNotChekPermissions(true);
-			objProps.setIncludeMetadataGroups(new Vector<String>());		
-	
-			for (int i = 0; i < childPKs.length; i++ ) {
-				NCMObjectPK childPK = new NCMObjectPK(getObjIdFromPK(childPKs[i]));
-				NCMObjectValueClient child = (NCMObjectValueClient) ds.getNode(childPK, objProps);
-				
-				// text objects
-				if (child.getType() == objType) {
-					setMetadata(child, metaSchema, metaField, metaValue);
-				}				
-			}
-		}
-	}
-	
-	protected void setMetadata(NCMObjectValueClient objVC, String metaSchema, String metaField, String metaValue) {
-		String objName = objVC.getNCMName();
-		Integer objId = getObjIdFromPK(objVC.getPK());
-		logger.finer("setMetadata: Object [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]" +
-			", Meta=" + metaSchema + "." + metaField + ", Value=" + metaValue);
-		
-		UserHermesCfgValueClient cfg = ds.getUserHermesCfg();
-		
-		// Get from configuration the schemaId using schemaName for metadata
-		MetadataSchemaValue schema = cfg.getMetadataSchemaByName(metaSchema);
-		int schemaId = schema.getId();
-		
-		// Get metadata property
-		IPropertyDefType metaGroupDefType = ds.getPropertyDefType(metaSchema);
-		//IPropertyValueClient metaGroupPK = objVC.getProperty(metaGroupDefType.getPK());		
-		
-		INCMMetadataNodeManager metaMgr = DataSource.getMetadataManager();
-		NCMMetadataPropertyValue pValue = new NCMMetadataPropertyValue(
-				metaGroupDefType.getPK(), null, schema);
-		pValue.setMetadataValue(metaField, metaValue);
-		NCMCustomMetadataPK cmPk = new NCMCustomMetadataPK(
-				objId, (short) objVC.getType(), schemaId);
-		schemaId = schema.getId();
-		NCMCustomMetadataPK[] nodePKs = new NCMCustomMetadataPK[] { cmPk };
-		
-		try {
-			try {
-				metaMgr.lockMetadataGroup(schemaId, nodePKs);
-			} catch (NodeAlreadyLockedException e) {
-			}
-			NCMCustomMetadataJournal j = new NCMCustomMetadataJournal();
-			j.setCreateDuringUpdate(true);
-			metaMgr.updateMetadataGroup(schemaId, nodePKs, pValue, j);
-			logger.finer("setMetadata: Update metadata successful for [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]");
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, "setMetadata: Update metadata failed for [" + objId.toString() + "," + objName + "," + Integer.toString(objVC.getType()) + "]: ", 
-				e);
-		} finally {
-			try {
-				metaMgr.unlockMetadataGroup(schemaId, nodePKs);
-			} catch (Exception e) {
-			}
-		}			
-	}	
-	
-	protected int getObjIdFromPK(INodePK pk) {
-		String s = pk.toString();
-		int delimIdx = s.indexOf(":");
-		if (delimIdx >= 0)
-			s = s.substring(0, delimIdx);
-		return Integer.parseInt(s);
 	}	
 		
 	protected boolean isReady() {
