@@ -904,18 +904,17 @@ public class MetadataPanel extends JPanel {
 
 		// web homepage - list depends on current desk
 		config.initComboBox(cmbHomepage, pub, "homepage", deskXpath + "/item");
-		String homepage = metadata.get("HOMEPAGE");
-		setComboBoxSelectedItem(cmbHomepage, homepage);
+		setComboBoxSelectedItem(cmbHomepage, metadata.get("HOMEPAGE"));
 
 		// print section - list depends on current desk
 		config.initComboBox(cmbPrintSection, pub, "printSection", deskXpath + "/item");
-		String printSection = metadata.get("PRINT_SECTION");
-		setComboBoxSelectedItem(cmbPrintSection, printSection);
+		setComboBoxSelectedItem(cmbPrintSection, metadata.get("PRINT_SECTION"));
+		
+		String currentPrintSection = cmbPrintSection.getSelectedItem().toString().trim();
 		
 		// print sequence - list depends on current desk and print section
-		config.initComboBox(cmbPrintSequence, pub, "printSequence", deskXpath + "/printSection[@id='" + printSection + "']/item");
-		String printSequence = metadata.get("SEQUENCE");
-		setComboBoxSelectedItem(cmbPrintSequence, printSequence);
+		config.initComboBox(cmbPrintSequence, pub, "printSequence", deskXpath + "/printSection[@id='" + currentPrintSection + "']/item");
+		setComboBoxSelectedItem(cmbPrintSequence, metadata.get("SEQUENCE"));
 
 		// text fields
 		txtEmail1.setText(metadata.get("REPORTER1_EMAIL"));

@@ -46,7 +46,7 @@ public class TestSPMetadata {
 		metadata.put("PHOTO_DESCRIPTION", "this is the photo desc");
 		metadata.put("BUDGET_HEAD", "my budget head is here");
 		metadata.put("PRINT_EXTRA", "print extra here");
-		metadata.put("PRINT_SECTION", "LI LIFE");
+		metadata.put("PRINT_SECTION", "");
 		metadata.put("SEQUENCE", "sequence value");
 		metadata.put("HOMEPAGE", "LI Crime");
 		metadata.put("ARRIVAL_STATUS", "LIVE");
