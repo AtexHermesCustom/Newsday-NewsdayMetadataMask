@@ -24,7 +24,7 @@ public class TestSPMetadata {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JFrame jFrame = new JFrame();
+		final JFrame jFrame = new JFrame();
 		final ICustomMetadataPanel customPane = new CustomMetadataPanel();
 		final HashMap<String, String> metadata = new HashMap<String, String>();
 		
@@ -59,8 +59,10 @@ public class TestSPMetadata {
 		metadata.put("DIGITAL_EXTRA1", "digital extra1");
 		metadata.put("DIGITAL_EXTRA2", "digital extra2");
 		metadata.put("PRINT_PAGE", "99");
-		metadata.put("EXCLUSIVE_FLAG", "FALSE");		
+		metadata.put("EXCLUSIVE_FLAG", "FALSE");
+		metadata.put("TEXT_BYLINE", "this is the text byline");		
 			
+		customPane.setParent(jFrame);
 		jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JButton okButton = new JButton("OK");
@@ -68,7 +70,8 @@ public class TestSPMetadata {
 			public void actionPerformed(ActionEvent arg0) {
 				if (customPane.canActionBePerformed(ICustomMetadataPanel.OK_BUTTON)) {
 					printHashMap(customPane.getMetadataValues());
-					System.exit(0);
+					//System.exit(0);
+					jFrame.dispose();	// to be able to call frame window listeners
 				}
 			}
 		});
@@ -100,7 +103,7 @@ public class TestSPMetadata {
 
 			public void windowClosed(WindowEvent e) {
 				System.out.println("End of main()");
-				printHashMap(customPane.getMetadataValues());
+				//printHashMap(customPane.getMetadataValues());
 				System.exit(0);
 			}
 

@@ -3,39 +3,28 @@ package com.atex.h11.newsday.metadata.sp;
 import com.unisys.media.commonservices.common.location.LocationInfo;
 import com.unisys.media.commonservices.dialogs.metadata.custom.NodeValueInspector;
 import com.unisys.media.commonservices.dialogs.metadata.view.ICustomMetadataPanel;
-import com.unisys.media.cr.adapter.ncm.common.business.interfaces.INCMMetadataNodeManager;
-import com.unisys.media.cr.adapter.ncm.common.data.pk.NCMCustomMetadataPK;
-import com.unisys.media.cr.adapter.ncm.common.data.pk.NCMObjectPK;
-import com.unisys.media.cr.adapter.ncm.common.data.types.NCMObjectNodeType;
-import com.unisys.media.cr.adapter.ncm.common.data.values.NCMCustomMetadataJournal;
-import com.unisys.media.cr.adapter.ncm.common.data.values.NCMMetadataPropertyValue;
-import com.unisys.media.cr.adapter.ncm.common.data.values.NCMObjectBuildProperties;
 import com.unisys.media.cr.adapter.ncm.model.data.datasource.NCMDataSource;
 import com.unisys.media.cr.adapter.ncm.model.data.values.NCMObjectValueClient;
-import com.unisys.media.cr.common.data.interfaces.INodePK;
-import com.unisys.media.cr.common.data.types.IPropertyDefType;
-import com.unisys.media.extension.common.exception.NodeAlreadyLockedException;
-import com.unisys.media.ncm.cfg.common.data.values.MetadataSchemaValue;
-import com.unisys.media.ncm.cfg.model.values.UserHermesCfgValueClient;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.Vector;
 import java.awt.Dimension;
 import java.awt.Window;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +33,7 @@ import java.util.logging.SimpleFormatter;
 
 import com.atex.h11.newsday.metadata.common.ConfigModel;
 import com.atex.h11.newsday.metadata.common.Constants;
+import com.atex.h11.newsday.metadata.common.CustomException;
 import com.atex.h11.newsday.util.InfoBox;
 
 public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel {
@@ -63,10 +53,17 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	private NCMDataSource ds = null;
 	private NCMObjectValueClient sp = null;
 	
+	private String objId;
+	private String objName; 		
+	private String objLevel;
+	private String objLevelId;
+	private String pub;	
+    private boolean isDone = false;	
+	
 	private static final Logger logger = Constants.LOGGER;
 	private static FileHandler fileLog;
     private static SimpleFormatter simpleFormatter;
-	
+    	
 	/**
 	 * This is the default constructor
 	 */
@@ -127,7 +124,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			throws Exception {
 		try {
 			logger.entering(this.getClass().getSimpleName(), "getPanel");
-			
+						
 			this.inspector = inspector;
 			this.metadata = metadata;
 
@@ -138,12 +135,12 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			else
 				this.validator = new HermesValidator(inspector);
 			*/
-						
-			String objId = "";
-			String objName = ""; 		
-			String objLevel = "";
-			String objLevelId = "";
-			String pub = "";
+			
+			objId = "";
+			objName = ""; 		
+			objLevel = "";
+			objLevelId = "";
+			pub = "";				
 			
 			// for testing only
 			String testMode = System.getProperty("Metadata.Test");
@@ -197,13 +194,12 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		try {
 			logger.entering(this.getClass().getSimpleName(), "getMetadataValues");
 			
-			HashMap<String, String> retMetadata = null;
-			
-			retMetadata = metadataPanel.getMetadataValues();
-			logMetadata(retMetadata, "Save to DB");
+			metadata.clear();
+			metadata = metadataPanel.getMetadataValues();
+			logMetadata(metadata, "Save to DB");
 			
 			logger.exiting(this.getClass().getSimpleName(), "getMetadataValues");
-			return retMetadata;
+			return metadata;
 		}
 		catch (Exception e) {
 			logger.log(Level.SEVERE, "Error encountered", e);
@@ -270,7 +266,87 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 	public void setParent(Window parent) {
 		this.parent = parent;
 		logger.finer("Window parent info: name=" + parent.getName());
+		
+		parent.addWindowListener(new WindowListener() {
+			@Override
+			public void windowActivated(WindowEvent arg0) {}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				if (!isDone) {
+					doFinalTasks();
+					isDone = true;	// to make sure this part is only called once
+				}
+			}
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {}
+
+			@Override
+			public void windowDeactivated(WindowEvent arg0) {}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {}
+
+			@Override
+			public void windowOpened(WindowEvent arg0) {}
+		});		
 	}	
+	
+	protected void doFinalTasks() {
+		logger.entering(this.getClass().getSimpleName(), "doFinalTasks");
+		updateChildMetadata();
+		logger.exiting(this.getClass().getSimpleName(), "doFinalTasks");
+	}
+	
+	protected void updateChildMetadata() {
+		logger.entering(this.getClass().getSimpleName(), "updateChildMetadata");
+		
+		// for specific child object metadata to be updated
+		String textByline = metadata.get("TEXT_BYLINE");
+		if (textByline != null && !textByline.isEmpty()) {			
+			HttpURLConnection httpCon = null;
+			
+			try {
+				String targetURL = "http://cvldndhermapp:8080/H11CustomWeb/UpdateChildMetadata?id=" + objId 
+					+ "&schema=WEB&field=BYLINE&value=" + URLEncoder.encode(textByline, "UTF-8");
+	            URL url = new URL(targetURL);
+	            
+	            // Connect
+	            httpCon = (HttpURLConnection) url.openConnection();       
+	            httpCon.setDoOutput(false);
+	            httpCon.setDoInput(true);
+	            httpCon.setRequestMethod("GET");
+	            httpCon.setInstanceFollowRedirects(true);
+	            httpCon.connect();
+	            
+	            //Map<String, List<String>> hdrs = httpCon.getHeaderFields();
+	            //for (String k : hdrs.keySet()) {
+	            //  System.out.println("header key=" + k + ", value=" + hdrs.get(k));
+				//}
+	           
+	            if (httpCon.getResponseCode() == 200) { 	// 200 = OK			
+	            	logger.fine("Updated child metadata field through web app: url=" + targetURL);
+	            } else {
+	            	throw new CustomException("Error encountered while calling web app: url=" + targetURL 
+	            		+ ". Error: "+ httpCon.getResponseCode() + " - " + httpCon.getResponseMessage());
+	            }				
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, "Error encountered", e);
+			} finally {
+	            if (httpCon != null) {
+	            	httpCon.disconnect();
+	            }
+			}
+		} else {
+			logger.finer("Child metadata not updated. No value passed.");
+		}
+		
+		logger.exiting(this.getClass().getSimpleName(), "updateChildMetadata");
+	}
 		
 	protected boolean isReady() {
 		boolean retVal = metadataPanel.isReady();
@@ -318,4 +394,5 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			InfoBox.showMessage(this, info, "debug", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}			
+	
 }

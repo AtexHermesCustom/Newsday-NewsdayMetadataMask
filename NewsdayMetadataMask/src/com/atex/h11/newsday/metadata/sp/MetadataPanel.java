@@ -36,6 +36,7 @@ import javax.swing.SwingUtilities;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -878,12 +879,15 @@ public class MetadataPanel extends JPanel {
 				
 		// reporter fields
 		config.initComboBox(cmbReporter1, pub, "reporter");
+		AutoCompleteDecorator.decorate(cmbReporter1);
 		setComboBoxSelectedItem(cmbReporter1, metadata.get("REPORTER1"));
 
 		config.initComboBox(cmbReporter2, pub, "reporter");
+		AutoCompleteDecorator.decorate(cmbReporter2);
 		setComboBoxSelectedItem(cmbReporter2, metadata.get("REPORTER2"));
 
 		config.initComboBox(cmbReporter3, pub, "reporter");
+		AutoCompleteDecorator.decorate(cmbReporter3);
 		setComboBoxSelectedItem(cmbReporter3, metadata.get("REPORTER3"));
 
 		// desk
@@ -927,6 +931,7 @@ public class MetadataPanel extends JPanel {
 		txtrPrintExtra.setText(metadata.get("PRINT_EXTRA"));
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
+		//txtTextByline.setText(metadata.get("TEXT_BYLINE"));		// target component to be determined 
 
 		if (cmbArrivalStatus.getSelectedItem().toString().equalsIgnoreCase(Constants.LIVE)) {
 			try {
@@ -1067,6 +1072,7 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
 			retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
 			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
+			retMetadata.put("TEXT_BYLINE", getComboBoxSelectedItem(cmbReporter1));	// TEXT_BYLINE for now copied from Reporter1
 			
 			String embargoDate = "";
 			if (dtpckEmbargoDate.getComponent(0).isEnabled()) {
