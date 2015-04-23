@@ -144,7 +144,10 @@ public class ConfigModel {
     	
     	// load items
 		for (int i = 0; i < nl.getLength(); i++) {
-			items.add(nl.item(i).getTextContent().trim());
+			String item = nl.item(i).getTextContent().trim();
+			if (!items.contains(item)) {	// check against duplicates
+				items.add(item);
+			}
 		}
 		
 		// sort (if configured)
@@ -181,7 +184,10 @@ public class ConfigModel {
 		
     	// load items
 		for (int i = 0; i < nl.getLength(); i++) {
-			items.add(nl.item(i).getTextContent().trim());
+			String item = nl.item(i).getTextContent().trim();
+			if (!items.contains(item)) {	// check against duplicates
+				items.add(item);
+			}
 		}    
 		
 		// sort (if configured)
