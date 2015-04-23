@@ -43,6 +43,8 @@ public class TestSPMetadata {
 		metadata.put("STORY_TYPE", "story type value");
 		metadata.put("LABEL", "label value");
 		metadata.put("DESCRIPTION", "this is the description\nthis is the 2nd line");
+		metadata.put("PHOTO_DESCRIPTION", "this is the photo desc");
+		metadata.put("BUDGET_HEAD", "my budget head is here");
 		metadata.put("PRINT_EXTRA", "print extra here");
 		metadata.put("PRINT_SECTION", "LI LIFE");
 		metadata.put("SEQUENCE", "sequence value");

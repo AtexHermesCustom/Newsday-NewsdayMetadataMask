@@ -922,6 +922,8 @@ public class MetadataPanel extends JPanel {
 		txtContributor.setText(metadata.get("CONTRIBUTOR"));
 		txtStoryGroup.setText(metadata.get("STORY_GROUP"));
 		txtrDescription.setText(metadata.get("DESCRIPTION"));
+		txtPhotoDescription.setText(metadata.get("PHOTO_DESCRIPTION"));
+		txtBudgetHead.setText(metadata.get("BUDGET_HEAD"));
 		txtrPrintExtra.setText(metadata.get("PRINT_EXTRA"));
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
@@ -1054,6 +1056,8 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("LABEL", getComboBoxSelectedItem(cmbLabel));
 			retMetadata.put("PRIORITY", getComboBoxSelectedItem(cmbPriority));
 			retMetadata.put("DESCRIPTION", txtrDescription.getText().trim());
+			retMetadata.put("PHOTO_DESCRIPTION", txtPhotoDescription.getText().trim());
+			retMetadata.put("BUDGET_HEAD", txtBudgetHead.getText().trim());
 			retMetadata.put("PRINT_EXTRA", txtrPrintExtra.getText().trim());
 			retMetadata.put("DIGITAL_EXTRA1", txtrDigitalExtra1.getText().trim());
 			retMetadata.put("DIGITAL_EXTRA2", txtrDigitalExtra2.getText().trim());
