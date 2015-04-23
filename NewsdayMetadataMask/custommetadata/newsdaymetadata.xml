@@ -961,9 +961,9 @@
 				</group>
 				<group id="SPORTS">
 					<item>Baseball</item>
-					<item>Baseball Other</item>
 					<item>Baseball All-Stars</item>
 					<item>Baseball Mets</item>
+					<item>Baseball Minor</item>
 					<item>Baseball Yankees</item>
 					<item>Basketball</item>
 					<item>Basketball Other</item>
@@ -1016,19 +1016,16 @@
 					<item>Hockey Islanders</item>
 					<item>Hockey Rangers</item>
 					<item>Horseracing</item>
-					<item>Horseracing Aqueuct</item>
-					<item>Horseracing Belmont</item>
 					<item>Horseracing Belmont Stakes</item>
 					<item>Lacrosse</item>
+					<item>Lacrosse Lizards</item>
 					<item>Teams Cyclones</item>
 					<item>Teams Dragons</item>
 					<item>Teams Ducks</item>
-					<item>Teams Renegades</item>
 					<item>Teams Magic</item>
 					<item>Teams Boulders</item>
 					<item>Teams Rough Riders</item>
 					<item>Teams Titans</item>
-					<item>Teams Flames</item>
 					<item>Media</item>
 					<item>Mixed Martial Arts</item>
 					<item>Motor Racing</item>
@@ -1036,6 +1033,8 @@
 					<item>Outdoors</item>
 					<item>Pro Wrestling</item>
 					<item>Soccer</item>
+					<item>Soccer Cosmos</item>
+					<item>Soccer NYCFC</item>
 					<item>Soccer Red Bulls</item>
 					<item>Soccer World Cup</item>
 					<item>Tennis</item>
@@ -1161,9 +1160,9 @@
 				</group>
 				<group id="SPORTS">
 					<item>Baseball</item>
-					<item>Baseball Other</item>
 					<item>Baseball All-Stars</item>
 					<item>Baseball Mets</item>
+					<item>Baseball Minor</item>
 					<item>Baseball Yankees</item>
 					<item>Basketball</item>
 					<item>Basketball Other</item>
@@ -1192,19 +1191,16 @@
 					<item>Hockey Islanders</item>
 					<item>Hockey Rangers</item>
 					<item>Horseracing</item>
-					<item>Horseracing Aqueuct</item>
-					<item>Horseracing Belmont</item>
 					<item>Horseracing Belmont Stakes</item>
 					<item>Lacrosse</item>
+					<item>Lacrosse Lizards</item>
 					<item>Teams Cyclones</item>
 					<item>Teams Dragons</item>
 					<item>Teams Ducks</item>
-					<item>Teams Renegades</item>
 					<item>Teams Magic</item>
 					<item>Teams Boulders</item>
 					<item>Teams Rough Riders</item>
 					<item>Teams Titans</item>
-					<item>Teams Flames</item>
 					<item>Media</item>
 					<item>Mixed Martial Arts</item>
 					<item>Motor Racing</item>
@@ -1212,6 +1208,8 @@
 					<item>Outdoors</item>
 					<item>Pro Wrestling</item>
 					<item>Soccer</item>
+					<item>Soccer Cosmos</item>
+					<item>Soccer NYCFC</item>					
 					<item>Soccer Red Bulls</item>
 					<item>Soccer World Cup</item>
 					<item>Tennis</item>
