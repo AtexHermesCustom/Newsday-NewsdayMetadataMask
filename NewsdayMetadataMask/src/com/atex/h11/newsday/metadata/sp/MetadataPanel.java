@@ -126,11 +126,14 @@ public class MetadataPanel extends JPanel {
 	JButton btnAddKeyword;
 	private JLabel lblEmbargoTime;
 	private JLabel lblVersion;
+	private JLabel lblPhoto;
+	private JTextField txtPhotoDescription;
+	private JLabel lblBudgetHead;
+	private JTextField txtBudgetHead;	
 	
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
-
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
@@ -182,7 +185,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(50dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(60dlu;default)"),
+				ColumnSpec.decode("left:max(63dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(53dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -210,6 +213,8 @@ public class MetadataPanel extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(12dlu;default):grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(12dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -299,8 +304,12 @@ public class MetadataPanel extends JPanel {
 		txtContributor.setColumns(10);
 		add(txtContributor, "4, 10, 5, 1, fill, default");
 		
-		JLabel lblDescription = new JLabel("Description");
-		add(lblDescription, "10, 10, right, default");
+		lblBudgetHead = new JLabel("Budget Head");
+		add(lblBudgetHead, "10, 10, right, default");
+		
+		txtBudgetHead = new JTextField();
+		txtBudgetHead.setColumns(10);
+		add(txtBudgetHead, "12, 10, 7, 1, fill, default");
 		
 		JLabel lblStoryGroup = new JLabel("Story Group");
 		add(lblStoryGroup, "2, 12, right, default");
@@ -311,20 +320,20 @@ public class MetadataPanel extends JPanel {
 		
 		scrlDescription = new JScrollPane();
 		scrlDescription.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrlDescription, "12, 10, 7, 3, fill, fill");
+		add(scrlDescription, "12, 12, 7, 3, fill, fill");
 		
 		txtrDescription = new JTextArea();
 		txtrDescription.setLineWrap(true);
 		scrlDescription.setViewportView(txtrDescription);
+		
+		JLabel lblDescription = new JLabel("Description");
+		add(lblDescription, "10, 12, right, default");
 		
 		JLabel lblStoryType = new JLabel("Story Type");
 		add(lblStoryType, "2, 14, right, default");
 		
 		cmbStoryType = new JComboBox();
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
-		
-		JLabel lblDigitalExtras = new JLabel("Digital Extras");
-		add(lblDigitalExtras, "10, 14, right, default");
 		
 		JLabel lblLabel = new JLabel("Label");
 		add(lblLabel, "2, 16, right, default");
@@ -334,18 +343,28 @@ public class MetadataPanel extends JPanel {
 		
 		scrlDigitalExtra1 = new JScrollPane();
 		scrlDigitalExtra1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrlDigitalExtra1, "12, 14, 7, 3, fill, fill");
+		add(scrlDigitalExtra1, "12, 16, 7, 3, fill, fill");
 		
 		txtrDigitalExtra1 = new JTextArea();
 		txtrDigitalExtra1.setLineWrap(true);
 		scrlDigitalExtra1.setViewportView(txtrDigitalExtra1);
 		
+		JLabel lblDigitalExtras = new JLabel("Digital Extras");
+		add(lblDigitalExtras, "10, 16, right, default");
+		
+		lblPhoto = new JLabel("Photo");
+		add(lblPhoto, "2, 18, right, default");
+		
+		txtPhotoDescription = new JTextField();
+		txtPhotoDescription.setColumns(10);
+		add(txtPhotoDescription, "4, 18, 5, 1, fill, default");
+		
 		JLabel lblPrintExtra = new JLabel("Print Extra");
-		add(lblPrintExtra, "2, 18, right, default");
+		add(lblPrintExtra, "2, 20, right, default");
 		
 		scrlPrintExtra = new JScrollPane();
 		scrlPrintExtra.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrlPrintExtra, "4, 18, 5, 3, fill, fill");
+		add(scrlPrintExtra, "4, 20, 5, 3, fill, fill");
 		
 		txtrPrintExtra = new JTextArea();
 		txtrPrintExtra.setLineWrap(true);
@@ -353,51 +372,51 @@ public class MetadataPanel extends JPanel {
 		
 		scrlDigitalExtra2 = new JScrollPane();
 		scrlDigitalExtra2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scrlDigitalExtra2, "12, 18, 7, 3, fill, fill");
+		add(scrlDigitalExtra2, "12, 20, 7, 3, fill, fill");
 		
 		txtrDigitalExtra2 = new JTextArea();
 		txtrDigitalExtra2.setLineWrap(true);
 		scrlDigitalExtra2.setViewportView(txtrDigitalExtra2);
 		
 		JLabel lblPrint = new JLabel("PRINT");
-		add(lblPrint, "2, 22, right, default");
+		add(lblPrint, "2, 24, right, default");
 		
 		JLabel lblSection = new JLabel("Section");
-		add(lblSection, "4, 22, right, default");
+		add(lblSection, "4, 24, right, default");
 		
 		cmbPrintSection = new JComboBox();
-		add(cmbPrintSection, "6, 22, 3, 1, fill, default");
+		add(cmbPrintSection, "6, 24, 3, 1, fill, default");
 		
 		JLabel lblSequenceOr = new JLabel("Sequence");
-		add(lblSequenceOr, "10, 22, right, default");
+		add(lblSequenceOr, "10, 24, right, default");
 		
 		cmbPrintSequence = new JComboBox();
-		add(cmbPrintSequence, "12, 22, 3, 1, fill, default");
+		add(cmbPrintSequence, "12, 24, 3, 1, fill, default");
 		
 		lblPage = new JLabel("Page");
-		add(lblPage, "16, 22, right, default");
+		add(lblPage, "16, 24, right, default");
 		
 		ftfPrintPage = new JFormattedTextField();
 		((AbstractDocument) ftfPrintPage.getDocument()).setDocumentFilter(
 				new NumericDocumentFilter(ftfPrintPage.getDocument(), false, false));		
 		//((AbstractDocument) ftfPrintPage.getDocument()).setDocumentFilter(
 		//		new AlphaNumericDocumentFilter());		
-		add(ftfPrintPage, "18, 22, fill, default");
+		add(ftfPrintPage, "18, 24, fill, default");
 		
 		JLabel lblWeb = new JLabel("WEB");
-		add(lblWeb, "2, 24, right, default");
+		add(lblWeb, "2, 26, right, default");
 		
 		JLabel lblHomePage = new JLabel("Home page");
-		add(lblHomePage, "4, 24, right, default");
+		add(lblHomePage, "4, 26, right, default");
 		
 		cmbHomepage = new JComboBox();
-		add(cmbHomepage, "6, 24, 3, 1, fill, default");
+		add(cmbHomepage, "6, 26, 3, 1, fill, default");
 		
 		JLabel lblArrivalStatus = new JLabel("Arrival Status");
-		add(lblArrivalStatus, "10, 24, right, default");
+		add(lblArrivalStatus, "10, 26, right, default");
 		
 		cmbArrivalStatus = new JComboBox();
-		add(cmbArrivalStatus, "12, 24, 3, 1, fill, default");
+		add(cmbArrivalStatus, "12, 26, 3, 1, fill, default");
 
 		Date currentDate = new Date();
 
@@ -413,27 +432,27 @@ public class MetadataPanel extends JPanel {
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
 		
 		chkEmbargo = new JCheckBox("Embargo");
-		add(chkEmbargo, "4, 26");
+		add(chkEmbargo, "4, 28");
 		
 		dtpckEmbargoDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		dtpckEmbargoDate.getJFormattedTextField().setEditable(true);
-		add(dtpckEmbargoDate, "6, 26, 3, 1");		
+		add(dtpckEmbargoDate, "6, 28, 3, 1");		
 				
 		lblEmbargoTime = new JLabel("Embargo Time");
-		add(lblEmbargoTime, "10, 26, right, default");
+		add(lblEmbargoTime, "10, 28, right, default");
 
 		SpinnerDateModel timeModel = new SpinnerDateModel(currentDate, null, null, Calendar.MINUTE);
 		spnrEmbargoTime = new JSpinner();
 		spnrEmbargoTime.setModel(timeModel);
 		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spnrEmbargoTime, Constants.TIME_FORMAT);
 		spnrEmbargoTime.setEditor(dateEditor);
-		add(spnrEmbargoTime, "12, 26, fill, fill");
+		add(spnrEmbargoTime, "12, 28, fill, fill");
 		
 		JLabel lblCategories = new JLabel("Categories");
-		add(lblCategories, "2, 28, right, top");
+		add(lblCategories, "2, 30, right, top");
 		
 		scrlCategories = new JScrollPane();
-		add(scrlCategories, "4, 28, 5, 1, fill, fill");
+		add(scrlCategories, "4, 30, 5, 1, fill, fill");
 		
 		trCategories = new JTree();
 		trCategories.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("JTree")));
@@ -441,10 +460,10 @@ public class MetadataPanel extends JPanel {
 		scrlCategories.setViewportView(trCategories);
 		
 		JLabel lblCommunities = new JLabel("Communities");
-		add(lblCommunities, "10, 28, right, top");
+		add(lblCommunities, "10, 30, right, top");
 		
 		scrlCommunities = new JScrollPane();
-		add(scrlCommunities, "12, 28, 7, 1, fill, fill");
+		add(scrlCommunities, "12, 30, 7, 1, fill, fill");
 		
 		trCommunities = new JTree();
 		trCommunities.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("JTree")));
@@ -453,10 +472,10 @@ public class MetadataPanel extends JPanel {
 		
 		JLabel lblSelectedCategories = new JLabel("<html><p>Selected</p><p>Categories</p></html>");
 		lblSelectedCategories.setVerticalAlignment(SwingConstants.TOP);
-		add(lblSelectedCategories, "2, 30, right, top");
+		add(lblSelectedCategories, "2, 32, right, top");
 		
 		scrlSelCategories = new JScrollPane();
-		add(scrlSelCategories, "4, 30, 5, 1, fill, fill");
+		add(scrlSelCategories, "4, 32, 5, 1, fill, fill");
 		
 		lstSelCategories = new JList();
 		lstSelCategories.setToolTipText("Double click an item to remove it from the list");
@@ -464,10 +483,10 @@ public class MetadataPanel extends JPanel {
 		
 		JLabel lblselectedcommunities = new JLabel("<html><p>Selected</p><p>Communities</p></html>");
 		lblselectedcommunities.setVerticalAlignment(SwingConstants.TOP);
-		add(lblselectedcommunities, "10, 30, right, top");
+		add(lblselectedcommunities, "10, 32, right, top");
 		
 		scrlSelCommunities = new JScrollPane();
-		add(scrlSelCommunities, "12, 30, 7, 1, fill, fill");
+		add(scrlSelCommunities, "12, 32, 7, 1, fill, fill");
 		
 		lstSelCommunities = new JList();
 		lstSelCommunities.setToolTipText("Double click an item to remove it from the list");
@@ -475,20 +494,20 @@ public class MetadataPanel extends JPanel {
 		
 		JLabel lblcustomkeyword = new JLabel("<html><p>Custom</p><p>Keyword</p></html>");
 		lblcustomkeyword.setVerticalAlignment(SwingConstants.TOP);
-		add(lblcustomkeyword, "2, 32, right, top");
+		add(lblcustomkeyword, "2, 34, right, top");
 		
 		txtCustomKeyword = new JTextField();
 		txtCustomKeyword.setColumns(10);
-		add(txtCustomKeyword, "4, 32, 3, 1, fill, default");
+		add(txtCustomKeyword, "4, 34, 3, 1, fill, default");
 		
 		btnAddKeyword = new JButton("Add Keyword");
-		add(btnAddKeyword, "8, 32");		
+		add(btnAddKeyword, "8, 34");		
 		
 		chkExclusive = new JCheckBox("Exclusive");
-		add(chkExclusive, "12, 32, 2, 1");
+		add(chkExclusive, "12, 34, 2, 1");
 		
 		lblVersion = new JLabel("Version:");
-		add(lblVersion, "14, 32, 5, 1, right, default");		
+		add(lblVersion, "14, 34, 5, 1, right, default");		
 		
 		// hide the Pub combobox - not needed
 		// the pub is determined from the level
