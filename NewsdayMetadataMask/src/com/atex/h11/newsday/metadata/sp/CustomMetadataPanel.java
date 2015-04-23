@@ -16,7 +16,6 @@ import org.w3c.dom.NodeList;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.HashMap;
 import java.util.Map;

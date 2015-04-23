@@ -6,7 +6,6 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.TreeMap;
 
 import javax.swing.BoxLayout;
