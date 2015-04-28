@@ -764,8 +764,10 @@ public class MetadataPanel extends JPanel {
 		
 		btnAddKeyword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				addItemToListModel(selCategoriesModel, txtCustomKeyword.getText().trim());
-				txtCustomKeyword.setText("");	// clear
+				if (!txtCustomKeyword.getText().trim().isEmpty()) {
+					addItemToListModel(selCategoriesModel, txtCustomKeyword.getText().trim());
+					txtCustomKeyword.setText("");	// clear
+				}
 			}
 		});				
 	}
