@@ -312,8 +312,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			try {
 				String targetUrl = config.getMetadataConfigValue("updateChildMetadataURL");
 				logger.finer("updateChildMetadata: init targetURL=" + targetUrl);
-				targetUrl = targetUrl.replace("${J2EE_IP}", config.getMetadataConfigValue("j2eeIp"));
-				targetUrl = targetUrl.replace("${J2EE_HTTPPORT}", config.getMetadataConfigValue("j2eeHttpPort"));
+				targetUrl = targetUrl.replace("${J2EE_IP}", config.getConfigValue("j2eeIP"));
+				targetUrl = targetUrl.replace("${J2EE_HTTPPORT}", config.getConfigValue("j2eeHTTPPort"));
 				targetUrl = targetUrl.replace("${OBJ_ID}", objId);
 				targetUrl = targetUrl.replace("${SCHEMA}", config.getMetadataConfigValue("updateChildMetadataSchema"));
 				targetUrl = targetUrl.replace("${FIELD}", config.getMetadataConfigValue("updateChildMetadataField"));

@@ -8,6 +8,10 @@
 			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
 		-->
 		<logLevel>FINER</logLevel>
+		
+		<!-- J2EE settings -->
+		<j2eeIP>cvldndhermapp</j2eeIP>
+		<j2eeHTTPPort>8080</j2eeHTTPPort>		
 	</configuration>
 	
 	<!--
@@ -17,10 +21,7 @@
 	 -->	
 	<sp>
 		<!-- configuration - schema-specific configuration -->
-		<configuration>
-			<j2eeIp>cvldndhermapp</j2eeIp>
-			<j2eeHttpPort>8080</j2eeHttpPort>
-			
+		<configuration>		
 			<updateChildMetadataURL><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/H11CustomWeb/UpdateChildMetadata?id=${OBJ_ID}&schema=${SCHEMA}&field=${FIELD}&value=${VALUE}]]></updateChildMetadataURL>
 			<updateChildMetadataSchema>WEB</updateChildMetadataSchema>
 			<updateChildMetadataField>BYLINE</updateChildMetadataField>
