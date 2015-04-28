@@ -932,7 +932,7 @@ public class MetadataPanel extends JPanel {
 		txtrPrintExtra.setText(metadata.get("PRINT_EXTRA"));
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
-		//txtTextByline.setText(metadata.get("TEXT_BYLINE"));		// target component to be determined 
+		//txtTextByline.setText(metadata.get("TEXT_BYLINE"));		// target component not needed 
 
 		if (cmbArrivalStatus.getSelectedItem().toString().equalsIgnoreCase(Constants.LIVE)) {
 			try {
@@ -1073,7 +1073,7 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
 			retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
 			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
-			retMetadata.put("TEXT_BYLINE", getComboBoxSelectedItem(cmbReporter1));	// TEXT_BYLINE for now copied from Reporter1
+			retMetadata.put("TEXT_BYLINE", getTextByline());	// TEXT_BYLINE - byline for TEXT object
 			
 			String embargoDate = "";
 			if (dtpckEmbargoDate.getComponent(0).isEnabled()) {
@@ -1135,5 +1135,27 @@ public class MetadataPanel extends JPanel {
 		}		
 	
 		return retStringList;
+	}
+	
+	protected String getTextByline() {
+		String byline = "";
+		String buf = null;
+		
+		buf = getComboBoxSelectedItem(cmbReporter1);
+		if (buf != null && !buf.isEmpty()) {
+			byline += buf;
+		}
+		
+		buf = getComboBoxSelectedItem(cmbReporter2);
+		if (buf != null && !buf.isEmpty()) {
+			byline += (!byline.isEmpty() ? ", " + buf : buf);
+		}
+		
+		buf = getComboBoxSelectedItem(cmbReporter3);
+		if (buf != null && !buf.isEmpty()) {
+			byline += (!byline.isEmpty() ? ", " + buf : buf);
+		}
+
+		return byline;
 	}
 }
