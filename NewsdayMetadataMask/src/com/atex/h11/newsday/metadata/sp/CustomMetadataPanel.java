@@ -310,9 +310,16 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			HttpURLConnection httpCon = null;
 			
 			try {
-				String targetURL = "http://cvldndhermapp:8080/H11CustomWeb/UpdateChildMetadata?id=" + objId 
-					+ "&schema=WEB&field=BYLINE&value=" + URLEncoder.encode(textByline, "UTF-8");
-	            URL url = new URL(targetURL);
+				String targetUrl = config.getMetadataConfigValue("updateChildMetadataURL");
+				logger.finer("updateChildMetadata: init targetURL=" + targetUrl);
+				targetUrl = targetUrl.replace("${J2EE_IP}", config.getMetadataConfigValue("j2eeIp"));
+				targetUrl = targetUrl.replace("${J2EE_HTTPPORT}", config.getMetadataConfigValue("j2eeHttpPort"));
+				targetUrl = targetUrl.replace("${OBJ_ID}", objId);
+				targetUrl = targetUrl.replace("${SCHEMA}", config.getMetadataConfigValue("updateChildMetadataSchema"));
+				targetUrl = targetUrl.replace("${FIELD}", config.getMetadataConfigValue("updateChildMetadataField"));
+				targetUrl = targetUrl.replace("${VALUE}", URLEncoder.encode(textByline, "UTF-8"));
+				logger.finer("updateChildMetadata: final targetURL=" + targetUrl);
+				URL url = new URL(targetUrl);
 	            
 	            // Connect
 	            httpCon = (HttpURLConnection) url.openConnection();       
@@ -328,9 +335,9 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 				//}
 	           
 	            if (httpCon.getResponseCode() == 200) { 	// 200 = OK			
-	            	logger.fine("Updated child metadata field through web app: url=" + targetURL);
+	            	logger.fine("Updated child metadata field through web app: url=" + targetUrl);
 	            } else {
-	            	throw new CustomException("Error encountered while calling web app: url=" + targetURL 
+	            	throw new CustomException("Error encountered while calling web app: url=" + targetUrl 
 	            		+ ". Error: "+ httpCon.getResponseCode() + " - " + httpCon.getResponseMessage());
 	            }				
 			} catch (Exception e) {

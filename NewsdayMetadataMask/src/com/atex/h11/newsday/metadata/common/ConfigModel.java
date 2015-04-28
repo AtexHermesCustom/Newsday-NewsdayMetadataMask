@@ -92,6 +92,11 @@ public class ConfigModel {
     		throws XPathExpressionException {
     	return getXpathValue("configuration/" + key);
     }
+    
+    public String getMetadataConfigValue(String key)
+    		throws XPathExpressionException {
+    	return getXpathValue(metadataGroup + "/configuration/" + key);
+    }    
 
     public String getMetadataName(String key)
 			throws XPathExpressionException {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
 
+	<!-- configuration settings -->
 	<configuration>
 		<logFile>log/NewsdayCustomMetadata.log</logFile>
 		<!-- logLevel allowed values (in ascending order, in terms of level of detail):
@@ -11,10 +12,20 @@
 	
 	<!--
 		#####################################
-		SP Metadata 
+		Metadata - "SP" Schema
 		#####################################
 	 -->	
 	<sp>
+		<!-- configuration - schema-specific configuration -->
+		<configuration>
+			<j2eeIp>cvldndhermapp</j2eeIp>
+			<j2eeHttpPort>8080</j2eeHttpPort>
+			
+			<updateChildMetadataURL><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/H11CustomWeb/UpdateChildMetadata?id=${OBJ_ID}&schema=${SCHEMA}&field=${FIELD}&value=${VALUE}]]></updateChildMetadataURL>
+			<updateChildMetadataSchema>WEB</updateChildMetadataSchema>
+			<updateChildMetadataField>BYLINE</updateChildMetadataField>
+		</configuration>
+	
 		<!--  metadataNames - not used -->
 		<metadataNames></metadataNames>
 		
