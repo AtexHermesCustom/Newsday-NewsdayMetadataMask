@@ -135,6 +135,7 @@ public class MetadataPanel extends JPanel {
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
+	private JTextField txtListTemp;
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
@@ -188,7 +189,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(63dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(53dlu;default)"),
+				ColumnSpec.decode("left:max(31dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(68dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -504,6 +505,11 @@ public class MetadataPanel extends JPanel {
 		btnAddKeyword = new JButton("Add Keyword");
 		add(btnAddKeyword, "8, 34");		
 		
+		txtListTemp = new JTextField();
+		txtListTemp.setColumns(10);
+		txtListTemp.setVisible(false);
+		add(txtListTemp, "10, 34, left, default");
+		
 		chkExclusive = new JCheckBox("Exclusive");
 		add(chkExclusive, "12, 34, 2, 1");
 		
@@ -686,6 +692,7 @@ public class MetadataPanel extends JPanel {
 					if (e.getClickCount() == 2) {	// double-click
 						String selItem = selNode.getUserObject().toString();
 						addItemToListModel(selCategoriesModel, selItem);
+						txtListTemp.setText(selItem);	// hack: update an invisible text component to trigger a call to getMetadataValues()
 					}
 				}
 			}
@@ -699,6 +706,7 @@ public class MetadataPanel extends JPanel {
 					if (e.getClickCount() == 2) {	// double-click
 						String selItem = selNode.getUserObject().toString();
 						addItemToListModel(selCommunitiesModel, selItem);
+						txtListTemp.setText(selItem);	// hack: update an invisible text component to trigger a call to getMetadataValues()
 					}
 				}
 			}
