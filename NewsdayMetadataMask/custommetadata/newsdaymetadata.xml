@@ -80,7 +80,7 @@
 		<!-- label:
 			- items in the Label dropdown
 		 -->
-		<label insertEmptyItem="0" selectFirstItemAsDefault="1">
+		<label insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ALL">
 				<item>EXCLUSIVE</item>
 				<item>COVER STORY</item>
