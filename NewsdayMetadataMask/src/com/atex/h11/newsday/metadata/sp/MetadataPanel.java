@@ -76,8 +76,6 @@ public class MetadataPanel extends JPanel {
 	private ConfigModel config = null;
 	private HashMap<String, String> metadata = null;
 	private boolean panelDisabled = false;
-	
-	private JLabel lblPub;	
 	private JLabel lblTitle;
 	private JLabel lblLevel;
 	private JTextField txtEmail1;
@@ -131,11 +129,11 @@ public class MetadataPanel extends JPanel {
 	private JTextField txtPhotoDescription;
 	private JLabel lblBudgetHead;
 	private JTextField txtBudgetHead;	
+	private JTextField txtListTemp;
 	
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
-	private JTextField txtListTemp;
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
@@ -238,13 +236,10 @@ public class MetadataPanel extends JPanel {
 		add(lblTitle, "2, 2, 7, 1");
 		
 		lblLevel = new JLabel("Level:");
-		add(lblLevel, "10, 2, 3, 1");
-		
-		lblPub = new JLabel("Pub");
-		add(lblPub, "14, 2, right, default");
+		add(lblLevel, "10, 2, 7, 1");
 		
 		cmbPub = new JComboBox();
-		add(cmbPub, "16, 2, 3, 1, fill, default");
+		add(cmbPub, "18, 2, fill, default");
 		
 		JLabel lblReporter = new JLabel("Reporter");
 		add(lblReporter, "2, 4, right, default");
@@ -515,10 +510,6 @@ public class MetadataPanel extends JPanel {
 		
 		lblVersion = new JLabel("Version:");
 		add(lblVersion, "14, 34, 5, 1, right, default");		
-		
-		// hide the Pub combobox - not needed
-		// the pub is determined from the level
-		lblPub.setVisible(false);
 		cmbPub.setVisible(false);
 	}
 		
