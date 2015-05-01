@@ -1104,10 +1104,14 @@ public class MetadataPanel extends JPanel {
 	}
 	
 	protected String getComboBoxSelectedItem(JComboBox cmbControl) {
-		if (cmbControl.getSelectedIndex() > -1) {
-			return cmbControl.getSelectedItem().toString().trim();
+		if (cmbControl.isEditable()) {
+			return ((JTextField) cmbControl.getEditor().getEditorComponent()).getText();	// return text field value
 		} else {
-			return "";
+			if (cmbControl.getSelectedIndex() > -1) {
+				return cmbControl.getSelectedItem().toString().trim();	// return selected item
+			} else {
+				return "";
+			}
 		}
 	}
 	
