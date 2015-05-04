@@ -28,20 +28,20 @@
   
   <dependencies>
 	<dependency>
-		<groupId>org.jdatepicker</groupId>
-		<artifactId>jdatepicker</artifactId>
-		<version>1.3.4</version>
-	</dependency>  
+		<groupId>org.swinglabs.swingx</groupId>
+		<artifactId>swingx-all</artifactId>
+		<version>1.6.4</version>
+	</dependency>		
 	<dependency>
 		<groupId>com.jgoodies</groupId>
 		<artifactId>forms</artifactId>
 		<version>1.2.1</version>
 	</dependency> 
 	<dependency>
-		<groupId>org.swinglabs.swingx</groupId>
-		<artifactId>swingx-all</artifactId>
-		<version>1.6.4</version>
-	</dependency>		
+		<groupId>org.jdatepicker</groupId>
+		<artifactId>jdatepicker</artifactId>
+		<version>1.3.4</version>
+	</dependency>  
     <dependency>
       <groupId>com.unisys.media</groupId>
       <artifactId>cr-all-client-103</artifactId>
