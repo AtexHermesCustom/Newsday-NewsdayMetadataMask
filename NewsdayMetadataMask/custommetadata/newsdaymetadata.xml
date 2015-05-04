@@ -82,12 +82,12 @@
 		 -->
 		<label insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ALL">
-				<item>EXCLUSIVE</item>
 				<item>COVER STORY</item>
+				<item>EXCLUSIVE</item>
 				<item>CENTERPIECE</item>
-				<item>DEVELOPING</item>
 				<item>TENTATIVE</item>
 				<item>WATCHING</item>
+				<item>DEVELOPING</item>
 			</pub>
 		</label>		
 
