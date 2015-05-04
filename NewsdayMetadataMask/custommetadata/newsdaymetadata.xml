@@ -4,12 +4,15 @@
 	<!-- configuration settings -->
 	<configuration>
 		<logFile>log/NewsdayCustomMetadata.log</logFile>
-		<!-- logLevel allowed values (in ascending order, in terms of level of detail):
+		<!-- logLevel:
+			- allowed values (in ascending order, in terms of level of detail):
 			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
 		-->
 		<logLevel>FINER</logLevel>
 		
-		<!-- J2EE settings -->
+		<!-- J2EE settings: 
+			- update when moving to a different environment, e.g. from DEV/TEST to PROD
+		-->
 		<j2eeIP>cvldndhermapp</j2eeIP>
 		<j2eeHTTPPort>8080</j2eeHTTPPort>		
 	</configuration>
