@@ -8,7 +8,7 @@
 			- allowed values (in ascending order, in terms of level of detail):
 			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
 		-->
-		<logLevel>FINER</logLevel>
+		<logLevel>INFO</logLevel>
 		
 		<!-- J2EE settings: 
 			- update when moving to a different environment, e.g. from DEV/TEST to PROD
@@ -71,10 +71,10 @@
 			<pub id="ALL">
 				<item>ARTICLE</item>
 				<item>COLUMN</item>
+				<item>REVIEW</item>
 				<item>EDITORIAL</item>
 				<item>LETTER</item>
 				<item>OPINION</item>
-				<item>REVIEW</item>
 				<item>OBITUARY</item>
 				<item>CUSTOM</item>
 			</pub>
@@ -687,17 +687,17 @@
 					<item>FANFARE</item>
 				</desk>
 				<desk id="LIFESTYLE">
-					<item>NEWS</item>
 					<item>EXPLORE LI</item>
 					<item>LI HOME</item>
 					<item>FANFARE</item>
+					<item>NEWS</item>
 				</desk>
 				<desk id="OP-ED">
 					<item>NEWS</item>
 				</desk>
 				<desk id="SPORTS">
-					<item>NEWS</item>
 					<item>SPORTS</item>
+					<item>NEWS</item>
 				</desk>
 			</pub>
 			<pub id="AM">
@@ -743,9 +743,9 @@
 				</desk>
 				<desk id="ENTERTAINMENT">
 					<printSection id="NEWS">
+						<item>FLASH</item>
 						<item>PAGE ONE</item>
 						<item>UPFRONT</item>
-						<item>FLASH</item>
 						<item>OBITUARIES</item>
 						<item>CORRECTIONS</item>
 					</printSection>
@@ -804,17 +804,17 @@
 					</printSection>
 				</desk>
 				<desk id="SPORTS">
-					<printSection id="NEWS">
-						<item>PAGE ONE</item>
-						<item>UPFRONT</item>
-						<item>OBITUARIES</item>
-						<item>CORRECTIONS</item>
-					</printSection>
 					<printSection id="SPORTS">
 						<item>PRO SPORTS</item>
 						<item>COLLEGES</item>
 						<item>GENERAL</item>
 						<item>HIGH SCHOOLS</item>
+					</printSection>
+					<printSection id="NEWS">
+						<item>PAGE ONE</item>
+						<item>UPFRONT</item>
+						<item>OBITUARIES</item>
+						<item>CORRECTIONS</item>
 					</printSection>
 				</desk>
 			</pub>
@@ -1543,16 +1543,34 @@
 				<level id="ND-NEUTRAL/NEWS/BUSINESS">
 					<desk>BUSINESS</desk>
 				</level>
+				<level id="ND-NEUTRAL/FEATURES/EXPLORE-LI">
+					<desk>LIFESTYLE</desk>
+				</level>
 				<level id="ND-NEUTRAL/FEATURES/ENTERTAINMENT">
 					<desk>ENTERTAINMENT</desk>
 				</level>
 				<level id="ND-NEUTRAL/FEATURES/LIFESTYLE">
 					<desk>LIFESTYLE</desk>
+				</level>
+				<level id="ND-NEUTRAL/FEATURES/KIDSDAY">
+					<desk>LIFESTYLE</desk>
+				</level>
+				<level id="ND-NEUTRAL/FEATURES/HOME">
+					<desk>LIFESTYLE</desk>
+				</level>
+				<level id="ND-NEUTRAL/NEWS/LI-LIFE">
+					<desk>LONG ISLAND</desk>
 				</level>		
 				<level id="ND-NEUTRAL/OP-ED/OPINION">
 					<desk>OP-ED</desk>
 				</level>
+				<level id="ND-NEUTRAL/OP-ED/EDITORIAL">
+					<desk>OP-ED</desk>
+				</level>
 				<level id="ND-NEUTRAL/SPORTS/MAIN">
+					<desk>SPORTS</desk>
+				</level>
+				<level id="ND-NEUTRAL/SPORTS/HIGH-SCHOOLS">
 					<desk>SPORTS</desk>
 				</level>
 			</pub>
