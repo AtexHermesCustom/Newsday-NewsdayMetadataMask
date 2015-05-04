@@ -166,7 +166,7 @@ public class MetadataPanel extends JPanel {
 			setComponentListeners();
 			
 			String desk = metadata.get("DESK");
-			if (desk == null || desk.isEmpty()) {	// set defaults based on level
+			if (desk == null || desk.trim().isEmpty()) {	// set defaults based on level
 				setDefaults(objLevel);
 			}
 			
