@@ -8,7 +8,7 @@
 			- allowed values (in ascending order, in terms of level of detail):
 			OFF, SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST
 		-->
-		<logLevel>INFO</logLevel>
+		<logLevel>FINER</logLevel>
 		
 		<!-- J2EE settings: 
 			- update when moving to a different environment, e.g. from DEV/TEST to PROD
