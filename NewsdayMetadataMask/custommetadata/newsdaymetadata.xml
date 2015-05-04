@@ -1534,29 +1534,26 @@
 		 -->
 		<defaultValue>
 			<pub id="ND">
-				<level id="ND-WRITERS/NEWS/LONG-ISLAND">
+				<level id="ND-NEUTRAL/NEWS/LONG-ISLAND">
 					<desk>LONG ISLAND</desk>
 				</level>
-				<level id="ND-WRITERS/NEWS/BUSINESS">
+				<level id="ND-NEUTRAL/NEWS/BUSINESS">
 					<desk>BUSINESS</desk>
 				</level>
-				<level id="ND-WRITERS/FEATURES/ENTERTAINMENT">
+				<level id="ND-NEUTRAL/FEATURES/ENTERTAINMENT">
 					<desk>ENTERTAINMENT</desk>
 				</level>
-				<level id="ND-WRITERS/FEATURES/LIFESTYLE">
+				<level id="ND-NEUTRAL/FEATURES/LIFESTYLE">
 					<desk>LIFESTYLE</desk>
 				</level>		
-				<level id="ND-WRITERS/OP-ED/OPINION">
+				<level id="ND-NEUTRAL/OP-ED/OPINION">
 					<desk>OP-ED</desk>
 				</level>
-				<level id="ND-WRITERS/SPORTS/MAIN">
+				<level id="ND-NEUTRAL/SPORTS/MAIN">
 					<desk>SPORTS</desk>
 				</level>
 			</pub>
 			<pub id="AM">
-				<level id="AM-WRITERS/AMNY">
-					<desk>NEWS</desk>
-				</level>
 			</pub>
 		</defaultValue>
 	</sp>
