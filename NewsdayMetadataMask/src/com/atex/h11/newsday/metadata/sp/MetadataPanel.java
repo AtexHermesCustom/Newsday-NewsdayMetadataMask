@@ -1009,7 +1009,7 @@ public class MetadataPanel extends JPanel {
 		    component.setEnabled(false);
 		}
 		
-		String title = "<html><p><b><font color=\"red\">This tab will be enabled once the package is created</font></b></html>";
+		String title = "<html><p><b><font color=\"red\">This tab will be available after the package is created</font></b></html>";
 		lblTitle.setText(title);
 		lblTitle.setEnabled(true);
 	}
