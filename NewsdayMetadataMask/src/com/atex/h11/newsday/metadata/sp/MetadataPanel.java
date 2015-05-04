@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JPanel;
@@ -934,13 +935,13 @@ public class MetadataPanel extends JPanel {
 		//txtTextByline.setText(metadata.get("TEXT_BYLINE"));		// target component not needed 
 
 		if (cmbArrivalStatus.getSelectedItem().toString().equalsIgnoreCase(Constants.LIVE)) {
-			try {
-				boolean hasEmbargoDate = false;
-				boolean hasEmbargoTime = false;
-				
-				// embargo date
-				String embargoDate = metadata.get("EMBARGO_DATE");
-				if (embargoDate != null && !embargoDate.isEmpty()) {
+			boolean hasEmbargoDate = false;
+			boolean hasEmbargoTime = false;
+			
+			// embargo date
+			String embargoDate = metadata.get("EMBARGO_DATE");
+			if (embargoDate != null && !embargoDate.trim().isEmpty()) {
+				try {
 					SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
 					Date d = (Date) dateFormat.parse(embargoDate);
 					Calendar cal = Calendar.getInstance();
@@ -949,26 +950,30 @@ public class MetadataPanel extends JPanel {
 					dtpckEmbargoDate.getModel().setMonth(cal.get(Calendar.MONTH));
 					dtpckEmbargoDate.getModel().setDay(cal.get(Calendar.DAY_OF_MONTH));
 					hasEmbargoDate = true;
-				}				
-				
-				// embargo time			
-				String embargoTime = metadata.get("EMBARGO_TIME");
-				if (embargoTime != null && !embargoTime.isEmpty()) {
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, "setComponentValues: Error encountered", e);
+				}
+			}				
+			
+			// embargo time			
+			String embargoTime = metadata.get("EMBARGO_TIME");
+			if (embargoTime != null && !embargoTime.trim().isEmpty()) {
+				try {
 					SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
 					Date d = (Date) timeFormat.parse(embargoTime);
 					spnrEmbargoTime.setValue(d);
 					hasEmbargoTime = true;
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, "setComponentValues: Error encountered", e);
 				}
-				
-				if (hasEmbargoDate && hasEmbargoTime) {
-					chkEmbargo.setSelected(true);
-				} else {
-					chkEmbargo.setSelected(false);
-					// disable embargo related components
-					setEmbargoComponentsEnabled(false);					
-				}
-			} catch (Exception e) {
-				InfoBox.ShowException(e);
+			}
+			
+			if (hasEmbargoDate && hasEmbargoTime) {
+				chkEmbargo.setSelected(true);
+			} else {
+				chkEmbargo.setSelected(false);
+				// disable embargo related components
+				setEmbargoComponentsEnabled(false);					
 			}
 		} else {
 			// disable and deselect embargo checkbox
