@@ -26,7 +26,14 @@
 		<!-- configuration - schema-specific configuration -->
 		<configuration>
 			<updateChildMetadata>
+				<!-- URL of web app to update the child metadata -->
 				<url><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/h11-custom-web/UpdateChildMultiMetadata?id=${OBJ_ID}&metadata=${VALUE}]]></url>
+				<!-- mapping:
+					mapping between SP metadata to child metadata
+					key=SP metadata field
+					schema.field=child metadata to be mapped to
+					uppercase=flag whether to convert the value to uppercase or not. possible values=0 or 1
+				 -->
 				<mapping>
 					<map schema="WEB" field="BYLINE1" key="REPORTER1" uppercase="1"/>
 					<map schema="WEB" field="BYLINE2" key="REPORTER2" uppercase="1"/>
