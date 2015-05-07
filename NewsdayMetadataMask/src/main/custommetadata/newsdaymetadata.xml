@@ -24,10 +24,18 @@
 	 -->	
 	<sp>
 		<!-- configuration - schema-specific configuration -->
-		<configuration>		
-			<updateChildMetadataURL><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/H11CustomWeb/UpdateChildMetadata?id=${OBJ_ID}&schema=${SCHEMA}&field=${FIELD}&value=${VALUE}]]></updateChildMetadataURL>
-			<updateChildMetadataSchema>WEB</updateChildMetadataSchema>
-			<updateChildMetadataField>BYLINE</updateChildMetadataField>
+		<configuration>
+			<updateChildMetadata>
+				<url><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/h11-custom-web/UpdateChildMultiMetadata?id=${OBJ_ID}&metadata=${VALUE}]]></url>
+				<mapping>
+					<map schema="WEB" field="BYLINE1" key="REPORTER1"/>
+					<map schema="WEB" field="BYLINE2" key="REPORTER2"/>
+					<map schema="WEB" field="BYLINE2" key="REPORTER3"/>
+					<map schema="WEB" field="EMAIL1" key="REPORTER1_EMAIL"/>
+					<map schema="WEB" field="EMAIL2" key="REPORTER2_EMAIL"/>
+					<map schema="WEB" field="EMAIL3" key="REPORTER3_EMAIL"/>
+				</mapping>
+			</updateChildMetadata>	
 		</configuration>
 	
 		<!--  metadataNames - not used -->

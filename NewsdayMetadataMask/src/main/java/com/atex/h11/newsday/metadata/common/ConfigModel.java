@@ -113,6 +113,18 @@ public class ConfigModel {
     	return getXpathValue(metadataGroup + "/" + metadata + "/pub[@id='" + pub + "']/" + xpath);
     }    
     
+    public NodeList getNodeList(String xpath) 
+    		throws XPathExpressionException {
+    	NodeList nl = (NodeList) xp.evaluate(xpath, doc.getDocumentElement(), XPathConstants.NODESET);
+    	return nl;    	
+    }
+    
+    public NodeList getMetadataNodeList(String xpath) 
+    		throws XPathExpressionException {
+    	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + xpath, doc.getDocumentElement(), XPathConstants.NODESET);
+    	return nl;    	
+    }    
+    
     public NodeList getListItems(String pub, String metadata) 
 			throws XPathExpressionException {
     	NodeList nl = (NodeList) xp.evaluate(metadataGroup + "/" + metadata + "/pub[@id='" + pub + "']/item", 

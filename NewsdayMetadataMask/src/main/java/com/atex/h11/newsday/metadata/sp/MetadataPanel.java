@@ -38,6 +38,10 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -932,7 +936,6 @@ public class MetadataPanel extends JPanel {
 		txtrPrintExtra.setText(metadata.get("PRINT_EXTRA"));
 		txtrDigitalExtra1.setText(metadata.get("DIGITAL_EXTRA1"));
 		txtrDigitalExtra2.setText(metadata.get("DIGITAL_EXTRA2"));
-		//txtTextByline.setText(metadata.get("TEXT_BYLINE"));		// target component not needed 
 
 		if (cmbArrivalStatus.getSelectedItem().toString().equalsIgnoreCase(Constants.LIVE)) {
 			boolean hasEmbargoDate = false;
@@ -1077,7 +1080,6 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
 			retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
 			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
-			retMetadata.put("TEXT_BYLINE", getTextByline());	// TEXT_BYLINE - byline for TEXT object
 			
 			String embargoDate = "";
 			if (dtpckEmbargoDate.getComponent(0).isEnabled()) {
@@ -1097,6 +1099,9 @@ public class MetadataPanel extends JPanel {
 			
 			retMetadata.put("CATEGORIES", getStringFromListModel(selCategoriesModel));
 			retMetadata.put("COMMUNITIES", getStringFromListModel(selCommunitiesModel));
+			
+			// for child metadata updates
+			retMetadata.put("JSON_CHILD_METADATA", getJSONChildMetadata(retMetadata));
 		}
 			
 		return retMetadata;
@@ -1145,25 +1150,27 @@ public class MetadataPanel extends JPanel {
 		return retStringList;
 	}
 	
-	protected String getTextByline() {
-		String byline = "";
-		String buf = null;
+	protected String getJSONChildMetadata(HashMap<String,String> metadata) 
+			throws XPathExpressionException {
+		JSONArray jsonArr = new JSONArray();
 		
-		buf = getComboBoxSelectedItem(cmbReporter1);
-		if (buf != null && !buf.isEmpty()) {
-			byline += buf;
-		}
-		
-		buf = getComboBoxSelectedItem(cmbReporter2);
-		if (buf != null && !buf.isEmpty()) {
-			byline += (!byline.isEmpty() ? ", " + buf : buf);
-		}
-		
-		buf = getComboBoxSelectedItem(cmbReporter3);
-		if (buf != null && !buf.isEmpty()) {
-			byline += (!byline.isEmpty() ? ", " + buf : buf);
-		}
+		NodeList nl = config.getMetadataNodeList("configuration/updateChildMetadata/mapping/map");
 
-		return byline;
+		for (int i = 0; i < nl.getLength(); i++) {
+			Node n = nl.item(i);
+			String schema = n.getAttributes().getNamedItem("schema").getNodeValue();
+			String field = n.getAttributes().getNamedItem("field").getNodeValue();
+			String key = n.getAttributes().getNamedItem("key").getNodeValue();
+			String value = metadata.get(key);	// get value using the key
+			if (value != null) {
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("schema", schema);
+				jsonObj.put("field", field);
+				jsonObj.put("value", value);			
+				jsonArr.add(jsonObj);	// include obj in array
+			}
+		}
+		
+		return jsonArr.toString();
 	}
 }

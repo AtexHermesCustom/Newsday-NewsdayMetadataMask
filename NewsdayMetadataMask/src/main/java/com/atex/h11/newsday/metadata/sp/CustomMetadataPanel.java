@@ -305,19 +305,17 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		logger.entering(this.getClass().getSimpleName(), "updateChildMetadata");
 		
 		// for specific child object metadata to be updated
-		String textByline = metadata.get("TEXT_BYLINE");
-		if (textByline != null && !textByline.isEmpty()) {			
+		String jsonMetadata = metadata.get("JSON_CHILD_METADATA");
+		if (jsonMetadata != null && !jsonMetadata.isEmpty()) {			
 			HttpURLConnection httpCon = null;
 			
 			try {
-				String targetUrl = config.getMetadataConfigValue("updateChildMetadataURL");
+				String targetUrl = config.getMetadataConfigValue("updateChildMetadata/url");
 				logger.finer("updateChildMetadata: init targetURL=" + targetUrl);
 				targetUrl = targetUrl.replace("${J2EE_IP}", config.getConfigValue("j2eeIP"));
 				targetUrl = targetUrl.replace("${J2EE_HTTPPORT}", config.getConfigValue("j2eeHTTPPort"));
 				targetUrl = targetUrl.replace("${OBJ_ID}", objId);
-				targetUrl = targetUrl.replace("${SCHEMA}", config.getMetadataConfigValue("updateChildMetadataSchema"));
-				targetUrl = targetUrl.replace("${FIELD}", config.getMetadataConfigValue("updateChildMetadataField"));
-				targetUrl = targetUrl.replace("${VALUE}", URLEncoder.encode(textByline, "UTF-8"));
+				targetUrl = targetUrl.replace("${VALUE}", URLEncoder.encode(jsonMetadata, "UTF-8"));
 				logger.finer("updateChildMetadata: final targetURL=" + targetUrl);
 				URL url = new URL(targetUrl);
 	            
