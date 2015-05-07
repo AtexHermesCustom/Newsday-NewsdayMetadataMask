@@ -337,8 +337,8 @@ public class MetadataPanel extends JPanel {
 		cmbStoryType = new JComboBox();
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
 		
-		JLabel lblUrgency = new JLabel("Urgency");
-		add(lblUrgency, "2, 16, right, default");
+		JLabel lblLabel = new JLabel("Urgency");
+		add(lblLabel, "2, 16, right, default");
 		
 		cmbLabel = new JComboBox();
 		add(cmbLabel, "4, 16, 3, 1, fill, default");
