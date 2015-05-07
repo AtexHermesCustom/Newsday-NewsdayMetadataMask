@@ -141,14 +141,15 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			objLevelId = "";
 			pub = "";				
 			
-			// for testing only
-			String testMode = System.getProperty("Metadata.Test");
-			if (testMode != null && testMode.equals("1")) {
-				System.out.println("metadata test mode");
-				objId = "5465:00";
+			// for stand-alone testing only
+			String testParams = System.getProperty("Metadata.Test");
+			if (testParams != null && !testParams.isEmpty()) {
+				System.out.println("metadata test params=" + testParams);
+				String[] params = testParams.split(",");
+				objId = params[0];
+				objName = params[1];
+				objLevel = params[2];
 				objId = objId.replaceAll(":.*$", "");
-				objName = "TESTPACKAGE";
-				objLevel = "ND-WRITERS/NEWS";
 				pub = getPubFromLevel(objLevel);
 			}
 
