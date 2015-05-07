@@ -28,9 +28,9 @@
 			<updateChildMetadata>
 				<url><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/h11-custom-web/UpdateChildMultiMetadata?id=${OBJ_ID}&metadata=${VALUE}]]></url>
 				<mapping>
-					<map schema="WEB" field="BYLINE1" key="REPORTER1"/>
-					<map schema="WEB" field="BYLINE2" key="REPORTER2"/>
-					<map schema="WEB" field="BYLINE3" key="REPORTER3"/>
+					<map schema="WEB" field="BYLINE1" key="REPORTER1" uppercase="1"/>
+					<map schema="WEB" field="BYLINE2" key="REPORTER2" uppercase="1"/>
+					<map schema="WEB" field="BYLINE3" key="REPORTER3" uppercase="1"/>
 					<map schema="WEB" field="EMAIL1" key="REPORTER1_EMAIL"/>
 					<map schema="WEB" field="EMAIL2" key="REPORTER2_EMAIL"/>
 					<map schema="WEB" field="EMAIL3" key="REPORTER3_EMAIL"/>

@@ -1161,11 +1161,16 @@ public class MetadataPanel extends JPanel {
 			String schema = n.getAttributes().getNamedItem("schema").getNodeValue();
 			String field = n.getAttributes().getNamedItem("field").getNodeValue();
 			String key = n.getAttributes().getNamedItem("key").getNodeValue();
+			String upperCaseFlag = "";
+			if (n.getAttributes().getNamedItem("uppercase") != null) {
+				upperCaseFlag = n.getAttributes().getNamedItem("uppercase").getNodeValue();
+			}
 			String value = metadata.get(key);	// get value using the key
 			if (value != null) {
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("schema", schema);
 				jsonObj.put("field", field);
+				if (upperCaseFlag.equals("1")) { value = value.toUpperCase(); }
 				jsonObj.put("value", value);			
 				jsonArr.add(jsonObj);	// include obj in array
 			}
