@@ -277,7 +277,7 @@ public class MetadataPanel extends JPanel {
 		JLabel lblAssignedLength = new JLabel("Length");
 		add(lblAssignedLength, "14, 6");
 		
-		JLabel lblPriority = new JLabel("Priority");
+		JLabel lblPriority = new JLabel("Urgency");
 		add(lblPriority, "16, 6");
 		
 		JLabel lblrdReporter = new JLabel("3rd Reporter");
@@ -337,7 +337,7 @@ public class MetadataPanel extends JPanel {
 		cmbStoryType = new JComboBox();
 		add(cmbStoryType, "4, 14, 3, 1, fill, default");
 		
-		JLabel lblLabel = new JLabel("Urgency");
+		JLabel lblLabel = new JLabel("Label");
 		add(lblLabel, "2, 16, right, default");
 		
 		cmbLabel = new JComboBox();
