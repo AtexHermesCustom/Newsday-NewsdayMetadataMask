@@ -1547,6 +1547,36 @@
 			</pub>
 		</community>
 		
+		<reviewStars insertEmptyItem="1" selectFirstItemAsDefault="1">
+			<pub id="ALL">
+				<item>4</item>
+				<item>3.5</item>
+				<item>3</item>
+				<item>2.5</item>
+				<item>2</item>
+				<item>1.5</item>
+				<item>1</item>
+				<item>.5</item>
+				<item>0</item>
+			</pub>
+		</reviewStars>
+
+		<reviewGrade insertEmptyItem="1" selectFirstItemAsDefault="1">
+			<pub id="ALL">
+				<item>A+</item>
+				<item>A</item>
+				<item>A-</item>
+				<item>B+</item>
+				<item>B</item>
+				<item>B-</item>
+				<item>C+</item>
+				<item>C</item>
+				<item>C-</item>
+				<item>D</item>
+				<item>F</item>
+			</pub>
+		</reviewGrade>
+		
 		<!-- defaultValue:
 			- default values based on the level
 		 -->

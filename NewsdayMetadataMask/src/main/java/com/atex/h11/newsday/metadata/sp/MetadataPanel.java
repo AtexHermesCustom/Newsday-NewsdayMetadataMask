@@ -65,6 +65,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.DefaultComboBoxModel;
 
 public class MetadataPanel extends JPanel {
 	/**
@@ -101,6 +102,8 @@ public class MetadataPanel extends JPanel {
 	private JComboBox cmbPrintSequence;
 	private JComboBox cmbHomepage;
 	private JComboBox cmbArrivalStatus;
+	private JComboBox cmbReviewStars;
+	private JComboBox cmbReviewGrade;
 	private JDatePickerImpl dtpckEmbargoDate;
 	private JSpinner spnrEmbargoTime;
 	private JLabel lblPage;
@@ -139,6 +142,8 @@ public class MetadataPanel extends JPanel {
 	private String prevReporter1 = "";
 	private String prevReporter2 = "";
 	private String prevReporter3 = "";
+	private JLabel lblReviewStars;
+	private JLabel lblReviewGrade;
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
@@ -188,7 +193,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(41dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:max(50dlu;default)"),
+				ColumnSpec.decode("left:max(66dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:max(63dlu;default)"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -198,9 +203,11 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("left:30dlu"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:36dlu"),
+				ColumnSpec.decode("left:47dlu"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("left:30dlu"),},
+				ColumnSpec.decode("left:30dlu"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -433,6 +440,12 @@ public class MetadataPanel extends JPanel {
 		
 		JDatePanelImpl datePanel = new JDatePanelImpl(dateModel, datePanelProps);
 		
+		lblReviewStars = new JLabel("Review Stars");
+		add(lblReviewStars, "16, 26, right, default");
+		
+		cmbReviewStars = new JComboBox();
+		add(cmbReviewStars, "18, 26, fill, default");
+		
 		chkEmbargo = new JCheckBox("Embargo");
 		add(chkEmbargo, "4, 28");
 		
@@ -449,6 +462,12 @@ public class MetadataPanel extends JPanel {
 		JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(spnrEmbargoTime, Constants.TIME_FORMAT);
 		spnrEmbargoTime.setEditor(dateEditor);
 		add(spnrEmbargoTime, "12, 28, fill, fill");
+		
+		lblReviewGrade = new JLabel("Review Grade");
+		add(lblReviewGrade, "16, 28, right, default");
+		
+		cmbReviewGrade = new JComboBox();
+		add(cmbReviewGrade, "18, 28, fill, default");
 		
 		JLabel lblCategories = new JLabel("Categories");
 		add(lblCategories, "2, 30, right, top");
@@ -895,6 +914,14 @@ public class MetadataPanel extends JPanel {
 		config.initComboBox(cmbReporter3, pub, "reporter");
 		AutoCompleteDecorator.decorate(cmbReporter3);
 		setComboBoxSelectedItem(cmbReporter3, metadata.get("REPORTER3"));
+		
+		// review stars
+		config.initComboBox(cmbReviewStars, Constants.ALL, "reviewStars");
+		setComboBoxSelectedItem(cmbReviewStars, metadata.get("REVIEW_STARS"));
+		
+		// review grade
+		config.initComboBox(cmbReviewGrade, Constants.ALL, "reviewGrade");
+		setComboBoxSelectedItem(cmbReviewGrade, metadata.get("REVIEW_GRADE"));
 
 		// desk
 		config.initComboBox(cmbDesk, pub, "desk");
@@ -1079,6 +1106,8 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("PRINT_PAGE", ftfPrintPage.getText().trim());
 			retMetadata.put("HOMEPAGE", getComboBoxSelectedItem(cmbHomepage));
 			retMetadata.put("ARRIVAL_STATUS", getComboBoxSelectedItem(cmbArrivalStatus));
+			retMetadata.put("REVIEW_STARS", getComboBoxSelectedItem(cmbReviewStars));
+			retMetadata.put("REVIEW_GRADE", getComboBoxSelectedItem(cmbReviewGrade));
 			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
 			
 			String embargoDate = "";
