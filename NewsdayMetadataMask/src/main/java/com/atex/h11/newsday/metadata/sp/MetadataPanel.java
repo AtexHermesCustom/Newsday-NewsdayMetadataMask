@@ -147,7 +147,7 @@ public class MetadataPanel extends JPanel {
 
 	// constructor
 	public MetadataPanel(ConfigModel config, HashMap<String, String> metadata, Logger l, 
-		String objId, String objName, String objLevel, String pub) 
+		String objId, String objName, String objLevel, String pub, boolean readOnly) 
 			throws XPathExpressionException {
 		
 		this.objId = objId;
@@ -165,7 +165,7 @@ public class MetadataPanel extends JPanel {
 		
 		if (objName == null || objLevel == null || objName.isEmpty() || objLevel.isEmpty()) {
 			// disable - do not allow entry of metadata
-			disableControls();
+			disableControlsNew();
 			panelDisabled = true;
 		} else {
 			// init components and set values based from metadata hash
@@ -183,6 +183,13 @@ public class MetadataPanel extends JPanel {
 			// not needed
 			//// check and highlight mandatory fields that are missing 
 			//isReady();		
+			
+			// if read Only (i.e. metadata is being edited simultaneously by another person)
+			if (readOnly) {
+				// disable - do not allow entry of metadata
+				disableControlsReadOnly();
+				panelDisabled = true;				
+			}
 		}		
 	}
 
@@ -244,7 +251,7 @@ public class MetadataPanel extends JPanel {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		lblTitle = new JLabel("Story Package Metadata");
+		lblTitle = new JLabel("Package Metadata");
 		add(lblTitle, "2, 2, 7, 1");
 		
 		lblLevel = new JLabel("Level:");
@@ -865,7 +872,7 @@ public class MetadataPanel extends JPanel {
 	protected void setComponentValues() 
 			throws XPathExpressionException {
 		// title label
-		String title = "<html><p><b>Story Package Metadata</b>";
+		String title = "<html><p><b>Package Metadata</b>";
 		if (objName != null && !objName.isEmpty()) {
 			title += "<b> for <font color=\"blue\">" + objName + "</font> (id: " + objId + ")</b>";
 		}
@@ -1039,14 +1046,32 @@ public class MetadataPanel extends JPanel {
 		}
 	}
 	
+	protected void disableControlsNew() {
+		disableControls();
+		
+		String title = "<html><p><b><font color=\"red\">This tab will be available after the package is created</font></b></p></html>";
+		lblTitle.setText(title);
+		lblTitle.setEnabled(true);		
+	}
+	
+	protected void disableControlsReadOnly() {
+		disableControls();
+		
+		// title label
+		String title = "<html><p><b>Package Metadata</b>";
+		if (objName != null && !objName.isEmpty()) {
+			title += "<b> for <font color=\"blue\">" + objName + "</font> (id: " + objId + ") - <font color=\"red\">Read Only</font></b>";
+		}
+		title += "</p></html>";
+		
+		lblTitle.setText(title);
+		lblTitle.setEnabled(true);			
+	}
+	
 	protected void disableControls() {		
 		for (Component component : getAllComponents(this)) {
 		    component.setEnabled(false);
 		}
-		
-		String title = "<html><p><b><font color=\"red\">This tab will be available after the package is created</font></b></html>";
-		lblTitle.setText(title);
-		lblTitle.setEnabled(true);
 	}
 	
 	protected Component[] getAllComponents(Component container) {

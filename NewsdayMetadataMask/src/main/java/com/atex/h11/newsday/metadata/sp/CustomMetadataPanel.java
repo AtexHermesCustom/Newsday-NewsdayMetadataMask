@@ -123,7 +123,8 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			throws Exception {
 		try {
 			logger.entering(this.getClass().getSimpleName(), "getPanel");
-						
+			logger.info("ReadOnly status=" + Boolean.toString(readonly));
+			
 			this.inspector = inspector;
 			this.metadata = metadata;
 
@@ -170,7 +171,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			
 			logMetadata(metadata, "Loaded from DB");
 
-			metadataPanel = new MetadataPanel(config, metadata, logger, objId, objName, objLevel, pub);
+			metadataPanel = new MetadataPanel(config, metadata, logger, objId, objName, objLevel, pub, readonly);
 			metadataPanel.setPreferredSize(new Dimension(720, 600));
 			
 			logger.exiting(this.getClass().getSimpleName(), "getPanel");
