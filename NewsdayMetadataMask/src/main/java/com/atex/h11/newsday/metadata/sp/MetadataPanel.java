@@ -1136,18 +1136,26 @@ public class MetadataPanel extends JPanel {
 			retMetadata.put("EXCLUSIVE_FLAG", chkExclusive.isSelected() ? Constants.TRUE : Constants.FALSE);
 			
 			String embargoDate = "";
-			if (dtpckEmbargoDate.getComponent(0).isEnabled()) {
-				Date d = (Date) dtpckEmbargoDate.getModel().getValue();
-				SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
-				embargoDate = dateFormat.format(d);
+			if (dtpckEmbargoDate.getComponent(0).isEnabled() && dtpckEmbargoDate.getModel().getValue() != null) {
+				try {
+					Date d = (Date) dtpckEmbargoDate.getModel().getValue();
+					SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_DB);
+					embargoDate = dateFormat.format(d);					
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, "getMetadataValues: Error encountered", e);
+				}				
 			}
 			retMetadata.put("EMBARGO_DATE", embargoDate);
 			
 			String embargoTime = "";
-			if (spnrEmbargoTime.isEnabled()) {
-				Date d = (Date) spnrEmbargoTime.getValue();
-				SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
-				embargoTime = timeFormat.format(d);
+			if (spnrEmbargoTime.isEnabled() && spnrEmbargoTime.getValue() != null) {
+				try {
+					Date d = (Date) spnrEmbargoTime.getValue();
+					SimpleDateFormat timeFormat = new SimpleDateFormat(Constants.TIME_FORMAT);
+					embargoTime = timeFormat.format(d);							
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, "getMetadataValues: Error encountered", e);
+				}				
 			}
 			retMetadata.put("EMBARGO_TIME", embargoTime);
 			
