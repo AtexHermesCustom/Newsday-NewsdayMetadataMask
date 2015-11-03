@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
 
 	<!-- configuration settings -->
@@ -27,7 +27,9 @@
 		<configuration>
 			<updateChildMetadata>
 				<!-- URL of web app to update the child metadata -->
-				<url><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/h11-custom-web/UpdateChildMultiMetadata?id=${OBJ_ID}&metadata=${VALUE}]]></url>
+				<url><![CDATA[http://${J2EE_IP}:${J2EE_HTTPPORT}/h11-custom-web/UpdateChildMultiMetadata]]></url>
+				<!-- encoding used -->
+				<encoding>ISO-8859-1</encoding>				
 				<!-- mapping:
 					mapping between SP metadata to child metadata
 					key=SP metadata field
@@ -35,9 +37,9 @@
 					uppercase=flag whether to convert the value to uppercase or not. possible values=0 or 1
 				 -->
 				<mapping>
-					<map schema="WEB" field="BYLINE1" key="REPORTER1" uppercase="1"/>
-					<map schema="WEB" field="BYLINE2" key="REPORTER2" uppercase="1"/>
-					<map schema="WEB" field="BYLINE3" key="REPORTER3" uppercase="1"/>
+					<map schema="WEB" field="BYLINE1" key="REPORTER1"/>
+					<map schema="WEB" field="BYLINE2" key="REPORTER2"/>
+					<map schema="WEB" field="BYLINE3" key="REPORTER3"/>
 					<map schema="WEB" field="EMAIL1" key="REPORTER1_EMAIL"/>
 					<map schema="WEB" field="EMAIL2" key="REPORTER2_EMAIL"/>
 					<map schema="WEB" field="EMAIL3" key="REPORTER3_EMAIL"/>
@@ -45,7 +47,7 @@
 			</updateChildMetadata>	
 		</configuration>
 	
-		<!--  metadataNames - not used -->
+		<!-- metadataNames - not used -->
 		<metadataNames></metadataNames>
 		
 		<!-- publicationConfiguration:
@@ -124,374 +126,558 @@
 		 -->
 		<reporter insertEmptyItem="1" selectFirstItemAsDefault="1">
 			<pub id="ND">
-				<item email="laura.albanese@newsday.com">Laura Albanese</item>
-				<item email="aisha.al-muslim@newsday.com">Aisha Al-Muslim</item>
-				<item email="stacey.altherr@newsday.com">Stacey Altherr</item>
-				<item email="sarah.armaghan@newsday.com">Sarah Armaghan</item>
-				<item email="john.asbury@newsday.com">John Asbury</item>
-				<item email="barbara.barker@newsday.com">Barbara Barker</item>
-				<item email="jennifer.barrios@newsday.com">Jennifer Barrios</item>
-				<item email="valerie.bauman@newsday.com">Valerie Bauman</item>
-				<item email="jim.baumbach@newsday.com">Jim Baumbach</item>
-				<item email="tom.beer@newsday.com">Tom Beer</item>
-				<item email="nbest1@gmail.com">Neil Best</item>
-				<item email="john.boell@newsday.com">John Boell</item>
-				<item email="eboland11@aol.com">Erik Boland</item>
-				<item email="denise.bonilla@newsday.com">Denise M. Bonilla</item>
-				<item email="roderick.boone@newsday.com">Roderick Boone</item>
-				<item email="rick.brand@newsday.com">Rick Brand</item>
-				<item email="Special to Newsday">Lynn Brenner</item>
-				<item email="robert.brodsky@newsday.com">Robert Brodsky</item>
-				<item email="peggy.brown@newsday.com">Peggy Brown</item>
-				<item email="tom.brune@newsday.com">Tom Brune</item>
-				<item email="daniel.bubbeo@newsday.com">Daniel Bubbeo</item>
-				<item email="salvatore.cacciatore@newsday.com">Sal Cacciatore</item>
-				<item email="marc.carig@newsday.com">Marc Carig</item>
-				<item email="judy.cartwright@newsday.com">Judy Cartwright</item>
-				<item email="matthew.cassella@newsday.com">Matthew Cassella</item>
-				<item email="sid.cassese@newsday.com">Sid Cassese</item>
-				<item email="robert.cassidy@newsday.com">Robert Cassidy</item>
-				<item email="alfonso.castillo@newsday.com">Alfonso A. Castillo</item>
-				<item email="sophia.chang@newsday.com">Sophia Chang</item>
-				<item email="Special to Newsday">Lauren Chattman</item>
-				<item email="matthew.chayes@newsday.com">Matthew Chayes</item>
-				<item email="matt.clark@newsday.com">Matt Clark</item>
-				<item email="rita.ciolli@newsday.com">Rita Ciolli</item>
-				<item email="tara.conry@newsday.com">Tara Conry</item>
-				<item email="david.criblez@newsday.com">David J. Criblez</item>
-				<item email="jessica.damiano@newsday.com">Jessica Damiano</item>
-				<item email="cody.derespina@newsday.com">Cody Derespina</item>
-				<item email="tony.destefano@newsday.com">Anthony M. DeStefano</item>
-				<item email="kevin.deutsch@newsday.com">Kevin Deutsch</item>
-				<item email="michael.dobie@newsday.com">Michael Dobie</item>
-				<item email="lisa.doll-bruno@newsday.com">Lisa Doll Bruno</item>
-				<item email="emily.dooley@newsday.com">Emily Dooley</item>
-				<item email="zachary.dowdy@newsday.com">Zachary R. Dowdy</item>
-				<item email="gary.dymski@newsday.com">Gary Dymski</item>
-				<item email="michael.ebert@newsday.com">Michael R. Ebert</item>
-				<item email="andy.edelstein@newsday.com">Andy Edelstein</item>
-				<item email="scott.eidler@newsday.com">Scott Eidler</item>
-				<item email="greg.emerson@newsday.com">Greg Emerson</item>
-				<item email="martin.evans@newsday.com">Martin C. Evans</item>
-				<item email="alan.fallick@newsday.com">Alan H. Fallick</item>
-				<item email="candice.ferrette@newsday.com">Candice Ferrette</item>
-				<item email="laura.figueroa@newsday.com">Laura Figueroa</item>
-				<item email="robert.fouch@newsday.com">Robert L. Fouch</item>
-				<item email="nicole.fuller@newsday.com">Nicole Fuller</item>
-				<item email="glenn.gamboa@newsday.com">Glenn Gamboa</item>
-				<item email="michael.gavin@newsday.com">Mike Gavin</item>
-				<item email="verne.gay@newsday.com">Verne Gay</item>
-				<item email="peter.gianotti@newsday.com">Peter M. Gianotti</item>
-				<item email="bobglauber18@gmail.com">Bob Glauber</item>
-				<item email="meghan.glynn@newsday.com">Meghan Glynn</item>
-				<item email="michael.gormley@newsday.com">Michael Gormley</item>
-				<item email="joan.gralla@newsday.com">Joan Gralla</item>
-				<item email="sam.guzik@newsday.com">Sam Guzik</item>
-				<item email="rafer.guzman@newsday.com">Rafer Guzman</item>
-				<item email="celeste.hadrick@newsday.com">Celeste Hadrick</item>
-				<item email="deon.hampton@newsday.com">Deon J. Hampton</item>
-				<item email="mark.harrington@newsday.com">Mark Harrington</item>
-				<item email="lauren.harrison@newsday.com">Lauren R. Harrison</item>
-				<item email="stephen.haynes@newsday.com">Stephen Haynes</item>
-				<item email="keith.herbert@newsday.com">Keith Herbert</item>
-				<item email="mark.herrmann@newsday.com">Mark Herrmann</item>
-				<item email="bob.herzog@newsday.com">Bob Herzog</item>
-				<item email="john.hildebrand@newsday.com">John Hildebrand</item>
-				<item email="al.iannazzone@newsday.com">Al Iannazzone</item>
-				<item email="tom.incantalupo@newsday.com">Tom Incantalupo</item>
-				<item email="lisa.irizarry@newsday.com">Lisa Irizarry</item>
-				<item email="will.james@newsday.com">Will James</item>
-				<item email="dan.janison@newsday.com">Dan Janison</item>
-				<item email="john.jeansonne@newsday.com">John Jeansonne</item>
-				<item email="bart.jones@newsday.com">Bart Jones</item>
-				<item email="valerie.kellogg@newsday.com">Valerie Kellogg</item>
-				<item email="kathleen.kerr@newsday.com">Kathleen Kerr</item>
-				<item email="robert.kessler@newsday.com">Robert E. Kessler</item>
-				<item email="sylvia.king-cohen@newsday.com">Sylvia E. King-Cohen</item>
-				<item email="patricia.kitchen@newsday.com">Patricia Kitchen</item>
-				<item email="nicholas.klopsis@newsday.com">Nick Klopsis</item>
-				<item email="chau.lam@newsday.com">Chau Lam</item>
-				<item email="mark.lamonica@newsday.com">Mark La Monica</item>
-				<item email="paul.larocco@newsday.com">Paul LaRocco</item>
-				<item email="jordan.lauterbach@newsday.com">Jordan Lauterbach</item>
-				<item email="dave.lennon@newsday.com">David Lennon</item>
-				<item email="gregory.logan@newsday.com">Greg Logan</item>
-				<item email="tania.lopez@newsday.com">Tania Lopez</item>
-				<item email="david.lopez@newsday.com">David J. Lopez</item>
-				<item email="marshall.lubin@newsday.com">Marshall Lubin</item>
-				<item email="carl.macgowan@newsday.com">Carl Macgowan</item>
-				<item email="james.madore@newsday.com">James Madore</item>
-				<item email="thomas.maier@newsday.com">Thomas Maier</item>
-				<item email="steven.marcus@newsday.com">Steven Marcus</item>
-				<item email="erica.marcus@newsday.com">Erica Marcus</item>
-				<item email="randi.marshall@newsday.com">Randi F. Marshall</item>
-				<item email="kimberley.martin@newsday.com">Kimberley A. Martin</item>
-				<item email="carrie.mason-draffen@newsday.com">Carrie Mason-Draffen</item>
-				<item email="maura.mcdermott@newsday.com">Maura McDermott</item>
-				<item email="ed.mcnamara@newsday.com">Ed McNamara</item>
-				<item email="robert.mcgough@newsday.com">Bob McGough</item>
-				<item email="deborah.morris@newsday.com">Deborah S. Morris</item>
-				<item email="gene.morris@newsday.com">Gene Morris</item>
-				<item email="bridget.murphy@newsday.com">Bridget Murphy</item>
-				<item email="bill.murphy@newsday.com">William Murphy</item>
-				<item email="jo.napolitano@newsday.com">Jo Napolitano</item>
-				<item email="emily.ngo@newsday.com">Emily Ngo</item>
-				<item email="phil.nobile@newsday.com">Phil Nobile</item>
-				<item email="ridgely.ochs@newsday.com">Ridgely Ochs</item>
-				<item email="rosemary.olander@newsday.com">Rosemary Olander</item>
-				<item email="steve.parks@newsday.com">Steve Parks</item>
-				<item email="sandra.peddie@newsday.com">Sandra Peddie</item>
-				<item email="ted.phillips@newsday.com">Ted Phillips</item>
-				<item email="carol.polsky@newsday.com">Carol Polsky</item>
-				<item email="monica.quintanilla@newsday.com">Monica Quintanilla</item>
-				<item email="victor.ramos@newsday.com">Victor Ramos</item>
-				<item email="joan.reminick@newsday.com">Joan Reminick</item>
-				<item email="delthia.ricks@newsday.com">Delthia Ricks</item>
-				<item email="anthony.rieber@newsday.com">Anthony Rieber</item>
-				<item email="john.riley@newsday.com">John Riley</item>
-				<item email="marjorie.robins@newsday.com">Marjorie K. Robins</item>
-				<item email="tom.rock@newsday.com">Tom Rock</item>
-				<item email="yancey.roy@newsday.com">Yancey Roy</item>
-				<item email="candice.ruud@newsday.com">Candice Ruud</item>
-				<item email="joe.ryan@newsday.com">Joe Ryan</item>
-				<item email="william.sammon@newsday.com">Will Sammon</item>
-				<item email="gregg.sarra@newsday.com">Gregg Sarra</item>
-				<item email="kenneth.schachter@newsday.com">Ken Schachter</item>
-				<item email="Special to Newsday">Jill Schlesinger</item>
-				<item email="barbara.schuler@newsday.com">Barbara Schuler</item>
-				<item email="dschwar1@newsday.com">David M. Schwartz</item>
-				<item email="darran.simon@newsday.com">Darran Simon</item>
-				<item email="jack.sirica@newsday.com">Jack Sirica</item>
-				<item email="andy.slawson@newsday.com">Andy Slawson</item>
-				<item email="steve.matthews@newsday.com">Steve Matthews</item>
-				<item email="andrew.smith@newsday.com">Andrew Smith</item>
-				<item email="ann.smukler@newsday.com">Ann Smukler</item>
-				<item email="nick.spangler@newsday.com">Nick Spangler</item>
-				<item email="arthur.staple@newsday.com">Arthur Staple</item>
-				<item email="joshua.stewart@newsday.com">Josh Stewart</item>
-				<item email="jason.stromberg@newsday.com">Jason Stromberg</item>
-				<item email="robin.topping@newsday.com">Robin Topping</item>
-				<item email="joie.tyrrell@newsday.com">Joie Tyrrell</item>
-				<item email="Special to amNY">David Uberti</item>
-				<item email="john.valenti@newsday.com">John Valenti</item>
-				<item email="shawna.vanness@newsday.com">Shawna VanNess</item>
-				<item email="will.vansant@newsday.com">Will Van Sant</item>
-				<item email="beth.whitehouse@newsday.com">Beth Whitehouse</item>
-				<item email="steve.wick@newsday.com">Steve Wick</item>
-				<item email="jeffrey.williams@newsday.com">Jeff Williams</item>
-				<item email="linda.winer@newsday.com">Linda Winer</item>
-				<item email="olivia.winslow@newsday.com">Olivia Winslow</item>
-				<item email="ellen.yan@newsday.com">Ellen Yan</item>
-				<item email="monte.young@newsday.com">Monte R. Young</item>
-				<item email="steve.zipay@newsday.com">Steve Zipay</item>
-				<item email="matthew.chayes@newsday.com">Matthew Chayes</item>
-				<item email="peter.catapano@am-ny.com">Peter Catapano</item>
-				<item email="meredith.deliso@am-ny.com">Meredith Deliso</item>
-				<item email="joseph.dolman@am-ny.com">Joseph Dolman</item>
-				<item email="sheila.feeney@am-ny.com">Sheila Anne Feeney</item>
-				<item email="scott.fontana@am-ny.com ">Scott Fontana</item>
-				<item email="alison.fox@am-ny.com">Alison Fox</item>
-				<item email="julie.gordon@am-ny.com">Julie Gordon</item>
-				<item email="dan.janison@newsday.com">Dan Janison</item>
-				<item email="georgia.kral@am-ny.com">Georgia Kral</item>
-				<item email="rlevin1@am-ny.com ">Robert Levin</item>
-				<item email="levitt@nypdconfidential.com">Len Levitt</item>
-				<item email="caroline.linton@am-ny.com">Caroline Linton</item>
-				<item email="emily.ngo@newsday.com">Emily Ngo</item>
-				<item email="ivan.pereira@am-ny.com ">Ivan Pereira</item>
-				<item email="eli.reyes@newsday.com">Eli Reyes</item>
-				<item email="dan.rivoli@am-ny.com ">Dan Rivoli</item>
-				<item email=" scott.rosenberg@am-ny.com ">Scott A. Rosenberg</item>
-				<item email="nina.ruggiero@am-ny.com">Nina Ruggiero</item>
-				<item email="cristian.salazar@am-ny.com">Cristian Salazar</item>
-				<item email="heather.senison@am-ny.com">Heather Senison</item>
-				<item email="jordan.teicher@am-ny.com">Jordan G. Teicher</item>
-				<item email="jeffvasishta@facebook.com">Jeff Vasishta</item>
-				<item email="mattwindman@gmail.com">Matt Windman</item>
+			<item email="aisha.al-muslim@newsday.com">Aisha Al-Muslim</item>
+			<item email="al.iannazzone@newsday.com">Al Iannazzone</item>
+			<item email="alan.fallick@newsday.com">Alan H. Fallick</item>
+			<item email="alfonso.castillo@newsday.com">Alfonso A. Castillo</item>
+			<item email="alison.bernicker@newsday.com">Alison Bernicker</item>
+			<item email="alison.fox@amny.com">Alison Fox</item>
+			<item email="Special to Newsday">Alison Gregor</item>
+			<item email="">amNY</item>
+			<item email="">amNY/Newsday</item>
+			<item email="askamy@tribune.com">Amy Dickinson</item>
+			<item email="andrew.smith@newsday.com">Andrew Smith</item>
+			<item email="andy.edelstein@newsday.com">Andy Edelstein</item>
+			<item email="andy.slawson@newsday.com">Andy Slawson</item>
+			<item email="ann.givens@newsday.com">Ann Givens</item>
+			<item email="ann.smukler@newsday.com">Ann Smukler</item>
+			<item email="Special to Newsday">Anne Bratskeir</item>
+			<item email="Special to Newsday">Anne Machalinski</item>
+			<item email="anne.michaud@newsday.com">Anne Michaud</item>
+			<item email="anthony.bottan@newsday.com">Anthony Bottan</item>
+			<item email="anthony.rieber@newsday.com">Anthony Rieber</item>
+			<item email="tony.destefano@newsday.com">Anthony M. DeStefano</item>
+			<item email="ari.kramer@newsday.com">Ari Kramer</item>
+			<item email="Special to Newsday">Art Spander</item>
+			<item email="arthur.staple@newsday.com">Arthur Staple</item>
+			<item email="barbara.barker@newsday.com">Barbara Barker</item>
+			<item email="barbara.schuler@newsday.com">Barbara Schuler</item>
+			<item email="bart.jones@newsday.com">Bart Jones</item>
+			<item email="beth.whitehouse@newsday.com">Beth Whitehouse</item>
+			<item email="Special to Newsday">Bill Bleyer</item>
+			<item email="bill.dedman@newsday.com">Bill Dedman</item>
+			<item email="bill.mason@newsday.com">Bill Mason</item>
+			<item email="">Bloomberg News</item>
+			<item email="bob.glauber@newsday.com">Bob Glauber</item>
+			<item email="bob.herzog@newsday.com">Bob Herzog</item>
+			<item email="robert.mcgough@newsday.com">Bob McGough</item>
+			<item email="bridget.murphy@newsday.com">Bridget Murphy</item>
+			<item email="Special to Newsday">Bryan Reesman</item>
+			<item email="candice.ferrette@newsday.com">Candice Ferrette</item>
+			<item email="candice.ruud@newsday.com">Candice Ruud</item>
+			<item email="Special to Newsday">Carl Corry</item>
+			<item email="carl.macgowan@newsday.com">Carl MacGowan</item>
+			<item email="carol.polsky@newsday.com">Carol Polsky</item>
+			<item email="carrie.mason-draffen@newsday.com">Carrie Mason-Draffen</item>
+			<item email="casey.musarra@newsday.com">Casey Musarra</item>
+			<item email="celeste.hadrick@newsday.com">Celeste Hadrick</item>
+			<item email="chau.lam@newsday.com">Chau Lam</item>
+			<item email="christine.chung@newsday.com">Christine Chung</item>
+			<item email="Special to Newsday">Claudia Gryvatz Copquin</item>
+			<item email="Special to Newsday">Colin Stephenson</item>
+			<item email="">Combined News Services</item>
+			<item email="cristian.salazar@amny.com">Cristian Salazar</item>
+			<item email="dan.janison@newsday.com">Dan Janison</item>
+			<item email="Special to Newsday">Daniel Akst</item>
+			<item email="daniel.bubbeo@newsday.com">Daniel Bubbeo</item>
+			<item email="Special to Newsday">Danielle Braff</item>
+			<item email="darran.simon@newsday.com">Darran Simon</item>
+			<item email="david.lennon@newsday.com">David Lennon</item>
+			<item email="david.olson@newsday.com">David Olson</item>
+			<item email="david.reich-hale@newsday.com">David Reich-Hale</item>
+			<item email="Special to amNY">David Uberti</item>
+			<item email="david.criblez@newsday.com">David J. Criblez</item>
+			<item email="david.lopez@newsday.com">David J. Lopez</item>
+			<item email="david.schwartz@newsday.com">David M. Schwartz</item>
+			<item email="deborah.morris@newsday.com">Deborah S. Morris</item>
+			<item email="delia.paunescu@newsday.com">Delia Paunescu</item>
+			<item email="delthia.ricks@newsday.com">Delthia Ricks</item>
+			<item email="denise.bonilla@newsday.com">Denise M. Bonilla</item>
+			<item email="deon.hampton@newsday.com">Deon J. Hampton</item>
+			<item email="Special to Newsday">Diane Werts</item>
+			<item email="ed.mcnamara@newsday.com">Ed McNamara</item>
+			<item email="edward.colby@newsday.com">Edward Colby</item>
+			<item email="edward.starkey@newsday.com">Edward Starkey</item>
+			<item email="elaine.piniat@newsday.com">Elaine Piniat</item>
+			<item email="eli.reyes@newsday.com">Eli Reyes</item>
+			<item email="ellen.yan@newsday.com">Ellen Yan</item>
+			<item email="emily.dooley@newsday.com">Emily Dooley</item>
+			<item email="emily.ngo@newsday.com">Emily Ngo</item>
+			<item email="erica.marcus@newsday.com">Erica Marcus</item>
+			<item email="erik.bacharach@newsday.com">Erik Bacharach</item>
+			<item email="erik.boland@newsday.com">Erik Boland</item>
+			<item email="erin.geismar@newsday.com">Erin Geismar</item>
+			<item email="fausto.pinto@newsday.com">Fausto Giovanny Pinto</item>
+			<item email="Special to Newsday">Frank Lovece</item>
+			<item email="">From staff and wire reports</item>
+			<item email="gary.dymski@newsday.com">Gary Dymski</item>
+			<item email="gene.morris@newsday.com">Gene Morris</item>
+			<item email="georgia.kral@amny.com">Georgia Kral</item>
+			<item email="glenn.gamboa@newsday.com">Glenn Gamboa</item>
+			<item email="greg.logan@newsday.com">Greg Logan</item>
+			<item email="gregg.sarra@newsday.com">Gregg Sarra</item>
+			<item email="gus.garcia-roberts@newsday.com">Gus Garcia-Roberts</item>
+			<item email="hannah.siegel@newsday.com">Hannah Siegel</item>
+			<item email="heather.doyle@newsday.com">Heather Doyle</item>
+			<item email="heather.senison@amny.com">Heather Senison</item>
+			<item email="Special to Newsday">Ian J. Stark</item>
+			<item email="ivan.pereira@amny.com ">Ivan Pereira</item>
+			<item email="jack.sirica@newsday.com">Jack Sirica</item>
+			<item email="Special to Newsday">James Kindall</item>
+			<item email="james.madore@newsday.com">James Madore</item>
+			<item email="jherzlich@aol.com">Jamie Herzlich</item>
+			<item email="jeffrey.williams@newsday.com">Jeff Williams</item>
+			<item email="jennifer.barrios@newsday.com">Jennifer Barrios</item>
+			<item email="jessica.damiano@newsday.com">Jessica Damiano</item>
+			<item email="Special to Newsday">Jessica Lewis</item>
+			<item email="Special to Newsday">Jill Schlesinger</item>
+			<item email="jim.baumbach@newsday.com">Jim Baumbach</item>
+			<item email="Special to Newsday">Jim Merritt</item>
+			<item email="jo.napolitano@newsday.com">Jo Napolitano</item>
+			<item email="joan.gralla@newsday.com">Joan Gralla</item>
+			<item email="joan.reminick@newsday.com">Joan Reminick</item>
+			<item email="joe.manniello@newsday.com">Joe Manniello</item>
+			<item email="joe.ryan@newsday.com">Joe Ryan</item>
+			<item email="Special to Newsday">John Anderson</item>
+			<item email="john.asbury@newsday.com">John Asbury</item>
+			<item email="john.boell@newsday.com">John Boell</item>
+			<item email="john.callegari@newsday.com">John Callegari</item>
+			<item email="Special to Newsday">John Hanc</item>
+			<item email="john.hildebrand@newsday.com">John Hildebrand</item>
+			<item email="Special to Newsday">John Jeansonne</item>
+			<item email="john.riley@newsday.com">John Riley</item>
+			<item email="john.valenti@newsday.com">John Valenti</item>
+			<item email="Special to Newsday">John Wilwol</item>
+			<item email="joie.tyrrell@newsday.com">Joie Tyrrell</item>
+			<item email="jonathan.starkey@newsday.com">Jonathan Starkey</item>
+			<item email="joseph.dolman@amny.com">Joseph Dolman</item>
+			<item email="joseph.mallia@newsday.com">Joseph Mallia</item>
+			<item email="Special to Newsday">Joseph V. Amodio</item>
+			<item email="joshua.stewart@newsday.com">Josh Stewart</item>
+			<item email="joye.brown@newsday.com">Joye Brown</item>
+			<item email="kaitlyn.piccoli@newsday.com">Kaitlyn Piccoli</item>
+			<item email="katherine.chaffer@newsday.com">Katherine Chaffer</item>
+			<item email="katherine.poirier@newsday.com">Katherine Poirier</item>
+			<item email="kathleen.kerr@newsday.com">Kathleen Kerr</item>
+			<item email="kathy.diamond@newsday.com">Kathy Diamond</item>
+			<item email="Special to Newsday">Kay Blough</item>
+			<item email="keira.alexander@amny.com">Keira Alexander</item>
+			<item email="keith.herbert@newsday.com">Keith Herbert</item>
+			<item email="kenneth.schachter@newsday.com">Ken Schachter</item>
+			<item email="kevin.deutsch@newsday.com">Kevin Deutsch</item>
+			<item email="kieran.lynch@newsday.com">Kieran Lynch</item>
+			<item email="kimberley.martin@newsday.com">Kimberley A. Martin</item>
+			<item email="Special to Newsday">Kristin Taveira</item>
+			<item email="lane.filler@newsday.com">Lane Filler</item>
+			<item email="Special to Newsday">Lara Ewen</item>
+			<item email="laura.albanese@newsday.com">Laura Albanese</item>
+			<item email="laura.blasey@newsday.com">Laura Blasey</item>
+			<item email="laura.figueroa@newsday.com">Laura Figueroa</item>
+			<item email="Special to Newsday">Lauren Chattman</item>
+			<item email="lauren.harrison@newsday.com">Lauren R. Harrison</item>
+			<item email="Special to Newsday">Lawrence Levy</item>
+			<item email="levitt@nypdconfidential.com">Len Levitt</item>
+			<item email="Special to Newsday">Lewis Beale</item>
+			<item email="linda.winer@newsday.com">Linda Winer</item>
+			<item email="Special to Newsday">Lisa Chamoff</item>
+			<item email="lisa.du@newsday.com">Lisa Du</item>
+			<item email="lisa.irizarry@newsday.com">Lisa Irizarry</item>
+			<item email="">Los Angeles Times (TNS)</item>
+			<item email="Special to Newsday">Lynn Brenner</item>
+			<item email="Special to Newsday">Mac Randall</item>
+			<item email="mackenzie.issler@newsday.com">Mackenzie Issler</item>
+			<item email="mackenzie.rigg@newsday.com">Mackenzie Rigg</item>
+			<item email="Special to Newsday">Malerie Yolen-Cohen</item>
+			<item email="mandy.hofmockel@newsday.com">Mandy Hofmockel</item>
+			<item email="marc.carig@newsday.com">Marc Carig</item>
+			<item email="Special to Newsday">Maria Alvarez</item>
+			<item email="Special to Newsday">Marion Winik</item>
+			<item email="marjorie.robins@newsday.com">Marjorie K. Robins</item>
+			<item email="mark.harrington@newsday.com">Mark Harrington</item>
+			<item email="mark.herrmann@newsday.com">Mark Herrmann</item>
+			<item email="mark.lamonica@newsday.com">Mark La Monica</item>
+			<item email="marshall.lubin@newsday.com">Marshall Lubin</item>
+			<item email="Special to Newsday">Marshall S. Berdan</item>
+			<item email="martin.evans@newsday.com">Martin C. Evans</item>
+			<item email="matt.clark@newsday.com">Matt Clark</item>
+			<item email="amNewYork Theater Critic">Matt Windman</item>
+			<item email="matthew.cassella@newsday.com">Matthew Cassella</item>
+			<item email="matthew.chayes@newsday.com">Matthew Chayes</item>
+			<item email="Special to Newsday">Matthew Price</item>
+			<item email="maura.mcdermott@newsday.com">Maura McDermott</item>
+			<item email="">McClatchy-Tribune News Service</item>
+			<item email="">MCT</item>
+			<item email="meghan.giannotta@newsday.com">Meghan Giannotta</item>
+			<item email="melissa.kravitz@amny.com">Melissa Kravitz</item>
+			<item email="meredith.deliso@amny.com">Meredith Deliso</item>
+			<item email="michael.dobie@newsday.com">Michael Dobie</item>
+			<item email="michael.gormley@newsday.com">Michael Gormley</item>
+			<item email="michael.ebert@newsday.com">Michael R. Ebert</item>
+			<item email="michael.gavin@newsday.com">Mike Gavin</item>
+			<item email="michael.rose@newsday.com">Mike Rose</item>
+			<item email="mitchell.freedman@newsday.com">Mitchell Freedman</item>
+			<item email="monica.quintanilla@newsday.com">Monica Quintanilla</item>
+			<item email="monte.young@newsday.com">Monte R. Young</item>
+			<item email="neil.best@newsday.com">Neil Best</item>
+			<item email="sports@newsday.com">Newsday.com</item>
+			<item email="nicholas.klopsis@newsday.com">Nick Klopsis</item>
+			<item email="nick.spangler@newsday.com">Nick Spangler</item>
+			<item email="nicole.fuller@newsday.com">Nicole Fuller</item>
+			<item email="olivia.winslow@newsday.com">Olivia Winslow</item>
+			<item email="owen.o’brien@newsday.com">Owen O'Brien</item>
+			<item email="patricia.kitchen@newsday.com">Patricia Kitchen</item>
+			<item email="patrick.whittle@newsday.com">Patrick Whittle</item>
+			<item email="paul.larocco@newsday.com">Paul LaRocco</item>
+			<item email="peggy.brown@newsday.com">Peggy Brown</item>
+			<item email="peter.cappiello@newsday.com">Peter Cappiello</item>
+			<item email="peter.catapano@amny.com">Peter Catapano</item>
+			<item email="Special to Newsday">Peter King</item>
+			<item email="peter.gianotti@newsday.com">Peter M. Gianotti</item>
+			<item email="phil.nobile@newsday.com">Phil Nobile</item>
+			<item email="polly.higgins@newsday.com">Polly Higgins</item>
+			<item email="rafer.guzman@newsday.com">Rafer Guzman</item>
+			<item email="randi.marshall@newsday.com">Randi F. Marshall</item>
+			<item email="rebecca.harshbarger@amny.com">Rebecca Harshbarger</item>
+			<item email="rick.brand@newsday.com">Rick Brand</item>
+			<item email="ridgely.ochs@newsday.com">Ridgely Ochs</item>
+			<item email="rita.ciolli@newsday.com">Rita Ciolli</item>
+			<item email="robert.brodsky@newsday.com">Robert Brodsky</item>
+			<item email="robert.cassidy@newsday.com">Robert Cassidy</item>
+			<item email="robert.levin@amny.com">Robert Levin</item>
+			<item email="Special to amNewYork">Robert Spuhler</item>
+			<item email="robert.kessler@newsday.com">Robert E. Kessler</item>
+			<item email="robert.fouch@newsday.com">Robert L. Fouch</item>
+			<item email="robin.topping@newsday.com">Robin Topping</item>
+			<item email="roderick.boone@newsday.com">Roderick Boone</item>
+			<item email="ronnie.gill@newsday.com">Ronnie Gill</item>
+			<item email="rosemary.olander@newsday.com">Rosemary Olander</item>
+			<item email="Special to amNewYork">Rozanne Rosenberg</item>
+			<item email="Special to Newsday">Ruth Bashinsky</item>
+			<item email="ryan.gerbosi@newsday.com">Ryan Gerbosi</item>
+			<item email="saba.ali@newsday.com">Saba Ali</item>
+			<item email="salvatore.cacciatore@newsday.com">Sal Cacciatore</item>
+			<item email="sam.guzik@newsday.com">Sam Guzik</item>
+			<item email="Special to Newsday">Sam Thielman</item>
+			<item email="sandra.peddie@newsday.com">Sandra Peddie</item>
+			<item email="sarah.armaghan@newsday.com">Sarah Armaghan</item>
+			<item email="scott.eidler@newsday.com">Scott Eidler</item>
+			<item email="scott.fontana@amny.com ">Scott Fontana</item>
+			<item email="scott.rosenberg@amny.com">Scott A. Rosenberg</item>
+			<item email="shawna.vanness@newsday.com">Shawna VanNess</item>
+			<item email="sheila.feeney@amny.com">Sheila Anne Feeney</item>
+			<item email="sid.cassese@newsday.com">Sid Cassese</item>
+			<item email="sophia.chang@newsday.com">Sophia Chang</item>
+			<item email="Special to Newsday">Steve Knopper</item>
+			<item email="steve.matthews@newsday.com">Steve Matthews</item>
+			<item email="steve.parks@newsday.com">Steve Parks</item>
+			<item email="steve.wick@newsday.com">Steve Wick</item>
+			<item email="steve.zipay@newsday.com">Steve Zipay</item>
+			<item email="steven.marcus@newsday.com">Steven Marcus</item>
+			<item email="sylvia.king-cohen@newsday.com">Sylvia E. King-Cohen</item>
+			<item email="tania.lopez@newsday.com">Tania Lopez</item>
+			<item email="tara.conry@newsday.com">Tara Conry</item>
+			<item email="tc.mccarthy@newsday.com">TC McCarthy</item>
+			<item email="Special to Newsday">Ted Loos</item>
+			<item email="ted.phillips@newsday.com">Ted Phillips</item>
+			<item email="">The Associated Press</item>
+			<item email="">The Editorial Board</item>
+			<item email="">The Washington Post</item>
+			<item email="thomas.maier@newsday.com">Thomas Maier</item>
+			<item email="tom.beer@newsday.com">Tom Beer</item>
+			<item email="tom.brune@newsday.com">Tom Brune</item>
+			<item email="tom.incantalupo@newsday.com">Tom Incantalupo</item>
+			<item email="tom.rock@newsday.com">Tom Rock</item>
+			<item email="Special to Newsday">Tom Schlichter</item>
+			<item email="valerie.bauman@newsday.com">Valerie Bauman</item>
+			<item email="valerie.kellogg@newsday.com">Valerie Kellogg</item>
+			<item email="verne.gay@newsday.com">Verne Gay</item>
+			<item email="victor.ocasio@newsday.com">Victor Ocasio</item>
+			<item email="victor.ramos@newsday.com">Victor Ramos</item>
+			<item email="virginia.dunleavy@newsday.com">Virginia Dunleavy</item>
+			<item email="Special to Newsday">Wendy Smith</item>
+			<item email="will.james@newsday.com">Will James</item>
+			<item email="will.vansant@newsday.com">Will Van Sant</item>
+			<item email="bill.murphy@newsday.com">William Murphy</item>
+			<item email="yancey.roy@newsday.com">Yancey Roy</item>
+			<item email="zachary.dowdy@newsday.com">Zachary R. Dowdy</item>
+			<item email="">Zap2it</item>
 			</pub>
 			<pub id="AM">
-				<item email="matthew.chayes@newsday.com">Matthew Chayes</item>
-				<item email="peter.catapano@am-ny.com">Peter Catapano</item>
-				<item email="meredith.deliso@am-ny.com">Meredith Deliso</item>
-				<item email="joseph.dolman@am-ny.com">Joseph Dolman</item>
-				<item email="sheila.feeney@am-ny.com">Sheila Anne Feeney</item>
-				<item email="scott.fontana@am-ny.com ">Scott Fontana</item>
-				<item email="alison.fox@am-ny.com">Alison Fox</item>
-				<item email="julie.gordon@am-ny.com">Julie Gordon</item>
-				<item email="dan.janison@newsday.com">Dan Janison</item>
-				<item email="georgia.kral@am-ny.com">Georgia Kral</item>
-				<item email="rlevin1@am-ny.com ">Robert Levin</item>
-				<item email="levitt@nypdconfidential.com">Len Levitt</item>
-				<item email="caroline.linton@am-ny.com">Caroline Linton</item>
-				<item email="emily.ngo@newsday.com">Emily Ngo</item>
-				<item email="ivan.pereira@am-ny.com ">Ivan Pereira</item>
-				<item email="eli.reyes@newsday.com">Eli Reyes</item>
-				<item email="dan.rivoli@am-ny.com ">Dan Rivoli</item>
-				<item email=" scott.rosenberg@am-ny.com ">Scott A. Rosenberg</item>
-				<item email="nina.ruggiero@am-ny.com">Nina Ruggiero</item>
-				<item email="cristian.salazar@am-ny.com">Cristian Salazar</item>
-				<item email="heather.senison@am-ny.com">Heather Senison</item>
-				<item email="jordan.teicher@am-ny.com">Jordan G. Teicher</item>
-				<item email="jeffvasishta@facebook.com">Jeff Vasishta</item>
-				<item email="mattwindman@gmail.com">Matt Windman</item>
-				<item email="laura.albanese@newsday.com">Laura Albanese</item>
-				<item email="aisha.al-muslim@newsday.com">Aisha Al-Muslim</item>
-				<item email="stacey.altherr@newsday.com">Stacey Altherr</item>
-				<item email="sarah.armaghan@newsday.com">Sarah Armaghan</item>
-				<item email="john.asbury@newsday.com">John Asbury</item>
-				<item email="barbara.barker@newsday.com">Barbara Barker</item>
-				<item email="jennifer.barrios@newsday.com">Jennifer Barrios</item>
-				<item email="valerie.bauman@newsday.com">Valerie Bauman</item>
-				<item email="jim.baumbach@newsday.com">Jim Baumbach</item>
-				<item email="tom.beer@newsday.com">Tom Beer</item>
-				<item email="nbest1@gmail.com">Neil Best</item>
-				<item email="john.boell@newsday.com">John Boell</item>
-				<item email="eboland11@aol.com">Erik Boland</item>
-				<item email="denise.bonilla@newsday.com">Denise M. Bonilla</item>
-				<item email="roderick.boone@newsday.com">Roderick Boone</item>
-				<item email="rick.brand@newsday.com">Rick Brand</item>
-				<item email="Special to Newsday">Lynn Brenner</item>
-				<item email="robert.brodsky@newsday.com">Robert Brodsky</item>
-				<item email="peggy.brown@newsday.com">Peggy Brown</item>
-				<item email="tom.brune@newsday.com">Tom Brune</item>
-				<item email="daniel.bubbeo@newsday.com">Daniel Bubbeo</item>
-				<item email="salvatore.cacciatore@newsday.com">Sal Cacciatore</item>
-				<item email="marc.carig@newsday.com">Marc Carig</item>
-				<item email="judy.cartwright@newsday.com">Judy Cartwright</item>
-				<item email="matthew.cassella@newsday.com">Matthew Cassella</item>
-				<item email="sid.cassese@newsday.com">Sid Cassese</item>
-				<item email="robert.cassidy@newsday.com">Robert Cassidy</item>
-				<item email="alfonso.castillo@newsday.com">Alfonso A. Castillo</item>
-				<item email="sophia.chang@newsday.com">Sophia Chang</item>
-				<item email="Special to Newsday">Lauren Chattman</item>
-				<item email="matt.clark@newsday.com">Matt Clark</item>
-				<item email="rita.ciolli@newsday.com">Rita Ciolli</item>
-				<item email="tara.conry@newsday.com">Tara Conry</item>
-				<item email="david.criblez@newsday.com">David J. Criblez</item>
-				<item email="jessica.damiano@newsday.com">Jessica Damiano</item>
-				<item email="cody.derespina@newsday.com">Cody Derespina</item>
-				<item email="tony.destefano@newsday.com">Anthony M. DeStefano</item>
-				<item email="kevin.deutsch@newsday.com">Kevin Deutsch</item>
-				<item email="michael.dobie@newsday.com">Michael Dobie</item>
-				<item email="lisa.doll-bruno@newsday.com">Lisa Doll Bruno</item>
-				<item email="emily.dooley@newsday.com">Emily Dooley</item>
-				<item email="zachary.dowdy@newsday.com">Zachary R. Dowdy</item>
-				<item email="gary.dymski@newsday.com">Gary Dymski</item>
-				<item email="michael.ebert@newsday.com">Michael R. Ebert</item>
-				<item email="andy.edelstein@newsday.com">Andy Edelstein</item>
-				<item email="scott.eidler@newsday.com">Scott Eidler</item>
-				<item email="greg.emerson@newsday.com">Greg Emerson</item>
-				<item email="martin.evans@newsday.com">Martin C. Evans</item>
-				<item email="alan.fallick@newsday.com">Alan H. Fallick</item>
-				<item email="candice.ferrette@newsday.com">Candice Ferrette</item>
-				<item email="laura.figueroa@newsday.com">Laura Figueroa</item>
-				<item email="robert.fouch@newsday.com">Robert L. Fouch</item>
-				<item email="nicole.fuller@newsday.com">Nicole Fuller</item>
-				<item email="glenn.gamboa@newsday.com">Glenn Gamboa</item>
-				<item email="michael.gavin@newsday.com">Mike Gavin</item>
-				<item email="verne.gay@newsday.com">Verne Gay</item>
-				<item email="peter.gianotti@newsday.com">Peter M. Gianotti</item>
-				<item email="bobglauber18@gmail.com">Bob Glauber</item>
-				<item email="meghan.glynn@newsday.com">Meghan Glynn</item>
-				<item email="michael.gormley@newsday.com">Michael Gormley</item>
-				<item email="joan.gralla@newsday.com">Joan Gralla</item>
-				<item email="sam.guzik@newsday.com">Sam Guzik</item>
-				<item email="rafer.guzman@newsday.com">Rafer Guzman</item>
-				<item email="celeste.hadrick@newsday.com">Celeste Hadrick</item>
-				<item email="deon.hampton@newsday.com">Deon J. Hampton</item>
-				<item email="mark.harrington@newsday.com">Mark Harrington</item>
-				<item email="lauren.harrison@newsday.com">Lauren R. Harrison</item>
-				<item email="stephen.haynes@newsday.com">Stephen Haynes</item>
-				<item email="keith.herbert@newsday.com">Keith Herbert</item>
-				<item email="mark.herrmann@newsday.com">Mark Herrmann</item>
-				<item email="bob.herzog@newsday.com">Bob Herzog</item>
-				<item email="john.hildebrand@newsday.com">John Hildebrand</item>
-				<item email="al.iannazzone@newsday.com">Al Iannazzone</item>
-				<item email="tom.incantalupo@newsday.com">Tom Incantalupo</item>
-				<item email="lisa.irizarry@newsday.com">Lisa Irizarry</item>
-				<item email="will.james@newsday.com">Will James</item>
-				<item email="john.jeansonne@newsday.com">John Jeansonne</item>
-				<item email="bart.jones@newsday.com">Bart Jones</item>
-				<item email="valerie.kellogg@newsday.com">Valerie Kellogg</item>
-				<item email="kathleen.kerr@newsday.com">Kathleen Kerr</item>
-				<item email="robert.kessler@newsday.com">Robert E. Kessler</item>
-				<item email="sylvia.king-cohen@newsday.com">Sylvia E. King-Cohen</item>
-				<item email="patricia.kitchen@newsday.com">Patricia Kitchen</item>
-				<item email="nicholas.klopsis@newsday.com">Nick Klopsis</item>
-				<item email="chau.lam@newsday.com">Chau Lam</item>
-				<item email="mark.lamonica@newsday.com">Mark La Monica</item>
-				<item email="paul.larocco@newsday.com">Paul LaRocco</item>
-				<item email="jordan.lauterbach@newsday.com">Jordan Lauterbach</item>
-				<item email="dave.lennon@newsday.com">David Lennon</item>
-				<item email="gregory.logan@newsday.com">Greg Logan</item>
-				<item email="tania.lopez@newsday.com">Tania Lopez</item>
-				<item email="david.lopez@newsday.com">David J. Lopez</item>
-				<item email="marshall.lubin@newsday.com">Marshall Lubin</item>
-				<item email="carl.macgowan@newsday.com">Carl Macgowan</item>
-				<item email="james.madore@newsday.com">James Madore</item>
-				<item email="thomas.maier@newsday.com">Thomas Maier</item>
-				<item email="steven.marcus@newsday.com">Steven Marcus</item>
-				<item email="erica.marcus@newsday.com">Erica Marcus</item>
-				<item email="randi.marshall@newsday.com">Randi F. Marshall</item>
-				<item email="kimberley.martin@newsday.com">Kimberley A. Martin</item>
-				<item email="carrie.mason-draffen@newsday.com">Carrie Mason-Draffen</item>
-				<item email="maura.mcdermott@newsday.com">Maura McDermott</item>
-				<item email="ed.mcnamara@newsday.com">Ed McNamara</item>
-				<item email="robert.mcgough@newsday.com">Bob McGough</item>
-				<item email="deborah.morris@newsday.com">Deborah S. Morris</item>
-				<item email="gene.morris@newsday.com">Gene Morris</item>
-				<item email="bridget.murphy@newsday.com">Bridget Murphy</item>
-				<item email="bill.murphy@newsday.com">William Murphy</item>
-				<item email="jo.napolitano@newsday.com">Jo Napolitano</item>
-				<item email="phil.nobile@newsday.com">Phil Nobile</item>
-				<item email="ridgely.ochs@newsday.com">Ridgely Ochs</item>
-				<item email="rosemary.olander@newsday.com">Rosemary Olander</item>
-				<item email="steve.parks@newsday.com">Steve Parks</item>
-				<item email="sandra.peddie@newsday.com">Sandra Peddie</item>
-				<item email="ted.phillips@newsday.com">Ted Phillips</item>
-				<item email="carol.polsky@newsday.com">Carol Polsky</item>
-				<item email="monica.quintanilla@newsday.com">Monica Quintanilla</item>
-				<item email="victor.ramos@newsday.com">Victor Ramos</item>
-				<item email="joan.reminick@newsday.com">Joan Reminick</item>
-				<item email="delthia.ricks@newsday.com">Delthia Ricks</item>
-				<item email="anthony.rieber@newsday.com">Anthony Rieber</item>
-				<item email="john.riley@newsday.com">John Riley</item>
-				<item email="marjorie.robins@newsday.com">Marjorie K. Robins</item>
-				<item email="tom.rock@newsday.com">Tom Rock</item>
-				<item email="yancey.roy@newsday.com">Yancey Roy</item>
-				<item email="candice.ruud@newsday.com">Candice Ruud</item>
-				<item email="joe.ryan@newsday.com">Joe Ryan</item>
-				<item email="william.sammon@newsday.com">Will Sammon</item>
-				<item email="gregg.sarra@newsday.com">Gregg Sarra</item>
-				<item email="kenneth.schachter@newsday.com">Ken Schachter</item>
-				<item email="Special to Newsday">Jill Schlesinger</item>
-				<item email="barbara.schuler@newsday.com">Barbara Schuler</item>
-				<item email="dschwar1@newsday.com">David M. Schwartz</item>
-				<item email="darran.simon@newsday.com">Darran Simon</item>
-				<item email="jack.sirica@newsday.com">Jack Sirica</item>
-				<item email="andy.slawson@newsday.com">Andy Slawson</item>
-				<item email="steve.matthews@newsday.com">Steve Matthews</item>
-				<item email="andrew.smith@newsday.com">Andrew Smith</item>
-				<item email="ann.smukler@newsday.com">Ann Smukler</item>
-				<item email="nick.spangler@newsday.com">Nick Spangler</item>
-				<item email="arthur.staple@newsday.com">Arthur Staple</item>
-				<item email="joshua.stewart@newsday.com">Josh Stewart</item>
-				<item email="jason.stromberg@newsday.com">Jason Stromberg</item>
-				<item email="robin.topping@newsday.com">Robin Topping</item>
-				<item email="joie.tyrrell@newsday.com">Joie Tyrrell</item>
-				<item email="Special to amNY">David Uberti</item>
-				<item email="john.valenti@newsday.com">John Valenti</item>
-				<item email="shawna.vanness@newsday.com">Shawna VanNess</item>
-				<item email="will.vansant@newsday.com">Will Van Sant</item>
-				<item email="beth.whitehouse@newsday.com">Beth Whitehouse</item>
-				<item email="steve.wick@newsday.com">Steve Wick</item>
-				<item email="jeffrey.williams@newsday.com">Jeff Williams</item>
-				<item email="linda.winer@newsday.com">Linda Winer</item>
-				<item email="olivia.winslow@newsday.com">Olivia Winslow</item>
-				<item email="ellen.yan@newsday.com">Ellen Yan</item>
-				<item email="monte.young@newsday.com">Monte R. Young</item>
-				<item email="steve.zipay@newsday.com">Steve Zipay</item>
-			</pub>			
+			<item email="Special to amNewYork">Alex Case</item>
+			<item email="alison.fox@amny.com">Alison Fox</item>
+			<item email="">amNY</item>
+			<item email="">amNY/Newsday</item>
+			<item email="">amNY/Reuters</item>
+			<item email="cristian.salazar@amny.com">Cristian Salazar</item>
+			<item email="dan.janison@newsday.com">Dan Janison</item>
+			<item email="Special to amNY">David Uberti</item>
+			<item email="">DNAinfo.com</item>
+			<item email="eli.reyes@newsday.com">Eli Reyes</item>
+			<item email="emily.ngo@newsday.com">Emily Ngo</item>
+			<item email="georgia.kral@amny.com">Georgia Kral</item>
+			<item email="glenn.gamboa@newsday.com">Glenn Gamboa</item>
+			<item email="heather.senison@amny.com">Heather Senison</item>
+			<item email="ivan.pereira@amny.com ">Ivan Pereira</item>
+			<item email="joseph.dolman@amny.com">Joseph Dolman</item>
+			<item email="keira.alexander@amny.com">Keira Alexander</item>
+			<item email="levitt@nypdconfidential.com">Len Levitt</item>
+			<item email="amNewYork Theater Critic">Matt Windman</item>
+			<item email="matthew.chayes@newsday.com">Matthew Chayes</item>
+			<item email="">MCT</item>
+			<item email="melissa.kravitz@amny.com">Melissa Kravitz</item>
+			<item email="meredith.deliso@amny.com">Meredith Deliso</item>
+			<item email="">Newsday</item>
+			<item email="peter.catapano@amny.com">Peter Catapano</item>
+			<item email="rafer.guzman@newsday.com">Rafer Guzman</item>
+			<item email="rebecca.harshbarger@amny.com">Rebecca Harshbarger</item>
+			<item email="">Reuters</item>
+			<item email="Special to amNewYork">Robert Spuhler</item>
+			<item email="Special to amNewYork">Rozanne Rosenberg</item>
+			<item email="scott.fontana@amny.com ">Scott Fontana</item>
+			<item email="scott.rosenberg@amny.com">Scott A. Rosenberg</item>
+			<item email="sheila.feeney@amny.com">Sheila Anne Feeney</item>
+			<item email="">The Editorial Board</item>
+			<item email="verne.gay@newsday.com">Verne Gay</item>
+			<item email=" brickunderground.com">Virginia K. Smith</item>
+			<item email="aisha.al-muslim@newsday.com">Aisha Al-Muslim</item>
+			<item email="al.iannazzone@newsday.com">Al Iannazzone</item>
+			<item email="alan.fallick@newsday.com">Alan H. Fallick</item>
+			<item email="alfonso.castillo@newsday.com">Alfonso A. Castillo</item>
+			<item email="alison.bernicker@newsday.com">Alison Bernicker</item>
+			<item email="Special to Newsday">Alison Gregor</item>
+			<item email="andrew.smith@newsday.com">Andrew Smith</item>
+			<item email="andy.edelstein@newsday.com">Andy Edelstein</item>
+			<item email="andy.slawson@newsday.com">Andy Slawson</item>
+			<item email="ann.givens@newsday.com">Ann Givens</item>
+			<item email="ann.smukler@newsday.com">Ann Smukler</item>
+			<item email="Special to Newsday">Anne Bratskeir</item>
+			<item email="Special to Newsday">Anne Machalinski</item>
+			<item email="anne.michaud@newsday.com">Anne Michaud</item>
+			<item email="anthony.bottan@newsday.com">Anthony Bottan</item>
+			<item email="anthony.rieber@newsday.com">Anthony Rieber</item>
+			<item email="tony.destefano@newsday.com">Anthony M. DeStefano</item>
+			<item email="ari.kramer@newsday.com">Ari Kramer</item>
+			<item email="Special to Newsday">Art Spander</item>
+			<item email="arthur.staple@newsday.com">Arthur Staple</item>
+			<item email="barbara.barker@newsday.com">Barbara Barker</item>
+			<item email="barbara.schuler@newsday.com">Barbara Schuler</item>
+			<item email="bart.jones@newsday.com">Bart Jones</item>
+			<item email="beth.whitehouse@newsday.com">Beth Whitehouse</item>
+			<item email="Special to Newsday">Bill Bleyer</item>
+			<item email="bill.dedman@newsday.com">Bill Dedman</item>
+			<item email="bill.mason@newsday.com">Bill Mason</item>
+			<item email="">Bloomberg News</item>
+			<item email="bob.glauber@newsday.com">Bob Glauber</item>
+			<item email="bob.herzog@newsday.com">Bob Herzog</item>
+			<item email="robert.mcgough@newsday.com">Bob McGough</item>
+			<item email="bridget.murphy@newsday.com">Bridget Murphy</item>
+			<item email="Special to Newsday">Bryan Reesman</item>
+			<item email="candice.ferrette@newsday.com">Candice Ferrette</item>
+			<item email="candice.ruud@newsday.com">Candice Ruud</item>
+			<item email="Special to Newsday">Carl Corry</item>
+			<item email="carl.macgowan@newsday.com">Carl MacGowan</item>
+			<item email="carol.polsky@newsday.com">Carol Polsky</item>
+			<item email="carrie.mason-draffen@newsday.com">Carrie Mason-Draffen</item>
+			<item email="casey.musarra@newsday.com">Casey Musarra</item>
+			<item email="celeste.hadrick@newsday.com">Celeste Hadrick</item>
+			<item email="chau.lam@newsday.com">Chau Lam</item>
+			<item email="christine.chung@newsday.com">Christine Chung</item>
+			<item email="Special to Newsday">Claudia Gryvatz Copquin</item>
+			<item email="Special to Newsday">Colin Stephenson</item>
+			<item email="Special to Newsday">Daniel Akst</item>
+			<item email="daniel.bubbeo@newsday.com">Daniel Bubbeo</item>
+			<item email="Special to Newsday">Danielle Braff</item>
+			<item email="darran.simon@newsday.com">Darran Simon</item>
+			<item email="david.lennon@newsday.com">David Lennon</item>
+			<item email="david.olson@newsday.com">David Olson</item>
+			<item email="david.reich-hale@newsday.com">David Reich-Hale</item>
+			<item email="david.criblez@newsday.com">David J. Criblez</item>
+			<item email="david.lopez@newsday.com">David J. Lopez</item>
+			<item email="david.schwartz@newsday.com">David M. Schwartz</item>
+			<item email="deborah.morris@newsday.com">Deborah S. Morris</item>
+			<item email="delia.paunescu@newsday.com">Delia Paunescu</item>
+			<item email="delthia.ricks@newsday.com">Delthia Ricks</item>
+			<item email="denise.bonilla@newsday.com">Denise M. Bonilla</item>
+			<item email="deon.hampton@newsday.com">Deon J. Hampton</item>
+			<item email="Special to Newsday">Diane Werts</item>
+			<item email="ed.mcnamara@newsday.com">Ed McNamara</item>
+			<item email="edward.colby@newsday.com">Edward Colby</item>
+			<item email="edward.starkey@newsday.com">Edward Starkey</item>
+			<item email="elaine.piniat@newsday.com">Elaine Piniat</item>
+			<item email="ellen.yan@newsday.com">Ellen Yan</item>
+			<item email="emily.dooley@newsday.com">Emily Dooley</item>
+			<item email="erica.marcus@newsday.com">Erica Marcus</item>
+			<item email="erik.bacharach@newsday.com">Erik Bacharach</item>
+			<item email="erik.boland@newsday.com">Erik Boland</item>
+			<item email="erin.geismar@newsday.com">Erin Geismar</item>
+			<item email="fausto.pinto@newsday.com">Fausto Giovanny Pinto</item>
+			<item email="Special to Newsday">Frank Lovece</item>
+			<item email="gary.dymski@newsday.com">Gary Dymski</item>
+			<item email="gene.morris@newsday.com">Gene Morris</item>
+			<item email="greg.logan@newsday.com">Greg Logan</item>
+			<item email="gregg.sarra@newsday.com">Gregg Sarra</item>
+			<item email="gus.garcia-roberts@newsday.com">Gus Garcia-Roberts</item>
+			<item email="hannah.siegel@newsday.com">Hannah Siegel</item>
+			<item email="heather.doyle@newsday.com">Heather Doyle</item>
+			<item email="Special to Newsday">Ian J. Stark</item>
+			<item email="jack.sirica@newsday.com">Jack Sirica</item>
+			<item email="Special to Newsday">James Kindall</item>
+			<item email="james.madore@newsday.com">James Madore</item>
+			<item email="jherzlich@aol.com">Jamie Herzlich</item>
+			<item email="jeffrey.williams@newsday.com">Jeff Williams</item>
+			<item email="jennifer.barrios@newsday.com">Jennifer Barrios</item>
+			<item email="jessica.damiano@newsday.com">Jessica Damiano</item>
+			<item email="Special to Newsday">Jessica Lewis</item>
+			<item email="Special to Newsday">Jill Schlesinger</item>
+			<item email="jim.baumbach@newsday.com">Jim Baumbach</item>
+			<item email="Special to Newsday">Jim Merritt</item>
+			<item email="jo.napolitano@newsday.com">Jo Napolitano</item>
+			<item email="joan.gralla@newsday.com">Joan Gralla</item>
+			<item email="joan.reminick@newsday.com">Joan Reminick</item>
+			<item email="joe.manniello@newsday.com">Joe Manniello</item>
+			<item email="joe.ryan@newsday.com">Joe Ryan</item>
+			<item email="Special to Newsday">John Anderson</item>
+			<item email="john.asbury@newsday.com">John Asbury</item>
+			<item email="john.boell@newsday.com">John Boell</item>
+			<item email="john.callegari@newsday.com">John Callegari</item>
+			<item email="Special to Newsday">John Hanc</item>
+			<item email="john.hildebrand@newsday.com">John Hildebrand</item>
+			<item email="Special to Newsday">John Jeansonne</item>
+			<item email="john.riley@newsday.com">John Riley</item>
+			<item email="john.valenti@newsday.com">John Valenti</item>
+			<item email="Special to Newsday">John Wilwol</item>
+			<item email="joie.tyrrell@newsday.com">Joie Tyrrell</item>
+			<item email="jonathan.starkey@newsday.com">Jonathan Starkey</item>
+			<item email="joseph.mallia@newsday.com">Joseph Mallia</item>
+			<item email="Special to Newsday">Joseph V. Amodio</item>
+			<item email="joshua.stewart@newsday.com">Josh Stewart</item>
+			<item email="joye.brown@newsday.com">Joye Brown</item>
+			<item email="kaitlyn.piccoli@newsday.com">Kaitlyn Piccoli</item>
+			<item email="katherine.chaffer@newsday.com">Katherine Chaffer</item>
+			<item email="katherine.poirier@newsday.com">Katherine Poirier</item>
+			<item email="kathleen.kerr@newsday.com">Kathleen Kerr</item>
+			<item email="kathy.diamond@newsday.com">Kathy Diamond</item>
+			<item email="Special to Newsday">Kay Blough</item>
+			<item email="keith.herbert@newsday.com">Keith Herbert</item>
+			<item email="kenneth.schachter@newsday.com">Ken Schachter</item>
+			<item email="kevin.deutsch@newsday.com">Kevin Deutsch</item>
+			<item email="kieran.lynch@newsday.com">Kieran Lynch</item>
+			<item email="kimberley.martin@newsday.com">Kimberley A. Martin</item>
+			<item email="Special to Newsday">Kristin Taveira</item>
+			<item email="lane.filler@newsday.com">Lane Filler</item>
+			<item email="Special to Newsday">Lara Ewen</item>
+			<item email="laura.albanese@newsday.com">Laura Albanese</item>
+			<item email="laura.blasey@newsday.com">Laura Blasey</item>
+			<item email="laura.figueroa@newsday.com">Laura Figueroa</item>
+			<item email="Special to Newsday">Lauren Chattman</item>
+			<item email="lauren.harrison@newsday.com">Lauren R. Harrison</item>
+			<item email="Special to Newsday">Lawrence Levy</item>
+			<item email="Special to Newsday">Lewis Beale</item>
+			<item email="linda.winer@newsday.com">Linda Winer</item>
+			<item email="Special to Newsday">Lisa Chamoff</item>
+			<item email="lisa.du@newsday.com">Lisa Du</item>
+			<item email="lisa.irizarry@newsday.com">Lisa Irizarry</item>
+			<item email="">Los Angeles Times (TNS)</item>
+			<item email="Special to Newsday">Lynn Brenner</item>
+			<item email="Special to Newsday">Mac Randall</item>
+			<item email="mackenzie.issler@newsday.com">Mackenzie Issler</item>
+			<item email="mackenzie.rigg@newsday.com">Mackenzie Rigg</item>
+			<item email="Special to Newsday">Malerie Yolen-Cohen</item>
+			<item email="mandy.hofmockel@newsday.com">Mandy Hofmockel</item>
+			<item email="marc.carig@newsday.com">Marc Carig</item>
+			<item email="Special to Newsday">Maria Alvarez</item>
+			<item email="Special to Newsday">Marion Winik</item>
+			<item email="marjorie.robins@newsday.com">Marjorie K. Robins</item>
+			<item email="mark.harrington@newsday.com">Mark Harrington</item>
+			<item email="mark.herrmann@newsday.com">Mark Herrmann</item>
+			<item email="mark.lamonica@newsday.com">Mark La Monica</item>
+			<item email="marshall.lubin@newsday.com">Marshall Lubin</item>
+			<item email="Special to Newsday">Marshall S. Berdan</item>
+			<item email="martin.evans@newsday.com">Martin C. Evans</item>
+			<item email="matt.clark@newsday.com">Matt Clark</item>
+			<item email="matthew.cassella@newsday.com">Matthew Cassella</item>
+			<item email="Special to Newsday">Matthew Price</item>
+			<item email="maura.mcdermott@newsday.com">Maura McDermott</item>
+			<item email="meghan.giannotta@newsday.com">Meghan Giannotta</item>
+			<item email="michael.dobie@newsday.com">Michael Dobie</item>
+			<item email="michael.gormley@newsday.com">Michael Gormley</item>
+			<item email="michael.ebert@newsday.com">Michael R. Ebert</item>
+			<item email="michael.gavin@newsday.com">Mike Gavin</item>
+			<item email="michael.rose@newsday.com">Mike Rose</item>
+			<item email="mitchell.freedman@newsday.com">Mitchell Freedman</item>
+			<item email="monica.quintanilla@newsday.com">Monica Quintanilla</item>
+			<item email="monte.young@newsday.com">Monte R. Young</item>
+			<item email="neil.best@newsday.com">Neil Best</item>
+			<item email="sports@newsday.com">Newsday.com</item>
+			<item email="nicholas.klopsis@newsday.com">Nick Klopsis</item>
+			<item email="nick.spangler@newsday.com">Nick Spangler</item>
+			<item email="nicole.fuller@newsday.com">Nicole Fuller</item>
+			<item email="olivia.winslow@newsday.com">Olivia Winslow</item>
+			<item email="owen.o’brien@newsday.com">Owen O'Brien</item>
+			<item email="patricia.kitchen@newsday.com">Patricia Kitchen</item>
+			<item email="patrick.whittle@newsday.com">Patrick Whittle</item>
+			<item email="paul.larocco@newsday.com">Paul LaRocco</item>
+			<item email="peggy.brown@newsday.com">Peggy Brown</item>
+			<item email="peter.cappiello@newsday.com">Peter Cappiello</item>
+			<item email="Special to Newsday">Peter King</item>
+			<item email="peter.gianotti@newsday.com">Peter M. Gianotti</item>
+			<item email="phil.nobile@newsday.com">Phil Nobile</item>
+			<item email="polly.higgins@newsday.com">Polly Higgins</item>
+			<item email="randi.marshall@newsday.com">Randi F. Marshall</item>
+			<item email="rick.brand@newsday.com">Rick Brand</item>
+			<item email="ridgely.ochs@newsday.com">Ridgely Ochs</item>
+			<item email="rita.ciolli@newsday.com">Rita Ciolli</item>
+			<item email="robert.brodsky@newsday.com">Robert Brodsky</item>
+			<item email="robert.cassidy@newsday.com">Robert Cassidy</item>
+			<item email="robert.levin@amny.com">Robert Levin</item>
+			<item email="robert.kessler@newsday.com">Robert E. Kessler</item>
+			<item email="robert.fouch@newsday.com">Robert L. Fouch</item>
+			<item email="robin.topping@newsday.com">Robin Topping</item>
+			<item email="roderick.boone@newsday.com">Roderick Boone</item>
+			<item email="ronnie.gill@newsday.com">Ronnie Gill</item>
+			<item email="rosemary.olander@newsday.com">Rosemary Olander</item>
+			<item email="Special to Newsday">Ruth Bashinsky</item>
+			<item email="ryan.gerbosi@newsday.com">Ryan Gerbosi</item>
+			<item email="saba.ali@newsday.com">Saba Ali</item>
+			<item email="salvatore.cacciatore@newsday.com">Sal Cacciatore</item>
+			<item email="sam.guzik@newsday.com">Sam Guzik</item>
+			<item email="Special to Newsday">Sam Thielman</item>
+			<item email="sandra.peddie@newsday.com">Sandra Peddie</item>
+			<item email="sarah.armaghan@newsday.com">Sarah Armaghan</item>
+			<item email="scott.eidler@newsday.com">Scott Eidler</item>
+			<item email="shawna.vanness@newsday.com">Shawna VanNess</item>
+			<item email="sid.cassese@newsday.com">Sid Cassese</item>
+			<item email="sophia.chang@newsday.com">Sophia Chang</item>
+			<item email="Special to Newsday">Steve Knopper</item>
+			<item email="steve.matthews@newsday.com">Steve Matthews</item>
+			<item email="steve.parks@newsday.com">Steve Parks</item>
+			<item email="steve.wick@newsday.com">Steve Wick</item>
+			<item email="steve.zipay@newsday.com">Steve Zipay</item>
+			<item email="steven.marcus@newsday.com">Steven Marcus</item>
+			<item email="sylvia.king-cohen@newsday.com">Sylvia E. King-Cohen</item>
+			<item email="tania.lopez@newsday.com">Tania Lopez</item>
+			<item email="tara.conry@newsday.com">Tara Conry</item>
+			<item email="tc.mccarthy@newsday.com">TC McCarthy</item>
+			<item email="Special to Newsday">Ted Loos</item>
+			<item email="ted.phillips@newsday.com">Ted Phillips</item>
+			<item email="thomas.maier@newsday.com">Thomas Maier</item>
+			<item email="tom.beer@newsday.com">Tom Beer</item>
+			<item email="tom.brune@newsday.com">Tom Brune</item>
+			<item email="tom.incantalupo@newsday.com">Tom Incantalupo</item>
+			<item email="tom.rock@newsday.com">Tom Rock</item>
+			<item email="Special to Newsday">Tom Schlichter</item>
+			<item email="valerie.bauman@newsday.com">Valerie Bauman</item>
+			<item email="valerie.kellogg@newsday.com">Valerie Kellogg</item>
+			<item email="victor.ocasio@newsday.com">Victor Ocasio</item>
+			<item email="victor.ramos@newsday.com">Victor Ramos</item>
+			<item email="virginia.dunleavy@newsday.com">Virginia Dunleavy</item>
+			<item email="Special to Newsday">Wendy Smith</item>
+			<item email="will.james@newsday.com">Will James</item>
+			<item email="will.vansant@newsday.com">Will Van Sant</item>
+			<item email="bill.murphy@newsday.com">William Murphy</item>
+			<item email="yancey.roy@newsday.com">Yancey Roy</item>
+			<item email="zachary.dowdy@newsday.com">Zachary R. Dowdy</item>
+			</pub>
 		</reporter>
 		
 		<!-- desk:
@@ -518,7 +704,7 @@
 		<homepage insertEmptyItem="0" selectFirstItemAsDefault="1">
 			<pub id="ND">
 				<desk id="LONG ISLAND">
-					<item>LONG ISLAND - NEWS</item>
+					<item>LONG ISLAND</item>
 					<item>Nassau</item>
 					<item>Suffolk</item>
 					<item>LI Crime</item>
@@ -560,7 +746,6 @@
 				</desk>
 				<desk id="LIFESTYLE">
 					<item>LIFESTYLE</item>
-					<item>Explore Long Island</item>
 					<item>Advice</item>
 					<item>Books</item>
 					<item>Family</item>
@@ -584,7 +769,7 @@
 				</desk>
 				<desk id="SPORTS">
 					<item>SPORTS</item>
-					<item>BASEBALL</item>
+					<item>BASEBALL </item>
 					<item>Baseball All Stars</item>
 					<item>Baseball Mets</item>
 					<item>Baseball Yankees</item>
@@ -604,7 +789,7 @@
 					<item>Football Giants</item>
 					<item>Football Jets</item>
 					<item>Football Super Bowl</item>
-					<item>GOLF</item>
+					<item>GOLF </item>
 					<item>Golf US Open</item>
 					<item>HIGH SCHOOL</item>
 					<item>High School Badminton</item>
@@ -623,7 +808,6 @@
 					<item>High School Golf</item>
 					<item>High School Gymnastics</item>
 					<item>High School Ice Hockey</item>
-					<item>High School Riflery</item>
 					<item>High School Softball</item>
 					<item>High School Swimming</item>
 					<item>High School Tennis</item>
@@ -631,11 +815,9 @@
 					<item>High School Volleyball</item>
 					<item>High School Wrestling</item>
 					<item>HOCKEY</item>
-					<item>Hockey Other</item>
-					<item>Hockey Devils</item>
 					<item>Hockey Islanders</item>
 					<item>Hockey Rangers</item>
-					<item>HORSERACING</item>
+					<item>HORSERACING </item>
 					<item>Horseracing Belmont</item>
 					<item>Lacrosse</item>
 					<item>TEAMS LOCAL</item>
@@ -668,6 +850,7 @@
 					<item>FASHION</item>
 					<item>CITY LIVING</item>
 					<item>REAL ESTATE</item>
+					<item>SECRETS</item>
 					<item>HEALTH</item>
 					<item>SPORTS</item>
 					<item>JETS</item>
@@ -729,13 +912,13 @@
 			<pub id="ND">
 				<desk id="LONG ISLAND">
 					<printSection id="NEWS">
-						<item>PAGE ONE</item>
-						<item>UPFRONT</item>
+						<item>TOP STORIES</item>
 						<item>LONG ISLAND</item>
-						<item>CRIME &amp; COURTS</item>
+						<item>TOWNS</item>
+						<item>CRIME-COURTS</item>
 						<item>HEALTH-SCIENCE</item>
 						<item>NYC</item>
-						<item>STATE &amp; REGION</item>
+						<item>STATE-REGION</item>
 						<item>NATION</item>
 						<item>WORLD</item>
 						<item>OBITUARIES</item>
@@ -749,8 +932,7 @@
 				</desk>
 				<desk id="BUSINESS">
 					<printSection id="NEWS">
-						<item>PAGE ONE</item>
-						<item>UPFRONT</item>
+						<item>TOP STORIES</item>
 						<item>LI BUSINESS</item>
 						<item>OBITUARIES</item>
 						<item>CORRECTIONS</item>
@@ -759,8 +941,7 @@
 				<desk id="ENTERTAINMENT">
 					<printSection id="NEWS">
 						<item>FLASH</item>
-						<item>PAGE ONE</item>
-						<item>UPFRONT</item>
+						<item>TOP STORIES</item>
 						<item>OBITUARIES</item>
 						<item>CORRECTIONS</item>
 					</printSection>
@@ -787,8 +968,7 @@
 				</desk>
 				<desk id="LIFESTYLE">
 					<printSection id="NEWS">
-						<item>PAGE ONE</item>
-						<item>UPFRONT</item>
+						<item>TOP STORIES</item>
 						<item>OBITUARIES</item>
 						<item>CORRECTIONS</item>
 					</printSection>
@@ -800,7 +980,7 @@
 						<item>FOOD</item>
 						<item>HEALTH</item>
 						<item>KIDSDAY</item>
-						<item>NYC PICS</item>
+						<item>NYC PICKS</item>
 						<item>RESTAURANTS</item>
 						<item>STYLE</item>
 						<item>TECH</item>
@@ -826,8 +1006,7 @@
 						<item>HIGH SCHOOLS</item>
 					</printSection>
 					<printSection id="NEWS">
-						<item>PAGE ONE</item>
-						<item>UPFRONT</item>
+						<item>TOP STORIES</item>
 						<item>OBITUARIES</item>
 						<item>CORRECTIONS</item>
 					</printSection>
@@ -841,6 +1020,7 @@
 						<item>BIZ</item>
 						<item>BUZZ</item>
 						<item>CITY LIVING</item>
+						<item>DINING OUT</item>
 						<item>WEEKEND</item>
 						<item>MOVIES</item>
 						<item>REAL ESTATE</item>
@@ -865,6 +1045,7 @@
 		<category sortGroups="0" sortItems="0">
 			<pub id="ND">
 				<group id="LONG ISLAND-NEWS">
+					<item>Long Island</item>
 					<item>Nassau</item>
 					<item>Suffolk</item>
 					<item>LI Crime</item>
@@ -887,6 +1068,7 @@
 					<item>911</item>
 				</group>
 				<group id="BUSINESS">
+					<item>Business</item>
 					<item>Auto</item>
 					<item>Employment</item>
 					<item>Healthcare</item>
@@ -898,6 +1080,7 @@
 					<item>Technology</item>
 				</group>				
 				<group id="ENTERTAINMENT">
+					<item>Entertainment</item>
 					<item>Arts</item>
 					<item>Celebrities</item>
 					<item>Movies</item>
@@ -914,6 +1097,7 @@
 					<item>TV Reality TV</item>
 				</group>
 				<group id="LIFESTYLE">
+					<item>Lifestyle</item>
 					<item>Advice</item>
 					<item>Books</item>
 					<item>Celebrations</item>
@@ -997,7 +1181,6 @@
 					<item>Baseball</item>
 					<item>Baseball All-Stars</item>
 					<item>Baseball Mets</item>
-					<item>Baseball Minor</item>
 					<item>Baseball Yankees</item>
 					<item>Basketball</item>
 					<item>Basketball Other</item>
@@ -1035,7 +1218,6 @@
 					<item>High School Ice Hockey</item>
 					<item>High School Boys Lacrosse</item>
 					<item>High School Girls Lacrosse</item>
-					<item>High School Riflery</item>
 					<item>High School Boys Soccer</item>
 					<item>High School Girls Soccer</item>
 					<item>High School Softball</item>
@@ -1045,8 +1227,6 @@
 					<item>High School Volleyball</item>
 					<item>High School Wrestling</item>
 					<item>Hockey</item>
-					<item>Hockey Other</item>
-					<item>Hockey Devils</item>
 					<item>Hockey Islanders</item>
 					<item>Hockey Rangers</item>
 					<item>Horseracing</item>
@@ -1056,8 +1236,6 @@
 					<item>Teams Cyclones</item>
 					<item>Teams Dragons</item>
 					<item>Teams Ducks</item>
-					<item>Teams Magic</item>
-					<item>Teams Boulders</item>
 					<item>Teams Rough Riders</item>
 					<item>Teams Titans</item>
 					<item>Media</item>
@@ -1095,6 +1273,7 @@
 					<item>911</item>
 				</group>
 				<group id="BUSINESS">
+					<item>Business</item>
 					<item>Auto</item>
 					<item>Employment</item>
 					<item>Healthcare</item>
@@ -1106,6 +1285,7 @@
 					<item>Technology</item>
 				</group>
 				<group id="ENTERTAINMENT">
+					<item>Entertainment</item>
 					<item>Arts</item>
 					<item>Celebrities</item>
 					<item>Movies</item>
@@ -1117,6 +1297,7 @@
 					<item>TV Reality TV</item>
 				</group>
 				<group id="LIFESTYLE">
+					<item>Lifestyle</item>
 					<item>Advice</item>
 					<item>Books</item>
 					<item>Events</item>
@@ -1196,10 +1377,8 @@
 					<item>Baseball</item>
 					<item>Baseball All-Stars</item>
 					<item>Baseball Mets</item>
-					<item>Baseball Minor</item>
 					<item>Baseball Yankees</item>
 					<item>Basketball</item>
-					<item>Basketball Other</item>
 					<item>Basketball Knicks</item>
 					<item>Basketball Liberty</item>
 					<item>Basketball Nets</item>
@@ -1212,7 +1391,6 @@
 					<item>College St Johns</item>
 					<item>College Stony Brook</item>
 					<item>Football</item>
-					<item>Football Other</item>
 					<item>Football Giants</item>
 					<item>Football Jets</item>
 					<item>Football Super Bowl</item>
@@ -1220,8 +1398,6 @@
 					<item>Golf US Open</item>
 					<item>High School</item>
 					<item>Hockey</item>
-					<item>Hockey Other</item>
-					<item>Hockey Devils</item>
 					<item>Hockey Islanders</item>
 					<item>Hockey Rangers</item>
 					<item>Horseracing</item>
@@ -1231,8 +1407,6 @@
 					<item>Teams Cyclones</item>
 					<item>Teams Dragons</item>
 					<item>Teams Ducks</item>
-					<item>Teams Magic</item>
-					<item>Teams Boulders</item>
 					<item>Teams Rough Riders</item>
 					<item>Teams Titans</item>
 					<item>Media</item>

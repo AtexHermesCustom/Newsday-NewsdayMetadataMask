@@ -38,5 +38,8 @@ public interface Constants {
 	// formats
 	public static final String DATE_FORMAT = "MM/dd/yyyy";
 	public static final String DATE_FORMAT_DB = "yyyy-MM-dd";	// format in DB
-	public static final String TIME_FORMAT = "hh:mm a";	
+	public static final String TIME_FORMAT = "hh:mm a";
+	
+	// encoding
+	public static final String DEFAULT_ENCODING = "UTF-8";
 }

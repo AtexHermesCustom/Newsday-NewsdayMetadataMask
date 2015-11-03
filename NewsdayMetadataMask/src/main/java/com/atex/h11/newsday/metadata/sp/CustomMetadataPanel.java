@@ -18,6 +18,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ResourceBundle;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.awt.Dimension;
@@ -313,21 +314,43 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 			
 			try {
 				String targetUrl = config.getMetadataConfigValue("updateChildMetadata/url");
-				logger.finer("updateChildMetadata: init targetURL=" + targetUrl);
+				String encoding = config.getMetadataConfigValue("updateChildMetadata/encoding");
+				logger.finer("updateChildMetadata: init targetURL=" + targetUrl + ", encoding=" + encoding);
+				
 				targetUrl = targetUrl.replace("${J2EE_IP}", config.getConfigValue("j2eeIP"));
 				targetUrl = targetUrl.replace("${J2EE_HTTPPORT}", config.getConfigValue("j2eeHTTPPort"));
-				targetUrl = targetUrl.replace("${OBJ_ID}", objId);
-				targetUrl = targetUrl.replace("${VALUE}", URLEncoder.encode(jsonMetadata, "UTF-8"));
+
 				logger.finer("updateChildMetadata: final targetURL=" + targetUrl);
 				URL url = new URL(targetUrl);
 	            
+				// parameters
+				Map<String, Object> params = new LinkedHashMap<String, Object>();
+		        params.put("id", objId);
+		        params.put("metadata", jsonMetadata);
+
+		        StringBuilder postData = new StringBuilder();
+		        for (Map.Entry<String, Object> param : params.entrySet()) {
+		            if (postData.length() != 0) { postData.append('&'); }
+		            postData.append(URLEncoder.encode(param.getKey(), encoding));
+		            postData.append('=');
+		            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), encoding));
+		        }
+		        byte[] postDataBytes = postData.toString().getBytes(encoding);
+		        
+		        if (logger.getLevel().equals(Level.FINER)) {
+			        String postDataSr = new String(postDataBytes, encoding);
+			        logger.finer("postData=" + postDataSr);
+		        }
+				
 	            // Connect
 	            httpCon = (HttpURLConnection) url.openConnection();       
-	            httpCon.setDoOutput(false);
-	            httpCon.setDoInput(true);
-	            httpCon.setRequestMethod("GET");
+	            httpCon.setRequestMethod("POST");
+	            httpCon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	            httpCon.setRequestProperty("charset", encoding);
+	            httpCon.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
+	            httpCon.setDoOutput(true);
 	            httpCon.setInstanceFollowRedirects(true);
-	            httpCon.connect();
+	            httpCon.getOutputStream().write(postDataBytes);
 	            
 	            //Map<String, List<String>> hdrs = httpCon.getHeaderFields();
 	            //for (String k : hdrs.keySet()) {
