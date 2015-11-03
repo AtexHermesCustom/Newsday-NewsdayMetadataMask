@@ -18,6 +18,7 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+      <!-- 
 	  <plugin>
 	     <groupId>org.apache.maven.plugins</groupId>
 	     <artifactId>maven-jar-plugin</artifactId>
@@ -30,7 +31,8 @@
 	            </manifest>
 	        </archive>
 	      </configuration>
-	  </plugin>      
+	  </plugin>
+	   -->      
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -39,6 +41,9 @@
             <descriptorRefs>
             	<descriptorRef>jar-with-dependencies</descriptorRef>
             </descriptorRefs>
+            <!-- <finalName>${project.artifactId}-${project.version}-full</finalName> -->
+            <finalName>${project.artifactId}-for-dist</finalName>
+            <appendAssemblyId>false</appendAssemblyId>
 	        <archive>                   
 	            <manifest>
 	                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
@@ -48,7 +53,7 @@
         </configuration>
 		<executions>
 			<execution>
-				<id>make-assembly</id>
+				<id>make-my-jar-with-dependencies</id>
 				<phase>package</phase>
 				<goals>
 					<goal>single</goal>
