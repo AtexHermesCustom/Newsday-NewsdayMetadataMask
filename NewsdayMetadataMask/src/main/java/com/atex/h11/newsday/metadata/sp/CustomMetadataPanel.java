@@ -337,7 +337,7 @@ public class CustomMetadataPanel extends JPanel implements ICustomMetadataPanel 
 		        }
 		        byte[] postDataBytes = postData.toString().getBytes(encoding);
 		        
-		        if (logger.getLevel().equals(Level.FINER)) {
+		        if (logger.getLevel().intValue() <= Level.FINER.intValue()) {
 			        String postDataSr = new String(postDataBytes, encoding);
 			        logger.finer("postData=" + postDataSr);
 		        }
